@@ -15,3 +15,6 @@ nbproject
 .sass-cache
 .idea
 vendor/*
+.DS_Store
+Gemfile.lock
+
