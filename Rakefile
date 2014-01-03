@@ -4,6 +4,7 @@ require 'motion/project/template/ios'
 
 begin
   require 'bundler'
+  require 'bubble-wrap/core'
 #  Bundler.require
 rescue LoadError
 end
