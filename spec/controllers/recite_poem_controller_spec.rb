@@ -21,6 +21,10 @@ describe 'RecitePoemController' do
       it 'プロパティとしてdeckを持つ' do
         @controller.deck.should.not.be.nil
       end
+
+      it 'プロパティとしてplayersを持つ' do
+        @controller.players.should.not.be.nil
+      end
     end
   end
 end
