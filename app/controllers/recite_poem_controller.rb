@@ -27,9 +27,8 @@ class RecitePoemController < UIViewController
   end
 
   def set_rp_view
-    RecitePoemView.alloc.init.tap do |rp_view|
+    RecitePoemView.alloc.initWithFrame(self.view.frame).tap do |rp_view|
 #      rp_view.frame = self.view.bounds
-      rp_view.frame = self.view.frame
       self.view.addSubview(rp_view)
     end
   end

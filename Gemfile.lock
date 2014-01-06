@@ -61,6 +61,8 @@ GEM
     mime-types (2.0)
     motion-calabash (0.9.160.1)
       calabash-cucumber (= 0.9.160)
+    motion-fontawesome (0.0.1)
+      rake
     motion-redgreen (0.1.0)
     multi_json (1.8.2)
     multi_test (0.0.3)
@@ -112,5 +114,6 @@ DEPENDENCIES
   bubble-wrap
   guard-motion
   motion-calabash
+  motion-fontawesome
   motion-redgreen
   rake
