@@ -22,6 +22,8 @@ Motion::Project::App.setup do |app|
   # Use `rake config' to see complete project settings.
   app.name = 'Shuffle100'
 
+  app.frameworks += ['AVFoundation', 'AudioToolbox']
+
   if is_test
 #    app.redgreen_style = :full
     app.redgreen_style = :focused
