@@ -8,6 +8,8 @@ class RecitePoemView < UIView
 
   ACC_LABEL_PLAY_BUTTON = 'play_button'
 
+  attr_accessor :delegate, :dataSource
+
   def initWithFrame(frame)
     super
 
@@ -17,10 +19,9 @@ class RecitePoemView < UIView
     self
   end
 
-#  private
+  private
 
   def set_play_button
-#    UIButton.buttonWithType(UIButtonTypeRoundedRect).tap do |b|
     UIButton.buttonWithType(UIButtonTypeCustom).tap do |b|
       b.frame = play_button_frame
       b.accessibilityLabel = ACC_LABEL_PLAY_BUTTON
@@ -29,6 +30,8 @@ class RecitePoemView < UIView
       b.titleLabel.font = FontAwesome.fontWithSize(PLAY_BUTTON_FONT_SIZE)
       b.titleLabel.textAlignment = NSTextAlignmentCenter
       b.setTitleColor(UIColor.redColor, forState: UIControlStateNormal)
+      b.setTitleColor(UIColor.redColor.colorWithAlphaComponent(0.25),
+                      forState: UIControlStateHighlighted)
 
       b.layer.tap do |l|
         l.cornerRadius = PLAY_BUTTON_CORNER_RADIUS
