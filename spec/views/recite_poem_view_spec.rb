@@ -18,4 +18,11 @@ describe 'RecitePoemView' do
     @rp_view.dataSource = test_data_source
     @rp_view.dataSource.should == test_data_source
   end
+
+  it '最初はボタンがポーズ状態' do
+    @rp_view.play_button.currentTitle.should ==
+        RecitePoemView::PLAY_BUTTON_PAUSING_TITLE
+  end
+
+
 end
