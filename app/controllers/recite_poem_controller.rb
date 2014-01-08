@@ -7,14 +7,19 @@ class RecitePoemController < UIViewController
   def viewDidLoad
     super
 
-=begin
-    @deck =    UIApplication.sharedApplication.delegate.deck
-    @players = UIApplication.sharedApplication.delegate.players
-=end
+
     init_properties
     set_rp_view
     recite_opening_poem
 
+  end
+
+  def play_button_pushed(view, playing: now_playing)
+    if now_playing
+      @current_player.pause
+    else
+      @current_player.play
+    end
   end
 
   private
@@ -28,12 +33,17 @@ class RecitePoemController < UIViewController
 
   def set_rp_view
     RecitePoemView.alloc.initWithFrame(self.view.frame).tap do |rp_view|
-#      rp_view.frame = self.view.bounds
+      rp_view.delegate = WeakRef.new(self)
       self.view.addSubview(rp_view)
     end
   end
 
   def recite_opening_poem
     self.title = OPENING_POEM_TITLE
+    @current_player = UIApplication.sharedApplication.delegate.opening_player
+    @current_player.play
   end
+
+  #%ToDo:  序歌の読み上げの再生が終わったら、自動的に停止状態に移行したいね！
+
 end
