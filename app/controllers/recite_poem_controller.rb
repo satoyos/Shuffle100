@@ -29,6 +29,7 @@ class RecitePoemController < UIViewController
       @deck =    delegate.deck
       @players = delegate.players
     end
+    @players.each{|player| player.delegate = self}
   end
 
   def set_rp_view
@@ -41,6 +42,7 @@ class RecitePoemController < UIViewController
   def recite_opening_poem
     self.title = OPENING_POEM_TITLE
     @current_player = UIApplication.sharedApplication.delegate.opening_player
+    @current_player.delegate = self
     @current_player.play
   end
 
