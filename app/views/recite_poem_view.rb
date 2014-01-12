@@ -68,6 +68,11 @@ class RecitePoemView < UIView
     end
   end
 
+  def slider_changed(sender)
+    if dataSource && dataSource.respond_to?('current_time_changed_to:')
+      self.dataSource.current_time_changed_to(@time_slider.value)
+    end
+  end
 
   private
 
@@ -98,7 +103,9 @@ class RecitePoemView < UIView
 
   def set_time_slider
     @time_slider = UISlider.alloc.initWithFrame(time_slider_frame)
-
+    @time_slider.addTarget(self,
+                           action: 'slider_changed:',
+                           forControlEvents: UIControlEventValueChanged)
     self.addSubview(@time_slider)
   end
 
@@ -139,6 +146,7 @@ class RecitePoemView < UIView
                       forState: UIControlStateHighlighted)
     end
   end
+
 
 
 

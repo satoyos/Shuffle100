@@ -16,9 +16,10 @@ class AppDelegate
     end
 
     @window = UIWindow.alloc.initWithFrame(UIScreen.mainScreen.bounds)
+    @recite_controller = RecitePoemController.new
     nav_controller =
-        UINavigationController.alloc.initWithRootViewController(
-            RecitePoemController.new)
+        UINavigationController.alloc.
+            initWithRootViewController(@recite_controller)
     nav_controller.tap do |nc|
       nc.navigationBar.barTintColor = BAR_TINT_COLOR
       nc.navigationBar.topItem.prompt = PROMPT
@@ -26,6 +27,7 @@ class AppDelegate
     end
 
     @window.makeKeyAndVisible
+    @recite_controller.recite_opening_poem
 
     true
   end

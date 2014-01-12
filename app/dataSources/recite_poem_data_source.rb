@@ -13,4 +13,12 @@ module RecitePoemDataSource
     end
 
   end
+
+  def current_time_changed_to(time)
+    return unless current_player
+    current_player.stop
+    current_player.currentTime = time
+    current_player.prepareToPlay
+    current_player.play
+  end
 end
