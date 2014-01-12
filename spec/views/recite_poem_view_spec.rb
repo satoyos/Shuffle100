@@ -34,4 +34,8 @@ describe 'RecitePoemView' do
     @rp_view.time_slider.should.not.be.nil
   end
 
+  it 'start_reciting' do
+    @rp_view.start_reciting.should.be.true
+  end
+
 end

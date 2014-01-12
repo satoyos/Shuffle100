@@ -35,37 +35,39 @@ class RecitePoemView < UIView
     show_play_button_pausing
     reset_time_slider
     self.reciting = true
-
+    @timer =
+        NSTimer.scheduledTimerWithTimeInterval(0.1,
+                                               target: self,
+                                               selector: :update_slider,
+                                               userInfo: nil,
+                                               repeats: true)
+    true
   end
 
-  #%ToDo: 以下の2メソッドはまだリファクタリング可能！
-
   def show_play_button_pausing
-    @play_button.tap do |b|
-      UIEdgeInsets.new.tap do |insets|
-        insets.left = 0
-        b.contentEdgeInsets = insets
-      end
-      b.setTitle(PLAY_BUTTON_PAUSING_TITLE, forState: UIControlStateNormal)
-      b.setTitleColor(PLAY_BUTTON_PAUSING_COLOR, forState: UIControlStateNormal)
-      b.setTitleColor(PLAY_BUTTON_PAUSING_COLOR.colorWithAlphaComponent(0.25),
-                      forState: UIControlStateHighlighted)
-
-    end
+    show_play_button_title(PLAY_BUTTON_PAUSING_TITLE,
+                           left_inset: 0,
+                           color: PLAY_BUTTON_PAUSING_COLOR)
   end
 
   def show_play_button_playing
-    @play_button.tap do |b|
-      UIEdgeInsets.new.tap do |insets|
-        insets.left = PLAY_MARK_INSET
-        b.contentEdgeInsets = insets
-      end
-      b.setTitle(PLAY_BUTTON_PLAYING_TITLE, forState: UIControlStateNormal)
-      b.setTitleColor(PLAY_BUTTON_PLAYING_COLOR, forState: UIControlStateNormal)
-      b.setTitleColor(PLAY_BUTTON_PLAYING_COLOR.colorWithAlphaComponent(0.25),
-                      forState: UIControlStateHighlighted)
+    show_play_button_title(PLAY_BUTTON_PLAYING_TITLE,
+                           left_inset: PLAY_MARK_INSET,
+                           color: PLAY_BUTTON_PLAYING_COLOR)
+  end
+
+  def play_finished_successfully
+    @play_button.enabled = false
+    @time_slider.enabled = false
+    @timer.invalidate
+  end
+
+  def update_slider
+    if dataSource && dataSource.respond_to?(:currentTime)
+      @time_slider.value = self.dataSource.currentTime
     end
   end
+
 
   private
 
@@ -96,12 +98,7 @@ class RecitePoemView < UIView
 
   def set_time_slider
     @time_slider = UISlider.alloc.initWithFrame(time_slider_frame)
-    sliderTimer =
-        NSTimer.scheduledTimerWithTimeInterval(0.5,
-                                               target:self,
-                                               selector:'updateSlider',
-                                               userInfo: nil,
-                                               repeats:true)
+
     self.addSubview(@time_slider)
   end
 
@@ -113,7 +110,7 @@ class RecitePoemView < UIView
   end
 
   def reset_time_slider
-    if dataSource and dataSource.method_defined?(:duration)
+    if dataSource and dataSource.respond_to?(:duration)
       @time_slider.maximumValue = dataSource.duration
       @time_slider.value = 0.0
     end
@@ -130,9 +127,19 @@ class RecitePoemView < UIView
     end
   end
 
-  def updateSlider
-    # code here
+  def show_play_button_title(title, left_inset: l_inset, color: color)
+    @play_button.tap do |b|
+      UIEdgeInsets.new.tap do |insets|
+        insets.left = l_inset
+        b.contentEdgeInsets = insets
+      end
+      b.setTitle(title, forState: UIControlStateNormal)
+      b.setTitleColor(color, forState: UIControlStateNormal)
+      b.setTitleColor(color.colorWithAlphaComponent(0.25),
+                      forState: UIControlStateHighlighted)
+    end
   end
+
 
 
 
