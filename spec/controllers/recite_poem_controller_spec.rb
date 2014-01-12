@@ -1,3 +1,7 @@
+def opening_player
+  UIApplication.sharedApplication.delegate.opening_player
+end
+
 describe 'RecitePoemController' do
   describe '初期化' do
     tests RecitePoemController
@@ -14,6 +18,10 @@ describe 'RecitePoemController' do
     it 'プロパティとしてplayersを持つ' do
       controller.players.should.not.be.nil
     end
+
+    it 'プロパティとしてcurrent_playerを持つ' do
+      controller.current_player.should.not.be.nil
+    end
   end
 
   describe '最初は序歌を読み上げる' do
@@ -23,23 +31,22 @@ describe 'RecitePoemController' do
       controller.title.should == '序歌'
     end
 
-    it 'まず、序歌が読み上げられている' do
-      opening_player.should.not.be.nil
-      opening_player.playing?.should.be.true
-    end
+    if opening_player
+      it 'まず、序歌が読み上げられている' do
+        opening_player.should.not.be.nil
+        opening_player.playing?.should.be.true
+      end
 
-    it 'playボタンを押すと、読み上げが止まったり再開したりする' do
-      opening_player.playing?.should.be.true
-      #noinspection RubyArgCount
-      tap 'play_button'
-      opening_player.playing?.should.be.false
-      #noinspection RubyArgCount
-      tap 'play_button'
-      opening_player.playing?.should.be.true
+      it 'playボタンを押すと、読み上げが止まったり再開したりする' do
+        opening_player.playing?.should.be.true
+        #noinspection RubyArgCount
+        tap 'play_button'
+        opening_player.playing?.should.be.false
+        #noinspection RubyArgCount
+        tap 'play_button'
+        opening_player.playing?.should.be.true
+      end
     end
   end
 end
 
-def opening_player
-  UIApplication.sharedApplication.delegate.opening_player
-end

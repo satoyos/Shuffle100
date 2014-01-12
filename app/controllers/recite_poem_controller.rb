@@ -2,7 +2,7 @@ class RecitePoemController < UIViewController
 
   OPENING_POEM_TITLE = '序歌'
 
-  attr_reader :deck, :players
+  attr_reader :deck, :players, :current_player
 
   def viewDidLoad
     super
@@ -48,6 +48,7 @@ class RecitePoemController < UIViewController
     self.title = OPENING_POEM_TITLE
     @current_player = UIApplication.sharedApplication.delegate.opening_player
     @current_player.delegate = self
+    @rp_view.start_reciting
     @current_player.play
   end
 

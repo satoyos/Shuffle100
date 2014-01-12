@@ -12,20 +12,30 @@ class RecitePoemView < UIView
   PLAY_BUTTON_PLAYING_COLOR = '#007bbb'.to_color # 紺碧
   PLAY_BUTTON_PAUSING_COLOR = '#e2041b'.to_color # 猩々緋
 
+  TIMER_SLIDER_HEIGHT = 50
+  TIMER_SLIDER_BOTTOM_MARGIN = 50
 
   ACC_LABEL_PLAY_BUTTON = 'play_button'
+  ACC_LABEL_TIME_SLICER = 'time_slider'
 
   attr_accessor :delegate, :dataSource, :reciting
-  attr_reader :play_button
+  attr_reader :play_button, :time_slider
 
   def initWithFrame(frame)
     super
 
     self.backgroundColor = RP_VIEW_COLOR
     set_play_button
-    self.reciting = true
+    set_time_slider
 
     self
+  end
+
+  def start_reciting
+    show_play_button_pausing
+    reset_time_slider
+    self.reciting = true
+
   end
 
   #%ToDo: 以下の2メソッドはまだリファクタリング可能！
@@ -78,11 +88,35 @@ class RecitePoemView < UIView
 
       self.addSubview(b)
     end
-    show_play_button_pausing
   end
 
   def play_button_frame
     [[(self.frame.size.width - PLAY_BUTTON_SIZE)/2, 150], [PLAY_BUTTON_SIZE, PLAY_BUTTON_SIZE]]
+  end
+
+  def set_time_slider
+    @time_slider = UISlider.alloc.initWithFrame(time_slider_frame)
+    sliderTimer =
+        NSTimer.scheduledTimerWithTimeInterval(0.5,
+                                               target:self,
+                                               selector:'updateSlider',
+                                               userInfo: nil,
+                                               repeats:true)
+    self.addSubview(@time_slider)
+  end
+
+
+  def time_slider_frame
+    [[@play_button.frame.origin.x,
+      self.frame.size.height - TIMER_SLIDER_HEIGHT - TIMER_SLIDER_BOTTOM_MARGIN],
+     [@play_button.frame.size.width, TIMER_SLIDER_HEIGHT]]
+  end
+
+  def reset_time_slider
+    if dataSource and dataSource.method_defined?(:duration)
+      @time_slider.maximumValue = dataSource.duration
+      @time_slider.value = 0.0
+    end
   end
 
   def play_button_pushed
@@ -95,5 +129,11 @@ class RecitePoemView < UIView
       show_play_button_playing
     end
   end
+
+  def updateSlider
+    # code here
+  end
+
+
 
 end
