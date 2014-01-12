@@ -28,6 +28,35 @@ class RecitePoemView < UIView
     self
   end
 
+  #%ToDo: 以下の2メソッドはまだリファクタリング可能！
+
+  def show_play_button_pausing
+    @play_button.tap do |b|
+      UIEdgeInsets.new.tap do |insets|
+        insets.left = 0
+        b.contentEdgeInsets = insets
+      end
+      b.setTitle(PLAY_BUTTON_PAUSING_TITLE, forState: UIControlStateNormal)
+      b.setTitleColor(PLAY_BUTTON_PAUSING_COLOR, forState: UIControlStateNormal)
+      b.setTitleColor(PLAY_BUTTON_PAUSING_COLOR.colorWithAlphaComponent(0.25),
+                      forState: UIControlStateHighlighted)
+
+    end
+  end
+
+  def show_play_button_playing
+    @play_button.tap do |b|
+      UIEdgeInsets.new.tap do |insets|
+        insets.left = PLAY_MARK_INSET
+        b.contentEdgeInsets = insets
+      end
+      b.setTitle(PLAY_BUTTON_PLAYING_TITLE, forState: UIControlStateNormal)
+      b.setTitleColor(PLAY_BUTTON_PLAYING_COLOR, forState: UIControlStateNormal)
+      b.setTitleColor(PLAY_BUTTON_PLAYING_COLOR.colorWithAlphaComponent(0.25),
+                      forState: UIControlStateHighlighted)
+    end
+  end
+
   private
 
   def set_play_button
@@ -64,35 +93,6 @@ class RecitePoemView < UIView
       show_play_button_pausing
     else
       show_play_button_playing
-    end
-  end
-
-  #%ToDo: 以下の2メソッドはまだリファクタリング可能！
-
-  def show_play_button_pausing
-    @play_button.tap do |b|
-      UIEdgeInsets.new.tap do |insets|
-        insets.left = 0
-        b.contentEdgeInsets = insets
-      end
-      b.setTitle(PLAY_BUTTON_PAUSING_TITLE, forState: UIControlStateNormal)
-      b.setTitleColor(PLAY_BUTTON_PAUSING_COLOR, forState: UIControlStateNormal)
-      b.setTitleColor(PLAY_BUTTON_PAUSING_COLOR.colorWithAlphaComponent(0.25),
-                      forState: UIControlStateHighlighted)
-
-    end
-  end
-
-  def show_play_button_playing
-    @play_button.tap do |b|
-      UIEdgeInsets.new.tap do |insets|
-        insets.left = PLAY_MARK_INSET
-        b.contentEdgeInsets = insets
-      end
-      b.setTitle(PLAY_BUTTON_PLAYING_TITLE, forState: UIControlStateNormal)
-      b.setTitleColor(PLAY_BUTTON_PLAYING_COLOR, forState: UIControlStateNormal)
-      b.setTitleColor(PLAY_BUTTON_PLAYING_COLOR.colorWithAlphaComponent(0.25),
-                      forState: UIControlStateHighlighted)
     end
   end
 

@@ -22,6 +22,12 @@ class RecitePoemController < UIViewController
     end
   end
 
+  #%ToDo:  序歌の読み上げの再生が終わったら、自動的に停止状態に移行したいね！
+  def audioPlayerDidFinishPlaying(player, successfully:flag)
+    puts '- 読み上げが無事に終了！'
+    @rp_view.show_play_button_playing
+  end
+
   private
 
   def init_properties
@@ -33,10 +39,9 @@ class RecitePoemController < UIViewController
   end
 
   def set_rp_view
-    RecitePoemView.alloc.initWithFrame(self.view.frame).tap do |rp_view|
-      rp_view.delegate = WeakRef.new(self)
-      self.view.addSubview(rp_view)
-    end
+    @rp_view = RecitePoemView.alloc.initWithFrame(self.view.frame)
+    @rp_view.delegate = WeakRef.new(self)
+    self.view.addSubview(@rp_view)
   end
 
   def recite_opening_poem
@@ -45,7 +50,5 @@ class RecitePoemController < UIViewController
     @current_player.delegate = self
     @current_player.play
   end
-
-  #%ToDo:  序歌の読み上げの再生が終わったら、自動的に停止状態に移行したいね！
 
 end
