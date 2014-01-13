@@ -12,8 +12,10 @@ class RecitePoemView < UIView
   PLAY_BUTTON_PLAYING_COLOR = '#007bbb'.to_color # 紺碧
   PLAY_BUTTON_PAUSING_COLOR = '#e2041b'.to_color # 猩々緋
 
-  TIMER_SLIDER_HEIGHT = 50
-  TIMER_SLIDER_BOTTOM_MARGIN = 50
+  TIME_SLIDER_HEIGHT = 50
+  TIME_SLIDER_BOTTOM_MARGIN = 50
+  TIME_SLIDER_INTERVAL = 0.5
+
 
   ACC_LABEL_PLAY_BUTTON = 'play_button'
   ACC_LABEL_TIME_SLICER = 'time_slider'
@@ -35,7 +37,7 @@ class RecitePoemView < UIView
     show_waiting_to_pause
     reset_time_slider
     @timer =
-        NSTimer.scheduledTimerWithTimeInterval(0.1,
+        NSTimer.scheduledTimerWithTimeInterval(TIME_SLIDER_INTERVAL,
                                                target: self,
                                                selector: :update_slider,
                                                userInfo: nil,
@@ -106,14 +108,16 @@ class RecitePoemView < UIView
     @time_slider.addTarget(self,
                            action: 'slider_changed:',
                            forControlEvents: UIControlEventValueChanged)
+    @time_slider.setThumbImage(UIImage.imageNamed('thumb01.png'),
+                               forState: UIControlStateNormal)
     self.addSubview(@time_slider)
   end
 
 
   def time_slider_frame
     [[@play_button.frame.origin.x,
-      self.frame.size.height - TIMER_SLIDER_HEIGHT - TIMER_SLIDER_BOTTOM_MARGIN],
-     [@play_button.frame.size.width, TIMER_SLIDER_HEIGHT]]
+      self.frame.size.height - TIME_SLIDER_HEIGHT - TIME_SLIDER_BOTTOM_MARGIN],
+     [@play_button.frame.size.width, TIME_SLIDER_HEIGHT]]
   end
 
   def reset_time_slider
