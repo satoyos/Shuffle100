@@ -36,12 +36,7 @@ class RecitePoemView < UIView
   def start_reciting
     show_waiting_to_pause
     reset_time_slider
-    @timer =
-        NSTimer.scheduledTimerWithTimeInterval(TIME_SLIDER_INTERVAL,
-                                               target: self,
-                                               selector: :update_slider,
-                                               userInfo: nil,
-                                               repeats: true)
+
     true
   end
 
@@ -74,6 +69,19 @@ class RecitePoemView < UIView
       self.dataSource.current_time_changed_to(@time_slider.value)
     end
     show_waiting_to_play
+  end
+
+  def reset_time_slider
+    if dataSource and dataSource.respond_to?(:duration)
+      @time_slider.maximumValue = dataSource.duration
+      @time_slider.value = 0.0
+    end
+    @timer =
+        NSTimer.scheduledTimerWithTimeInterval(TIME_SLIDER_INTERVAL,
+                                               target: self,
+                                               selector: :update_slider,
+                                               userInfo: nil,
+                                               repeats: true)
   end
 
   private
@@ -120,12 +128,6 @@ class RecitePoemView < UIView
      [@play_button.frame.size.width, TIME_SLIDER_HEIGHT]]
   end
 
-  def reset_time_slider
-    if dataSource and dataSource.respond_to?(:duration)
-      @time_slider.maximumValue = dataSource.duration
-      @time_slider.value = 0.0
-    end
-  end
 
   def play_button_pushed
     puts 'play_button pushed!'

@@ -3,13 +3,13 @@ class AppDelegate
   BAR_TINT_COLOR = '#cee4ae'.to_color #夏虫色
   PROMPT = '百首読み上げ'
 
-  attr_accessor :deck, :players, :opening_player
+  attr_accessor :poem_supplier, :players_hash, :opening_player
 
   def application(application, didFinishLaunchingWithOptions:launchOptions)
     AudioPlayerFactory.prepare_audio_players(m4a_files_hash)
-    self.deck = Deck.new
-    self.players = []
-    self.opening_player = AudioPlayerFactory.players[:opening]
+    self.poem_supplier = PoemSupplier.new
+    self.players_hash = AudioPlayerFactory.players
+    self.opening_player = self.players_hash[:opening]
 
     if RUBYMOTION_ENV == 'test'
       return true
@@ -34,5 +34,13 @@ class AppDelegate
 
   def m4a_files_hash
     hash = {opening: 'audio/序歌'}
+    (1..100).each do |number|
+      number_str_a = '%03da' % number
+      number_str_b = '%03db' % number
+      hash[number_str_a] = "audio/#{number_str_a}"
+      hash[number_str_b] = "audio/#{number_str_b}"
+    end
+
+    hash
   end
 end

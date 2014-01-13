@@ -11,12 +11,8 @@ describe 'RecitePoemController' do
       controller.is_a?(RecitePoemController).should.be.true
     end
 
-    it 'プロパティとしてdeckを持つ' do
-      controller.deck.should.not.be.nil
-    end
-
-    it 'プロパティとしてplayersを持つ' do
-      controller.players.should.not.be.nil
+    it 'プロパティとしてsupplierを持つ' do
+      controller.supplier.should.not.be.nil
     end
 
     it 'プロパティとしてcurrent_playerを持つが、初期状態は空っぽ' do

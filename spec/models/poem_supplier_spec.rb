@@ -25,6 +25,7 @@ describe 'PoemSupplier' do
     it '初期状態では、扱っている歌は無い' do
       @supplier.poem.should.be.nil
       @supplier.player.should.be.nil
+      @supplier.kami?.should.be.nil
     end
   end
 
@@ -73,6 +74,15 @@ describe 'PoemSupplier' do
         end
 =end
       end
+
+      describe 'kami?の確認' do
+        before do
+          @supplier.draw_next_poem
+        end
+        it '次の歌に移ってすぐは、上の句を管理している状態' do
+          @supplier.kami?.should.be.true
+        end
+      end
     end
 
     context 'もう次の歌が無いとき' do
@@ -88,5 +98,17 @@ describe 'PoemSupplier' do
       end
     end
 
+  end
+
+  describe 'step_into_shimo' do
+    before do
+      @supplier = PoemSupplier.new
+      @supplier.draw_next_poem
+    end
+
+    it '管理対象が上の句から下の句に移行する' do
+      @supplier.step_into_shimo
+      @supplier.kami?.should.be.false
+    end
   end
 end

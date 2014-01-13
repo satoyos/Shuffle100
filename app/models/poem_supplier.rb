@@ -15,11 +15,21 @@ class PoemSupplier
     @deck.size
   end
 
+  def kami?
+    @kami
+  end
+
   def draw_next_poem
     return false if current_index >= size
     @poem = @deck.next_poem
-    @player = AudioPlayerFactory.create_player_by_path('audio/001a', ofType: 'm4a')
+    @kami = true
+    @player = UIApplication.sharedApplication.delegate.players_hash['%03da' % @poem.number]
     true
+  end
+
+  def step_into_shimo
+    @kami = false
+    @player = UIApplication.sharedApplication.delegate.players_hash['%03db' % @poem.number]
   end
 
 end
