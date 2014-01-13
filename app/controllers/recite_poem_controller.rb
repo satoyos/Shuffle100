@@ -8,18 +8,17 @@ class RecitePoemController < UIViewController
   def viewDidLoad
     super
 
-
     init_properties
     set_rp_view
-#    recite_opening_poem
-
   end
 
-  def play_button_pushed(view, playing: now_playing)
-    if now_playing
+  def play_button_pushed(view)
+    if @current_player.playing?
       @current_player.pause
+      @rp_view.show_waiting_to_play
     else
       @current_player.play
+      @rp_view.show_waiting_to_pause
     end
   end
 
@@ -37,6 +36,7 @@ class RecitePoemController < UIViewController
     @rp_view.start_reciting
     @current_player.play
   end
+
 
   private
 

@@ -18,7 +18,7 @@ class RecitePoemView < UIView
   ACC_LABEL_PLAY_BUTTON = 'play_button'
   ACC_LABEL_TIME_SLICER = 'time_slider'
 
-  attr_accessor :delegate, :dataSource, :reciting
+  attr_accessor :delegate, :dataSource
   attr_reader :play_button, :time_slider
 
   def initWithFrame(frame)
@@ -32,9 +32,8 @@ class RecitePoemView < UIView
   end
 
   def start_reciting
-    show_play_button_pausing
+    show_waiting_to_pause
     reset_time_slider
-    self.reciting = true
     @timer =
         NSTimer.scheduledTimerWithTimeInterval(0.1,
                                                target: self,
@@ -44,13 +43,13 @@ class RecitePoemView < UIView
     true
   end
 
-  def show_play_button_pausing
+  def show_waiting_to_pause
     show_play_button_title(PLAY_BUTTON_PAUSING_TITLE,
                            left_inset: 0,
                            color: PLAY_BUTTON_PAUSING_COLOR)
   end
 
-  def show_play_button_playing
+  def show_waiting_to_play
     show_play_button_title(PLAY_BUTTON_PLAYING_TITLE,
                            left_inset: PLAY_MARK_INSET,
                            color: PLAY_BUTTON_PLAYING_COLOR)
@@ -72,6 +71,7 @@ class RecitePoemView < UIView
     if dataSource && dataSource.respond_to?('current_time_changed_to:')
       self.dataSource.current_time_changed_to(@time_slider.value)
     end
+    show_waiting_to_play
   end
 
   private
@@ -125,13 +125,7 @@ class RecitePoemView < UIView
 
   def play_button_pushed
     puts 'play_button pushed!'
-    self.delegate.play_button_pushed(self, playing: self.reciting)
-    self.reciting = !self.reciting
-    if self.reciting
-      show_play_button_pausing
-    else
-      show_play_button_playing
-    end
+    self.delegate.play_button_pushed(self)
   end
 
   def show_play_button_title(title, left_inset: l_inset, color: color)
@@ -144,6 +138,8 @@ class RecitePoemView < UIView
       b.setTitleColor(color, forState: UIControlStateNormal)
       b.setTitleColor(color.colorWithAlphaComponent(0.25),
                       forState: UIControlStateHighlighted)
+      b.setTitleColor(color.colorWithAlphaComponent(0.25),
+                      forState: UIControlStateDisabled)
     end
   end
 

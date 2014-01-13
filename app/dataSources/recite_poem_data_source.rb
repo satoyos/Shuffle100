@@ -19,6 +19,6 @@ module RecitePoemDataSource
     current_player.stop
     current_player.currentTime = time
     current_player.prepareToPlay
-    current_player.play
+#    current_player.play
   end
 end
