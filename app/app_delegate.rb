@@ -1,4 +1,5 @@
-class AppDelegate
+#class AppDelegate
+class AppDelegate < PM::Delegate
 
   BAR_TINT_COLOR = '#cee4ae'.to_color #夏虫色
   PROMPT = '百首読み上げ'
@@ -6,7 +7,10 @@ class AppDelegate
   attr_accessor :poem_supplier, :players_hash, :opening_player
 
   def application(application, didFinishLaunchingWithOptions:launchOptions)
-    AudioPlayerFactory.prepare_audio_players(m4a_files_hash)
+    BW.debug = true unless App.info_plist['AppStoreRelease']
+
+#    AudioPlayerFactory.prepare_audio_players({opening: 'audio/序歌'})
+    AudioPlayerFactory.prepare_audio_players({opening: 'audio/これは、テスト音声です。'})
     self.poem_supplier = PoemSupplier.new
     self.players_hash = AudioPlayerFactory.players
     self.opening_player = self.players_hash[:opening]
@@ -16,7 +20,7 @@ class AppDelegate
     end
 
     @window = UIWindow.alloc.initWithFrame(UIScreen.mainScreen.bounds)
-    @recite_controller = RecitePoemController.new
+    @recite_controller = RecitePoemScreen.new
     nav_controller =
         UINavigationController.alloc.
             initWithRootViewController(@recite_controller)
@@ -27,13 +31,32 @@ class AppDelegate
     end
 
     @window.makeKeyAndVisible
-    @recite_controller.recite_opening_poem
+#    @recite_controller.recite_opening_poem
 
     true
   end
 
+  def load_rest_poems_sound
+    AudioPlayerFactory.prepare_audio_players(m4a_files_hash)
+  end
+
+
+  def setting_players_of_poem(range)
+    NSLog "start (#{range.to_a.size})"
+    hash = {}
+    range.each do |number|
+      number_str_a = '%03da' % number
+      number_str_b = '%03db' % number
+      hash[number_str_a] = "audio/#{number_str_a}"
+      hash[number_str_b] = "audio/#{number_str_b}"
+    end
+    AudioPlayerFactory.prepare_audio_players(hash)
+    NSLog "end (#{range.to_a.size}"
+  end
+
   def m4a_files_hash
-    hash = {opening: 'audio/序歌'}
+#    hash = {opening: 'audio/序歌'}
+    hash = {}
     (1..100).each do |number|
       number_str_a = '%03da' % number
       number_str_b = '%03db' % number

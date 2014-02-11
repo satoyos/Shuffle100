@@ -8,7 +8,7 @@ module AudioPlayerFactory
 
   # @param [Hash] audio_hash Key=m4aファイルを特定するシンボル, Value=そのファイルのパス(拡張子抜き)のハッシュ
   def prepare_audio_players(audio_hash)
-    @players = {}
+    @players ||= {}
     audio_hash.each do |key, path|
       @players[key] = create_player_by_path(path, ofType: 'm4a')
     end

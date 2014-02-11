@@ -1,7 +1,7 @@
 class RecitePoemView < UIView
   RP_VIEW_COLOR = UIColor.whiteColor
 
-  PLAY_BUTTON_SIZE = 280
+  PLAY_BUTTON_SIZE = 260
   PLAY_BUTTON_FONT_SIZE = PLAY_BUTTON_SIZE * 0.5
   PLAY_BUTTON_PAUSE_KEY = 'pause' # FontAwesomeのアイコン名から'fa-'を除いたもの
   PLAY_BUTTON_PLAY_KEY  = 'play'
@@ -12,41 +12,83 @@ class RecitePoemView < UIView
   PLAY_BUTTON_PLAYING_COLOR = '#007bbb'.to_color # 紺碧
   PLAY_BUTTON_PAUSING_COLOR = '#e2041b'.to_color # 猩々緋
 
-  TIME_SLIDER_HEIGHT = 50
-  TIME_SLIDER_BOTTOM_MARGIN = 50
-  TIME_SLIDER_INTERVAL = 0.5
+  PROGRESS_TIMER_INTERVAL = 0.5
 
+  GEAR_BUTTON_SIZE = 30
 
   ACC_LABEL_PLAY_BUTTON = 'play_button'
   ACC_LABEL_TIME_SLICER = 'time_slider'
+  ACC_LABEL_GEAR_BUTTON = 'gear_button'
 
   attr_accessor :delegate, :dataSource
-  attr_reader :play_button, :time_slider
+#  attr_reader :play_button, :progress_bar
 
-  def initWithFrame(frame)
+  def init
     super
 
-    self.backgroundColor = RP_VIEW_COLOR
-    set_play_button
-    set_time_slider
+    self.backgroundColor = UIColor.whiteColor
+
+    self.addSubview self.play_button
+    self.addSubview self.progress_bar
+    self.addSubview self.gear_button
 
     self
   end
 
-  def start_reciting
-    show_waiting_to_pause
-    reset_time_slider
+  def layout_with_top_offset(top_offset)
+    self.frame = delegate.view.bounds
+    self.play_button.layer.cornerRadius = PLAY_BUTTON_SIZE / 2
+    Motion::Layout.new do |layout|
+      layout.view self
+      layout.subviews 'button'    => self.play_button,
+                      'progress'  => self.progress_bar,
+                      'gear'      => self.gear_button
+      layout.metrics 'margin' => 20, 'height' => 10,
+                     'b_size' => PLAY_BUTTON_SIZE,   # Playボタンのサイズは決め打ち
+                     'g_size' => GEAR_BUTTON_SIZE,   # Gearボタンのサイズも決め打ち
+                     'top_margin_to_gear' => top_offset + 10,
+                     'top_margin_to_play' => top_offset + 50
 
-    true
+
+      layout.vertical(
+          '|-top_margin_to_play-[button(b_size)]-40-[progress(height)]-(<=margin@600)-|'
+      )
+      layout.vertical('|-top_margin_to_gear-[gear(g_size)]')
+      layout.horizontal('|-(>=margin)-[button(b_size)]-(>=margin)-|')
+      layout.horizontal('|-(margin)-[progress]-(margin)-|')
+      layout.horizontal('[gear(g_size)]-|')
+
+    end
   end
+
+
+  def create_progress_update_timer(interval_time)
+    NSTimer.scheduledTimerWithTimeInterval(interval_time,
+                                           target: self,
+                                           selector: 'update_progress:',
+                                           userInfo: nil,
+                                           repeats: true)
+  end
+
+  def update_progress(timer)
+#    ap "timer(#{timer}).isValid => #{timer.isValid} in update_progress" if BW::debug?
+
+    self.progress_bar.progress = self.delegate.current_player_progress
+
+  end
+
 
   def show_waiting_to_pause
     show_play_button_title(PLAY_BUTTON_PAUSING_TITLE,
                            left_inset: 0,
                            color: PLAY_BUTTON_PAUSING_COLOR)
+    @timer = create_progress_update_timer(PROGRESS_TIMER_INTERVAL)
   end
 
   def show_waiting_to_play
+    ap '- 再生の指示待ちです。' if BW::debug?
+    @timer.invalidate if @timer
+#    ap "- @timer.isValid => #{@timer.isValid}" if BW::debug?
     show_play_button_title(PLAY_BUTTON_PLAYING_TITLE,
                            left_inset: PLAY_MARK_INSET,
                            color: PLAY_BUTTON_PLAYING_COLOR)
@@ -54,47 +96,19 @@ class RecitePoemView < UIView
 
   def play_finished_successfully
     @play_button.enabled = false
-    @time_slider.enabled = false
+#    @time_slider.enabled = false
     @timer.invalidate
   end
 
-  def update_slider
-    if dataSource && dataSource.respond_to?(:currentTime)
-      @time_slider.value = self.dataSource.currentTime
-    end
-  end
-
-  def slider_changed(sender)
-    if dataSource && dataSource.respond_to?('current_time_changed_to:')
-      self.dataSource.current_time_changed_to(@time_slider.value)
-    end
-    show_waiting_to_play
-  end
-
-  def reset_time_slider
-    if dataSource and dataSource.respond_to?(:duration)
-      @time_slider.maximumValue = dataSource.duration
-      @time_slider.value = 0.0
-    end
-    @timer =
-        NSTimer.scheduledTimerWithTimeInterval(TIME_SLIDER_INTERVAL,
-                                               target: self,
-                                               selector: :update_slider,
-                                               userInfo: nil,
-                                               repeats: true)
-  end
-
-  private
-
-  def set_play_button
+  def play_button
+    return @play_button if @play_button
     @play_button = UIButton.buttonWithType(UIButtonTypeCustom)
     @play_button.tap do |b|
-      b.frame = play_button_frame
       b.accessibilityLabel = ACC_LABEL_PLAY_BUTTON
-      b.titleLabel.font = FontAwesome.fontWithSize(PLAY_BUTTON_FONT_SIZE)
       b.titleLabel.textAlignment = NSTextAlignmentCenter
+      b.titleLabel.font = FontAwesome.fontWithSize(PLAY_BUTTON_FONT_SIZE)
       b.layer.tap do |l|
-        l.cornerRadius = PLAY_BUTTON_CORNER_RADIUS
+#        l.cornerRadius = PLAY_BUTTON_CORNER_RADIUS
         l.masksToBounds = true
         l.borderWidth = 1.0
         l.borderColor = UIColor.darkGrayColor.CGColor
@@ -102,31 +116,43 @@ class RecitePoemView < UIView
       b.addTarget(self,
                   action: :play_button_pushed,
                   forControlEvents: UIControlEventTouchUpInside)
-
-      self.addSubview(b)
+      b.enabled = true
     end
+    @play_button
   end
 
+
+  def progress_bar
+    @prrogress_bar ||= UIProgressView.alloc.initWithProgressViewStyle(UIProgressViewStyleDefault)
+
+  end
+
+  def gear_button
+    @gear_button ||=
+        UIButton.buttonWithType(UIButtonTypeRoundedRect).tap do |b|
+          b.setImage(gear_image, forState: UIControlStateNormal)
+          b.addTarget(self,
+                      action: 'gear_button_did_pushed:',
+                      forControlEvents: UIControlEventTouchUpInside)
+          b.accessibilityLabel = ACC_LABEL_GEAR_BUTTON
+        end
+  end
+
+  def gear_button_did_pushed(sender)
+    self.delegate.start_on_game_settings(sender)
+  end
+
+  def gear_image
+    ResizeUIImage.resizeImage(UIImage.imageNamed('gear_256.png'),
+                              newSize: CGSizeMake(GEAR_BUTTON_SIZE, GEAR_BUTTON_SIZE))
+  end
+
+=begin
   def play_button_frame
     [[(self.frame.size.width - PLAY_BUTTON_SIZE)/2, 150], [PLAY_BUTTON_SIZE, PLAY_BUTTON_SIZE]]
   end
+=end
 
-  def set_time_slider
-    @time_slider = UISlider.alloc.initWithFrame(time_slider_frame)
-    @time_slider.addTarget(self,
-                           action: 'slider_changed:',
-                           forControlEvents: UIControlEventValueChanged)
-    @time_slider.setThumbImage(UIImage.imageNamed('thumb01.png'),
-                               forState: UIControlStateNormal)
-    self.addSubview(@time_slider)
-  end
-
-
-  def time_slider_frame
-    [[@play_button.frame.origin.x,
-      self.frame.size.height - TIME_SLIDER_HEIGHT - TIME_SLIDER_BOTTOM_MARGIN],
-     [@play_button.frame.size.width, TIME_SLIDER_HEIGHT]]
-  end
 
 
   def play_button_pushed

@@ -1,0 +1,12 @@
+describe 'OnGameSettingsBuilder' do
+  describe 'create' do
+    before do
+      @root = OnGameSettingsBuilder.create
+    end
+
+    it 'QRootElementオブジェクトを返す' do
+      @root.should.not.be.nil
+      @root.is_a?(QRootElement).should.be.true
+    end
+  end
+end
