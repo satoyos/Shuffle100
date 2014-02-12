@@ -33,9 +33,11 @@ Motion::Project::App.setup do |app|
   app.codesign_certificate = 'iPhone Developer: Yoshifumi Sato'
   app.provisioning_profile = '/Users/yoshi/data/dev/Provisioning_for_100series_Tester_with_iPad_Air.mobileprovision'
 
+=begin
   app.pods do
     pod 'QuickDialog'
   end
+=end
 
   app.vendor_project(
       'vendor/Reveal.framework',

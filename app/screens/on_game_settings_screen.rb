@@ -6,58 +6,26 @@ class OnGameSettingsScreen < PM::TableScreen
   end
 
   def will_appear
+    update_table_data
     set_attributes self.view, {
         background_color: hex_color('FFFFFF')
     }
   end
 
   def table_data
-
     [{
-        cells: [
-            {
-                title: '歌と歌の間隔',
-                cell_class: IntervalSettingCell,
-            }
-        ]
+        cells: [{
+                    title: '歌と歌の間隔',
+                    cell_class: IntervalSettingCell,
+                    action: :tapped_interval_cell,
+                }]
      }]
   end
-=begin
-  def initWithRoot(root)
-    super
 
-    section = QSection.alloc.init
-    label = QLabelElement.alloc.initWithTitle('Hallo', Value: 'world!')
-    root.addSection(section)
-    section.addElement(label)
+  def tapped_interval_cell
+    puts ' - IntervalCell is tapped!' if BW::debug?
+    open IntervalSettingScreen.new, nav_bar: true
   end
-=end
-
-=begin
-  def viewDidLoad
-    super
-
-    puts 'viewDidLoad (in OnGameSettingsController) was called!'
-
-    self.navigationItem.rightBarButtonItem = bar_button_done
-
-  end
-=end
-
-=begin
-  def initialize_custom_part
-    self.navigationItem.rightBarButtonItem = bar_button_done
-  end
-
-  def bar_button_done
-    @done_button ||=
-        UIBarButtonItem.alloc.initWithBarButtonSystemItem(UIBarButtonItemStyleDone,
-                                                          target: self,
-                                                          action: 'done_button_did_pushed:')
-  end
-=end
-
-
 
   def done_button_did_pushed
     puts 'Done button pushed.' if BW::debug?
@@ -70,7 +38,7 @@ class IntervalSettingCell < ProMotion::TableViewCell
   def setup(data_cell, screen)
     super
     label = UILabel.alloc.initWithFrame(CGRectZero).tap do |l|
-      l.text = '1.00秒'
+      l.text = '%1.2f秒' % screen.app_delegate.reciting_settings.interval_time
       l.sizeToFit
       l.frame =
           [

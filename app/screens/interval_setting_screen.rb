@@ -1,4 +1,4 @@
-class IntervalSettingController < QuickDialogController
+class IntervalSettingScreen < PM::Screen
   MIN_INTERVAL_VALUE = 0.5
   MAX_INTERVAL_VALUE = 2.0
   SHORTEN_INTERVAL = 0.02
@@ -7,19 +7,9 @@ class IntervalSettingController < QuickDialogController
 
   attr_reader :shimo_player, :kami_player, :interval_time
 
-  def initWithNibName(nibName, bundle: nibBundle)
-    super
-
-    puts "#{self.class.to_s}を生成しましたよ！"
+  def on_load
     set_kami_shimo_players
 
-    self
-  end
-
-  def loadView
-    super
-
-    self.view = UIView.new
     self.view.backgroundColor = UIColor.whiteColor
     self.title = '歌の間隔の変更'
 
@@ -30,36 +20,20 @@ class IntervalSettingController < QuickDialogController
     self.view.addSubview self.interval_slider
   end
 
-  def viewDidLoad
-    super
-    self.interval_slider.addTarget(self, action: 'sliderChanging:', forControlEvents: UIControlEventValueChanged)
-
-    self.interval_slider.addTarget(self,
-                                   action:'slider_value_changed:',
-                                   forControlEvents: UIControlEventTouchUpInside | UIControlEventTouchUpOutside)
-
-    self.try_button.addTarget(self,
-                              action: 'try_button_pushed:',
-                              forControlEvents: UIControlEventTouchUpInside)
-
-  end
-
-  def viewWillAppear(animated)
-    super
-
-    printf 'このViewのサイズ: '
-    ap self.view.frame.size
+  def will_appear
+    printf 'このViewのサイズ: ' if BW::debug?
+    ap self.view.frame.size if BW::debug?
 
     top_guide_height = case self.navigationController
                          when nil; 0
                          else
-                           printf "NavigationBarのフレーム: "
-                           ap self.navigationController.navigationBar.frame
+                           printf "NavigationBarのフレーム: " if BW::debug?
+                           ap self.navigationController.navigationBar.frame if BW::debug?
                            frame = self.navigationController.navigationBar.frame
                            frame.origin.y + frame.size.height
                        end
 
-    puts "計算したTopLayoutGuide.length相当の値 => #{top_guide_height}"
+    puts "計算したTopLayoutGuide.length相当の値 => #{top_guide_height}" if BW::debug?
 
 
     # 以下、レイアウト
@@ -113,27 +87,29 @@ class IntervalSettingController < QuickDialogController
 
   end
 
+  def will_disappear
+    puts ' - interval_timeの値を %1.2f秒に書き換えます！' % self.interval_slider.value if BW::debug?
+    app_delegate.reciting_settings.interval_time = self.interval_slider.value.round(2)
+  end
+
   def audioPlayerDidFinishPlaying(player, successfully:flag)
     return unless flag
 
-    puts '- 読み上げが無事に終了！'
+    puts '- 読み上げが無事に終了！' if BW::debug?
     if @kami_playing
       update_interval_label_text
       return
     end
 
-    puts "- #{self.interval_time}秒間の間隔を開けます。"
-#    sleep(self.interval_time)
+    puts "- #{self.interval_time}秒間の間隔を開けます。" if BW::debug?
     @last_time = self.interval_time
 
-    NSLog '  - Timer Start!'
+    NSLog '  - Timer Start!' if BW::debug?
     NSTimer.scheduledTimerWithTimeInterval(SHORTEN_INTERVAL,
                                            target: self,
                                            selector: 'shorten_last_time:',
                                            userInfo: nil,
                                            repeats: true)
-
-
   end
 
   def shorten_last_time(timer)
@@ -142,7 +118,7 @@ class IntervalSettingController < QuickDialogController
     if @last_time < SHORTEN_INTERVAL
       timer.invalidate
       self.interval_label.text = '%.02f' % 0.0
-      NSLog '  - Timer END!'
+      NSLog '  - Timer END!' if BW::debug?
       self.kami_player.play
       @kami_playing = true
     end
@@ -151,11 +127,10 @@ class IntervalSettingController < QuickDialogController
 
   def interval_label
     unless @interval_label
-      @interval_label = UILabel.alloc.initWithFrame(CGRectZero)
-#      @interval_label.font = @interval_label.font.fontWithSize(quater_height)
-      @interval_label.textAlignment = UITextAlignmentCenter
-#      update_interval_label_text
-      @interval_label.adjustsFontSizeToFitWidth = true
+      @interval_label = UILabel.alloc.initWithFrame(CGRectZero).tap do |l|
+        l.textAlignment = UITextAlignmentCenter
+        l.adjustsFontSizeToFitWidth = true
+      end
     end
     @interval_label
   end
@@ -169,10 +144,11 @@ class IntervalSettingController < QuickDialogController
 
   def sec_label
     unless @sec_label
-      @sec_label = UILabel.alloc.initWithFrame(CGRectZero)
-      @sec_label.font = @sec_label.font.fontWithSize(20)
-      @sec_label.textAlignment =UITextAlignmentCenter
-      @sec_label.text = '秒'
+      @sec_label = UILabel.alloc.initWithFrame(CGRectZero).tap do |l|
+        l.font = l.font.fontWithSize(20)
+        l.textAlignment =UITextAlignmentCenter
+        l.text = '秒'
+      end
     end
     @sec_label
   end
@@ -180,8 +156,11 @@ class IntervalSettingController < QuickDialogController
 
   def try_button
     unless @try_button
-      @try_button = UIButton.buttonWithType(UIButtonTypeRoundedRect)
-      @try_button.setTitle(TRY_BUTTON_TITLE, forState: UIControlStateNormal)
+      @try_button = UIButton.buttonWithType(UIButtonTypeRoundedRect).tap do |b|
+        b.setTitle(TRY_BUTTON_TITLE, forState: UIControlStateNormal)
+        b.addTarget(self, action: 'try_button_pushed:',
+                    forControlEvents: UIControlEventTouchUpInside)
+      end
     end
     @try_button
   end
@@ -192,7 +171,13 @@ class IntervalSettingController < QuickDialogController
       @interval_slider.tap do  |sl|
         sl.minimumValue = MIN_INTERVAL_VALUE
         sl.maximumValue = MAX_INTERVAL_VALUE
-        sl.value = 1.0
+        sl.value = app_delegate.reciting_settings.interval_time
+        sl.addTarget(self, action: 'sliderChanging:',
+                     forControlEvents: UIControlEventValueChanged)
+        sl.addTarget(self, action:'slider_value_changed:',
+                     forControlEvents: UIControlEventTouchUpInside |
+                         UIControlEventTouchUpOutside)
+
       end
     end
     @interval_slider
@@ -206,7 +191,7 @@ class IntervalSettingController < QuickDialogController
 
   def slider_value_changed(sender)
     reset_players #これをSliderの値が変わるたびに呼ぶと、実機で重くなるので注意！
-    puts "- スライダーの値は #{self.interval_slider.value}"
+    puts "- スライダーの値は #{self.interval_slider.value}" if BW::debug?
     update_interval_label_text
   end
 
@@ -217,8 +202,8 @@ class IntervalSettingController < QuickDialogController
   private
 
   def try_button_pushed(button)
-    puts "button #{button} is pushed"
-    puts "このとき、スライダーの値は[#{self.interval_slider.value}]"
+    puts "button #{button} is pushed" if BW::debug?
+    puts "このとき、スライダーの値は[#{self.interval_slider.value}]" if BW::debug?
     reset_players_if_needed
     @interval_time = self.interval_slider.value.round(2)
     self.shimo_player.play
@@ -231,7 +216,7 @@ class IntervalSettingController < QuickDialogController
 
 
   def set_kami_shimo_players
-    supplier = UIApplication.sharedApplication.delegate.poem_supplier
+    supplier = PoemSupplier.new  # 間隔調節用に、全く新規のsupplierを作る
     supplier.draw_next_poem
     supplier.step_into_shimo
     @shimo_player = supplier.player # 一首目の下の句を再生するプレーヤー

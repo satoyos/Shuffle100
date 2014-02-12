@@ -4,20 +4,18 @@ class AppDelegate < PM::Delegate
   BAR_TINT_COLOR = '#cee4ae'.to_color #夏虫色
   PROMPT = '百首読み上げ'
 
-  attr_accessor :poem_supplier, :players_hash, :opening_player
+  attr_accessor :poem_supplier, :players_hash, :opening_player, :reciting_settings
 
-  def application(application, didFinishLaunchingWithOptions:launchOptions)
+  def on_load(app, options)
     BW.debug = true unless App.info_plist['AppStoreRelease']
 
 #    AudioPlayerFactory.prepare_audio_players({opening: 'audio/序歌'})
     AudioPlayerFactory.prepare_audio_players({opening: 'audio/これは、テスト音声です。'})
+    self.opening_player = AudioPlayerFactory.players[:opening]
     self.poem_supplier = PoemSupplier.new
-    self.players_hash = AudioPlayerFactory.players
-    self.opening_player = self.players_hash[:opening]
+    self.reciting_settings = RecitingSettings.new
+#    self.players_hash = AudioPlayerFactory.players
 
-    if RUBYMOTION_ENV == 'test'
-      return true
-    end
 
     @window = UIWindow.alloc.initWithFrame(UIScreen.mainScreen.bounds)
     @recite_controller = RecitePoemScreen.new

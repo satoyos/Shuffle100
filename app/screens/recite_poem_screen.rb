@@ -4,7 +4,7 @@ class RecitePoemScreen < PM::Screen
   OPENING_POEM_TITLE = '序歌'
   title OPENING_POEM_TITLE
 
-  attr_reader :supplier, :current_player
+  attr_reader :supplier, :current_player, :reciting_settings
 
   def on_load
     init_properties_with_delegate
@@ -15,10 +15,6 @@ class RecitePoemScreen < PM::Screen
   end
 
 
-=begin
-  def viewWillAppear(animated)
-    super
-=end
   def will_appear
     top_guide_height = case self.navigationController
                          when nil; 0
@@ -115,6 +111,7 @@ class RecitePoemScreen < PM::Screen
       @supplier = delegate.poem_supplier
       @current_player = delegate.opening_player
       @current_player.delegate = self
+      @reciting_settings = delegate.reciting_settings
     end
   end
 
@@ -137,7 +134,8 @@ class RecitePoemScreen < PM::Screen
     else
       view_animation_def('make_rp_view_appear',
                          arg: nil,
-                         duration: 1.0,
+#                         duration: 1.0,
+                         duration: self.reciting_settings.interval_time,
                          transition: UIViewAnimationTransitionFlipFromLeft)
     end
   end

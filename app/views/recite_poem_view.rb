@@ -12,7 +12,7 @@ class RecitePoemView < UIView
   PLAY_BUTTON_PLAYING_COLOR = '#007bbb'.to_color # 紺碧
   PLAY_BUTTON_PAUSING_COLOR = '#e2041b'.to_color # 猩々緋
 
-  PROGRESS_TIMER_INTERVAL = 0.5
+  PROGRESS_TIMER_INTERVAL = 0.1
 
   GEAR_BUTTON_SIZE = 30
 
@@ -147,13 +147,6 @@ class RecitePoemView < UIView
                               newSize: CGSizeMake(GEAR_BUTTON_SIZE, GEAR_BUTTON_SIZE))
   end
 
-=begin
-  def play_button_frame
-    [[(self.frame.size.width - PLAY_BUTTON_SIZE)/2, 150], [PLAY_BUTTON_SIZE, PLAY_BUTTON_SIZE]]
-  end
-=end
-
-
 
   def play_button_pushed
     puts 'play_button pushed!'
@@ -164,6 +157,8 @@ class RecitePoemView < UIView
     @play_button.tap do |b|
       UIEdgeInsets.new.tap do |insets|
         insets.left = l_inset
+        # ↓↓ラベルのテキストを上下中央にするための小細工
+#        insets.top = (-1 * b.titleLabel.font.descender) / 1.5
         b.contentEdgeInsets = insets
       end
       b.setTitle(title, forState: UIControlStateNormal)

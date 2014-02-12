@@ -1,5 +1,5 @@
 class PoemSupplier
-  attr_reader :current_index, :poem, :player
+  attr_reader :poem, :player
 
   def initialize
     @deck = Deck.new
