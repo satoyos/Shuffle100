@@ -1,10 +1,13 @@
 class PoemSupplier
   attr_reader :poem, :player
 
-  def initialize
-    @deck = Deck.new
-#    @current_index = 0 # 現在何首めを扱っているか。
-
+  def initialize(init_hash={})
+    size = init_hash[:size] || 100
+    shuffle_flg = init_hash[:shuffle] || false
+    @deck = case  shuffle_flg
+             when true ; Deck.new(size).shuffle_with_size(size)
+             else      ; Deck.new(size)
+    end
   end
 
   def current_index
@@ -35,8 +38,8 @@ class PoemSupplier
 
   def current_player
     path = case @kami
-             when true ; 'audio/%03da' % current_index
-             else      ; 'audio/%03db' % current_index
+             when true ; 'audio/%03da' % self.poem.number
+             else      ; 'audio/%03db' % self.poem.number
            end
     AudioPlayerFactory.create_player_by_path(path, ofType: 'm4a')
   end

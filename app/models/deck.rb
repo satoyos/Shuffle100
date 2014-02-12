@@ -22,14 +22,14 @@ class Deck
 
   end
 
-  def initialize
-    read_poems
+  def initialize(size=100)
+    read_poems(size)
     @counter = 0
   end
 
-  def read_poems
+  def read_poems(size)
     path = App.resources_path.stringByAppendingPathComponent JSON_FILE
-    @poems = BW::JSON.parse(File.read(path)).map{|poem_hash| Poem.new(poem_hash)}
+    @poems = BW::JSON.parse(File.read(path)).map{|poem_hash| Poem.new(poem_hash)}[0..size-1]
   end
 
   def next_poem

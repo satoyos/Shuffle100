@@ -1,12 +1,38 @@
 describe 'Deck' do
   describe 'initialize' do
-    before do
-      @deck = Deck.new
+    shared 'a valid Deck' do
+      it 'should be a valid Deck' do
+        @deck.should.not.be.nil
+        @deck.is_a?(Deck).should.be.true
+      end
+    end
+    context '枚数指定無しで初期化' do
+      before do
+        @deck = Deck.new
+      end
+
+      behaves_like 'a valid Deck'
+
+      it '枚数は100枚' do
+        @deck.size.should == 100
+      end
+
     end
 
-    it 'should be a valid Deck' do
-      @deck.should.not.be.nil
-      @deck.is_a?(Deck).should.be.true
+    context '枚数を10枚に指定して初期化' do
+      before do
+        @deck = Deck.new(10)
+      end
+
+      behaves_like 'a valid Deck'
+
+      it '枚数は10枚' do
+        @deck.size.should == 10
+      end
+
+      it '歌番号は1番から10番' do
+        @deck.poems.map{|poem| poem.number}.should == (1..10).to_a
+      end
     end
   end
 
