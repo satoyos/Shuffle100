@@ -29,6 +29,7 @@ class OnGameSettingsScreen < PM::TableScreen
 
   def done_button_did_pushed
     puts 'Done button pushed.' if BW::debug?
+    app_delegate.settings_manager.save
     close
   end
 

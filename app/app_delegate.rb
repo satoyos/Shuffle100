@@ -4,7 +4,8 @@ class AppDelegate < PM::Delegate
   BAR_TINT_COLOR = '#cee4ae'.to_color #夏虫色
   PROMPT = '百首読み上げ'
 
-  attr_accessor :poem_supplier, :players_hash, :opening_player, :reciting_settings
+  attr_accessor :poem_supplier, :players_hash, :opening_player
+  attr_accessor :settings_manager, :reciting_settings
 
   def on_load(app, options)
     BW.debug = true unless App.info_plist['AppStoreRelease']
@@ -13,7 +14,8 @@ class AppDelegate < PM::Delegate
     AudioPlayerFactory.prepare_audio_players({opening: 'audio/これは、テスト音声です。'})
     self.opening_player = AudioPlayerFactory.players[:opening]
     self.poem_supplier = PoemSupplier.new
-    self.reciting_settings = RecitingSettings.new
+    self.settings_manager = SettingsManager.new
+    self.reciting_settings = self.settings_manager.reciting_settings
 #    self.players_hash = AudioPlayerFactory.players
 
 
