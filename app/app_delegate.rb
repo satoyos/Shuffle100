@@ -1,5 +1,6 @@
 #class AppDelegate
 class AppDelegate < PM::Delegate
+  include PM::Styling
 
   BAR_TINT_COLOR = '#cee4ae'.to_color #夏虫色
   PROMPT = '百首読み上げ'
@@ -10,15 +11,13 @@ class AppDelegate < PM::Delegate
   def on_load(app, options)
     BW.debug = true unless App.info_plist['AppStoreRelease']
 
-#    AudioPlayerFactory.prepare_audio_players({opening: 'audio/序歌'})
-    AudioPlayerFactory.prepare_audio_players({opening: 'audio/これは、テスト音声です。'})
-    self.opening_player = AudioPlayerFactory.players[:opening]
-    self.poem_supplier = PoemSupplier.new({size: 10, shuffle: true})  # データができているのは10番まで
-    self.settings_manager = SettingsManager.new
-    self.reciting_settings = self.settings_manager.reciting_settings
-#    self.players_hash = AudioPlayerFactory.players
+    set_models
 
+    set_appearance_defaults
 
+    open RecitePoemScreen.new(nav_bar: true)
+
+=begin
     @window = UIWindow.alloc.initWithFrame(UIScreen.mainScreen.bounds)
     @recite_controller = RecitePoemScreen.new
     nav_controller =
@@ -34,10 +33,26 @@ class AppDelegate < PM::Delegate
 #    @recite_controller.recite_opening_poem
 
     true
+=end
+  end
+
+  def set_models
+#    AudioPlayerFactory.prepare_audio_players({opening: 'audio/序歌'})
+    AudioPlayerFactory.prepare_audio_players({opening: 'audio/これは、テスト音声です。'})
+    self.opening_player = AudioPlayerFactory.players[:opening]
+    self.poem_supplier = PoemSupplier.new({size: 10, shuffle: true}) # データができているのは10番まで
+    self.settings_manager = SettingsManager.new
+    self.reciting_settings = self.settings_manager.reciting_settings
+  end
+
+  def set_appearance_defaults
+    UINavigationBar.appearance.barTintColor = BAR_TINT_COLOR
+#    UINavigationBar.appearance.topItem.prompt = PROMPT
   end
 
   def load_rest_poems_sound
     AudioPlayerFactory.prepare_audio_players(m4a_files_hash)
+
   end
 
 
