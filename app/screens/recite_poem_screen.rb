@@ -9,18 +9,19 @@ class RecitePoemScreen < PM::Screen
   def on_load
     init_properties_with_delegate
 
+    init_appearance
+
     @rp_view = create_recite_poem_view
-    self.view.addSubview @rp_view
+    add @rp_view
     recite_poem unless RUBYMOTION_ENV == 'test'
   end
-
 
   def will_appear
     top_guide_height = case self.navigationController
                          when nil; 0
                          else
-#                           printf "NavigationBarのフレーム: "
-#                           ap self.navigationController.navigationBar.frame
+                           printf "NavigationBarのフレーム: "
+                           ap self.navigationController.navigationBar.frame
                            frame = self.navigationController.navigationBar.frame
                            frame.origin.y + frame.size.height
                        end
@@ -65,17 +66,16 @@ class RecitePoemScreen < PM::Screen
 
   def renew_view_and_player
     puts '== rp_viewを更新します！' if BW::debug?
-    @rp_view.removeFromSuperview
+    remove @rp_view
     @rp_view = create_recite_poem_view
     fetch_player
 
-#    self.viewWillAppear(false)
     self.will_appear
     @rp_view.layoutSubviews
  end
 
   def make_rp_view_appear
-    self.view.addSubview self.recite_poem_view
+    add self.recite_poem_view
   end
 
   def fetch_player
@@ -115,7 +115,11 @@ class RecitePoemScreen < PM::Screen
     end
   end
 
-
+  def init_appearance
+    if self.navigationController
+      self.navigationController.navigationBar.topItem.prompt = AppDelegate::PROMPT
+    end
+  end
 
   def goto_shimo
     renew_view_and_player
