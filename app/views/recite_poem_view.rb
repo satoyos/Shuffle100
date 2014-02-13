@@ -36,13 +36,18 @@ class RecitePoemView < UIView
   end
 
   def layout_with_top_offset(top_offset)
-    self.frame = delegate.view.bounds
+#    self.frame = delegate.view.bounds
+    self.frame = delegate.bounds
     self.play_button.layer.cornerRadius = PLAY_BUTTON_SIZE / 2
+    dummy_nav_bar =
+        UILabel.alloc.initWithFrame(CGRectMake(0, 0, self.frame.size.width, top_offset))
+    self.addSubview dummy_nav_bar
     Motion::Layout.new do |layout|
       layout.view self
       layout.subviews 'button'    => self.play_button,
                       'progress'  => self.progress_bar,
-                      'gear'      => self.gear_button
+                      'gear'      => self.gear_button,
+                      'nav_bar'   => dummy_nav_bar
       layout.metrics 'margin' => 20, 'height' => 10,
                      'b_size' => PLAY_BUTTON_SIZE,   # Playボタンのサイズは決め打ち
                      'g_size' => GEAR_BUTTON_SIZE,   # Gearボタンのサイズも決め打ち
