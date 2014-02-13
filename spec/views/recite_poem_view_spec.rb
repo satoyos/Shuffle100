@@ -45,4 +45,23 @@ describe 'RecitePoemView' do
 
   end
 
+  describe 'layout_with_top_offset' do
+    before do
+      @rp_view = RecitePoemView.alloc.init
+      @rp_view.delegate = mock(:bounds, return: CGRectMake(0, 0, 320, 568))
+    end
+
+    it 'mockが正しく動作する' do
+      @rp_view.delegate.bounds.tap do |b|
+        b.should.not.be.nil
+        b.should.be.kind_of(CGRect)
+      end
+    end
+
+    it 'layout_with_top_offsetが落ちずに動作する' do
+      @rp_view.layout_with_top_offset(94)
+      1.should == 1
+    end
+  end
+
 end

@@ -76,6 +76,7 @@ GEM
       rake
     motion-layout (0.0.2)
     motion-redgreen (0.1.0)
+    motion-stump (0.3.1)
     multi_json (1.8.4)
     multi_test (0.0.3)
     nio4r (1.0.0)
@@ -132,4 +133,5 @@ DEPENDENCIES
   motion-fontawesome
   motion-layout
   motion-redgreen
+  motion-stump (<= 0.3.1)
   rake

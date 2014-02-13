@@ -6,7 +6,7 @@ begin
   require 'bundler'
   require 'bubble-wrap/core'
   require 'rubygems'
-  require 'motion-cocoapods'
+  require 'motion-stump'
   require 'awesome_print_motion'
   require 'motion-layout'
 

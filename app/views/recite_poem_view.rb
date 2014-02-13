@@ -39,24 +39,33 @@ class RecitePoemView < UIView
 #    self.frame = delegate.view.bounds
     self.frame = delegate.bounds
     self.play_button.layer.cornerRadius = PLAY_BUTTON_SIZE / 2
-    dummy_nav_bar =
-        UILabel.alloc.initWithFrame(CGRectMake(0, 0, self.frame.size.width, top_offset))
+    dummy_nav_bar = create_new_label
+    space1 = create_new_label
+    space2 = create_new_label
+    space3 = create_new_label
     self.addSubview dummy_nav_bar
+    self.addSubview space1
+    self.addSubview space2
+    self.addSubview space3
+
     Motion::Layout.new do |layout|
       layout.view self
       layout.subviews 'button'    => self.play_button,
                       'progress'  => self.progress_bar,
                       'gear'      => self.gear_button,
-                      'nav_bar'   => dummy_nav_bar
+                      'nav_bar'   => dummy_nav_bar,
+                      's1' => space1,
+                      's2' => space2,
+                      's3' => space3
       layout.metrics 'margin' => 20, 'height' => 10,
                      'b_size' => PLAY_BUTTON_SIZE,   # Playボタンのサイズは決め打ち
                      'g_size' => GEAR_BUTTON_SIZE,   # Gearボタンのサイズも決め打ち
-                     'top_margin_to_gear' => top_offset + 10,
-                     'top_margin_to_play' => top_offset + 50
-
+                     'nav_height' => top_offset,
+                     'top_margin_to_gear' => top_offset + 20
 
       layout.vertical(
-          '|-top_margin_to_play-[button(b_size)]-40-[progress(height)]-(<=margin@600)-|'
+#          '|-top_margin_to_play-[button(b_size)]-40-[progress(height)]-(<=margin@600)-|'
+          '|[nav_bar(nav_height)][s1][button(b_size)][s2(s1)][progress(height)][s3(s1)]|'
       )
       layout.vertical('|-top_margin_to_gear-[gear(g_size)]')
       layout.horizontal('|-(>=margin)-[button(b_size)]-(>=margin)-|')
@@ -64,6 +73,10 @@ class RecitePoemView < UIView
       layout.horizontal('[gear(g_size)]-|')
 
     end
+  end
+
+  def create_new_label
+    UILabel.alloc.initWithFrame(CGRectZero)
   end
 
 
