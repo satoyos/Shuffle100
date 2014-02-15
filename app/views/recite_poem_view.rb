@@ -61,7 +61,7 @@ class RecitePoemView < UIView
                      'b_size' => PLAY_BUTTON_SIZE,   # Playボタンのサイズは決め打ち
                      'g_size' => GEAR_BUTTON_SIZE,   # Gearボタンのサイズも決め打ち
                      'nav_height' => top_offset,
-                     'top_margin_to_gear' => top_offset + 20
+                     'top_margin_to_gear' => top_offset + 10
 
       layout.vertical(
 #          '|-top_margin_to_play-[button(b_size)]-40-[progress(height)]-(<=margin@600)-|'
@@ -70,7 +70,8 @@ class RecitePoemView < UIView
       layout.vertical('|-top_margin_to_gear-[gear(g_size)]')
       layout.horizontal('|-(>=margin)-[button(b_size)]-(>=margin)-|')
       layout.horizontal('|-(margin)-[progress]-(margin)-|')
-      layout.horizontal('[gear(g_size)]-|')
+#      layout.horizontal('[gear(g_size)]-|')
+      layout.horizontal('[gear(g_size)]-10-|')
 
     end
   end

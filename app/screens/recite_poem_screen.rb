@@ -102,7 +102,27 @@ class RecitePoemScreen < PM::Screen
 
   end
 
+  def quit_game
+    puts '- Quit Button Pushed!' if BW::debug?
+#    App.alert('終了しますか？')
+    if @current_player.playing?
+      @current_player.pause
+      self.recite_poem_view.show_waiting_to_play
+    end
 
+    BW::UIAlertView.new({
+      title: '試合を終了しますか？',
+      buttons: ['終了する', '続ける'],
+      cancel_button_index: 0
+    }) do |alert|
+      if alert.clicked_button.cancel?
+        puts '[quit] 試合を終了します' if BW::debug?
+        # ここに試合を終えるコードを入れる。
+      else
+        puts '[continue] 試合を続行します' if BW::debug?
+      end
+    end.show
+  end
 
   private
 
@@ -119,6 +139,11 @@ class RecitePoemScreen < PM::Screen
     if self.navigationController
       self.navigationController.navigationBar.topItem.prompt = AppDelegate::PROMPT
     end
+    set_nav_bar_button :right, {
+      title: '終了',
+      action: :quit_game,
+      accessibility_label: 'quit_button'
+    }
   end
 
   def goto_shimo

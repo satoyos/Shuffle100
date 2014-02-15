@@ -16,8 +16,10 @@ class OnGameSettingsScreen < PM::TableScreen
     [{
         cells: [{
                     title: '歌と歌の間隔',
-                    cell_class: IntervalSettingCell,
+                    cell_style: UITableViewCellStyleValue1,
+                    subtitle: '%1.2f秒' % app_delegate.reciting_settings.interval_time,
                     action: :tapped_interval_cell,
+                    accessoryType: UITableViewCellAccessoryDisclosureIndicator,
                 }]
      }]
   end
@@ -33,27 +35,4 @@ class OnGameSettingsScreen < PM::TableScreen
     close
   end
 
-end
-
-class IntervalSettingCell < ProMotion::TableViewCell
-  def setup(data_cell, screen)
-    super
-    label = UILabel.alloc.initWithFrame(CGRectZero).tap do |l|
-      l.text = '%1.2f秒' % screen.app_delegate.reciting_settings.interval_time
-      l.sizeToFit
-      l.frame =
-          [
-              [
-                  self.frame.size.width - l.frame.size.width - 30,
-                  (self.frame.size.height - l.frame.size.height)/2
-              ],
-              l.frame.size
-          ]
-    end
-    self.accessoryType = UITableViewCellAccessoryDisclosureIndicator
-    data_cell[:subviews] = [label]
-    set_subviews
-
-    self
-  end
 end

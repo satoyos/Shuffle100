@@ -16,29 +16,11 @@ class AppDelegate < PM::Delegate
     set_appearance_defaults
 
     open RecitePoemScreen.new(nav_bar: true)
-
-=begin
-    @window = UIWindow.alloc.initWithFrame(UIScreen.mainScreen.bounds)
-    @recite_controller = RecitePoemScreen.new
-    nav_controller =
-        UINavigationController.alloc.
-            initWithRootViewController(@recite_controller)
-    nav_controller.tap do |nc|
-      nc.navigationBar.barTintColor = BAR_TINT_COLOR
-      nc.navigationBar.topItem.prompt = PROMPT
-      @window.rootViewController = nc
-    end
-
-    @window.makeKeyAndVisible
-#    @recite_controller.recite_opening_poem
-
-    true
-=end
   end
 
   def set_models
-#    AudioPlayerFactory.prepare_audio_players({opening: 'audio/序歌'})
-    AudioPlayerFactory.prepare_audio_players({opening: 'audio/これは、テスト音声です。'})
+    AudioPlayerFactory.prepare_audio_players({opening: 'audio/序歌'})
+#    AudioPlayerFactory.prepare_audio_players({opening: 'audio/これは、テスト音声です。'})
     self.opening_player = AudioPlayerFactory.players[:opening]
     self.poem_supplier = PoemSupplier.new({size: 10, shuffle: true}) # データができているのは10番まで
     self.settings_manager = SettingsManager.new
@@ -47,12 +29,10 @@ class AppDelegate < PM::Delegate
 
   def set_appearance_defaults
     UINavigationBar.appearance.barTintColor = BAR_TINT_COLOR
-#    UINavigationBar.appearance.topItem.prompt = PROMPT
   end
 
   def load_rest_poems_sound
     AudioPlayerFactory.prepare_audio_players(m4a_files_hash)
-
   end
 
 
