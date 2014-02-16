@@ -31,8 +31,21 @@ class PoemSupplier
     true
   end
 
+  def rollback_prev_poem
+    @poem = @deck.rollback_poem
+    return false unless @poem
+    @kami = false
+    @player = current_player
+    true
+  end
+
   def step_into_shimo
     @kami = false
+    @player = current_player
+  end
+
+  def step_back_to_kami
+    @kami = true
     @player = current_player
   end
 

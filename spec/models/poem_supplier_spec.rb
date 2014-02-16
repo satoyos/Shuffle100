@@ -100,6 +100,24 @@ describe 'PoemSupplier' do
 
   end
 
+  describe 'rollback_prev_poem' do
+    before do
+      @supplier = PoemSupplier.new
+      2.times {@supplier.draw_next_poem}  # 2枚めくっておく
+    end
+
+    it '1回ロールバックすると、current_indexは1になり、歌番号は1になる' do
+      @supplier.rollback_prev_poem.should.be.true
+      @supplier.current_index.should == 1
+      @supplier.poem.number.should == 1
+    end
+
+    it '2回ロールバックすると、falseを返す' do
+      @supplier.rollback_prev_poem.should.be.true
+      @supplier.rollback_prev_poem.should.be.false
+    end
+  end
+
   describe 'step_into_shimo' do
     before do
       @supplier = PoemSupplier.new

@@ -129,6 +129,31 @@ describe 'Deck' do
 
   end
 
+  describe 'rollback_prev_poem' do
+    before do
+      @deck = Deck.new
+      2.times {@deck.next_poem}  # 2枚めくっておく(2首進めておく)
+    end
+
+    it 'この状態で、counterの値は2' do
+      @deck.counter.should == 2
+    end
+
+    it '1回ロールバックすると、カウンターの値は1になり、歌番号は1番になる' do
+      prev_poem = @deck.rollback_poem
+      @deck.counter.should == 1
+      prev_poem.number.should == 1
+    end
+
+    it '2回ロールバックすると、カウンターの値は0になり、Poemはnilが返る' do
+      prev_poem = @deck.rollback_poem
+      prev_poem.should.not.be.nil
+      @deck.rollback_poem.should.be.nil
+      @deck.counter.should == 0
+
+    end
+  end
+
   describe 'shuffle_with_size:' do
     before do
       @deck = Deck.new.shuffle_with_size(10)

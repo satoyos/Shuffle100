@@ -14,6 +14,7 @@ class RecitePoemScreen < PM::Screen
     @rp_view = create_recite_poem_view
     add @rp_view
     recite_poem unless RUBYMOTION_ENV == 'test'
+
   end
 
   def will_appear
@@ -44,7 +45,7 @@ class RecitePoemScreen < PM::Screen
     self.recite_poem_view.play_finished_successfully
     if @supplier.kami?
       @supplier.step_into_shimo
-      goto_shimo
+      transit_kami_shimo(true)
     else
       return unless @supplier.draw_next_poem
       goto_next_poem
@@ -75,6 +76,7 @@ class RecitePoemScreen < PM::Screen
  end
 
   def make_rp_view_appear
+    renew_current_title
     add self.recite_poem_view
   end
 
@@ -124,6 +126,31 @@ class RecitePoemScreen < PM::Screen
     end.show
   end
 
+  def forward_skip
+    if @current_player
+      @current_player.currentTime = @current_player.duration - 0.01
+      @current_player.play
+    end
+  end
+
+  def rewind_skip
+    return unless @current_player
+    if @current_player.currentTime > 0.0 # 再生途中の場合
+      @current_player.currentTime = 0.0
+      @current_player.pause
+      self.recite_poem_view.show_waiting_to_play
+      self.recite_poem_view.update_progress
+    else
+      if @supplier.kami?
+        return unless @supplier.rollback_prev_poem
+        go_back_to_prev_poem
+      else
+        @supplier.step_back_to_kami
+        go_back_to_kami
+      end
+    end
+  end
+
   private
 
   def init_properties_with_delegate
@@ -146,11 +173,15 @@ class RecitePoemScreen < PM::Screen
     }
   end
 
-  def goto_shimo
+  def go_back_to_kami
+    transit_kami_shimo(false)
+  end
+
+  def transit_kami_shimo(to_recite)
     renew_view_and_player
     make_rp_view_appear
     self.recite_poem_view.show_waiting_to_play
-    new_rp_view_did_appear
+    new_rp_view_did_appear(to_recite)
   end
 
   def goto_next_poem
@@ -169,14 +200,31 @@ class RecitePoemScreen < PM::Screen
     end
   end
 
-  def new_rp_view_did_appear
+  def go_back_to_prev_poem
+    puts 'Back to Prev Poem!' if BW::debug?
+    renew_view_and_player
+    self.recite_poem_view.show_waiting_to_play
+    if RUBYMOTION_ENV == 'test'
+      make_rp_view_appear
+      new_rp_view_did_appear(false)
+    else
+      view_animation_def('make_rp_view_appear',
+                         arg: nil,
+                         duration: 0.5,
+                         transition: UIViewAnimationTransitionFlipFromRight)
+    end
+  end
 
+  def new_rp_view_did_appear(to_recite=true)
+    recite_poem if @supplier.kami? and to_recite
+  end
+
+  def renew_current_title
     self.title = "#{@supplier.current_index}/#{@supplier.size} " +
         case @supplier.kami?
-          when true ; '(上)'
-          else      ; '(下)'
+          when true; '(上)'
+          else     ; '(下)'
         end
-    recite_poem if @supplier.kami?
   end
 
   def view_animation_def(method_name, arg: arg, duration: duration, transition: transition)

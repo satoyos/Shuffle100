@@ -37,9 +37,8 @@ class Deck
     if @counter == @poems.size
       return nil
     end
-    poem = @poems[@counter]
     @counter += 1
-    poem
+    @poems[@counter-1]
   end
 
   def size
@@ -63,6 +62,19 @@ class Deck
     end
     @poems = poems
     self
+  end
+
+  def rollback_poem
+    case @counter
+      when 0 ; nil
+      when 1
+        @counter = 0
+        nil
+      else
+        @counter -= 1
+        @poems[@counter-1]
+    end
+
   end
 
 
