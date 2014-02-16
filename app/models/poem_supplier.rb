@@ -2,10 +2,14 @@ class PoemSupplier
   attr_reader :poem, :player
 
   def initialize(init_hash={})
-    size = init_hash[:size] || 100
+    size = limit_size = init_hash[:size] || 100
+    if init_hash[:limit] and init_hash[:limit] < limit_size
+      limit_size = init_hash[:limit]
+    end
+
     shuffle_flg = init_hash[:shuffle] || false
     @deck = case  shuffle_flg
-             when true ; Deck.new(size).shuffle_with_size(size)
+             when true ; Deck.new(size).shuffle_with_size(limit_size)
              else      ; Deck.new(size)
     end
   end
