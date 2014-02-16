@@ -7,8 +7,8 @@ class RecitePoemView < UIView
   PLAY_BUTTON_PLAY_KEY  = 'play'
   PLAY_BUTTON_CORNER_RADIUS = PLAY_BUTTON_SIZE / 2.0
   PLAY_MARK_INSET = PLAY_BUTTON_FONT_SIZE * 0.3
-  PLAY_BUTTON_PLAYING_TITLE = FontAwesome.icon(PLAY_BUTTON_PLAY_KEY)
-  PLAY_BUTTON_PAUSING_TITLE = FontAwesome.icon(PLAY_BUTTON_PAUSE_KEY)
+  PLAY_BUTTON_PLAYING_TITLE = FontAwesome.icon('play')
+  PLAY_BUTTON_PAUSING_TITLE = FontAwesome.icon('pause')
   PLAY_BUTTON_PLAYING_COLOR = '#007bbb'.to_color # 紺碧
   PLAY_BUTTON_PAUSING_COLOR = '#e2041b'.to_color # 猩々緋
 
@@ -16,12 +16,16 @@ class RecitePoemView < UIView
 
   GEAR_BUTTON_SIZE = 30
 
+  SKIP_BUTTON_SIZE = 30
+  SKIP_BUTTON_FONT_SIZE = SKIP_BUTTON_SIZE * 0.5
+  SKIP_BUTTON_COLOR = PLAY_BUTTON_PLAYING_COLOR
+  FORWARD_BUTTON_TITLE = FontAwesome.icon('fast-forward')
+  REWIND_BUTTON_TITLE  = FontAwesome.icon('fast-backward')
+
   ACC_LABEL_PLAY_BUTTON = 'play_button'
-  ACC_LABEL_TIME_SLICER = 'time_slider'
   ACC_LABEL_GEAR_BUTTON = 'gear_button'
 
   attr_accessor :delegate, :dataSource
-#  attr_reader :play_button, :progress_bar
 
   def init
     super
@@ -31,6 +35,8 @@ class RecitePoemView < UIView
     self.addSubview self.play_button
     self.addSubview self.progress_bar
     self.addSubview self.gear_button
+    self.addSubview self.rewind_button
+    self.addSubview self.forward_button
 
     self
   end
@@ -39,6 +45,9 @@ class RecitePoemView < UIView
 #    self.frame = delegate.view.bounds
     self.frame = delegate.bounds
     self.play_button.layer.cornerRadius = PLAY_BUTTON_SIZE / 2
+    [self.rewind_button, self.forward_button].each do |b|
+      b.layer.cornerRadius = SKIP_BUTTON_SIZE / 2
+    end
     dummy_nav_bar = create_new_label
     space1 = create_new_label
     space2 = create_new_label
@@ -54,23 +63,26 @@ class RecitePoemView < UIView
                       'progress'  => self.progress_bar,
                       'gear'      => self.gear_button,
                       'nav_bar'   => dummy_nav_bar,
+                      'forward'   => self.forward_button,
+                      'rewind'    => self.rewind_button,
                       's1' => space1,
                       's2' => space2,
                       's3' => space3
       layout.metrics 'margin' => 20, 'height' => 10,
                      'b_size' => PLAY_BUTTON_SIZE,   # Playボタンのサイズは決め打ち
                      'g_size' => GEAR_BUTTON_SIZE,   # Gearボタンのサイズも決め打ち
+                     's_size' => SKIP_BUTTON_SIZE,   # Rewind/Forwadボタンのサイズも決め打ち
                      'nav_height' => top_offset,
                      'top_margin_to_gear' => top_offset + 10
 
       layout.vertical(
-#          '|-top_margin_to_play-[button(b_size)]-40-[progress(height)]-(<=margin@600)-|'
           '|[nav_bar(nav_height)][s1][button(b_size)][s2(s1)][progress(height)][s3(s1)]|'
       )
       layout.vertical('|-top_margin_to_gear-[gear(g_size)]')
+      layout.vertical('[rewind(s_size)]')
+      layout.vertical('[forward(s_size)]')
       layout.horizontal('|-(>=margin)-[button(b_size)]-(>=margin)-|')
-      layout.horizontal('|-(margin)-[progress]-(margin)-|')
-#      layout.horizontal('[gear(g_size)]-|')
+      layout.horizontal('|-[rewind(s_size)]-[progress]-[forward(s_size)]-|')
       layout.horizontal('[gear(g_size)]-10-|')
 
     end
@@ -84,12 +96,12 @@ class RecitePoemView < UIView
   def create_progress_update_timer(interval_time)
     NSTimer.scheduledTimerWithTimeInterval(interval_time,
                                            target: self,
-                                           selector: 'update_progress:',
+                                           selector: 'update_progress',
                                            userInfo: nil,
                                            repeats: true)
   end
 
-  def update_progress(timer)
+  def update_progress
 #    ap "timer(#{timer}).isValid => #{timer.isValid} in update_progress" if BW::debug?
 
     self.progress_bar.progress = self.delegate.current_player_progress
@@ -99,8 +111,8 @@ class RecitePoemView < UIView
 
   def show_waiting_to_pause
     show_play_button_title(PLAY_BUTTON_PAUSING_TITLE,
-                           left_inset: 0,
-                           color: PLAY_BUTTON_PAUSING_COLOR)
+                             left_inset: 0,
+                             color: PLAY_BUTTON_PAUSING_COLOR)
     @timer = create_progress_update_timer(PROGRESS_TIMER_INTERVAL)
   end
 
@@ -109,33 +121,24 @@ class RecitePoemView < UIView
     @timer.invalidate if @timer
 #    ap "- @timer.isValid => #{@timer.isValid}" if BW::debug?
     show_play_button_title(PLAY_BUTTON_PLAYING_TITLE,
-                           left_inset: PLAY_MARK_INSET,
-                           color: PLAY_BUTTON_PLAYING_COLOR)
+                             left_inset: PLAY_MARK_INSET,
+                             color: PLAY_BUTTON_PLAYING_COLOR)
   end
 
   def play_finished_successfully
     @play_button.enabled = false
-#    @time_slider.enabled = false
-    @timer.invalidate
+    @timer.invalidate if @timer and @timer.isValid
   end
 
   def play_button
     return @play_button if @play_button
-    @play_button = UIButton.buttonWithType(UIButtonTypeCustom)
+    @play_button = ReciteViewButton.buttonWithType(UIButtonTypeCustom)
     @play_button.tap do |b|
       b.accessibilityLabel = ACC_LABEL_PLAY_BUTTON
-      b.titleLabel.textAlignment = NSTextAlignmentCenter
       b.titleLabel.font = FontAwesome.fontWithSize(PLAY_BUTTON_FONT_SIZE)
-      b.layer.tap do |l|
-#        l.cornerRadius = PLAY_BUTTON_CORNER_RADIUS
-        l.masksToBounds = true
-        l.borderWidth = 1.0
-        l.borderColor = UIColor.darkGrayColor.CGColor
-      end
       b.addTarget(self,
                   action: :play_button_pushed,
                   forControlEvents: UIControlEventTouchUpInside)
-      b.enabled = true
     end
     @play_button
   end
@@ -189,8 +192,48 @@ class RecitePoemView < UIView
     end
   end
 
+  def rewind_button
+    @rewind_button ||=
+        create_skip_button('rewind_button', SKIP_BUTTON_COLOR).tap do |b|
+          b.setTitle(REWIND_BUTTON_TITLE, forState: UIControlStateNormal)
+          b.addTarget(self,
+                      action: :rewind_button_pushed,
+                      forControlEvents: UIControlEventTouchUpInside)
+        end
+  end
 
+  def forward_button
+    @forward_button ||=
+        create_skip_button('forward_button', SKIP_BUTTON_COLOR).tap do |b|
+          b.setTitle(FORWARD_BUTTON_TITLE, forState: UIControlStateNormal)
+          b.addTarget(self,
+                      action: :forward_button_pushed,
+                      forControlEvents: UIControlEventTouchUpInside)
+        end
+  end
 
+  def rewind_button_pushed
+    puts ' - Rewind Button was pushed!' if BW::debug?
+    self.delegate.rewind_skip
+  end
+
+  def forward_button_pushed
+    puts ' - Forward Button was pushed!' if BW::debug?
+    self.delegate.forward_skip
+  end
+
+  def create_skip_button(acc_label, color)
+    ReciteViewButton.buttonWithType(UIButtonTypeCustom).tap do |b|
+      b.accessibilityLabel = acc_label
+      b.titleLabel.font = FontAwesome.fontWithSize(SKIP_BUTTON_FONT_SIZE)
+      b.setTitleColor(color, forState: UIControlStateNormal)
+      b.setTitleColor(color.colorWithAlphaComponent(0.25),
+                      forState: UIControlStateHighlighted)
+      b.setTitleColor(color.colorWithAlphaComponent(0.25),
+                      forState: UIControlStateDisabled)
+
+    end
+  end
 
 
 end

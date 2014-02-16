@@ -28,6 +28,7 @@ Motion::Project::App.setup do |app|
 
 #  app.frameworks += ['AVFoundation', 'CoreAudio']
   app.frameworks += ['AVFoundation', 'AudioToolbox']
+  app.frameworks += ['QuartzCore']
 
   app.icons = ['Shuffle100.png', 'Shuffle100@2x.png']
   app.prerendered_icon = true
