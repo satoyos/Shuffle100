@@ -47,8 +47,11 @@ class RecitePoemScreen < PM::Screen
       @supplier.step_into_shimo
       transit_kami_shimo(true)
     else
-      return unless @supplier.draw_next_poem
-      goto_next_poem
+      if @supplier.draw_next_poem # 次の歌がある
+        goto_next_poem
+      else                        # 次の歌がない (最後の歌だった)
+        open GameEndScreen.new, nav_bar: true
+      end
     end
   end
 
@@ -235,7 +238,6 @@ class RecitePoemScreen < PM::Screen
       UIView.setAnimationTransition(transition,
                                     forView: self.view,
                                     cache: true)
-
     end
     if arg
       self.send("#{method_name}", arg)
