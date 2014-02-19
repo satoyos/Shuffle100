@@ -15,7 +15,8 @@ class AppDelegate < PM::Delegate
 
     set_appearance_defaults
 
-    open RecitePoemScreen.new(nav_bar: true)
+#    open RecitePoemScreen.new(nav_bar: true)
+    open HomeScreen.new(nav_bar: true)
   end
 
   def set_models
@@ -25,6 +26,10 @@ class AppDelegate < PM::Delegate
     self.poem_supplier = PoemSupplier.new({size: 20, shuffle: true, limit: 3}) # データができているのは10番まで
     self.settings_manager = SettingsManager.new
     self.reciting_settings = self.settings_manager.reciting_settings
+  end
+
+  def refresh_models
+    set_models
   end
 
   def set_appearance_defaults

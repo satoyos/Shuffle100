@@ -77,5 +77,4 @@ class Deck
 
   end
 
-
 end

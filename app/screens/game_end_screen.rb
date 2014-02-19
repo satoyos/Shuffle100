@@ -30,6 +30,7 @@ class GameEndScreen < PM::Screen
 
   def back_button_pushed
     puts '[Back to Top] button pushed!' if BW::debug?
+    open_root_screen HomeScreen
   end
 
 

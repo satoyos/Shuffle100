@@ -75,6 +75,7 @@ describe 'PoemSupplier' do
 =end
       end
 
+
       describe 'kami?の確認' do
         before do
           @supplier.draw_next_poem

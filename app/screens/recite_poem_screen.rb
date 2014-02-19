@@ -122,7 +122,7 @@ class RecitePoemScreen < PM::Screen
     }) do |alert|
       if alert.clicked_button.cancel?
         puts '[quit] 試合を終了します' if BW::debug?
-        # ここに試合を終えるコードを入れる。
+        open_root_screen HomeScreen
       else
         puts '[continue] 試合を続行します' if BW::debug?
       end
@@ -158,6 +158,7 @@ class RecitePoemScreen < PM::Screen
 
   def init_properties_with_delegate
     UIApplication.sharedApplication.delegate.tap do |delegate|
+      delegate.refresh_models
       @supplier = delegate.poem_supplier
       @current_player = delegate.opening_player
       @current_player.delegate = self
@@ -166,14 +167,18 @@ class RecitePoemScreen < PM::Screen
   end
 
   def init_appearance
+=begin
     if self.navigationController
       self.navigationController.navigationBar.topItem.prompt = AppDelegate::PROMPT
     end
+=end
     set_nav_bar_button :right, {
       title: '終了',
       action: :quit_game,
       accessibility_label: 'quit_button'
     }
+
+#    set_nav_bar_button :left, {' '}
   end
 
   def go_back_to_kami
