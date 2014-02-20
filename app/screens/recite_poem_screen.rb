@@ -9,9 +9,8 @@ class RecitePoemScreen < PM::Screen
   def on_load
     init_properties_with_delegate
 
-    init_appearance
-
     @rp_view = create_recite_poem_view
+    self.recite_poem_view.title = OPENING_POEM_TITLE
     add @rp_view
     recite_poem unless RUBYMOTION_ENV == 'test'
 
@@ -63,8 +62,10 @@ class RecitePoemScreen < PM::Screen
   end
 
   def create_recite_poem_view
-    rp_view = RecitePoemView.alloc.init
+#    rp_view = RecitePoemView.alloc.initWith
+    rp_view = RecitePoemView.alloc.initWithFrame(view.frame)
     rp_view.delegate = WeakRef.new(self)
+    rp_view.title = create_current_title
     rp_view
   end
 
@@ -79,7 +80,7 @@ class RecitePoemScreen < PM::Screen
  end
 
   def make_rp_view_appear
-    renew_current_title
+#    renew_current_title
     add self.recite_poem_view
   end
 
@@ -166,21 +167,6 @@ class RecitePoemScreen < PM::Screen
     end
   end
 
-  def init_appearance
-=begin
-    if self.navigationController
-      self.navigationController.navigationBar.topItem.prompt = AppDelegate::PROMPT
-    end
-=end
-    set_nav_bar_button :right, {
-      title: '終了',
-      action: :quit_game,
-      accessibility_label: 'quit_button'
-    }
-
-#    set_nav_bar_button :left, {' '}
-  end
-
   def go_back_to_kami
     transit_kami_shimo(false)
   end
@@ -227,8 +213,9 @@ class RecitePoemScreen < PM::Screen
     recite_poem if @supplier.kami? and to_recite
   end
 
-  def renew_current_title
-    self.title = "#{@supplier.current_index}/#{@supplier.size} " +
+
+  def create_current_title
+    "#{@supplier.current_index}/#{@supplier.size} " +
         case @supplier.kami?
           when true; '(上)'
           else     ; '(下)'

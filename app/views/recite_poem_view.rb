@@ -14,7 +14,7 @@ class RecitePoemView < UIView
 
   PROGRESS_TIMER_INTERVAL = 0.1
 
-  GEAR_BUTTON_SIZE = 30
+#  GEAR_BUTTON_SIZE = 30
 
   SKIP_BUTTON_SIZE = 30
   SKIP_BUTTON_FONT_SIZE = SKIP_BUTTON_SIZE * 0.5
@@ -22,21 +22,25 @@ class RecitePoemView < UIView
   FORWARD_BUTTON_TITLE = FontAwesome.icon('fast-forward')
   REWIND_BUTTON_TITLE  = FontAwesome.icon('fast-backward')
 
+  HEADER_VIEW_HEIGHT = 60
+
   ACC_LABEL_PLAY_BUTTON = 'play_button'
-  ACC_LABEL_GEAR_BUTTON = 'gear_button'
+#  ACC_LABEL_GEAR_BUTTON = 'gear_button'
 
   attr_accessor :delegate, :dataSource
 
-  def init
+#  def init
+  def initWithFrame(frame)
     super
 
     self.backgroundColor = UIColor.whiteColor
 
     self.addSubview self.play_button
     self.addSubview self.progress_bar
-    self.addSubview self.gear_button
     self.addSubview self.rewind_button
     self.addSubview self.forward_button
+    self.addSubview self.header_view
+#    self.addSubview self.gear_button
 
     self
   end
@@ -48,11 +52,11 @@ class RecitePoemView < UIView
     [self.rewind_button, self.forward_button].each do |b|
       b.layer.cornerRadius = SKIP_BUTTON_SIZE / 2
     end
-    dummy_nav_bar = create_new_label
+#    dummy_nav_bar = create_new_label
     space1 = create_new_label
     space2 = create_new_label
     space3 = create_new_label
-    self.addSubview dummy_nav_bar
+#    self.addSubview dummy_nav_bar
     self.addSubview space1
     self.addSubview space2
     self.addSubview space3
@@ -61,31 +65,44 @@ class RecitePoemView < UIView
       layout.view self
       layout.subviews 'button'    => self.play_button,
                       'progress'  => self.progress_bar,
-                      'gear'      => self.gear_button,
-                      'nav_bar'   => dummy_nav_bar,
+#                      'gear'      => self.gear_button,
+#                      'nav_bar'   => dummy_nav_bar,
                       'forward'   => self.forward_button,
                       'rewind'    => self.rewind_button,
+                      'header'    => self.header_view,
                       's1' => space1,
                       's2' => space2,
                       's3' => space3
       layout.metrics 'margin' => 20, 'height' => 10,
                      'b_size' => PLAY_BUTTON_SIZE,   # Playボタンのサイズは決め打ち
-                     'g_size' => GEAR_BUTTON_SIZE,   # Gearボタンのサイズも決め打ち
+#                     'g_size' => GEAR_BUTTON_SIZE,   # Gearボタンのサイズも決め打ち
                      's_size' => SKIP_BUTTON_SIZE,   # Rewind/Forwadボタンのサイズも決め打ち
-                     'nav_height' => top_offset,
-                     'top_margin_to_gear' => top_offset + 10
+                     'h_height' => HEADER_VIEW_HEIGHT
+#                     'nav_height' => top_offset,
+#                     'top_margin_to_gear' => top_offset + 10
 
       layout.vertical(
-          '|[nav_bar(nav_height)][s1][button(b_size)][s2(s1)][progress(height)][s3(s1)]|'
+#          '|[nav_bar(nav_height)][s1][button(b_size)][s2(s1)][progress(height)][s3(s1)]|'
+          '|[header(h_height)][s1][button(b_size)][s2(s1)][progress(height)][s3(s1)]|'
       )
-      layout.vertical('|-top_margin_to_gear-[gear(g_size)]')
+#      layout.vertical('|-10-[gear(g_size)]')
       layout.vertical('[rewind(s_size)]')
       layout.vertical('[forward(s_size)]')
       layout.horizontal('|-(>=margin)-[button(b_size)]-(>=margin)-|')
       layout.horizontal('|-[rewind(s_size)]-[progress]-[forward(s_size)]-|')
-      layout.horizontal('[gear(g_size)]-10-|')
+#      layout.horizontal('|-10-[gear(g_size)]')
+      layout.horizontal('|[header]|')
 
     end
+#    header_view.layout_subviews
+  end
+
+  def title=(str)
+    self.header_view.title = str
+  end
+
+  def title
+    self.header_view.title
   end
 
   def create_new_label
@@ -149,6 +166,7 @@ class RecitePoemView < UIView
 
   end
 
+=begin
   def gear_button
     @gear_button ||=
         UIButton.buttonWithType(UIButtonTypeRoundedRect).tap do |b|
@@ -169,6 +187,7 @@ class RecitePoemView < UIView
                               newSize: CGSizeMake(GEAR_BUTTON_SIZE, GEAR_BUTTON_SIZE))
   end
 
+=end
 
   def play_button_pushed
     puts 'play_button pushed!'
@@ -233,6 +252,18 @@ class RecitePoemView < UIView
                       forState: UIControlStateDisabled)
 
     end
+  end
+
+  def header_view
+    @header_view ||=
+        ReciteHeaderView.alloc.initWithFrame(header_view_frame).tap do |view|
+          view.backgroundColor = AppDelegate::BAR_TINT_COLOR
+        end
+  end
+
+  def header_view_frame
+    [[0, 0],
+     [self.frame.size.width, HEADER_VIEW_HEIGHT]]
   end
 
 

@@ -30,6 +30,9 @@ class HomeScreen < PM::GroupedTableScreen
 
   def start_game
     puts '++ 試合開始！' if BW::debug?
-    open RecitePoemScreen.new, nav_bar: false
+#    app_delegate.class.status_bar false, animation: :fade
+#    UIApplication.sharedApplication.setStatusBarHidden(true, animated: false)
+    navigation_controller.setNavigationBarHidden(true, animated: true)
+    open RecitePoemScreen.new
   end
 end
