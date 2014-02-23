@@ -2,6 +2,13 @@ class PoemSupplier
   attr_reader :poem, :player
 
   def initialize(init_hash={})
+    if init_hash[:special]
+      bool100 = (0..99).to_a.map {|idx| false}
+      (88..99).to_a.each {|idx| bool100[idx] = true}
+
+      @deck = Deck.create_from_bool100(bool100).shuffle_with_size(bool100.select{|b| b}.size)
+      return
+    end
     size = limit_size = init_hash[:size] || 100
     if init_hash[:limit] and init_hash[:limit] < limit_size
       limit_size = init_hash[:limit]

@@ -23,7 +23,8 @@ class AppDelegate < PM::Delegate
     AudioPlayerFactory.prepare_audio_players({opening: 'audio/序歌'})
 #    AudioPlayerFactory.prepare_audio_players({opening: 'audio/これは、テスト音声です。'})
     self.opening_player = AudioPlayerFactory.players[:opening]
-    self.poem_supplier = PoemSupplier.new({size: 30, shuffle: true, limit: 3}) # データができているのは10番まで
+#    self.poem_supplier = PoemSupplier.new({size: 30, shuffle: true, limit: 3}) # データができているのは10番まで
+    self.poem_supplier = PoemSupplier.new({special: true}) # データができているのは10番まで
     self.settings_manager = SettingsManager.new
     self.reciting_settings = self.settings_manager.reciting_settings
   end
