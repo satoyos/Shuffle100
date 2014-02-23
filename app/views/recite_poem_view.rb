@@ -25,7 +25,10 @@ class RecitePoemView < UIView
   HEADER_VIEW_HEIGHT = 60
 
   ACC_LABEL_PLAY_BUTTON = 'play_button'
-#  ACC_LABEL_GEAR_BUTTON = 'gear_button'
+  ACC_LABEL_PLAY  = 'play'
+  ACC_LABEL_PAUSE = 'pause'
+  ACC_LABEL_FORWARD =  'forward'
+  ACC_LABEL_BACKWORD = 'backward'
 
   attr_accessor :delegate, :dataSource
 
@@ -130,16 +133,17 @@ class RecitePoemView < UIView
     show_play_button_title(PLAY_BUTTON_PAUSING_TITLE,
                              left_inset: 0,
                              color: PLAY_BUTTON_PAUSING_COLOR)
+    self.play_button.titleLabel.accessibilityLabel = ACC_LABEL_PAUSE
     @timer = create_progress_update_timer(PROGRESS_TIMER_INTERVAL)
   end
 
   def show_waiting_to_play
     ap '- 再生の指示待ちです。' if BW::debug?
     @timer.invalidate if @timer
-#    ap "- @timer.isValid => #{@timer.isValid}" if BW::debug?
     show_play_button_title(PLAY_BUTTON_PLAYING_TITLE,
                              left_inset: PLAY_MARK_INSET,
                              color: PLAY_BUTTON_PLAYING_COLOR)
+    self.play_button.titleLabel.accessibilityLabel = ACC_LABEL_PLAY
   end
 
   def play_finished_successfully
@@ -147,6 +151,7 @@ class RecitePoemView < UIView
     @timer.invalidate if @timer and @timer.isValid
   end
 
+  # @return [UIButton]
   def play_button
     return @play_button if @play_button
     @play_button = ReciteViewButton.buttonWithType(UIButtonTypeCustom)
@@ -161,6 +166,7 @@ class RecitePoemView < UIView
   end
 
 
+  # @return [UIProgressView]
   def progress_bar
     @prrogress_bar ||= UIProgressView.alloc.initWithProgressViewStyle(UIProgressViewStyleDefault)
 
@@ -218,6 +224,7 @@ class RecitePoemView < UIView
           b.addTarget(self,
                       action: :rewind_button_pushed,
                       forControlEvents: UIControlEventTouchUpInside)
+          b.accessibilityLabel = ACC_LABEL_BACKWORD
         end
   end
 
@@ -228,6 +235,7 @@ class RecitePoemView < UIView
           b.addTarget(self,
                       action: :forward_button_pushed,
                       forControlEvents: UIControlEventTouchUpInside)
+          b.accessibilityLabel = ACC_LABEL_FORWARD
         end
   end
 

@@ -64,4 +64,20 @@ describe 'RecitePoemView' do
     end
   end
 
+  describe 'show_waiting_to_pause' do
+    before do
+      rp_view = RecitePoemView.alloc.init
+      rp_view.show_waiting_to_pause
+      @play_button = rp_view.play_button
+    end
+
+    it 'ラベルタイトルが正しく設定されている' do
+      @play_button.currentTitle.should == RecitePoemView::PLAY_BUTTON_PAUSING_TITLE
+    end
+
+    it 'PlayButtonのアクセさビリティラベルにアクセスできる' do
+      @play_button.titleLabel.accessibilityLabel.should == RecitePoemView::ACC_LABEL_PAUSE
+    end
+  end
+
 end

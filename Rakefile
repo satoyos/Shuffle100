@@ -1,18 +1,14 @@
 # -*- coding: utf-8 -*-
 $:.unshift("/Library/RubyMotion/lib")
 require 'motion/project/template/ios'
+require 'bundler'
+require 'bubble-wrap/core'
+require 'rubygems'
+require 'motion-stump'
+require 'awesome_print_motion'
+require 'motion-layout'
+require 'motion-frank'
 
-begin
-  require 'bundler'
-  require 'bubble-wrap/core'
-  require 'rubygems'
-  require 'motion-stump'
-  require 'awesome_print_motion'
-  require 'motion-layout'
-
-#  Bundler.require
-rescue LoadError
-end
 
 is_test = ARGV.join(' ') =~ /spec/
 if is_test
