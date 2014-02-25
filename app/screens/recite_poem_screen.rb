@@ -49,7 +49,13 @@ class RecitePoemScreen < PM::Screen
       if @supplier.draw_next_poem # 次の歌がある
         goto_next_poem
       else                        # 次の歌がない (最後の歌だった)
-        open GameEndScreen.new, nav_bar: true
+        @rp_view = GameEndView.alloc.initWithFrame(bounds).tap do |ge_view|
+          ge_view.delegate = WeakRef.new(self)
+        end
+        view_animation_def('make_rp_view_appear',
+                           arg: nil,
+                           duration: self.reciting_settings.interval_time,
+                           transition: UIViewAnimationTransitionFlipFromLeft)
       end
     end
   end
@@ -123,7 +129,7 @@ class RecitePoemScreen < PM::Screen
     }) do |alert|
       if alert.clicked_button.cancel?
         puts '[quit] 試合を終了します' if BW::debug?
-        open_root_screen HomeScreen
+        close to_screen: :root
       else
         puts '[continue] 試合を続行します' if BW::debug?
       end
