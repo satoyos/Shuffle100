@@ -264,9 +264,12 @@ class RecitePoemView < UIView
 
   def header_view
     @header_view ||=
+        ReciteHeaderView.alloc.initWithFrame(header_view_frame)
+=begin
         ReciteHeaderView.alloc.initWithFrame(header_view_frame).tap do |view|
           view.backgroundColor = AppDelegate::BAR_TINT_COLOR
         end
+=end
   end
 
   def header_view_frame

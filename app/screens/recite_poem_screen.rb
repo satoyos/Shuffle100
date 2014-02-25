@@ -155,6 +155,7 @@ class RecitePoemScreen < PM::Screen
     end
   end
 
+
   private
 
   def init_properties_with_delegate

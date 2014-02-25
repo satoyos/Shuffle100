@@ -4,6 +4,7 @@ class ReciteHeaderView < UIView
 
   def initWithFrame(frame)
     super
+    self.backgroundColor = AppDelegate::BAR_TINT_COLOR
     self.addSubview self.title_label
     self.addSubview self.gear_button
     self
@@ -21,19 +22,6 @@ class ReciteHeaderView < UIView
   def title
     self.title_label.text
   end
-=begin
-  def layout_subviews
-    Motion::Layout.new do |layout|
-#      self.title_label.sizeToFit
-
-      layout.view self
-      layout.subviews title: self.title_label
-      layout.horizontal '|-(>=20)-[title]-(>=20)-|'
-      layout.vertical   '|-[title(>=20)]-|'
-    end
-
-  end
-=end
 
   def title_label
     @title_label ||=

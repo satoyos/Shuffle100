@@ -28,6 +28,10 @@ class HomeScreen < PM::GroupedTableScreen
     ]
   end
 
+  def will_appear
+    navigation_controller.setNavigationBarHidden(false, animated: false) if self.nav_bar?
+  end
+
   def start_game
     puts '++ 試合開始！' if BW::debug?
 #    app_delegate.class.status_bar false, animation: :fade
