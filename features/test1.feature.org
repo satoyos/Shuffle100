@@ -52,7 +52,7 @@ Scenario:
 
 
   Scenario:
-早送りのボタンを押すと、すぐに次の歌に進む。
+    早送りのボタンを押すと、すぐに次の歌に進む。
   Then I should see "百首読み上げ"
 
   # 序歌画面
@@ -63,3 +63,5 @@ Scenario:
   When I touch the button marked "forward"
   When I wait for 2 seconds
   Then I should see "1/"
+
+

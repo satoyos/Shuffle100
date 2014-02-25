@@ -1,0 +1,21 @@
+Feature:
+  As a developer
+  I want to take some screenshots
+  So I can explain how the app works
+
+Background:
+  Given I launch the app
+
+  Scenario:
+  歌が変わるアニメーションの撮影にトライ
+    Then I should see "百首読み上げ"
+
+  # 序歌画面
+    When I touch "試合開始"
+    Then I should see "序歌"
+
+  # 早送りスキップボタンを押す
+    When I touch the button marked "forward"
+    When I wait for 0.5 seconds
+    Then I save a screenshot with prefix flipping
+
