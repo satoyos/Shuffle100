@@ -48,7 +48,10 @@ Scenario:
 
   # 最後の歌の読み上げが終了すると、終了画面が出る。
   Then I wait to see "トップに戻る"
-  
+
+  # 「トップに戻る」ボタンを押すと、トップ画面に戻る
+  When I touch the button marked "back_to_top"
+  Then I should see "百首読み上げ"
 
 
   Scenario:

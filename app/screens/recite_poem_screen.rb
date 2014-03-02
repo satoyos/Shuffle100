@@ -5,6 +5,7 @@ class RecitePoemScreen < PM::Screen
   OPENING_POEM_TITLE = '序歌'
   title OPENING_POEM_TITLE
 
+  ACC_LABEL_QUIT_ALERT = 'quit_alert_view'
   attr_reader :supplier, :current_player, :reciting_settings
 
   def on_load
@@ -131,7 +132,8 @@ class RecitePoemScreen < PM::Screen
     BW::UIAlertView.new({
       title: '試合を終了しますか？',
       buttons: ['終了する', '続ける'],
-      cancel_button_index: 0
+      cancel_button_index: 0,
+      accessibilityLabel: ACC_LABEL_QUIT_ALERT
     }) do |alert|
       if alert.clicked_button.cancel?
         puts '[quit] 試合を終了します' if BW::debug?
