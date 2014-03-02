@@ -20,8 +20,6 @@ class RecitePoemScreen < PM::Screen
     top_guide_height = case self.navigationController
                          when nil; 0
                          else
-                           printf "NavigationBarのフレーム: "
-                           ap self.navigationController.navigationBar.frame
                            frame = self.navigationController.navigationBar.frame
                            frame.origin.y + frame.size.height
                        end
