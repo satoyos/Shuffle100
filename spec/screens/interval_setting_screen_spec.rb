@@ -1,8 +1,8 @@
 describe 'IntervalSettingController' do
-  describe '初期化' do
-    tests IntervalSettingScreen
+  tests IntervalSettingScreen
+  alias :screen :controller
 
-    alias :screen :controller
+  describe '初期化' do
 
     it 'should not be nil' do
       screen.should.not.be.nil

@@ -1,6 +1,7 @@
 class GameEndView < UIView
   GAME_END_VIEW_TITLE =  '試合終了'
   HEADER_VIEW_HEIGHT = RecitePoemView::HEADER_VIEW_HEIGHT
+  ACC_LABEL_BACK_TO_TOP_BOTTON = 'back_to_top'
 
   attr_accessor :delegate
 
@@ -23,13 +24,13 @@ class GameEndView < UIView
           b.addTarget(self,
                       action: :back_to_top_button_pushed,
                       forControlEvents: UIControlEventTouchUpInside)
+          b.accessibilityLabel = ACC_LABEL_BACK_TO_TOP_BOTTON
         end
   end
 
   def back_to_top_button_pushed
     puts '[Back to Top] button pushed!' if BW::debug?
 
-    #%ToDo: ここ、delegateのメッセージを呼び出すように実装する！
     self.delegate.back_to_top_screen
   end
 

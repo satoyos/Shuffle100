@@ -53,12 +53,10 @@ class IntervalSettingScreen < PM::Screen
       layout.vertical(
           '|-(<=top_margin)-[int_label][blank(<=height)]-margin-[slider(blank)]-[button(blank)]-(<=margin@600)-|'
       )
-#      layout.horizontal '[int_label(200)]'
       layout.horizontal '[blank(int_label)]'
       layout.horizontal '[blank][sec_label(40)]-(>=margin)-|'
       layout.horizontal '|-margin-[slider]-margin-|'
       layout.horizontal '|-margin-[button]-margin-|'
-#      layout.vertical '[int_label(il_height)][sec_label(height)]'
     end
 
     # interval_labelのcenterXを、self.viewのcenterXと一致させる
@@ -131,61 +129,47 @@ class IntervalSettingScreen < PM::Screen
   end
 
   def interval_label
-    unless @interval_label
-      @interval_label = UILabel.alloc.initWithFrame(CGRectZero).tap do |l|
-        l.textAlignment = UITextAlignmentCenter
-        l.adjustsFontSizeToFitWidth = true
-      end
-    end
-    @interval_label
+    @interval_label ||=
+        UILabel.alloc.initWithFrame(CGRectZero).tap do |l|
+          l.textAlignment = UITextAlignmentCenter
+          l.adjustsFontSizeToFitWidth = true
+        end
   end
 
   def blank_label
-    unless @blank_label
-      @blank_label = UILabel.alloc.initWithFrame(CGRectZero)
-    end
-    @blank_label
+      @blank_label ||= UILabel.alloc.initWithFrame(CGRectZero)
   end
 
   def sec_label
-    unless @sec_label
-      @sec_label = UILabel.alloc.initWithFrame(CGRectZero).tap do |l|
-        l.font = l.font.fontWithSize(20)
-        l.textAlignment =UITextAlignmentCenter
-        l.text = '秒'
-      end
-    end
-    @sec_label
+    @sec_label ||=
+        UILabel.alloc.initWithFrame(CGRectZero).tap do |l|
+          l.font = l.font.fontWithSize(20)
+          l.textAlignment =UITextAlignmentCenter
+          l.text = '秒'
+        end
   end
 
-
   def try_button
-    unless @try_button
-      @try_button = UIButton.buttonWithType(UIButtonTypeRoundedRect).tap do |b|
-        b.setTitle(TRY_BUTTON_TITLE, forState: UIControlStateNormal)
-        b.addTarget(self, action: 'try_button_pushed:',
-                    forControlEvents: UIControlEventTouchUpInside)
-      end
-    end
-    @try_button
+    @try_button ||=
+        UIButton.buttonWithType(UIButtonTypeRoundedRect).tap do |b|
+          b.setTitle(TRY_BUTTON_TITLE, forState: UIControlStateNormal)
+          b.addTarget(self, action: 'try_button_pushed:',
+                      forControlEvents: UIControlEventTouchUpInside)
+        end
   end
 
   def interval_slider
-    unless @interval_slider
-      @interval_slider = UISlider.alloc.initWithFrame(CGRectZero)
-      @interval_slider.tap do  |sl|
-        sl.minimumValue = MIN_INTERVAL_VALUE
-        sl.maximumValue = MAX_INTERVAL_VALUE
-        sl.value = app_delegate.reciting_settings.interval_time
-        sl.addTarget(self, action: 'sliderChanging:',
-                     forControlEvents: UIControlEventValueChanged)
-        sl.addTarget(self, action:'slider_value_changed:',
-                     forControlEvents: UIControlEventTouchUpInside |
-                         UIControlEventTouchUpOutside)
-
-      end
-    end
-    @interval_slider
+    @interval_slider ||=
+        UISlider.alloc.initWithFrame(CGRectZero).tap do  |sl|
+          sl.minimumValue = MIN_INTERVAL_VALUE
+          sl.maximumValue = MAX_INTERVAL_VALUE
+          sl.value = app_delegate.reciting_settings.interval_time
+          sl.addTarget(self, action: 'sliderChanging:',
+                       forControlEvents: UIControlEventValueChanged)
+          sl.addTarget(self, action:'slider_value_changed:',
+                       forControlEvents: UIControlEventTouchUpInside |
+                           UIControlEventTouchUpOutside)
+        end
   end
 
   def sliderChanging(sender)
@@ -219,7 +203,6 @@ class IntervalSettingScreen < PM::Screen
     (self.view.frame.size.height / 4).to_i
   end
 
-
   def set_kami_shimo_players
     supplier = PoemSupplier.new  # 間隔調節用に、全く新規のsupplierを作る
     supplier.draw_next_poem
@@ -248,7 +231,4 @@ class IntervalSettingScreen < PM::Screen
     player.currentTime = 0.0
     player.prepareToPlay
   end
-
-
-
 end
