@@ -5,6 +5,7 @@ app/pixate_code.rb
 resources/*.nib
 resources/*.momd
 resources/*.storyboardc
+resources/fontawesome-webfont.ttf
 .DS_Store
 nbproject
 .redcar
@@ -17,4 +18,5 @@ nbproject
 vendor/*
 .DS_Store
 Gemfile.lock
+
 

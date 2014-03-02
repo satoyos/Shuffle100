@@ -10,6 +10,7 @@ class IntervalSettingScreen < PM::Screen
   def on_load
     set_kami_shimo_players
 
+    self.view = UIScrollView.alloc.initWithFrame(self.view.bounds)
     self.view.backgroundColor = UIColor.whiteColor
     self.title = '歌の間隔の変更'
 
