@@ -48,6 +48,10 @@ class RecitePoemView < UIView
     self
   end
 
+  def should_autorotate
+    false
+  end
+
   def layout_with_top_offset(top_offset)
 #    self.frame = delegate.view.bounds
     self.frame = delegate.bounds

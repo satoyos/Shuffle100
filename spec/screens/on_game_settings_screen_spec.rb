@@ -11,4 +11,7 @@ describe 'OnGameSettingsScreen' do
     screen.should.be.kind_of(PM::TableScreen)
   end
 
+  it 'should not rotate' do
+    screen.should_autorotate.should.be.false
+  end
 end

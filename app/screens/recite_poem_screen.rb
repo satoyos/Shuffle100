@@ -1,6 +1,7 @@
 class RecitePoemScreen < PM::Screen
   include RecitePoemDataSource
 
+
   OPENING_POEM_TITLE = '序歌'
   title OPENING_POEM_TITLE
 
@@ -24,6 +25,10 @@ class RecitePoemScreen < PM::Screen
                            frame.origin.y + frame.size.height
                        end
     self.recite_poem_view.layout_with_top_offset(top_guide_height)
+  end
+
+  def should_autorotate
+    false
   end
 
   def play_button_pushed(view)

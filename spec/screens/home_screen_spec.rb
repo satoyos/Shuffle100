@@ -9,4 +9,8 @@ describe 'HomeScreen' do
   it 'is a TableScreen' do
     screen.should.be.kind_of PM::GroupedTableScreen
   end
+
+  it 'should not rotate' do
+    screen.should_autorotate.should.be.false
+  end
 end

@@ -12,6 +12,10 @@ class OnGameSettingsScreen < PM::TableScreen
     }
   end
 
+  def should_autorotate
+    false
+  end
+
   def table_data
     [{
         cells: [{

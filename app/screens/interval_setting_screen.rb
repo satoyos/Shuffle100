@@ -93,6 +93,10 @@ class IntervalSettingScreen < PM::Screen
     app_delegate.reciting_settings.interval_time = self.interval_slider.value.round(2)
   end
 
+  def should_autorotate
+    false
+  end
+
   def audioPlayerDidFinishPlaying(player, successfully:flag)
     return unless flag
 
