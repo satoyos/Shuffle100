@@ -78,7 +78,7 @@ class IntervalSettingScreen < PM::Screen
                                                relatedBy: NSLayoutRelationEqual,
                                                toItem: self.interval_label,
                                                attribute: NSLayoutAttributeWidth,
-                                               multiplier: 0.5,
+                                               multiplier: 0.6,
                                                constant: 0 )
     )
 
