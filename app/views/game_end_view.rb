@@ -30,6 +30,7 @@ class GameEndView < UIView
     puts '[Back to Top] button pushed!' if BW::debug?
 
     #%ToDo: ここ、delegateのメッセージを呼び出すように実装する！
+    self.delegate.back_to_top_screen
   end
 
   def header_view

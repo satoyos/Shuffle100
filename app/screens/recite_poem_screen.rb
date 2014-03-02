@@ -112,9 +112,12 @@ class RecitePoemScreen < PM::Screen
 
   end
 
+  def back_to_top_screen
+    close to_screen: :root
+  end
+
   def quit_game
     puts '- Quit Button Pushed!' if BW::debug?
-#    App.alert('終了しますか？')
     if @current_player.playing?
       @current_player.pause
       self.recite_poem_view.show_waiting_to_play
@@ -127,12 +130,13 @@ class RecitePoemScreen < PM::Screen
     }) do |alert|
       if alert.clicked_button.cancel?
         puts '[quit] 試合を終了します' if BW::debug?
-        close to_screen: :root
+        back_to_top_screen
       else
         puts '[continue] 試合を続行します' if BW::debug?
       end
     end.show
   end
+
 
   def forward_skip
     if @current_player

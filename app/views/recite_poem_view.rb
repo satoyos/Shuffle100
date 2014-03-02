@@ -172,29 +172,6 @@ class RecitePoemView < UIView
 
   end
 
-=begin
-  def gear_button
-    @gear_button ||=
-        UIButton.buttonWithType(UIButtonTypeRoundedRect).tap do |b|
-          b.setImage(gear_image, forState: UIControlStateNormal)
-          b.addTarget(self,
-                      action: 'gear_button_did_pushed:',
-                      forControlEvents: UIControlEventTouchUpInside)
-          b.accessibilityLabel = ACC_LABEL_GEAR_BUTTON
-        end
-  end
-
-  def gear_button_did_pushed(sender)
-    self.delegate.start_on_game_settings(sender)
-  end
-
-  def gear_image
-    ResizeUIImage.resizeImage(UIImage.imageNamed('gear_256.png'),
-                              newSize: CGSizeMake(GEAR_BUTTON_SIZE, GEAR_BUTTON_SIZE))
-  end
-
-=end
-
   def play_button_pushed
     puts 'play_button pushed!'
     self.delegate.play_button_pushed(self)
@@ -265,11 +242,6 @@ class RecitePoemView < UIView
   def header_view
     @header_view ||=
         ReciteHeaderView.alloc.initWithFrame(header_view_frame)
-=begin
-        ReciteHeaderView.alloc.initWithFrame(header_view_frame).tap do |view|
-          view.backgroundColor = AppDelegate::BAR_TINT_COLOR
-        end
-=end
   end
 
   def header_view_frame
