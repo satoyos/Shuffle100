@@ -1,0 +1,25 @@
+Feature:
+  As an 百人一首 player
+  I want to change some settings when playing games
+  So I can change 歌間隔 or 音量 etc..
+
+  Background:
+    Given I launch the app
+
+  Scenario:
+  歯車ボタンを押すと、歌間隔や音量などの設定がd家居る。
+    Then I should see "百首読み上げ"
+
+    # 序歌画面
+    When I touch "試合開始"
+    Then I should see "序歌"
+
+    # 歯車ボタンを押すと、各種設定画面が現れる。
+    When I touch "gear_button"
+    When I wait for 1 second
+    Then I should see "いろいろな設定"
+
+    # 最初のテーブルセルを押すと、歌間隔設定画面に遷移する。
+    When I touch the first table cell
+    When I wait for 1 second
+    Then I should see "歌の間隔の変更"

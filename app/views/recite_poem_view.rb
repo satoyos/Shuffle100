@@ -43,7 +43,6 @@ class RecitePoemView < UIView
     self.addSubview self.rewind_button
     self.addSubview self.forward_button
     self.addSubview self.header_view
-#    self.addSubview self.gear_button
 
     self
   end
@@ -53,17 +52,14 @@ class RecitePoemView < UIView
   end
 
   def layout_with_top_offset(top_offset)
-#    self.frame = delegate.view.bounds
     self.frame = delegate.bounds
     self.play_button.layer.cornerRadius = PLAY_BUTTON_SIZE / 2
     [self.rewind_button, self.forward_button].each do |b|
       b.layer.cornerRadius = SKIP_BUTTON_SIZE / 2
     end
-#    dummy_nav_bar = create_new_label
     space1 = create_new_label
     space2 = create_new_label
     space3 = create_new_label
-#    self.addSubview dummy_nav_bar
     self.addSubview space1
     self.addSubview space2
     self.addSubview space3
@@ -72,8 +68,6 @@ class RecitePoemView < UIView
       layout.view self
       layout.subviews 'button'    => self.play_button,
                       'progress'  => self.progress_bar,
-#                      'gear'      => self.gear_button,
-#                      'nav_bar'   => dummy_nav_bar,
                       'forward'   => self.forward_button,
                       'rewind'    => self.rewind_button,
                       'header'    => self.header_view,
@@ -157,18 +151,15 @@ class RecitePoemView < UIView
 
   # @return [UIButton]
   def play_button
-    return @play_button if @play_button
-    @play_button = ReciteViewButton.buttonWithType(UIButtonTypeCustom)
-    @play_button.tap do |b|
-      b.accessibilityLabel = ACC_LABEL_PLAY_BUTTON
-      b.titleLabel.font = FontAwesome.fontWithSize(PLAY_BUTTON_FONT_SIZE)
-      b.addTarget(self,
-                  action: :play_button_pushed,
-                  forControlEvents: UIControlEventTouchUpInside)
-    end
-    @play_button
+    @play_button ||=
+        ReciteViewButton.buttonWithType(UIButtonTypeCustom).tap do |b|
+          b.accessibilityLabel = ACC_LABEL_PLAY_BUTTON
+          b.titleLabel.font = FontAwesome.fontWithSize(PLAY_BUTTON_FONT_SIZE)
+          b.addTarget(self,
+                      action: :play_button_pushed,
+                      forControlEvents: UIControlEventTouchUpInside)
+        end
   end
-
 
   # @return [UIProgressView]
   def progress_bar

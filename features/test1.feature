@@ -51,10 +51,11 @@ Scenario:
 
   # 「トップに戻る」ボタンを押すと、トップ画面に戻る
   When I touch the button marked "back_to_top"
+  When I wait for 1 second
   Then I should see "百首読み上げ"
 
 
-  Scenario:
+Scenario:
     早送りのボタンを押すと、すぐに次の歌に進む。
   Then I should see "百首読み上げ"
 
@@ -67,4 +68,6 @@ Scenario:
   When I wait for 2 seconds
   Then I should see "1/"
 
+  # シミュレータを抜ける
+  When I quit the simulator
 

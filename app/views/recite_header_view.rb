@@ -76,7 +76,7 @@ class ReciteHeaderView < UIView
   end
 
   def gear_button_did_pushed(sender)
-    superview.delegate.start_on_game_settings(sender)
+    superview.delegate.open_on_game_settings(sender)
   end
 
   def quit_button_did_pushed(sender)
