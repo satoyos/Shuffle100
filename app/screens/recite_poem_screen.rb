@@ -4,6 +4,9 @@ class RecitePoemScreen < PM::Screen
 
 
   OPENING_POEM_TITLE = '序歌'
+
+  SLIDING_EFFECT_DURATION = 0.2
+
   title OPENING_POEM_TITLE
 
   attr_reader :supplier, :current_player, :reciting_settings
@@ -11,6 +14,7 @@ class RecitePoemScreen < PM::Screen
   def on_load
     init_properties_with_delegate
 
+    view.backgroundColor = UIColor.redColor # 見えてはいけないviewが見えたらすぐ分かるよう着色
     @rp_view = create_recite_poem_view
     self.recite_poem_view.title = OPENING_POEM_TITLE
     add @rp_view
@@ -47,7 +51,7 @@ class RecitePoemScreen < PM::Screen
         @rp_view = GameEndView.alloc.initWithFrame(bounds).tap do |ge_view|
           ge_view.delegate = WeakRef.new(self)
         end
-        view_animation_def('make_rp_view_appear',
+        view_animation_def('make_rp_view_appear_adding',
                            arg: nil,
                            duration: self.reciting_settings.interval_time,
                            transition: UIViewAnimationTransitionFlipFromLeft)
@@ -63,25 +67,44 @@ class RecitePoemScreen < PM::Screen
   end
 
   def create_recite_poem_view
-#    rp_view = RecitePoemView.alloc.initWith
-    rp_view = RecitePoemView.alloc.initWithFrame(view.frame)
-    rp_view.delegate = WeakRef.new(self)
-    rp_view.title = create_current_title
-    rp_view
+    RecitePoemView.alloc.initWithFrame(view.frame).tap do |rp_view|
+      rp_view.delegate = WeakRef.new(self)
+      rp_view.title = create_current_title
+      rp_view.show_waiting_to_play
+    end
   end
 
-  def renew_view_and_player
+  def renew_view_and_player(side = nil)
     puts '== rp_viewを更新します！' if BW::debug?
-    remove @rp_view
+#    ここで不要になったviewをすぐ消すのは止める。
+#    remove @rp_view
+    @prev_view = @rp_view
     @rp_view = create_recite_poem_view
     fetch_player
 
     self.will_appear
     @rp_view.layoutSubviews
+
+    locate_rp_view(side)
  end
 
-  def make_rp_view_appear
+  def locate_rp_view(side)
+    case side
+      when :right
+        @rp_view.frame = [[frame.size.width, 0], frame.size]
+      when :left
+        @rp_view.frame = [[-1 * frame.size.width, 0], frame.size]
+      else
+        # 何もしない
+    end
+  end
+
+  def make_rp_view_appear_adding
     add self.recite_poem_view
+  end
+
+  def make_rp_view_appear_sliding
+    @rp_view.frame = [[0, 0], frame.size]
   end
 
   def fetch_player
@@ -106,47 +129,51 @@ class RecitePoemScreen < PM::Screen
   end
 
   def go_back_to_kami
-    transit_kami_shimo(false)
+    transit_shimo_kami(false)
   end
 
   def transit_kami_shimo(to_recite)
-    renew_view_and_player
-    make_rp_view_appear
-    self.recite_poem_view.show_waiting_to_play
-    new_rp_view_did_appear(to_recite)
+    renew_view_and_player(:right)
+    make_view_appear_with_sliding
   end
+
+  def transit_shimo_kami(to_recite)
+    renew_view_and_player(:left)
+    make_view_appear_with_sliding
+  end
+
+  def make_view_appear_with_sliding
+    add self.recite_poem_view
+    view_animation_def('make_rp_view_appear_sliding', arg: nil,
+                       duration: SLIDING_EFFECT_DURATION, transition: nil)
+  end
+
 
   def goto_next_poem
     puts 'Go to Next Poem!' if BW::debug?
     renew_view_and_player
     self.recite_poem_view.show_waiting_to_play
-    if RUBYMOTION_ENV == 'test'
-      make_rp_view_appear
-      new_rp_view_did_appear
-    else
-      view_animation_def('make_rp_view_appear',
-                         arg: nil,
-                         duration: self.reciting_settings.interval_time,
-                         transition: UIViewAnimationTransitionFlipFromLeft)
-    end
+    view_animation_def('make_rp_view_appear_adding',
+                       arg: nil,
+                       duration: self.reciting_settings.interval_time,
+                       transition: UIViewAnimationTransitionFlipFromLeft)
   end
 
   def go_back_to_prev_poem
     puts 'Back to Prev Poem!' if BW::debug?
     renew_view_and_player
     self.recite_poem_view.show_waiting_to_play
-    if RUBYMOTION_ENV == 'test'
-      make_rp_view_appear
-      new_rp_view_did_appear(false)
-    else
-      view_animation_def('make_rp_view_appear',
-                         arg: nil,
-                         duration: 0.5,
-                         transition: UIViewAnimationTransitionFlipFromRight)
-    end
+    view_animation_def('make_rp_view_appear_adding',
+                       arg: nil,
+                       duration: 0.5,
+                       transition: UIViewAnimationTransitionFlipFromRight)
   end
 
   def new_rp_view_did_appear(to_recite=true)
+    if @prev_view
+      remove @prev_view
+      @prev_view = nil
+    end
     recite_poem if @supplier.kami? and to_recite
   end
 
@@ -179,8 +206,10 @@ class RecitePoemScreen < PM::Screen
 
   def view_animation_has_finished(animation_id)
     case animation_id
-      when 'make_rp_view_appear'
-        new_rp_view_did_appear
+      when 'make_rp_view_appear_adding'
+        new_rp_view_did_appear(true)
+      when 'make_rp_view_appear_sliding'
+        new_rp_view_did_appear(false)
       else
         puts "/////// このアニメーションの後処理はありません。 ///////" if BW::debug?
     end

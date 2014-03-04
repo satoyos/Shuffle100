@@ -23,6 +23,7 @@ Scenario:
   Then I wait to see "下"
 
   # Playボタンを押すと、下の句の読み上げが始まる
+  When I wait for 1 second
   When I touch the button marked "play_button"
   Then I should see play_button waiting "pause"
 
@@ -30,9 +31,12 @@ Scenario:
   Then I wait to see "2/"
 
   # 上の句の読み上げが終わったら、下の句の読み上げ待ちになる
+  # 1枚目の(下)の文字がアニメーション後に画面から完全に消えるのを待つ
+  When I wait for 2.5 second
   Then I wait to see "下"
 
   # Playボタンを押すと、下の句の読み上げが始まる
+  When I wait for 1 second
   When I touch the button marked "play_button"
   Then I should see play_button waiting "pause"
 
@@ -40,9 +44,12 @@ Scenario:
   Then I wait to see "3/"
 
   # 上の句の読み上げが終わったら、下の句の読み上げ待ちになる
+  # 1枚目の(下)の文字がアニメーション後に画面から完全に消えるのを待つ
+  When I wait for 2.5 second
   Then I wait to see "下"
 
   # Playボタンを押すと、下の句の読み上げが始まる
+  When I wait for 1 second
   When I touch the button marked "play_button"
   Then I should see play_button waiting "pause"
 

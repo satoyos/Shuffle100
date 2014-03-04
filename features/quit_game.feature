@@ -18,6 +18,10 @@ Feature:
     When I touch "quit_button"
     When I wait for 1 second
 
-  # なぜか↓この確認画面検出が失敗する！(T_T)
+   # なぜか↓この確認画面検出が失敗する！(T_T)
+#   Then I should see an alert view titled ”試合を終了しますか？”
 #   Then I should see "終了する"
 #   Then I should see an element of class "UIAlertView"
+
+    # シミュレータを抜ける
+    When I quit the simulator
