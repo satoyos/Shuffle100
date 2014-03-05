@@ -1,13 +1,14 @@
 class GameEndView < UIView
   GAME_END_VIEW_TITLE =  '試合終了'
+  BACK_TO_TOP_TITLE = 'トップに戻る'
   HEADER_VIEW_HEIGHT = RecitePoemView::HEADER_VIEW_HEIGHT
-  ACC_LABEL_BACK_TO_TOP_BOTTON = 'back_to_top'
+  ACC_LABEL_BACK_TO_TOP_BUTTON = 'back_to_top'
 
   attr_accessor :delegate
 
   def initWithFrame(frame)
     super
-    self.backgroundColor= UIColor.whiteColor
+    self.backgroundColor= 'white'.to_color
     self.addSubview self.back_to_top_button
     self.addSubview self.header_view
 
@@ -20,11 +21,11 @@ class GameEndView < UIView
         UIButton.buttonWithType(UIButtonTypeRoundedRect).tap do |b|
           b.frame = [[0, 0], [200, 80]]
           b.center = self.center
-          b.setTitle('トップに戻る', forState: UIControlStateNormal)
+          b.setTitle(BACK_TO_TOP_TITLE, forState: UIControlStateNormal)
           b.addTarget(self,
                       action: :back_to_top_button_pushed,
                       forControlEvents: UIControlEventTouchUpInside)
-          b.accessibilityLabel = ACC_LABEL_BACK_TO_TOP_BOTTON
+          b.accessibilityLabel = ACC_LABEL_BACK_TO_TOP_BUTTON
         end
   end
 

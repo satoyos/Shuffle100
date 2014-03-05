@@ -5,8 +5,6 @@ class GameStartCell < UITableViewCell
   def initWithText(text, acc_label: acc_label, reuseIdentifier: reuseIdentifier)
     self.initWithStyle(CELL_STYLE, reuseIdentifier: reuseIdentifier)
     textLabel.text = text
-#    textLabel.textAlignment = UITextAlignmentCenter
-#    textLabel.textColor = UIColor.redColor
     self.accessibilityLabel = acc_label
 
     self

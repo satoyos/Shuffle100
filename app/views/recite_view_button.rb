@@ -1,21 +1,18 @@
 class ReciteViewButton < UIButton
-  GLAY_BLIGHTNESS = 0.9
+  GLAY_BRIGHTNESS = 0.9
+  BORDER_WIDTH = 1.0 # ボタンの境界線の太さ
 
-#  def init
   class << self
     def buttonWithType(type)
-      button = super
-      
-      button.tap do |b|
+      super.tap do |b|
         b.titleLabel.textAlignment = NSTextAlignmentCenter
         b.layer.tap do |l|
           l.masksToBounds = true
-          l.borderWidth = 1.0
+          l.borderWidth = BORDER_WIDTH
           l.borderColor = UIColor.darkGrayColor.CGColor
         end
         b.enabled = true
       end
-      button
     end
   end
 
@@ -25,9 +22,9 @@ class ReciteViewButton < UIButton
     context = UIGraphicsGetCurrentContext()
 
     # Color Declarations
-    color = UIColor.colorWithRed(GLAY_BLIGHTNESS,
-                                 green: GLAY_BLIGHTNESS,
-                                 blue: GLAY_BLIGHTNESS,
+    color = UIColor.colorWithRed(GLAY_BRIGHTNESS,
+                                 green: GLAY_BRIGHTNESS,
+                                 blue: GLAY_BRIGHTNESS,
                                  alpha: 1)
 
     # Gradient Declarations
