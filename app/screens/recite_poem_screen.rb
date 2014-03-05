@@ -19,7 +19,6 @@ class RecitePoemScreen < PM::Screen
     self.recite_poem_view.title = OPENING_POEM_TITLE
     add @rp_view
     recite_poem unless RUBYMOTION_ENV == 'test'
-
   end
 
   def will_appear
@@ -119,7 +118,7 @@ class RecitePoemScreen < PM::Screen
   private
 
   def init_properties_with_delegate
-    UIApplication.sharedApplication.delegate.tap do |delegate|
+    app_delegate.tap do |delegate|
       delegate.refresh_models
       @supplier = delegate.poem_supplier
       @current_player = delegate.opening_player

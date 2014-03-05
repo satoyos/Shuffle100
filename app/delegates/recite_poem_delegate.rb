@@ -3,41 +3,41 @@ module RecitePoemDelegate
 
 
   def play_button_pushed(view)
-    if self.current_player.playing?
-      self.current_player.pause
-      self.recite_poem_view.show_waiting_to_play
+    if current_player.playing?
+      current_player.pause
+      recite_poem_view.show_waiting_to_play
     else
       recite_poem
     end
   end
 
   def current_player_progress
-    total = self.current_player.duration
-    f = self.current_player.currentTime / total
+    total = current_player.duration
+    f = current_player.currentTime / total
 #    ap "  - f = #{f}" if BW::debug?
     f
   end
 
   def forward_skip
-    if self.current_player
-      self.current_player.currentTime = self.current_player.duration - 0.01
-      self.current_player.play
+    if current_player
+      current_player.currentTime = current_player.duration - 0.01
+      current_player.play
     end
   end
 
   def rewind_skip
-    return unless self.current_player
-    if self.current_player.currentTime > 0.0 # 再生途中の場合
-      self.current_player.currentTime = 0.0
-      self.current_player.pause
-      self.recite_poem_view.show_waiting_to_play
-      self.recite_poem_view.update_progress
+    return unless current_player
+    if current_player.currentTime > 0.0 # 再生途中の場合
+      current_player.currentTime = 0.0
+      current_player.pause
+      recite_poem_view.show_waiting_to_play
+      recite_poem_view.update_progress
     else
-      if self.supplier.kami?
-        return unless self.supplier.rollback_prev_poem
+      if supplier.kami?
+        return unless supplier.rollback_prev_poem
         go_back_to_prev_poem
       else
-        self.supplier.step_back_to_kami
+        supplier.step_back_to_kami
         go_back_to_kami
       end
     end
@@ -52,9 +52,9 @@ module RecitePoemDelegate
 
   def quit_game
     puts '- Quit Button Pushed!' if BW::debug?
-    if self.current_player.playing?
-      self.current_player.pause
-      self.recite_poem_view.show_waiting_to_play
+    if current_player.playing?
+      current_player.pause
+      recite_poem_view.show_waiting_to_play
     end
 
     BW::UIAlertView.new({

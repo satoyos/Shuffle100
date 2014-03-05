@@ -14,8 +14,6 @@ class RecitePoemView < UIView
 
   PROGRESS_TIMER_INTERVAL = 0.1
 
-#  GEAR_BUTTON_SIZE = 30
-
   SKIP_BUTTON_SIZE = 30
   SKIP_BUTTON_FONT_SIZE = SKIP_BUTTON_SIZE * 0.5
   SKIP_BUTTON_COLOR = PLAY_BUTTON_PLAYING_COLOR
@@ -32,7 +30,6 @@ class RecitePoemView < UIView
 
   attr_accessor :delegate, :dataSource
 
-#  def init
   def initWithFrame(frame)
     super
 
@@ -76,26 +73,19 @@ class RecitePoemView < UIView
                       's3' => space3
       layout.metrics 'margin' => 20, 'height' => 10,
                      'b_size' => PLAY_BUTTON_SIZE,   # Playボタンのサイズは決め打ち
-#                     'g_size' => GEAR_BUTTON_SIZE,   # Gearボタンのサイズも決め打ち
                      's_size' => SKIP_BUTTON_SIZE,   # Rewind/Forwadボタンのサイズも決め打ち
                      'h_height' => HEADER_VIEW_HEIGHT
-#                     'nav_height' => top_offset,
-#                     'top_margin_to_gear' => top_offset + 10
 
       layout.vertical(
-#          '|[nav_bar(nav_height)][s1][button(b_size)][s2(s1)][progress(height)][s3(s1)]|'
           '|[header(h_height)][s1][button(b_size)][s2(s1)][progress(height)][s3(s1)]|'
       )
-#      layout.vertical('|-10-[gear(g_size)]')
       layout.vertical('[rewind(s_size)]')
       layout.vertical('[forward(s_size)]')
       layout.horizontal('|-(>=margin)-[button(b_size)]-(>=margin)-|')
       layout.horizontal('|-[rewind(s_size)]-[progress]-[forward(s_size)]-|')
-#      layout.horizontal('|-10-[gear(g_size)]')
       layout.horizontal('|[header]|')
 
     end
-#    header_view.layout_subviews
   end
 
   def title=(str)
@@ -120,10 +110,7 @@ class RecitePoemView < UIView
   end
 
   def update_progress
-#    ap "timer(#{timer}).isValid => #{timer.isValid} in update_progress" if BW::debug?
-
     self.progress_bar.progress = self.delegate.current_player_progress
-
   end
 
 
@@ -176,16 +163,16 @@ class RecitePoemView < UIView
     @play_button.tap do |b|
       UIEdgeInsets.new.tap do |insets|
         insets.left = l_inset
-        # ↓↓ラベルのテキストを上下中央にするための小細工
-#        insets.top = (-1 * b.titleLabel.font.descender) / 1.5
         b.contentEdgeInsets = insets
       end
       b.setTitle(title, forState: UIControlStateNormal)
       b.setTitleColor(color, forState: UIControlStateNormal)
       b.setTitleColor(color.colorWithAlphaComponent(0.25),
-                      forState: UIControlStateHighlighted)
+                      forState: UIControlStateHighlighted | UIControlStateDisabled)
+=begin
       b.setTitleColor(color.colorWithAlphaComponent(0.25),
                       forState: UIControlStateDisabled)
+=end
     end
   end
 
@@ -243,6 +230,4 @@ class RecitePoemView < UIView
     [[0, 0],
      [self.frame.size.width, HEADER_VIEW_HEIGHT]]
   end
-
-
 end
