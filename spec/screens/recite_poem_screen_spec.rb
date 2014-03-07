@@ -2,7 +2,7 @@ def opening_player
   UIApplication.sharedApplication.delegate.opening_player
 end
 
-describe 'RecitePoemController' do
+describe 'RecitePoemScreen' do
   tests RecitePoemScreen
   alias :screen :controller
 

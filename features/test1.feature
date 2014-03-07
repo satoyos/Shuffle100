@@ -17,7 +17,7 @@ Scenario:
   Then I should not see play_button waiting "play"
   
   # 自動的に1首目へ
-  Then I wait to see "1/"
+  Then I wait to see "1"
 
   # 上の句の読み上げが終わったら、下の句の読み上げ待ちになる
   Then I wait to see "下"
@@ -28,7 +28,7 @@ Scenario:
   Then I should see play_button waiting "pause"
 
   # 自動的に2首目へ
-  Then I wait to see "2/"
+  Then I wait to see "2"
 
   # 上の句の読み上げが終わったら、下の句の読み上げ待ちになる
   # 1枚目の(下)の文字がアニメーション後に画面から完全に消えるのを待つ
@@ -41,7 +41,7 @@ Scenario:
   Then I should see play_button waiting "pause"
 
   # 自動的に3首目へ
-  Then I wait to see "3/"
+  Then I wait to see "3首め"
 
   # 上の句の読み上げが終わったら、下の句の読み上げ待ちになる
   # 1枚目の(下)の文字がアニメーション後に画面から完全に消えるのを待つ
@@ -73,7 +73,7 @@ Scenario:
   # 早送りスキップボタンを押す
   When I touch the button marked "forward"
   When I wait for 2 seconds
-  Then I should see "1/"
+  Then I should see "1"
 
   # シミュレータを抜ける
   When I quit the simulator

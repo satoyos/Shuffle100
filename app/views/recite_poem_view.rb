@@ -110,7 +110,7 @@ class RecitePoemView < UIView
   end
 
   def update_progress
-    self.progress_bar.progress = self.delegate.current_player_progress
+    self.progress_bar.progress = self.delegate.current_player_progress if self.delegate
   end
 
 
