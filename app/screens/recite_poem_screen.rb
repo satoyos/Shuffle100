@@ -178,11 +178,13 @@ class RecitePoemScreen < PM::Screen
 
 
   def create_current_title
-    "#{@supplier.current_index}/#{@supplier.size} " +
+    "#{@supplier.current_index}首め:" +
         case @supplier.kami?
-          when true; '(上)'
-          else     ; '(下)'
-        end
+          when true; '上の句'
+          else     ; '下の句'
+        end +
+        " (全#{@supplier.size}首)"
+
   end
 
   def view_animation_def(method_name, arg: arg, duration: duration, transition: transition)
