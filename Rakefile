@@ -44,7 +44,7 @@ Motion::Project::App.setup do |app|
   end
 
   if is_test
-    app.redgreen_style = :full
-#    app.redgreen_style = :focused
+#    app.redgreen_style = :full
+    app.redgreen_style = :focused
   end
 end
