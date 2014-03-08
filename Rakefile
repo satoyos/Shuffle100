@@ -32,12 +32,14 @@ Motion::Project::App.setup do |app|
   app.codesign_certificate = 'iPhone Developer: Yoshifumi Sato'
   app.provisioning_profile = '/Users/yoshi/data/dev/Provisioning_for_100series_Tester_with_iPad_Air.mobileprovision'
 
+=begin
   app.vendor_project(
       'vendor/Reveal.framework',
       :static,
       :products => %w{Reveal},
       :headers_dir => 'Headers'
   )
+=end
 
   app.release do
     app.info_plist['AppStoreRelease'] = true
