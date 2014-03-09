@@ -8,24 +8,21 @@ class PoemPicker < PM::Screen
   def_delegators :@status100, :select_in_number, :[], :[]=
 
   TITLE = '歌を選ぶ'
-
-  attr_reader :poems, :status100, :table_view
+  attr_accessor :status100
 
   def on_load
+    self.status100 = loaded_selected_status
 
-    init_data_source
-    @status100 = loaded_selected_status
     setToolbarItems(toolbar_items, animated: true)
 
     init_table_view
 
     self.title = TITLE
     view.backgroundColor = UIColor.whiteColor
-
   end
 
   def will_appear
-    @status100 = loaded_selected_status
+    self.status100 = loaded_selected_status
     navigationController.setToolbarHidden(false, animated: true) if navigationController
     table_view.reloadData
   end
@@ -68,19 +65,18 @@ class PoemPicker < PM::Screen
                                             style: UIBarButtonItemStyleBordered,
                                             target: self,
                                             action: :select_by_ngram)
-
     ]
   end
 
   def select_all_poems
-    @status100.select_all
-    save_selected_status(@status100)
+    status100.select_all
+    save_selected_status(status100)
     table_view.reloadData
   end
 
   def cancel_all_poems
-    @status100.cancel_all
-    save_selected_status(@status100)
+    status100.cancel_all
+    save_selected_status(status100)
     table_view.reloadData
   end
 
