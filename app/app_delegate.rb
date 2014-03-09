@@ -6,7 +6,7 @@ class AppDelegate < PM::Delegate
   PROMPT = '百首読み上げ'
 
   attr_accessor :poem_supplier, :players_hash, :opening_player
-  attr_accessor :settings_manager, :reciting_settings
+  attr_accessor :settings_manager, :reciting_settings, :game_settings
 
   def on_load(app, options)
     BW.debug = true unless App.info_plist['AppStoreRelease']
@@ -26,11 +26,21 @@ class AppDelegate < PM::Delegate
     self.poem_supplier = PoemSupplier.new({size: 50, shuffle: true, limit: 3}) # データができているのは10番まで
 #    self.poem_supplier = PoemSupplier.new({special: true}) # データができているのは10番まで
     self.settings_manager = SettingsManager.new
-    self.reciting_settings = self.settings_manager.reciting_settings
+    self.reciting_settings = settings_manager.reciting_settings
+    self.game_settings     = settings_manager.game_settings
   end
 
   def refresh_models
     set_models
+  end
+
+  def current_status100
+    self.game_settings.statuses_for_deck.first
+  end
+
+  def current_status100=(status100)
+    raise '正しいstatus100を指定してください。' unless status100.is_a?(SelectedStatus100)
+    self.game_settings.statuses_for_deck = [status100]
   end
 
   def set_appearance_defaults

@@ -1,8 +1,10 @@
 class SelectedStatus100
   extend Forwardable
 
+  KEY_STATUS = 'status100'
+
   SIZE = 100
-  INITIAL_STATUS = false
+  INITIAL_STATUS = true
 
   class << self
     def one_side_array_of(bool)
@@ -21,6 +23,19 @@ class SelectedStatus100
                     raise 'Invalid init_item in initialize'
                   end
               end
+  end
+
+  # @param [NSCoder] decoder
+  def initWithCoder(decoder)
+    @status =
+        decoder.decodeObjectForKey(KEY_STATUS) ||
+            self.class.one_side_array_of(INITIAL_STATUS)
+    self
+  end
+
+  # @param [NSCoder] encoder
+  def encodeWithCoder(encoder)
+    encoder.encodeObject(@status, forKey: KEY_STATUS)
   end
 
   def status_array

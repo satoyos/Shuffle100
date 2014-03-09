@@ -1,4 +1,5 @@
 class HomeScreen < PM::GroupedTableScreen
+  include SelectedStatusHandler
   title '百首読み上げ'
 
   def table_data
@@ -8,7 +9,12 @@ class HomeScreen < PM::GroupedTableScreen
             title_view_height: 30,
             cells: [
                 {
-                    title: 'title1'
+                    title: '取り札を用意する歌',
+                    cell_style: UITableViewCellStyleValue1,
+#                    subtitle: '%d首' % loaded_selected_status.select{|st| st}.size,
+                    subtitle: '%d首' % loaded_selected_status.selected_num,
+                    action: :select_poems,
+                    accessoryType: UITableViewCellAccessoryDisclosureIndicator,
                 },
                 {
                     title: 'title2'
@@ -29,7 +35,13 @@ class HomeScreen < PM::GroupedTableScreen
   end
 
   def will_appear
+    puts 'home - will_appear' if BW::debug?
     navigation_controller.setNavigationBarHidden(false, animated: false) if self.nav_bar?
+    update_table_data
+  end
+
+  def will_present
+    puts 'home - will_present' if BW::debug?
   end
 
   def should_autorotate
@@ -42,5 +54,10 @@ class HomeScreen < PM::GroupedTableScreen
 #    UIApplication.sharedApplication.setStatusBarHidden(true, animated: false)
     navigation_controller.setNavigationBarHidden(true, animated: true)
     open RecitePoemScreen.new
+  end
+
+  def select_poems
+    puts ' - 歌を選ぶ画面へ！' if BW::debug?
+    open PoemPicker.new
   end
 end
