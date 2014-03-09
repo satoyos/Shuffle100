@@ -11,8 +11,7 @@ class PoemPicker < PM::Screen
 
   attr_reader :poems, :status100, :table_view
 
-  def viewDidLoad
-    super
+  def on_load
 
     init_data_source
     @status100 = loaded_selected_status
@@ -25,11 +24,32 @@ class PoemPicker < PM::Screen
 
   end
 
+  def will_appear
+    @status100 = loaded_selected_status
+    navigationController.setToolbarHidden(false, animated: true) if navigationController
+    table_view.reloadData
+  end
+
+  def will_disappear
+    navigationController.setToolbarHidden(true, animated: true) if navigationController
+  end
+
+  def barButtonSystemItem(system_item)
+    UIBarButtonItem.alloc.initWithBarButtonSystemItem(system_item,
+                                                      target: nil,
+                                                      action: nil)
+  end
+
+  def table_view
+    @table_view ||= UITableView.alloc.initWithFrame(frame)
+  end
+
+  private
+
   def init_table_view
     table_view.dataSource = self
     table_view.delegate = self
     add table_view
-
   end
 
   def toolbar_items
@@ -52,16 +72,9 @@ class PoemPicker < PM::Screen
     ]
   end
 
-  def barButtonSystemItem(system_item)
-    UIBarButtonItem.alloc.initWithBarButtonSystemItem(system_item,
-                                                      target: nil,
-                                                      action: nil)
-  end
-
   def select_all_poems
     @status100.select_all
     save_selected_status(@status100)
-#    @table_view.reloadData
     table_view.reloadData
   end
 
@@ -72,28 +85,8 @@ class PoemPicker < PM::Screen
   end
 
   def select_by_ngram
-    navigationController.pushViewController(
-        NGramPicker.alloc.init,
-        animated: true)
+    navigationController.pushViewController(NGramPicker.alloc.init,
+                                            animated: true)
   end
 
-  def viewWillAppear(animated)
-    super
-    @status100 = loaded_selected_status
-    unless RUBYMOTION_ENV == 'test'
-      navigationController.setToolbarHidden(false, animated: true)
-    end
-    table_view.reloadData
-  end
-
-  def viewWillDisappear(animated)
-    super
-    unless RUBYMOTION_ENV == 'test'
-      navigationController.setToolbarHidden(true, animated: true)
-    end
-  end
-
-  def table_view
-    @table_view ||= UITableView.alloc.initWithFrame(frame)
-  end
 end
