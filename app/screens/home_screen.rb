@@ -1,6 +1,6 @@
 class HomeScreen < PM::GroupedTableScreen
   include SelectedStatusHandler
-  title '百首読み上げ'
+  title 'トップ'
 
   def table_data
     [
@@ -11,7 +11,6 @@ class HomeScreen < PM::GroupedTableScreen
                 {
                     title: '取り札を用意する歌',
                     cell_style: UITableViewCellStyleValue1,
-#                    subtitle: '%d首' % loaded_selected_status.select{|st| st}.size,
                     subtitle: '%d首' % loaded_selected_status.selected_num,
                     action: :select_poems,
                     accessoryType: UITableViewCellAccessoryDisclosureIndicator,
@@ -37,6 +36,7 @@ class HomeScreen < PM::GroupedTableScreen
   def will_appear
     puts 'home - will_appear' if BW::debug?
     navigation_controller.setNavigationBarHidden(false, animated: false) if self.nav_bar?
+    self.navigationItem.prompt = '百首読み上げ'
     update_table_data
   end
 
@@ -50,8 +50,6 @@ class HomeScreen < PM::GroupedTableScreen
 
   def start_game
     puts '++ 試合開始！' if BW::debug?
-#    app_delegate.class.status_bar false, animation: :fade
-#    UIApplication.sharedApplication.setStatusBarHidden(true, animated: false)
     navigation_controller.setNavigationBarHidden(true, animated: true)
     open RecitePoemScreen.new
   end
