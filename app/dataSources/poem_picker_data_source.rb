@@ -1,11 +1,6 @@
 module PoemPickerDataSource
 
 
-  LINER_FONT_SIZE = 16
-  LINER_FONT = FontFactory.create_font_with_type(:japaneseW6, size: LINER_FONT_SIZE)
-  DETAIL_FONT_SIZE = 11
-  DETAIL_FONT = FontFactory.create_font_with_type(:japanese, size: DETAIL_FONT_SIZE)
-
   SELECTED_BG_COLOR = '#eebbcb'.to_color #撫子色
 
   def tableView(tableView, numberOfRowsInSection: section)
@@ -23,16 +18,18 @@ module PoemPickerDataSource
     cell.tap do |c|
       c.textLabel.text = '%3d. %s %s %s' %
           [poem.number, poem.liner[0], poem.liner[1], poem.liner[2]]
-      c.textLabel.font = LINER_FONT
+      c.textLabel.font = UIFont.fontWithName('HiraMinProN-W6',
+                                             size: c.textLabel.font.pointSize)
       c.detailTextLabel.text = "　　 #{poem.poet}"
-      c.detailTextLabel.font = DETAIL_FONT
+      c.detailTextLabel.font =
+          UIFont.fontWithName('HiraMinProN-W3',
+                              size: c.detailTextLabel.font.pointSize)
+      c.accessoryType = case status100[indexPath.row]
+                          when true ; UITableViewCellAccessoryCheckmark
+                          else ; UITableViewCellAccessoryNone
+                        end
     end
 
-    cell.accessoryType = case status100[indexPath.row]
-                           when true ; UITableViewCellAccessoryCheckmark
-                           else ; UITableViewCellAccessoryNone
-                         end
-    cell
   end
 
   def tableView(tableView, willDisplayCell: cell, forRowAtIndexPath: indexPath)

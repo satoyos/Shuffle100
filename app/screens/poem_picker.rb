@@ -1,4 +1,3 @@
-#class PoemPicker < UIViewController
 class PoemPicker < PM::Screen
   include SelectedStatusHandler
   include PoemPickerDataSource
