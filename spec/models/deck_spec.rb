@@ -178,6 +178,24 @@ describe 'Deck' do
     end
   end
 
+  describe 'shuffle' do
+    before do
+      @deck = Deck.new.shuffle
+      @numbers1 = @deck.poems.map{|poem| poem.number}
+    end
+
+    it 'should not be nil' do
+      @deck.should.not.be.nil
+      @deck.should.be.kind_of(Deck)
+    end
+
+    it 'change orders of poem' do
+      numbers2 = @deck.shuffle.poems.map{|poem| poem.number}
+      numbers2.size.should == @numbers1.size
+      numbers2.should.not == @numbers1
+    end
+  end
+
   describe 'create_from_bool100:' do
     before do
       bool100 = SelectedStatus100.one_side_array_of(false)

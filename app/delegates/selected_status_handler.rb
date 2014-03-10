@@ -7,6 +7,7 @@ module SelectedStatusHandler
     app_delegate.current_status100 = status100
   end
 
+  # @return [SelectedStatus100]
   def loaded_selected_status
     puts '- loading [selected_status]'
     puts " number_of(true => #{app_delegate.current_status100.selected_num}"

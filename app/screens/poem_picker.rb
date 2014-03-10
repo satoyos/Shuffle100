@@ -6,23 +6,23 @@ class PoemPicker < PM::Screen
 
   def_delegators :@status100, :select_in_number, :[], :[]=
 
-  TITLE = '歌を選ぶ'
+  title '歌を選ぶ'
   attr_accessor :status100
 
   def on_load
     self.status100 = loaded_selected_status
 
-    setToolbarItems(toolbar_items, animated: true)
+    setToolbarItems(toolbar_items, animated: false)
+    add table_view
 
     init_table_view
 
-    self.title = TITLE
     view.backgroundColor = UIColor.whiteColor
   end
 
   def will_appear
     self.status100 = loaded_selected_status
-    navigationController.setToolbarHidden(false, animated: true) if navigationController
+    navigationController.setToolbarHidden(false, animated: false) if navigationController
     table_view.reloadData
   end
 
@@ -45,7 +45,6 @@ class PoemPicker < PM::Screen
   def init_table_view
     table_view.dataSource = self
     table_view.delegate = self
-    add table_view
   end
 
   def toolbar_items

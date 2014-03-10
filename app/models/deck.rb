@@ -51,6 +51,10 @@ class Deck
     self
   end
 
+  def shuffle
+    shuffle_with_size(self.size)
+  end
+
   :protected
 
   def select_from_bool100(bool100)

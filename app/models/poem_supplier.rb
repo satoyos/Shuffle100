@@ -2,6 +2,11 @@ class PoemSupplier
   attr_reader :poem, :player
 
   def initialize(init_hash={})
+    if init_hash[:deck]
+      puts '- PoemSupplierを、deckを指定する形で初期化しました。' if BW::debug?
+      @deck = init_hash[:deck]
+      return
+    end
     if init_hash[:special]
       bool100 = (0..99).to_a.map {|idx| false}
       (88..99).to_a.each {|idx| bool100[idx] = true}

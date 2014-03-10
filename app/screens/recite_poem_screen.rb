@@ -119,7 +119,7 @@ class RecitePoemScreen < PM::Screen
 
   def init_properties_with_delegate
     app_delegate.tap do |delegate|
-      delegate.refresh_models
+#      delegate.refresh_models
       @supplier = delegate.poem_supplier
       @current_player = delegate.opening_player
       @current_player.delegate = self

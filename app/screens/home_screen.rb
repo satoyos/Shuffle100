@@ -2,6 +2,8 @@ class HomeScreen < PM::GroupedTableScreen
   include SelectedStatusHandler
   title 'トップ'
 
+  SELECT_POEM_TITLE = '取り札を用意する歌'
+
   def table_data
     [
         {
@@ -9,11 +11,12 @@ class HomeScreen < PM::GroupedTableScreen
             title_view_height: 30,
             cells: [
                 {
-                    title: '取り札を用意する歌',
+                    title: SELECT_POEM_TITLE,
                     cell_style: UITableViewCellStyleValue1,
                     subtitle: '%d首' % loaded_selected_status.selected_num,
                     action: :select_poems,
                     accessoryType: UITableViewCellAccessoryDisclosureIndicator,
+                    accessibilityLabel: 'select_poem',
                 },
                 {
                     title: 'title2'
@@ -49,8 +52,13 @@ class HomeScreen < PM::GroupedTableScreen
   end
 
   def start_game
+    if loaded_selected_status.selected_num == 0
+      alert_no_poem_selected()
+      return
+    end
     puts '++ 試合開始！' if BW::debug?
     navigation_controller.setNavigationBarHidden(true, animated: true)
+    app_delegate.poem_supplier = PoemSupplier.new({deck: selected_poems_deck})
     open RecitePoemScreen.new
   end
 
@@ -58,4 +66,19 @@ class HomeScreen < PM::GroupedTableScreen
     puts ' - 歌を選ぶ画面へ！' if BW::debug?
     open PoemPicker.new
   end
+
+  private
+
+  def selected_poems_deck
+    Deck.create_from_bool100(loaded_selected_status.status_array).shuffle
+  end
+
+  def alert_no_poem_selected
+    UIAlertView.alloc.init.tap{|alert_view|
+      alert_view.title ='歌を選びましょう'
+      alert_view.message = "「#{SELECT_POEM_TITLE}」で、試合に使う歌を選んでください。"
+      alert_view.addButtonWithTitle('戻る')
+    }.show
+  end
+
 end

@@ -9,7 +9,22 @@ Background:
 Scenario:
 一通りゲームを進められる。
   Then I should see "百首読み上げ"
-  
+
+  # 歌選択画面で、歌を三首選ぶ
+  When I touch the table cell marked "select_poem"
+  When I wait to see "歌を選ぶ"
+  When I touch "全て取消"
+  When I touch the table cell marked "002"
+  When I touch the table cell marked "004"
+  When I touch the table cell marked "006"
+  When I wait for 0.5 second
+  Then I should see "3首"
+  When I touch "トップ"
+  When I wait to see "百首読み上げ"
+
+
+
+
   # 序歌画面
   When I touch "試合開始"
   Then I should see "序歌"

@@ -28,6 +28,7 @@ module PoemPickerDataSource
                           when true ; UITableViewCellAccessoryCheckmark
                           else ; UITableViewCellAccessoryNone
                         end
+      c.accessibilityLabel = '%03d' % poem.number
     end
 
   end
