@@ -27,6 +27,7 @@ class PoemPicker < PM::Screen
   end
 
   def will_disappear
+    app_delegate.settings_manager.save
     navigationController.setToolbarHidden(true, animated: true) if navigationController
   end
 

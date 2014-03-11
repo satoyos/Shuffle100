@@ -9,6 +9,7 @@ class SettingsManager
   end
 
   def load
+    puts '* 設定データを読み込みます' if BW::debug?
     rs_data = NSUserDefaults.standardUserDefaults.objectForKey(KEY_RECITING_SETTINGS)
     self.reciting_settings =
         NSKeyedUnarchiver.unarchiveObjectWithData(rs_data) || RecitingSettings.new
@@ -18,6 +19,7 @@ class SettingsManager
   end
 
   def save
+    puts '* 設定データを永続化します' if BW::debug?
     rs_data = NSKeyedArchiver.archivedDataWithRootObject(self.reciting_settings)
     NSUserDefaults.standardUserDefaults.setObject(rs_data, forKey: KEY_RECITING_SETTINGS)
     gs_data = NSKeyedArchiver.archivedDataWithRootObject(self.game_settings)

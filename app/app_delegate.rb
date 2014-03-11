@@ -15,16 +15,13 @@ class AppDelegate < PM::Delegate
 
     set_appearance_defaults
 
-#    open RecitePoemScreen.new(nav_bar: true)
     open HomeScreen.new(nav_bar: true)
   end
 
   def set_models
     AudioPlayerFactory.prepare_audio_players({opening: 'audio/序歌'})
-#    AudioPlayerFactory.prepare_audio_players({opening: 'audio/これは、テスト音声です。'})
     self.opening_player = AudioPlayerFactory.players[:opening]
     self.poem_supplier = PoemSupplier.new({size: 50, shuffle: true, limit: 3}) # データができているのは10番まで
-#    self.poem_supplier = PoemSupplier.new({special: true}) # データができているのは10番まで
     self.settings_manager = SettingsManager.new
     self.reciting_settings = settings_manager.reciting_settings
     self.game_settings     = settings_manager.game_settings
