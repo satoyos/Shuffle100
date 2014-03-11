@@ -80,8 +80,7 @@ class PoemPicker < PM::Screen
   end
 
   def select_by_ngram
-    navigationController.pushViewController(NGramPicker.alloc.init,
-                                            animated: true)
+    open NGramPicker.new
   end
 
 end
