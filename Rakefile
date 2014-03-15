@@ -22,6 +22,8 @@ Motion::Project::App.setup do |app|
   # Use `rake config' to see complete project settings.
   app.name = 'Shuffle100'
 
+  app.version = '1.01'
+
   app.frameworks += ['AVFoundation', 'AudioToolbox']
   app.frameworks += ['QuartzCore']
 
