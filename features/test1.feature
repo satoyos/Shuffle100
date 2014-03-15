@@ -19,8 +19,10 @@ Scenario:
   When I touch the table cell marked "006"
   When I wait for 0.5 second
   Then I should see "3首"
-  When I touch "トップ"
-  When I wait to see "百首読み上げ"
+  When I forced_touch "トップ"
+#  Then I navigate back
+#  When I touch "歌を選ぶ"
+  Then I wait to see "百首読み上げ"
 
 
 
@@ -32,7 +34,7 @@ Scenario:
   Then I should not see play_button waiting "play"
   
   # 自動的に1首目へ
-  Then I wait to see "1"
+  Then I wait to see "1首め"
 
   # 上の句の読み上げが終わったら、下の句の読み上げ待ちになる
   Then I wait to see "下"
@@ -43,7 +45,7 @@ Scenario:
   Then I should see play_button waiting "pause"
 
   # 自動的に2首目へ
-  Then I wait to see "2"
+  Then I wait to see "2首め"
 
   # 上の句の読み上げが終わったら、下の句の読み上げ待ちになる
   # 1枚目の(下)の文字がアニメーション後に画面から完全に消えるのを待つ

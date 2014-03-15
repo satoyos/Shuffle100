@@ -24,4 +24,4 @@ Feature:
 #   Then I should see an element of class "UIAlertView"
 
     # シミュレータを抜ける
-    When I quit the simulator
+#    When I quit the simulator
