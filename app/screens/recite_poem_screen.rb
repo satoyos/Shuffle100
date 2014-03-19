@@ -67,7 +67,7 @@ class RecitePoemScreen < PM::Screen
 
   def create_recite_poem_view
     RecitePoemView.alloc.initWithFrame(view.frame).tap do |rp_view|
-      rp_view.delegate = WeakRef.new(self)
+      rp_view.delegate = self
       rp_view.title = create_current_title
       rp_view.show_waiting_to_play
     end
@@ -75,8 +75,6 @@ class RecitePoemScreen < PM::Screen
 
   def renew_view_and_player(side = nil)
     puts '== rp_viewを更新します！' if BW::debug?
-#    ここで不要になったviewをすぐ消すのは止める。
-#    remove @rp_view
     @prev_view = @rp_view
     @rp_view = create_recite_poem_view
     fetch_player
@@ -119,7 +117,6 @@ class RecitePoemScreen < PM::Screen
 
   def init_properties_with_delegate
     app_delegate.tap do |delegate|
-#      delegate.refresh_models
       @supplier = delegate.poem_supplier
       @current_player = delegate.opening_player
       @current_player.delegate = self

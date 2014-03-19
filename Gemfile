@@ -8,6 +8,7 @@ gem 'motion-stump', '<= 0.3.1'
 gem 'awesome_print_motion'
 gem 'motion-layout'
 gem 'ProMotion'
+gem 'motion-weakattr'
 
 
 group :spec do

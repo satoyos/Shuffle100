@@ -26,9 +26,10 @@ class RecitePoemView < UIView
   ACC_LABEL_PLAY  = 'play'
   ACC_LABEL_PAUSE = 'pause'
   ACC_LABEL_FORWARD =  'forward'
-  ACC_LABEL_BACKWORD = 'backward'
+  ACC_LABEL_BACKWARD = 'backward'
 
-  attr_accessor :delegate, :dataSource
+#  attr_accessor :delegate, :dataSource
+  weak_attr :delegate, :dataSource
 
   def initWithFrame(frame)
     super
@@ -183,7 +184,7 @@ class RecitePoemView < UIView
           b.addTarget(self,
                       action: :rewind_button_pushed,
                       forControlEvents: UIControlEventTouchUpInside)
-          b.accessibilityLabel = ACC_LABEL_BACKWORD
+          b.accessibilityLabel = ACC_LABEL_BACKWARD
         end
   end
 
