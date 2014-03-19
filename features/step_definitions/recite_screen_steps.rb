@@ -17,6 +17,10 @@ def forced_touch( selector )
   touch_successes
 end
 
+def poem_number_label_of(number)
+  '%03d' % number
+end
+
 Then /^I should see play_button waiting "([^\"]*)"$/ do |expected_mark|
 
   quote = get_selector_quote(expected_mark)
@@ -45,4 +49,13 @@ When /^I forced_touch "([^\"]*)"$/ do |mark|
     raise "Could not touch [#{mark}], it does not exist."
   end
   sleep 1
+end
+
+When /^I touch (\d+) poems at random$/ do |ordinal|
+  ordinal = ordinal.to_i
+  (1..8).to_a.shuffle.slice(0, ordinal).each do |number|
+    puts ' - 歌番号[%3d]の歌を選びます。' % number
+    quote = get_selector_quote(poem_number_label_of(number))
+    touch("tableViewCell marked:#{quote}#{poem_number_label_of(number)}#{quote}")
+  end
 end

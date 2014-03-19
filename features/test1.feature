@@ -14,9 +14,10 @@ Scenario:
   When I touch the table cell marked "select_poem"
   When I wait to see "歌を選ぶ"
   When I touch "全て取消"
-  When I touch the table cell marked "002"
-  When I touch the table cell marked "004"
-  When I touch the table cell marked "006"
+#  When I touch the table cell marked "002"
+#  When I touch the table cell marked "004"
+#  When I touch the table cell marked "006"
+  When I touch 3 poems at random
   When I wait for 0.5 second
   Then I should see "3首"
   When I forced_touch "トップ"
