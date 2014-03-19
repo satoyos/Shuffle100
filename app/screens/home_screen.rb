@@ -3,6 +3,7 @@ class HomeScreen < PM::GroupedTableScreen
   title 'トップ'
 
   SELECT_POEM_TITLE = '取り札を用意する歌'
+  FAKE_SETTING_TITLE = '空札を加える'
 
   def table_data
     [
@@ -19,7 +20,12 @@ class HomeScreen < PM::GroupedTableScreen
                     accessibilityLabel: 'select_poem',
                 },
                 {
-                    title: 'title2'
+                    title: FAKE_SETTING_TITLE,
+                    accessory: {
+                        view: :switch,
+                        action: :foo,
+                        accessibilityLabel: 'fake_switch'
+                    }
                 },
                 {
                     title: 'title3'
@@ -82,3 +88,11 @@ class HomeScreen < PM::GroupedTableScreen
   end
 
 end
+
+class UISwitch
+  def set_on
+    puts 'スイッチをonにします！'
+    self.on = true
+  end
+end
+

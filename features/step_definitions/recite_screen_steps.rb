@@ -59,3 +59,14 @@ When /^I touch (\d+) poems at random$/ do |ordinal|
     touch("tableViewCell marked:#{quote}#{poem_number_label_of(number)}#{quote}")
   end
 end
+
+
+When(/^I flip switch "([^\"]*)" on$/) do |mark|
+  quote = get_selector_quote(mark)
+  selector = "view:'UISwitch' marked:#{quote}#{mark}#{quote}"
+  if element_exists(selector)
+    frankly_map( selector, "set_on" )
+  else
+    raise "Could not touch [#{mark}], it does not exist."
+  end
+end

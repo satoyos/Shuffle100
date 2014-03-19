@@ -1,7 +1,7 @@
 module SelectedStatusHandler
   def save_selected_status(status100)
-    puts '- saving [selected_status]'
-    puts "  number_of(true) => #{status100.selected_num}"
+    puts '- saving [selected_status]' if BW::debug?
+#    puts "  number_of(true) => #{status100.selected_num}" if BW::debug?
 #    settings[:selected_status] = status100
 #    NSUserDefaults[:selected_status] = status100
     app_delegate.current_status100 = status100
@@ -9,8 +9,8 @@ module SelectedStatusHandler
 
   # @return [SelectedStatus100]
   def loaded_selected_status
-    puts '- loading [selected_status]'
-    puts " number_of(true => #{app_delegate.current_status100.selected_num}"
+    puts '- loading [selected_status]' if BW::debug?
+#    puts " number_of(true) => #{app_delegate.current_status100.selected_num}" if BW::debug?
 #    status100 = settings.selected_status
 #    status100 = NSUserDefaults[:selected_status]
     status100 = app_delegate.current_status100
