@@ -213,5 +213,30 @@ describe 'Deck' do
     end
   end
 
+  describe 'add_fake_poems' do
+    context '取り札の数が3の場合' do
+      before do
+        bool100 = SelectedStatus100.one_side_array_of(false)
+        bool100[1] = bool100[3] = bool100[5] = true
+        @deck = Deck.create_from_bool100(bool100).add_fake_poems
+      end
+      it '3枚の空札が追加された、合計6枚のデッキを生成する' do
+        @deck.size.should == 6
+        @deck.poems.first.is_a?(Poem).should.be.true
+      end
+    end
+
+    context '取り札の数が60の場合' do
+      before do
+        bool100 = SelectedStatus100.one_side_array_of(false)
+        (0..59).each{|i| bool100[i] = true}
+        @deck = Deck.create_from_bool100(bool100).add_fake_poems
+      end
+      it '空札を追加した後は、100枚のデッキができる' do
+        @deck.size.should == 100
+        @deck.poems.last.is_a?(Poem).should.be.true
+      end
+    end
+  end
 
 end

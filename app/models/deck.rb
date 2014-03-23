@@ -55,6 +55,14 @@ class Deck
     shuffle_with_size(self.size)
   end
 
+  def add_fake_poems
+    joining_num = (self.size <= 50) ? self.size : 100 - self.size
+    new_poem_numbers =
+        ((1..100).to_a - self.poems.map{|poem| poem.number}).shuffle.slice(0, joining_num)
+    @poems = (@poems + new_poem_numbers.map{|num| self.class.original_poems[num-1]}).shuffle
+    self
+  end
+
   :protected
 
   def select_from_bool100(bool100)
