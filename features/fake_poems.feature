@@ -22,6 +22,19 @@ Feature:
 
     # 空札スイッチをonに設定
     When I flip switch "空札を加える" on
+    Then switch "空札を加える" should be on
+
+    # 序歌画面
+    When I touch "試合開始"
+    Then I should see "序歌"
+    When I wait for 1 second
+
+    # スキップボタンを押して、早送りし、1首目の画面へ
+    When I touch the button marked "forward"
+
+    # その画面で、読み上げられる歌の総数をチェック
+    When I wait for 2 seconds
+    Then I should see "全6首"
 
 
 
