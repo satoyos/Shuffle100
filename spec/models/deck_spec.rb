@@ -178,9 +178,9 @@ describe 'Deck' do
     end
   end
 
-  describe 'shuffle' do
+  describe 'shuffle!' do
     before do
-      @deck = Deck.new.shuffle
+      @deck = Deck.new.shuffle!
       @numbers1 = @deck.poems.map{|poem| poem.number}
     end
 
@@ -190,7 +190,7 @@ describe 'Deck' do
     end
 
     it 'change orders of poem' do
-      numbers2 = @deck.shuffle.poems.map{|poem| poem.number}
+      numbers2 = @deck.shuffle!.poems.map{|poem| poem.number}
       numbers2.size.should == @numbers1.size
       numbers2.should.not == @numbers1
     end
@@ -213,12 +213,12 @@ describe 'Deck' do
     end
   end
 
-  describe 'add_fake_poems' do
+  describe 'add_fake_poems!' do
     context '取り札の数が3の場合' do
       before do
         bool100 = SelectedStatus100.one_side_array_of(false)
         bool100[1] = bool100[3] = bool100[5] = true
-        @deck = Deck.create_from_bool100(bool100).add_fake_poems
+        @deck = Deck.create_from_bool100(bool100).add_fake_poems!
       end
       it '3枚の空札が追加された、合計6枚のデッキを生成する' do
         @deck.size.should == 6
@@ -230,7 +230,7 @@ describe 'Deck' do
       before do
         bool100 = SelectedStatus100.one_side_array_of(false)
         (0..59).each{|i| bool100[i] = true}
-        @deck = Deck.create_from_bool100(bool100).add_fake_poems
+        @deck = Deck.create_from_bool100(bool100).add_fake_poems!
       end
       it '空札を追加した後は、100枚のデッキができる' do
         @deck.size.should == 100

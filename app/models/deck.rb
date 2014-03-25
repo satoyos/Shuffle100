@@ -51,11 +51,11 @@ class Deck
     self
   end
 
-  def shuffle
+  def shuffle!
     shuffle_with_size(self.size)
   end
 
-  def add_fake_poems
+  def add_fake_poems!
     joining_num = (self.size <= 50) ? self.size : 100 - self.size
     new_poem_numbers =
         ((1..100).to_a - self.poems.map{|poem| poem.number}).shuffle.slice(0, joining_num)

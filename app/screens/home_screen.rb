@@ -76,7 +76,7 @@ class HomeScreen < PM::GroupedTableScreen
   private
 
   def selected_poems_deck
-    Deck.create_from_bool100(loaded_selected_status.status_array).shuffle
+    Deck.create_from_bool100(loaded_selected_status.status_array).shuffle!
   end
 
   def alert_no_poem_selected
