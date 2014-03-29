@@ -8,7 +8,7 @@ class HomeScreen < PM::GroupedTableScreen
   def table_data
     [
         {
-            title: "設定",
+            title: '設定',
             title_view_height: 30,
             cells: [
                 {
@@ -23,13 +23,14 @@ class HomeScreen < PM::GroupedTableScreen
                     title: FAKE_SETTING_TITLE,
                     accessory: {
                         view: :switch,
-                        action: :foo,
+                        value: app_delegate.game_settings.fake_flg,
+                        action: 'fake_switch_flipped:',
                         accessibilityLabel: 'fake_switch'
                     }
                 },
-                {
-                    title: 'title3'
-                }
+                # {
+                #     title: 'title3'
+                # }
             ]
         },
         {
@@ -64,7 +65,11 @@ class HomeScreen < PM::GroupedTableScreen
     end
     puts '++ 試合開始！' if BW::debug?
     navigation_controller.setNavigationBarHidden(true, animated: true)
-    app_delegate.poem_supplier = PoemSupplier.new({deck: selected_poems_deck})
+    new_deck = app_delegate.game_settings.fake_flg ?
+        selected_poems_deck.add_fake_poems! :
+        selected_poems_deck
+
+    app_delegate.poem_supplier = PoemSupplier.new({deck: new_deck})
     open RecitePoemScreen.new
   end
 
@@ -73,8 +78,15 @@ class HomeScreen < PM::GroupedTableScreen
     open PoemPicker.new
   end
 
+  def fake_switch_flipped(data_hash)
+    # ap data_hash if BW::debug?
+    app_delegate.game_settings.fake_flg = data_hash[:value]
+    app_delegate.settings_manager.save
+  end
+
   private
 
+  # @return [Deck] 選択された歌から構成されるDeck。歌の順序はShuffleされている。
   def selected_poems_deck
     Deck.create_from_bool100(loaded_selected_status.status_array).shuffle!
   end
@@ -90,9 +102,15 @@ class HomeScreen < PM::GroupedTableScreen
 end
 
 class UISwitch
+#  weak_attr delegate
+
   def set_on
-    puts 'スイッチをonにします！'
+    puts 'スイッチをonにします！' if BW::debug?
     self.on = true
+  end
+  def set_off
+    puts 'スイッチをoffにします！' if BW::debug?
+    self.on = false
   end
 end
 

@@ -70,3 +70,13 @@ When(/^I flip switch "([^\"]*)" on$/) do |mark|
     raise "Could not touch [#{mark}], it does not exist."
   end
 end
+
+When(/^I flip switch "([^\"]*)" off$/) do |mark|
+  quote = get_selector_quote(mark)
+  selector = "view:'UISwitch' marked:#{quote}#{mark}#{quote}"
+  if element_exists(selector)
+    frankly_map( selector, "set_off" )
+  else
+    raise "Could not touch [#{mark}], it does not exist."
+  end
+end
