@@ -1,4 +1,6 @@
 class OnGameSettingsScreen < PM::TableScreen
+  ACC_LABEL_INTERVAL_CELL = 'interval'
+
   title 'いろいろな設定'
 
   def on_load
@@ -24,6 +26,12 @@ class OnGameSettingsScreen < PM::TableScreen
                     subtitle: '%1.2f秒' % app_delegate.reciting_settings.interval_time,
                     action: :tapped_interval_cell,
                     accessoryType: UITableViewCellAccessoryDisclosureIndicator,
+                    accessibilityLabel: ACC_LABEL_INTERVAL_CELL
+                },
+                {
+                    title: '音量調整',
+                    accessoryType: UITableViewCellAccessoryDisclosureIndicator,
+                    action: :tapped_volume_cell
                 }]
      }]
   end
@@ -31,6 +39,11 @@ class OnGameSettingsScreen < PM::TableScreen
   def tapped_interval_cell
     puts ' - IntervalCell is tapped!' if BW::debug?
     open IntervalSettingScreen.new, nav_bar: true
+  end
+
+  def tapped_volume_cell
+    puts ' - VolumeCell is tapped!' if BW::debug?
+    open VolumeSettingScreen.new, nav_bar: true
   end
 
   def done_button_did_pushed

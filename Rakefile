@@ -22,7 +22,7 @@ Motion::Project::App.setup do |app|
   # Use `rake config' to see complete project settings.
   app.name = 'Shuffle100'
 
-  app.version = '1.02'
+  app.version = '1.03'
 
   app.frameworks += ['AVFoundation', 'AudioToolbox']
   app.frameworks += ['QuartzCore']
@@ -34,7 +34,7 @@ Motion::Project::App.setup do |app|
   app.codesign_certificate = 'iPhone Developer: Yoshifumi Sato'
   app.provisioning_profile = '/Users/yoshi/data/dev/Provisioning_for_100series_Tester_140325.mobileprovision'
 
-  if File.exist?('vendor/Reveal.framework/Reveal')
+  if File.exist?('vendor/Reveal.f22222222ramework/Reveal')
     app.vendor_project(
         'vendor/Reveal.framework',
         :static,

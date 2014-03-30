@@ -31,6 +31,11 @@ class RecitePoemScreen < PM::Screen
     self.recite_poem_view.layout_with_top_offset(top_guide_height)
   end
 
+  def on_return
+    puts '// 読み上げ画面に帰ってきたぜ！' if BW::debug?
+    set_player_volume
+  end
+
   def should_autorotate
     false
   end
@@ -59,8 +64,8 @@ class RecitePoemScreen < PM::Screen
   end
 
   def recite_poem
-
     self.recite_poem_view.show_waiting_to_pause
+    set_player_volume
     @current_player.play
 
   end
@@ -107,6 +112,7 @@ class RecitePoemScreen < PM::Screen
   def fetch_player
     @current_player = @supplier.player
     @current_player.delegate = self
+    set_player_volume
   end
 
   def recite_poem_view
@@ -122,6 +128,10 @@ class RecitePoemScreen < PM::Screen
       @current_player.delegate = self
       @reciting_settings = delegate.reciting_settings
     end
+  end
+
+  def set_player_volume
+    @current_player.volume = app_delegate.reciting_settings.volume
   end
 
   def go_back_to_kami

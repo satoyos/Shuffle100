@@ -20,6 +20,7 @@ Feature:
     Then I should see "いろいろな設定"
 
     # 最初のテーブルセルを押すと、歌間隔設定画面に遷移する。
-    When I touch the first table cell
+#    When I touch the first table cell
+    When I touch the table cell marked "interval"
     When I wait for 1 second
     Then I should see "歌の間隔の変更"
