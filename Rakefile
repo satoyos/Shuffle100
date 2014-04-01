@@ -34,7 +34,7 @@ Motion::Project::App.setup do |app|
   app.codesign_certificate = 'iPhone Developer: Yoshifumi Sato'
   app.provisioning_profile = '/Users/yoshi/data/dev/Provisioning_for_100series_Tester_140325.mobileprovision'
 
-  if File.exist?('vendor/Reveal.f22222222ramework/Reveal')
+  if File.exist?('vendor/Reveal.framework/Reveal')
     app.vendor_project(
         'vendor/Reveal.framework',
         :static,

@@ -5,6 +5,9 @@ class HomeScreen < PM::GroupedTableScreen
   SELECT_POEM_TITLE = '取り札を用意する歌'
   FAKE_SETTING_TITLE = '空札を加える'
 
+  INFO_BUTTON_SIZE = CGSizeMake(16, 16)
+  ACC_LABEL_INFO_BUTTON = 'Info'
+
   def table_data
     [
         {
@@ -28,9 +31,6 @@ class HomeScreen < PM::GroupedTableScreen
                         accessibilityLabel: 'fake_switch'
                     }
                 },
-                # {
-                #     title: 'title3'
-                # }
             ]
         },
         {
@@ -43,6 +43,13 @@ class HomeScreen < PM::GroupedTableScreen
     ]
   end
 
+  def on_load
+    set_nav_bar_button :right, {
+        image: info_image,
+        action: :open_info
+    }
+  end
+
   def will_appear
     puts 'home - will_appear' if BW::debug?
     navigation_controller.setNavigationBarHidden(false, animated: false) if self.nav_bar?
@@ -50,9 +57,6 @@ class HomeScreen < PM::GroupedTableScreen
     update_table_data
   end
 
-  def will_present
-    puts 'home - will_present' if BW::debug?
-  end
 
   def should_autorotate
     false
@@ -84,6 +88,16 @@ class HomeScreen < PM::GroupedTableScreen
     app_delegate.settings_manager.save
   end
 
+  def open_info
+    puts '- Info Button pushed!' if BW::debug?
+    open InfoScreen.new
+  end
+
+  def info_image
+    ResizeUIImage.resizeImage(UIImage.imageNamed('info_white.png'),
+                              newSize: INFO_BUTTON_SIZE)
+  end
+
   private
 
   # @return [Deck] 選択された歌から構成されるDeck。歌の順序はShuffleされている。
@@ -98,6 +112,21 @@ class HomeScreen < PM::GroupedTableScreen
       alert_view.addButtonWithTitle('戻る')
     }.show
   end
+
+=begin
+  def info_button
+    UIButton.buttonWithType(UIButtonTypeRoundedRect).tap do |b|
+      # b.contentEdgeInsets = button_insets
+      b.setImage(info_image, forState: UIControlStateNormal)
+      # b.frame = [[0, PROMPT_HEIGHT], button_size]
+      b.addTarget(self,
+                  action: 'open_info',
+                  forControlEvents: UIControlEventTouchUpInside)
+      b.accessibilityLabel = ACC_LABEL_INFO_BUTTON
+    end
+  end
+=end
+
 
 end
 
