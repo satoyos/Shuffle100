@@ -1,8 +1,8 @@
-describe 'SettingsHelpScreen' do
-  tests SettingsHelpScreen
+describe 'InfoMenuScreen' do
+  tests InfoMenuScreen
 
   def controller
-    @controller ||= SettingsHelpScreen.new
+    @controller ||= InfoMenuScreen.new
   end
   alias :screen :controller
 
@@ -10,8 +10,8 @@ describe 'SettingsHelpScreen' do
     screen.should.not.be.nil
   end
 
-  it 'should be a PM::WebScreen' do
-    screen.should.be.kind_of(PM::WebScreen)
+  it 'is a TableScreen' do
+    screen.should.be.kind_of PM::TableScreen
   end
 
   it 'should not rotate' do

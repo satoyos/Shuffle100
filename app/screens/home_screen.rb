@@ -90,12 +90,14 @@ class HomeScreen < PM::GroupedTableScreen
 
   def open_info
     puts '- Info Button pushed!' if BW::debug?
-    open InfoScreen.new
+    open InfoMenuScreen.new
   end
 
   def info_image
     ResizeUIImage.resizeImage(UIImage.imageNamed('info_white.png'),
-                              newSize: INFO_BUTTON_SIZE)
+                              newSize: INFO_BUTTON_SIZE).tap do |im|
+      im.accessibilityLabel = 'info'
+    end
   end
 
   private
@@ -113,19 +115,6 @@ class HomeScreen < PM::GroupedTableScreen
     }.show
   end
 
-=begin
-  def info_button
-    UIButton.buttonWithType(UIButtonTypeRoundedRect).tap do |b|
-      # b.contentEdgeInsets = button_insets
-      b.setImage(info_image, forState: UIControlStateNormal)
-      # b.frame = [[0, PROMPT_HEIGHT], button_size]
-      b.addTarget(self,
-                  action: 'open_info',
-                  forControlEvents: UIControlEventTouchUpInside)
-      b.accessibilityLabel = ACC_LABEL_INFO_BUTTON
-    end
-  end
-=end
 
 
 end
