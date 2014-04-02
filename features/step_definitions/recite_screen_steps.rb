@@ -80,3 +80,8 @@ When(/^I flip switch "([^\"]*)" off$/) do |mark|
     raise "Could not touch [#{mark}], it does not exist."
   end
 end
+
+Then /^I forcedly navigate back$/ do
+  forced_touch( "navigationItemButtonView" )
+  wait_for_nothing_to_be_animating
+end
