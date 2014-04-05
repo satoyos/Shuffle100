@@ -22,7 +22,7 @@ Motion::Project::App.setup do |app|
   # Use `rake config' to see complete project settings.
   app.name = 'Shuffle100'
 
-  app.version = '1.04'
+  app.version = '1.0.0β'
 
   app.frameworks += ['AVFoundation', 'AudioToolbox']
   app.frameworks += ['QuartzCore']
@@ -34,6 +34,12 @@ Motion::Project::App.setup do |app|
   app.codesign_certificate = 'iPhone Developer: Yoshifumi Sato'
   app.provisioning_profile = '/Users/yoshi/data/dev/Provisioning_for_100series_Tester_140325.mobileprovision'
 
+  app.info_plist['CFBundleURLTypes'] = [
+      { 'CFBundleURLName' => 'com.satoyos.Shuffle100',
+        'CFBundleURLSchemes' => ['Shuffle100'] }
+  ]
+
+=begin
   if File.exist?('vendor/Reveal.framework/Reveal')
     app.vendor_project(
         'vendor/Reveal.framework',
@@ -42,6 +48,7 @@ Motion::Project::App.setup do |app|
         :headers_dir => 'Headers'
     )
   end
+=end
 
   app.release do
     app.info_plist['AppStoreRelease'] = true
