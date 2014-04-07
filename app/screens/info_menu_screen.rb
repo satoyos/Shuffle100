@@ -1,5 +1,5 @@
 class InfoMenuScreen < PM::TableScreen
-  title 'Info.'
+  title 'ヘルプ'
 
   def table_data
     [{
