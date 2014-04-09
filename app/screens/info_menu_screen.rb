@@ -14,6 +14,11 @@ class InfoMenuScreen < PM::TableScreen
                     title: '試合の流れ',
                     action: :open_game_flow_help,
                     accessibility_label: 'open_game_flow_help'
+                },
+                {
+                    title: 'バージョン',
+                    cell_style: UITableViewCellStyleValue1,
+                    subtitle: "#{App.version}"
                 }
             ]
      }]
