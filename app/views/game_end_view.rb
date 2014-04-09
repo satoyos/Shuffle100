@@ -1,7 +1,6 @@
 class GameEndView < UIView
   GAME_END_VIEW_TITLE =  '試合終了'
   BACK_TO_TOP_TITLE = 'トップに戻る'
-  HEADER_VIEW_HEIGHT = RecitePoemView::HEADER_VIEW_HEIGHT
   ACC_LABEL_BACK_TO_TOP_BUTTON = 'back_to_top'
 
   attr_accessor :delegate

@@ -3,7 +3,6 @@ class ReciteHeaderView < UIView
   GEAR_BUTTON_SIZE = 30
   BUTTON_IMAGE_SIZE = CGSizeMake(30, 30)
   BUTTON_WIDTH = 40
-  BUTTON_COLOR = RecitePoemView::PLAY_BUTTON_PLAYING_COLOR
   ACC_LABEL_GEAR_BUTTON = 'gear_button'
   ACC_LABEL_QUIT_BUTTON = 'quit_button'
 
