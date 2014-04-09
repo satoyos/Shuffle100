@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 gem 'rake'
 gem 'bubble-wrap'
-gem 'motion-frank'
+# gem 'motion-frank'
 gem 'motion-fontawesome'
 gem 'motion-stump', '<= 0.3.1'
 gem 'awesome_print_motion'
