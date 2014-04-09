@@ -37,14 +37,14 @@ Motion::Project::App.setup do |app|
   ]
 
   app.development do
-    app.version = '1.0.0β2'
+    app.version = '1.0.1β'
     app.codesign_certificate = 'iPhone Developer: Yoshifumi Sato'
     app.provisioning_profile = '/Users/yoshi/data/dev/Provisioning_for_100series_Tester_140325.mobileprovision'
   end
 
   app.release do
     app.info_plist['AppStoreRelease'] = true
-    app.version = '1.0.0'
+    app.version = '1.0.1'
     app.codesign_certificate = 'iPhone Distribution: Yoshifumi Sato'
     app.provisioning_profile = '/Users/yoshi/data/dev/Provisioning_for_Shuffle100_Distribution.mobileprovision'
   end
