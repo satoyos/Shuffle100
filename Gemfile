@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'rake'
-gem 'bubble-wrap'
+gem 'bubble-wrap', '< 1.5.0'
 # gem 'motion-frank'
 gem 'motion-fontawesome'
 gem 'motion-stump', '<= 0.3.1'
