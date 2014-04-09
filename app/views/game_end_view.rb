@@ -6,11 +6,11 @@ class GameEndView < UIView
 
   attr_accessor :delegate
 
-  def initWithFrame(frame)
-    super
+  def initWithFrame(frame, header_height: height)
+    self.initWithFrame(frame)
     self.backgroundColor= 'white'.to_color
     self.addSubview self.back_to_top_button
-    self.addSubview self.header_view
+    self.addSubview self.header_view(height)
 
     self
   end
@@ -35,15 +35,15 @@ class GameEndView < UIView
     self.delegate.back_to_top_screen
   end
 
-  def header_view
+  def header_view(height)
     @header_view ||=
-        ReciteHeaderView.alloc.initWithFrame(header_view_frame).tap do |view|
+        ReciteHeaderView.alloc.initWithFrame(header_view_frame(height)).tap do |view|
           view.title = GAME_END_VIEW_TITLE
         end
   end
 
-  def header_view_frame
+  def header_view_frame(height)
     [[0, 0],
-     [self.frame.size.width, HEADER_VIEW_HEIGHT]]
+     [self.frame.size.width, height]]
   end
 end

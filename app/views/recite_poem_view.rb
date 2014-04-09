@@ -28,7 +28,6 @@ class RecitePoemView < UIView
   ACC_LABEL_FORWARD =  'forward'
   ACC_LABEL_BACKWARD = 'backward'
 
-#  attr_accessor :delegate, :dataSource
   weak_attr :delegate, :dataSource
 
   def initWithFrame(frame)
@@ -95,6 +94,10 @@ class RecitePoemView < UIView
 
   def title
     self.header_view.title
+  end
+
+  def header_height
+    HEADER_VIEW_HEIGHT
   end
 
   def create_new_label
@@ -229,6 +232,7 @@ class RecitePoemView < UIView
 
   def header_view_frame
     [[0, 0],
-     [self.frame.size.width, HEADER_VIEW_HEIGHT]]
+#     [self.frame.size.width, HEADER_VIEW_HEIGHT]]
+     [self.frame.size.width, header_height]]
   end
 end

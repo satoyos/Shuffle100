@@ -1,10 +1,10 @@
 describe 'GameEndView' do
   before do
-    @screen = GameEndView.alloc.initWithFrame(CGRectZero)
+    @ge_view = GameEndView.alloc.initWithFrame(CGRectZero, header_height: 60)
   end
 
   it 'should be a valid view' do
-    @screen.should.not.be.nil
-    @screen.should.be.kind_of UIView
+    @ge_view.should.not.be.nil
+    @ge_view.should.be.kind_of UIView
   end
 end

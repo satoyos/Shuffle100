@@ -52,9 +52,11 @@ class RecitePoemScreen < PM::Screen
       if @supplier.draw_next_poem # 次の歌がある
         goto_next_poem
       else                        # 次の歌がない (最後の歌だった)
-        @rp_view = GameEndView.alloc.initWithFrame(bounds).tap do |ge_view|
-          ge_view.delegate = WeakRef.new(self)
-        end
+        @rp_view =
+            GameEndView.alloc.initWithFrame(bounds,
+                                            header_height: @rp_view.header_height).tap do |ge_view|
+              ge_view.delegate = WeakRef.new(self)
+            end
         view_animation_def('make_rp_view_appear_adding',
                            arg: nil,
                            duration: self.reciting_settings.interval_time,
