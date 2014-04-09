@@ -36,16 +36,6 @@ Motion::Project::App.setup do |app|
         'CFBundleURLSchemes' => ['Shuffle100'] }
   ]
 
-=begin
-  if File.exist?('vendor/Reveal.framework/Reveal')
-    app.vendor_project(
-        'vendor/Reveal.framework',
-        :static,
-        :products => %w{Reveal},
-        :headers_dir => 'Headers'
-    )
-  end
-=end
   app.development do
     app.version = '1.0.0β2'
     app.codesign_certificate = 'iPhone Developer: Yoshifumi Sato'
