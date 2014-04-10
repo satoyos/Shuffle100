@@ -51,7 +51,7 @@ class HomeScreen < PM::GroupedTableScreen
   end
 
   def will_appear
-    puts 'home - will_appear' if BW::debug?
+    # puts 'home - will_appear' if BW::debug?
     navigation_controller.setNavigationBarHidden(false, animated: false) if self.nav_bar?
     self.navigationItem.prompt = '百首読み上げ'
     update_table_data
