@@ -8,11 +8,13 @@ class InfoMenuScreen < PM::TableScreen
                 {
                     title: '試合の流れ',
                     action: :open_game_flow_help,
+                    accessoryType: UITableViewCellAccessoryDisclosureIndicator,
                     accessibility_label: 'open_game_flow_help'
                 },
                 {
                     title: '設定できること',
                     action: :open_options_help,
+                    accessoryType: UITableViewCellAccessoryDisclosureIndicator,
                     accessibility_label: 'open_options_help'
                 },
                 {
