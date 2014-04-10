@@ -3,18 +3,17 @@ $:.unshift("/Library/RubyMotion/lib")
 require 'motion/project/template/ios'
 require 'bundler'
 require 'bubble-wrap/core'
-require 'rubygems'
-require 'motion-stump'
+#require 'rubygems'
 require 'awesome_print_motion'
 require 'motion-layout'
-# require 'motion-frank'
 
-
-is_test = ARGV.join(' ') =~ /spec/
+is_test = ARGV.join(' ') =~ /spec|frank/
 if is_test
+  require 'motion-stump'
   require 'guard/motion'
+  require 'motion-frank'
   Bundler.require :default, :spec
-else
+ else
   Bundler.require
 end
 
