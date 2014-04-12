@@ -1,4 +1,3 @@
-#class AppDelegate
 class AppDelegate < PM::Delegate
   include PM::Styling
 
@@ -27,10 +26,6 @@ class AppDelegate < PM::Delegate
     self.game_settings     = settings_manager.game_settings
   end
 
-  def refresh_models
-    set_models
-  end
-
   def current_status100
     self.game_settings.statuses_for_deck.first
   end
@@ -44,34 +39,5 @@ class AppDelegate < PM::Delegate
     UINavigationBar.appearance.barTintColor = BAR_TINT_COLOR
   end
 
-  def load_rest_poems_sound
-    AudioPlayerFactory.prepare_audio_players(m4a_files_hash)
-  end
 
-
-  def setting_players_of_poem(range)
-    NSLog "start (#{range.to_a.size})"
-    hash = {}
-    range.each do |number|
-      number_str_a = '%03da' % number
-      number_str_b = '%03db' % number
-      hash[number_str_a] = "audio/#{number_str_a}"
-      hash[number_str_b] = "audio/#{number_str_b}"
-    end
-    AudioPlayerFactory.prepare_audio_players(hash)
-    NSLog "end (#{range.to_a.size}"
-  end
-
-  def m4a_files_hash
-#    hash = {opening: 'audio/序歌'}
-    hash = {}
-    (1..100).each do |number|
-      number_str_a = '%03da' % number
-      number_str_b = '%03db' % number
-      hash[number_str_a] = "audio/#{number_str_a}"
-      hash[number_str_b] = "audio/#{number_str_b}"
-    end
-
-    hash
-  end
 end
