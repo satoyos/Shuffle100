@@ -23,6 +23,10 @@ https://vimeo.com/88511077
 3. 【歌と歌の間隔(秒数)】
   下の句を読み終えてから、次の歌の上の句を読み上げるまでの間隔を調整できます。
 
+
+
+This software is released under the MIT License, see LICENSE.txt.
+
 - - -
 
 (※1) ボーカロイドはヤマハ株式会社の登録商標です。
