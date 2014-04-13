@@ -121,6 +121,12 @@ class RecitePoemScreen < PM::Screen
     @rp_view
   end
 
+=begin
+  def change_supplier(supplier)
+    @supplier = PoemSupplier.new
+  end
+=end
+
   private
 
   def init_properties_with_delegate
