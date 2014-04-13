@@ -16,6 +16,7 @@ class ReciteViewButton < UIButton
     end
   end
 
+=begin
   def drawRect(rect)
     # General Declarations
     colorSpace = CGColorSpaceCreateDeviceRGB()
@@ -45,5 +46,6 @@ class ReciteViewButton < UIButton
     CGColorSpaceRelease(colorSpace)
 
   end
+=end
 
 end
