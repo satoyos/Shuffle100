@@ -6,6 +6,11 @@ class ReciteHeaderView < UIView
   ACC_LABEL_GEAR_BUTTON = 'gear_button'
   ACC_LABEL_QUIT_BUTTON = 'quit_button'
 
+  QUIT_IMAGE = ResizeUIImage.resizeImage(UIImage.imageNamed('exit_square_org.png'),
+                                         newSize: BUTTON_IMAGE_SIZE)
+  GEAR_IMAGE = ResizeUIImage.resizeImage(UIImage.imageNamed('gear-520.png'),
+                                         newSize: BUTTON_IMAGE_SIZE)
+
   def initWithFrame(frame)
     super
     self.backgroundColor = AppDelegate::BAR_TINT_COLOR
@@ -46,7 +51,8 @@ class ReciteHeaderView < UIView
     @gear_button ||=
         UIButton.buttonWithType(UIButtonTypeRoundedRect).tap do |b|
           b.contentEdgeInsets = button_insets
-          b.setImage(gear_image, forState: UIControlStateNormal)
+          # b.setImage(gear_image, forState: UIControlStateNormal)
+          b.setImage(GEAR_IMAGE, forState: UIControlStateNormal)
           b.frame = [[0, PROMPT_HEIGHT], button_size]
           b.addTarget(self,
                       action: 'gear_button_did_pushed:',
@@ -59,7 +65,8 @@ class ReciteHeaderView < UIView
     @quit_button ||=
         UIButton.buttonWithType(UIButtonTypeRoundedRect).tap do |b|
           b.contentEdgeInsets = button_insets
-          b.setImage(quit_image, forState: UIControlStateNormal)
+          # b.setImage(quit_image, forState: UIControlStateNormal)
+          b.setImage(QUIT_IMAGE, forState: UIControlStateNormal)
           b.frame = [[self.frame.size.width - BUTTON_WIDTH, PROMPT_HEIGHT], button_size]
           b.addTarget(self,
                       action: 'quit_button_did_pushed:',
@@ -83,6 +90,7 @@ class ReciteHeaderView < UIView
     superview.delegate.quit_game
   end
 
+=begin
   def gear_image
     UIImage.imageNamed('gear-520.png')
   end
@@ -90,6 +98,7 @@ class ReciteHeaderView < UIView
   def quit_image
     UIImage.imageNamed('exit_square_org.png')
   end
+=end
 
   def button_size
     CGSizeMake(BUTTON_WIDTH, self.frame.size.height - PROMPT_HEIGHT)
