@@ -50,10 +50,10 @@ class RecitePoemView < UIView
 
   def layout_with_top_offset(top_offset)
     self.frame = delegate.bounds
-    self.play_button.layer.cornerRadius = PLAY_BUTTON_SIZE / 2
-    [self.rewind_button, self.forward_button].each do |b|
-      b.layer.cornerRadius = SKIP_BUTTON_SIZE / 2
-    end
+#    self.play_button.layer.cornerRadius = PLAY_BUTTON_SIZE / 2
+#     [self.rewind_button, self.forward_button].each do |b|
+#       b.layer.cornerRadius = SKIP_BUTTON_SIZE / 2
+#     end
     space1 = create_new_label
     space2 = create_new_label
     space3 = create_new_label
@@ -143,8 +143,11 @@ class RecitePoemView < UIView
   # @return [UIButton]
   def play_button
     @play_button ||=
-        ReciteViewButton.buttonWithType(UIButtonTypeCustom).tap do |b|
+        ReciteViewButton.alloc.initWithFrame(
+            [CGPointZero,
+             CGSizeMake(PLAY_BUTTON_SIZE, PLAY_BUTTON_SIZE)]).tap do |b|
           b.accessibilityLabel = ACC_LABEL_PLAY_BUTTON
+          b.layer.cornerRadius = PLAY_BUTTON_SIZE / 2
           b.titleLabel.font = FontAwesome.fontWithSize(PLAY_BUTTON_FONT_SIZE)
           b.addTarget(self,
                       action: :play_button_pushed,
@@ -173,10 +176,6 @@ class RecitePoemView < UIView
       b.setTitleColor(color, forState: UIControlStateNormal)
       b.setTitleColor(color.colorWithAlphaComponent(0.25),
                       forState: UIControlStateHighlighted | UIControlStateDisabled)
-=begin
-      b.setTitleColor(color.colorWithAlphaComponent(0.25),
-                      forState: UIControlStateDisabled)
-=end
     end
   end
 
@@ -213,9 +212,11 @@ class RecitePoemView < UIView
   end
 
   def create_skip_button(acc_label, color)
-    ReciteViewButton.buttonWithType(UIButtonTypeCustom).tap do |b|
+    ReciteViewButton.alloc.initWithFrame(
+        [CGPointZero, CGSizeMake(SKIP_BUTTON_SIZE, SKIP_BUTTON_SIZE)]).tap do |b|
       b.accessibilityLabel = acc_label
       b.titleLabel.font = FontAwesome.fontWithSize(SKIP_BUTTON_FONT_SIZE)
+      b.layer.cornerRadius = SKIP_BUTTON_SIZE / 2
       b.setTitleColor(color, forState: UIControlStateNormal)
       b.setTitleColor(color.colorWithAlphaComponent(0.25),
                       forState: UIControlStateHighlighted)
