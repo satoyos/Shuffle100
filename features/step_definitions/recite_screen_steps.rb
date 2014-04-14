@@ -85,3 +85,70 @@ Then /^I forcedly navigate back$/ do
   forced_touch( "navigationItemButtonView" )
   wait_for_nothing_to_be_animating
 end
+
+def play_button_mark
+  'play_button'
+end
+
+
+def wait_to_see(expected_mark)
+  puts "Then I wait to see #{expected_mark}"
+  quote = get_selector_quote(expected_mark)
+  wait_until(:message => "waited to see view marked #{quote}#{expected_mark}#{quote}") {
+    view_with_mark_exists(expected_mark)
+  }
+end
+
+def touch2(mark)
+  # puts '- touch in my steps'
+  quote = get_selector_quote(mark)
+  selector = "view marked:#{quote}#{mark}#{quote} first"
+  if element_exists(selector)
+    touch( selector )
+  else
+    raise "Could not touch [#{mark}], it does not exist."
+  end
+  sleep 1
+end
+
+Then /^I can go through (\d+) poems$/ do |poems_num|
+  puts "#{Time.now} - [#{poems_num}] Loop Start!"
+  puts "poems_num => #{poems_num} (#{poems_num.class})"
+  q = get_selector_quote(play_button_mark)
+  (1..poems_num.to_i).each do |idx|
+    # Then I wait to see "1首め"
+    wait_to_see('%d首め' % idx)
+    # Then I wait to see "下"
+    sleep 2
+    wait_to_see('下')
+    # When I touch "play_button"
+    sleep 1.5
+    touch2(play_button_mark)
+  end
+  puts "#{Time.now} - [#{poems_num}] Loop End!"
+end
+
+Then /^I can go through (\d+) poems with skip$/ do |poems_num|
+  puts "#{Time.now} - [#{poems_num}] Loop Start!"
+  puts "poems_num => #{poems_num} (#{poems_num.class})"
+  q = get_selector_quote(play_button_mark)
+  (1..poems_num.to_i).each do |idx|
+    # Then I wait to see "1首め"
+    wait_to_see('%d首め' % idx)
+    # スキップで上の句の読み上げが終わったら、下の句の読み上げ待ちになる
+    sleep 2
+    # When I touch the button marked "forward"
+    touch2 "forward"
+    # Then I wait to see "下"
+    sleep 2
+    wait_to_see('下')
+
+    # When I touch "play_button"
+    # sleep 0.6
+    touch2(play_button_mark)
+
+    # When I touch the button marked "forward"
+    touch2 "forward"
+  end
+  puts "#{Time.now} - [#{poems_num}] Loop End!"
+end
