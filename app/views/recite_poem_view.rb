@@ -50,10 +50,6 @@ class RecitePoemView < UIView
 
   def layout_with_top_offset(top_offset)
     self.frame = delegate.bounds
-#    self.play_button.layer.cornerRadius = PLAY_BUTTON_SIZE / 2
-#     [self.rewind_button, self.forward_button].each do |b|
-#       b.layer.cornerRadius = SKIP_BUTTON_SIZE / 2
-#     end
     space1 = create_new_label
     space2 = create_new_label
     space3 = create_new_label
@@ -147,7 +143,6 @@ class RecitePoemView < UIView
             [CGPointZero,
              CGSizeMake(PLAY_BUTTON_SIZE, PLAY_BUTTON_SIZE)]).tap do |b|
           b.accessibilityLabel = ACC_LABEL_PLAY_BUTTON
-          b.layer.cornerRadius = PLAY_BUTTON_SIZE / 2
           b.titleLabel.font = FontAwesome.fontWithSize(PLAY_BUTTON_FONT_SIZE)
           b.addTarget(self,
                       action: :play_button_pushed,
@@ -222,7 +217,6 @@ class RecitePoemView < UIView
                       forState: UIControlStateHighlighted)
       b.setTitleColor(color.colorWithAlphaComponent(0.25),
                       forState: UIControlStateDisabled)
-
     end
   end
 
@@ -233,7 +227,6 @@ class RecitePoemView < UIView
 
   def header_view_frame
     [[0, 0],
-#     [self.frame.size.width, HEADER_VIEW_HEIGHT]]
      [self.frame.size.width, header_height]]
   end
 end

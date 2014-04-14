@@ -1,6 +1,6 @@
 describe 'PlayButtonBackView' do
   before do
-    @button = ReciteViewButton.buttonWithType(UIButtonTypeCustom)
+    @button = ReciteViewButton.alloc.initWithFrame([CGPointZero, CGSizeMake(100, 100)])
   end
 
   it 'should not be nil' do

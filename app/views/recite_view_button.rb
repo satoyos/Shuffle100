@@ -9,6 +9,7 @@ class ReciteViewButton < UIButton
         l.masksToBounds = true
         l.borderWidth = BORDER_WIDTH
         l.borderColor = UIColor.darkGrayColor.CGColor
+        l.cornerRadius = self.frame.size.height / 2
       end
       b.setupBackgroundGradientForState(
           UIControlStateNormal,
