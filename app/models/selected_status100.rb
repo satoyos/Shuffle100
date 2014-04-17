@@ -85,6 +85,10 @@ class SelectedStatus100
     self[idx] = !self[idx]
   end
 
+  def reverse_in_number(num)
+    reverse_in_index(num-1)
+  end
+
   :private
 
   def set_status(value, of_number: idx)

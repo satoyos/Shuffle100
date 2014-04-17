@@ -177,15 +177,27 @@ describe 'SelectedState100' do
     end
   end
 
-  describe 'reverse_in_number' do
+  describe 'reverse_in_index' do
     before do
       @status100 = SelectedStatus100.new(nil).select_all
       @status100.reverse_in_index(4)
     end
 
-    it '指定された番号の選択状態を反転させる' do
+    it '指定された配列インデックスの選択状態を反転させる' do
       @status100[4].should.be.false
     end
   end
 
+  describe 'reverse_in_number' do
+    before do
+      @status100 = SelectedStatus100.new(nil).select_all
+      @status100.reverse_in_number(10)
+    end
+
+    it '指定された歌番号の選択状態を反転させる' do
+      @status100.of_number( 9).should.be.true
+      @status100.of_number(10).should.be.false
+      @status100.of_number(11).should.be.true
+    end
+  end
 end
