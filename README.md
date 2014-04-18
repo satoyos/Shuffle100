@@ -10,8 +10,8 @@ RubyMotionで作っています。
 ![Image](http://postachio-images.s3-website-us-east-1.amazonaws.com/bdc9788b9b5c8ff218c37223f302b9a4/511242b6e6a9f3507107fc8f1c2af6e2/w600_df90791d0bf5c6022857a54b3700d61b.png)
 
 ボーカロイド音声(※1)で、百人一首の歌をランダムに読み上げます。
-下記URLの動画で、実際に使っている様子をご覧いただけます。
-https://vimeo.com/88511077
+[こちらの動画](https://vimeo.com/88511077)で、実際に使っている様子をご覧いただけます。
+[App Store](https://itunes.apple.com/jp/app/bai-shou-dumi-shangge/id857819404?mt=8)で公開中です。
 
 ■ 設定できること
 
