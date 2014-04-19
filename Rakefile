@@ -48,6 +48,10 @@ Motion::Project::App.setup do |app|
     app.provisioning_profile = '/Users/yoshi/data/dev/Provisioning_for_Shuffle100_Distribution.mobileprovision'
   end
 
+  # RubyMotionのバグ対策？
+  # 参考issue: https://github.com/rubymotion/BubbleWrap/issues/337
+  app.detect_dependencies = false
+
   if is_test
 #    app.redgreen_style = :full
     app.redgreen_style = :focused
