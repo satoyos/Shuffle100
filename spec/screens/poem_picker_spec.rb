@@ -23,4 +23,20 @@ describe 'PoemPicker' do
       screen.status100.size.should == 100
     end
   end
+
+=begin
+  describe 'flip_poem_now' do
+    def controller
+      @controller ||= PoemPicker.new.init_members
+    end
+    alias :screen :controller
+
+    it 'should grab cell' do
+      screen.flip_poem_now(3).tap do |cell|
+        cell.should.not.be.nil
+        cell.is_a?(UITableViewCell).should.be.true
+      end
+    end
+  end
+=end
 end
