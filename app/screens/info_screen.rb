@@ -12,4 +12,17 @@ class InfoScreen < PM::WebScreen
   def should_autorotate
     false
   end
+
+  def webView(webView, shouldStartLoadWithRequest: request, navigationType: navigationType)
+    if (navigationType == UIWebViewNavigationTypeLinkClicked ||
+        navigationType == UIWebViewNavigationTypeOther)
+      url = request.URL.absoluteString
+      unless url =~ /\Afile/ or url =~ /vimeo.com\//
+        puts  "- URL stopped! (#{url})" if BW::debug?
+        return false
+      end
+    end
+
+    true
+  end
 end
