@@ -14,8 +14,8 @@ class InfoScreen < PM::WebScreen
   end
 
   def webView(webView, shouldStartLoadWithRequest: request, navigationType: navigationType)
-    if (navigationType == UIWebViewNavigationTypeLinkClicked ||
-        navigationType == UIWebViewNavigationTypeOther)
+    if navigationType == UIWebViewNavigationTypeLinkClicked ||
+        navigationType == UIWebViewNavigationTypeOther
       url = request.URL.absoluteString
       unless url =~ /\Afile/ or url =~ /vimeo.com\//
         puts  "- URL stopped! (#{url})" if BW::debug?
