@@ -9,4 +9,8 @@ class Liner_2_parts
     @shimo = init_hash[:shimo]
   end
 
+  def to_s
+    "#{kami} #{shimo}"
+  end
+
 end
