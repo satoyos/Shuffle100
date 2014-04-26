@@ -9,7 +9,6 @@ class PoemPicker < PM::TableScreen
 
   def on_load
     init_members
-    # init_tool_bar
     update_table_and_prompt
   end
 
@@ -28,6 +27,7 @@ class PoemPicker < PM::TableScreen
 
                font: UIFont.fontWithName('HiraMinProN-W6', size: 16),
                subtitle: "　　 #{poem.poet}",
+               accessibility_label: '%03d' % poem.number,
                accessory_type: status100.of_number(poem.number) ?
                    UITableViewCellAccessoryCheckmark :
                    UITableViewCellAccessoryNone,
@@ -43,53 +43,26 @@ class PoemPicker < PM::TableScreen
 
   def poem_tapped(arg_hash)
     status100.reverse_in_number(arg_hash[:number])
-    puts "searching? => #{searching?}" if BW::debug?
-    # flip_poem_now(arg_hash[:number]) if searching?
-    if searching?
-      # flip_poem_now(arg_hash[:number])
-      # @table_search_display_controller.searchResultsTableView.reloadData
-      @table_search_display_controller.setActive(false, animated: true)
-    else
-    end
     update_table_and_prompt
-  end
-
-=begin
-  def flip_poem_now(poem_number)
-    cell = @table_search_display_controller.searchResultsDataSource.tableView(
-        @table_search_display_controller.searchResultsTableView,
-        cellForRowAtIndexPath: NSIndexPath.indexPathForRow(poem_number-1, inSection: 0))
-    cell.backgroundColor = UIColor.blueColor
-    puts "これから#{cell}を再描画します！"
-    cell.setNeedsLayout
-    cell
-  end
-=end
-=begin
-  def viewWillAppear(animated
-    super
-
-    puts 'reset search word in viewWillAppear' if BW::debug?
+    # ap table_data if BW::debug?
+    puts "searching? => #{searching?}" if BW::debug?
     if searching?
-      @table_search_display_controller.searchBar.text = @table_search_display_controller.searchBar.text
+      puts 'reset search word in poem tapped!' if BW::debug?
+      # @table_search_display_controller.searchBar.text = @table_search_display_controller.searchBar.text
+      refresh_search_result_table
     end
   end
 
   def will_appear
     init_tool_bar
-    if searching?
-      puts '+ reset search word in will_appear' if BW::debug?
-      @table_search_display_controller.searchBar.text = @table_search_display_controller.searchBar.text
-    else
-      update_table_and_prompt
-    end
+    puts "main_view => [#{view}]" if BW::debug?
+    prepare_text_field
+    update_table_and_prompt
   end
-=end
 
 
   def will_disappear
     app_delegate.settings_manager.save
-    # navigationController.setToolbarHidden(true, animated: true) if navigationController
     navigation_controller.setToolbarHidden(true, animated: false) if navigation_controller
   end
 
@@ -121,7 +94,11 @@ class PoemPicker < PM::TableScreen
                            action: :select_by_ngram
                        }
 
-                      ]
+                      ] if navigation_controller
+  end
+
+  def refresh_search_result_table
+    @table_search_display_controller.searchBar.text = @table_search_display_controller.searchBar.text
   end
 
   def select_all_poems
@@ -137,4 +114,15 @@ class PoemPicker < PM::TableScreen
   def select_by_ngram
     open NGramPicker.new
   end
+
+  # Frankのテストがうまく書けなかったので、ここで行っている設定は利用できてないんだけど…。
+  def prepare_text_field
+    search_bar = view.subviews.find{|v| v.is_a?(UISearchBar)}
+    text_field = search_bar.subviews[0].subviews[1]
+    # puts "+ search_bar text_field => [#{text_field}]" if BW::debug?
+    text_field.accessibilityLabel = 'search_text_field'
+    text_field.keyboardType = UIKeyboardTypeDefault
+  end
+
+
 end
