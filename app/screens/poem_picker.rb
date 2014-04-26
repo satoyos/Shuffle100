@@ -28,12 +28,9 @@ class PoemPicker < PM::TableScreen
                font: UIFont.fontWithName('HiraMinProN-W6', size: 16),
                subtitle: "　　 #{poem.poet}",
                accessibility_label: '%03d' % poem.number,
-               accessory_type: status100.of_number(poem.number) ?
-                   UITableViewCellAccessoryCheckmark :
-                   UITableViewCellAccessoryNone,
-               background_color: status100.of_number(poem.number) ?
-                   SELECTED_BG_COLOR :
-                   UIColor.whiteColor,
+               accessory_type: acc_type_for_poem(poem),
+               background_color: bg_color_for_poem(poem),
+               search_text: search_text_for_poem(poem),
                action: :poem_tapped,
                arguments: {number: poem.number}
            }
@@ -123,6 +120,29 @@ class PoemPicker < PM::TableScreen
     text_field.accessibilityLabel = 'search_text_field'
     text_field.keyboardType = UIKeyboardTypeDefault
   end
+
+  # @param [Poem] poem
+  # @return [UIColor]
+  def bg_color_for_poem(poem)
+    status100.of_number(poem.number) ?
+        SELECTED_BG_COLOR :
+        UIColor.whiteColor
+  end
+
+  # @param [Poem] poem
+  # @return [UITableViewCellEditingStyle]
+  def acc_type_for_poem(poem)
+    status100.of_number(poem.number) ?
+        UITableViewCellAccessoryCheckmark :
+        UITableViewCellAccessoryNone
+  end
+
+  # @param [Poem] poem
+  # @return [String]
+  def search_text_for_poem(poem)
+    [poem.liner, poem.in_hiragana, poem.poet, poem.kimari_ji].flatten.join(' ')
+  end
+
 
 
 end
