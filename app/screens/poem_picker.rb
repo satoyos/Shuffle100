@@ -41,11 +41,9 @@ class PoemPicker < PM::TableScreen
   def poem_tapped(arg_hash)
     status100.reverse_in_number(arg_hash[:number])
     update_table_and_prompt
-    # ap table_data if BW::debug?
     puts "searching? => #{searching?}" if BW::debug?
     if searching?
       puts 'reset search word in poem tapped!' if BW::debug?
-      # @table_search_display_controller.searchBar.text = @table_search_display_controller.searchBar.text
       refresh_search_result_table
     end
   end
@@ -76,22 +74,22 @@ class PoemPicker < PM::TableScreen
   end
 
   def init_tool_bar
-    set_toolbar_items [{
-                           title: '全て取消',
-                           action: :cancel_all_poems
-                       }, {
-                           system_item: :flexible_space
-                       }, {
-                           title: '全て選択',
-                           action: :select_all_poems
-                       }, {
-                           system_item: :flexible_space
-                       }, {
-                           title: '1字目で選ぶ',
-                           action: :select_by_ngram
-                       }
-
-                      ] if navigation_controller
+    return unless navigation_controller
+    items = [{
+                 title: '全て取消',
+                 action: :cancel_all_poems
+             }, {
+                 system_item: :flexible_space
+             }, {
+                 title: '全て選択',
+                 action: :select_all_poems
+             }, {
+                 system_item: :flexible_space
+             }, {
+                 title: '1字目で選ぶ',
+                 action: :select_by_ngram
+             }]
+    set_toolbar_items items
   end
 
   def refresh_search_result_table
@@ -99,25 +97,52 @@ class PoemPicker < PM::TableScreen
   end
 
   def select_all_poems
-    status100.select_all
-    update_table_and_prompt
+    if searching?
+      status100.select_in_numbers(search_result_poem_numbers)
+      update_table_and_prompt
+      refresh_search_result_table
+    else
+      status100.select_all
+      update_table_and_prompt
+    end
+  end
+
+  # @return [Array] 検索結果として表示されている歌全ての番号
+  def search_result_poem_numbers
+    @table_search_display_controller.searchResultsTableView.subviews[0].subviews.
+        select{|sv| sv.is_a?(UITableViewCell) and not sv.hidden?}.
+        map{|cell| cell.accessibilityLabel.to_i}.tap { |numbers|
+      puts 'numbers in 検索結果 => ' if BW::debug?
+      ap numbers if BW::debug?
+    }
   end
 
   def cancel_all_poems
-    status100.cancel_all
-    update_table_and_prompt
+    if searching?
+      status100.cancel_in_numbers(search_result_poem_numbers)
+      update_table_and_prompt
+      refresh_search_result_table
+    else
+      status100.cancel_all
+      update_table_and_prompt
+    end
   end
 
   def select_by_ngram
+    return if searching?
     open NGramPicker.new
   end
 
-  # Frankのテストがうまく書けなかったので、ここで行っている設定は利用できてないんだけど…。
   def prepare_text_field
     search_bar = view.subviews.find{|v| v.is_a?(UISearchBar)}
-    text_field = search_bar.subviews[0].subviews[1]
-    # puts "+ search_bar text_field => [#{text_field}]" if BW::debug?
-    text_field.accessibilityLabel = 'search_text_field'
+    search_bar.subviews[0].subviews[1].tap do |text_field|
+      text_field.accessibilityLabel = 'search_text_field'
+      set_text_field_japanese(text_field)
+    end
+  end
+
+  # @param [UITextField] text_field
+  def set_text_field_japanese(text_field)
     text_field.keyboardType = UIKeyboardTypeDefault
   end
 
