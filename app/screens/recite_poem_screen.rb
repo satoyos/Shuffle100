@@ -2,11 +2,8 @@ class RecitePoemScreen < PM::Screen
   include RecitePoemDataSource
   include RecitePoemDelegate
 
-
   OPENING_POEM_TITLE = '序歌'
-
   SLIDING_EFFECT_DURATION = 0.2
-
   title OPENING_POEM_TITLE
 
   attr_reader :supplier, :current_player, :reciting_settings
@@ -121,19 +118,16 @@ class RecitePoemScreen < PM::Screen
     @rp_view
   end
 
-=begin
-  def change_supplier(supplier)
-    @supplier = PoemSupplier.new
-  end
-=end
-
   private
 
   def init_properties_with_delegate
     app_delegate.tap do |delegate|
       @supplier = delegate.poem_supplier
-      @current_player = delegate.opening_player
-      @current_player.delegate = self
+      @current_player = delegate.opening_player.tap do |player|
+        player.delegate = self
+        player.currentTime = 0.0
+        player.prepareToPlay
+      end
       @reciting_settings = delegate.reciting_settings
     end
   end
