@@ -129,7 +129,10 @@ class PoemPicker < PM::TableScreen
   end
 
   def select_by_ngram
-    return if searching?
+    if searching?
+      alert_ngram_picker_disabled
+      return
+    end
     open NGramPicker.new
   end
 
@@ -168,6 +171,12 @@ class PoemPicker < PM::TableScreen
     [poem.liner, poem.in_hiragana, poem.poet, poem.kimari_ji].flatten.join(' ')
   end
 
-
+  def alert_ngram_picker_disabled
+    UIAlertView.alloc.init.tap{|alert_view|
+      # alert_view.title ='歌を選びましょう'
+      alert_view.message = '歌を検索している時には、このボタンは使えません。'
+      alert_view.addButtonWithTitle('戻る')
+    }.show
+  end
 
 end
