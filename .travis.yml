@@ -2,3 +2,6 @@ language: objective-c
 before_install:
     - (ruby --version)
 script: "(bundle install) && (bundle exec rake clean) && (bundle exec rake spec)"
+
+before_script:
+ - chmod 777 /Users/travis/Library/RubyMotion/build
