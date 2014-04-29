@@ -37,16 +37,16 @@ Motion::Project::App.setup do |app|
   ]
 
   app.development do
-    app.version = '1.1.0β2'
+    app.version = '1.1.0β3'
     app.codesign_certificate = 'iPhone Developer: Yoshifumi Sato'
-    app.provisioning_profile = '/Users/yoshi/data/dev/Provisioning_for_100series_Tester_140325.mobileprovision'
+    app.provisioning_profile = '/Users/yoshi/data/dev/Provisionings/Provisioning_for_100series_Tester_140429.mobileprovision'
   end
 
   app.release do
     app.info_plist['AppStoreRelease'] = true
     app.version = '1.1.0'
     app.codesign_certificate = 'iPhone Distribution: Yoshifumi Sato'
-    app.provisioning_profile = '/Users/yoshi/data/dev/Provisioning_for_Shuffle100_Distribution.mobileprovision'
+    app.provisioning_profile = '/Users/yoshi/data/dev/Provisionings/Provisioning_for_Shuffle100_Distribution.mobileprovision'
   end
 
   # RubyMotionのバグ対策？
