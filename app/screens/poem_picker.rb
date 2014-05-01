@@ -168,7 +168,8 @@ class PoemPicker < PM::TableScreen
   # @param [Poem] poem
   # @return [String]
   def search_text_for_poem(poem)
-    [poem.liner, poem.in_hiragana, poem.poet, poem.kimari_ji].flatten.join(' ')
+    [poem.liner, poem.in_hiragana, poem.in_modern_kana, poem.poet, poem.kimari_ji].
+        flatten.join(' ')
   end
 
   def alert_ngram_picker_disabled
