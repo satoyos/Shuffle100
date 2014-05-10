@@ -74,7 +74,8 @@ EOF
         @poem.kimari_ji.should.be.equal 'はるす'
       end
       it '現代かなデータも正しく読み込める' do
-        @poem.in_modern_kana.should.not.be.nil
+        # @poem.in_modern_kana.should.not.be.nil
+        expect(@poem.in_modern_kana).not.to.be.equal nil
         @poem.in_modern_kana[4].should == 'あまのかぐやま'
       end
     end
