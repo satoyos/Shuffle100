@@ -62,6 +62,10 @@ class HomeScreen < PM::GroupedTableScreen
     false
   end
 
+  def supported_orientations
+    UIInterfaceOrientationPortrait
+  end
+
   def start_game
     if loaded_selected_status.selected_num == 0
       alert_no_poem_selected()
@@ -99,6 +103,7 @@ class HomeScreen < PM::GroupedTableScreen
       im.accessibilityLabel = 'info'
     end
   end
+
 
   private
 

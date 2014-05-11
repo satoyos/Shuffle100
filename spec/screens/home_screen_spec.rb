@@ -13,4 +13,8 @@ describe 'HomeScreen' do
   it 'should not rotate' do
     screen.should_autorotate.should.be.false
   end
+
+  it 'delegateにアクセスできる' do
+    screen.app_delegate.should.not.be.nil
+  end
 end

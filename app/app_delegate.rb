@@ -37,6 +37,7 @@ class AppDelegate < PM::Delegate
 
   def set_appearance_defaults
     UINavigationBar.appearance.barTintColor = BAR_TINT_COLOR
+    UIApplication.sharedApplication.statusBarOrientation = UIInterfaceOrientationPortrait
   end
 
 
