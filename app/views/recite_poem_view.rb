@@ -41,6 +41,10 @@ class RecitePoemView < UIView
     self.addSubview self.forward_button
     self.addSubview self.header_view
 
+    play_button.setTranslatesAutoresizingMaskIntoConstraints false
+    progress_bar.setTranslatesAutoresizingMaskIntoConstraints false
+    header_view.setTranslatesAutoresizingMaskIntoConstraints false
+
     self
   end
 
