@@ -8,6 +8,7 @@ gem 'awesome_print_motion'
 gem 'motion-layout'
 gem 'ProMotion'
 gem 'motion-weakattr'
+gem 'motion-kit'
 
 
 group :spec, :development, :test do

@@ -23,46 +23,11 @@ describe 'RecitePoemScreen' do
     screen.should_autorotate.should.be.false
   end
 
-=begin
-  describe '百枚通すテスト！' do
-    before do
-      # このテストでは、100枚のシャッフル無しのデッキを用意する。
-      screen.change_supplier(PoemSupplier.new)
-      @interval_time = UIApplication.sharedApplication.delegate.reciting_settings.interval_time
-    end
-
-    it 'Supplierが扱うデッキのサイズは100' do
-      screen.supplier.size.should == 100
-    end
-
-    it '歌を再生して、強制的に終わらせる' do
-      # 序歌
-      screen.recite_poem
-      puts '=序歌読み上げ中'
-      wait 1 do
-        tap 'forward'
-        wait @interval_time + 1 do
-          2.times{
-            # ここでは上の句を読み上げ中
-            puts '=上の句読み上げ中'
-            screen.supplier.kami?.should.be.true
-            tap 'forward'
-            wait 0.5 do
-
-
-              tap 'play_button'
-              # ここでは下の句を読み上げ中
-              puts '=下の句読み上げ中'
-              screen.supplier.kami?.should.be.false
-              tap 'forward'
-              wait @interval_time + 1 do
-                # next
-              end
-            end
-          }
-        end
-      end
+  describe 'MotionKit対応' do
+    it 'viewとして、MotionKit::Layoutのサブクラスが設定されている' do
+      screen.view.should.not.be.nil
+      screen.view.is_a?(RecitePoemLayout).should.be.true
     end
   end
-=end
+
 end
