@@ -34,7 +34,7 @@ class RecitePoemScreen < PM::Screen
                        end
     self.recite_poem_view.layout_with_top_offset(top_guide_height)
 =end
-    @layout.add_constraints
+    # @layout.add_constraints
   end
 
   def on_return
