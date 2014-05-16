@@ -5,8 +5,6 @@ class RecitePoemLayout < MotionKit::Layout
   HEADER_BUTTON_MARGIN = 10
   BUTTON_IMAGE_SIZE = CGSizeMake(HEADER_BUTTON_SIZE, HEADER_BUTTON_SIZE)
 
-  weak_attr :delegate
-
   def layout
     background_color UIColor.whiteColor
 

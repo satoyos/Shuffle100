@@ -22,14 +22,4 @@ describe 'RecitePoemScreen' do
   it 'should not rotate' do
     screen.should_autorotate.should.be.false
   end
-
-=begin
-  describe 'MotionKit対応' do
-    it 'viewとして、MotionKit::Layoutのサブクラスが設定されている' do
-      screen.view.should.not.be.nil
-      screen.view.is_a?(RecitePoemLayout).should.be.true
-    end
-  end
-=end
-
 end

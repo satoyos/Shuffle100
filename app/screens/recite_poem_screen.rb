@@ -20,11 +20,11 @@ class RecitePoemScreen < PM::Screen
     @layout = RecitePoemLayout.new
     self.view = @layout.view
 
-
+    set_button_actions
     # recite_poem unless RUBYMOTION_ENV == 'test'
   end
 
-  def will_appear
+    def will_appear
 =begin
     top_guide_height = case self.navigationController
                          when nil; 0
@@ -36,6 +36,8 @@ class RecitePoemScreen < PM::Screen
 =end
     # @layout.add_constraints
   end
+
+
 
   def on_return
     puts '// 読み上げ画面に帰ってきたぜ！' if BW::debug?
@@ -140,6 +142,18 @@ class RecitePoemScreen < PM::Screen
       @reciting_settings = delegate.reciting_settings
     end
   end
+
+  def set_button_actions
+    set_button_of_symbol(:gear_button, action: 'open_on_game_settings:')
+    set_button_of_symbol(:exit_button, action: 'quit_game')
+  end
+
+  def set_button_of_symbol(sym, action: action_str)
+    @layout.get(sym).addTarget(self,
+                               action: action_str,
+                               forControlEvents: UIControlEventTouchUpInside)
+  end
+
 
   def set_player_volume
     @current_player.volume = app_delegate.reciting_settings.volume
