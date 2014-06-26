@@ -5,21 +5,42 @@ class RecitePoemLayout < MotionKit::Layout
   HEADER_BUTTON_MARGIN = 10
   BUTTON_IMAGE_SIZE = CGSizeMake(HEADER_BUTTON_SIZE, HEADER_BUTTON_SIZE)
 
-  def layout
-    background_color UIColor.whiteColor
+  PLAY_BUTTON_SIZE = 260
+  PLAY_BUTTON_FONT_SIZE = PLAY_BUTTON_SIZE * 0.5
 
-    add UIView, :status_area
-    add UIView, :header_container do
-      add UILabel, :header_title do
-        text '序歌'
+  PLAY_BUTTON_PLAYING_TITLE = FontAwesome.icon('play')
+  PLAY_BUTTON_PAUSING_TITLE = FontAwesome.icon('pause')
+  PLAY_BUTTON_PLAYING_COLOR = '#007bbb'.to_color # 紺碧
+  PLAY_BUTTON_PAUSING_COLOR = '#e2041b'.to_color # 猩々緋
+
+  ACC_LABEL_PLAY_BUTTON = 'play_button'
+  ACC_LABEL_PLAY  = 'play'
+  ACC_LABEL_PAUSE = 'pause'
+  ACC_LABEL_FORWARD =  'forward'
+  ACC_LABEL_BACKWARD = 'backward'
+
+
+  def layout
+    root :rp_view do
+      add UIView, :status_area
+      add UIView, :header_container do
+        add UILabel, :header_title do
+          text '序歌'
+        end
+        add UIButton, :gear_button
+        add UIButton, :exit_button
       end
-      add UIButton, :gear_button
-      add UIButton, :exit_button
-      # add UIView, :test_view
+
+      # play_button
+      add ReciteViewButton, :play_button
+
+      # progress_bar
     end
 
-    # play_button
-    # progress_bar
+  end
+
+  def rp_view_style
+    background_color UIColor.whiteColor
   end
 
   def status_area_style
@@ -53,10 +74,15 @@ class RecitePoemLayout < MotionKit::Layout
     center y: '50%'
   end
 
-  def test_view_style
-    background_color UIColor.brownColor
-    size [30, 30]
-    frame from_top_right(left: 5)
+  def play_button_style
+    size [PLAY_BUTTON_SIZE, PLAY_BUTTON_SIZE] # こっちが先であることが重要!!
+    center ['50%', '50%'] # centerを決めるのは、sizeが決まってからでないと！
+    title 'play'
+    init_recite_view_button
+    accessibility_label ACC_LABEL_PLAY_BUTTON
+    titleLabel.font = FontAwesome.fontWithSize(PLAY_BUTTON_FONT_SIZE)
+    set_title(PLAY_BUTTON_PAUSING_TITLE, left_inset: 0,
+              color: PLAY_BUTTON_PAUSING_COLOR)
   end
 
   private

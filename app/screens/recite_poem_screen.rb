@@ -17,8 +17,9 @@ class RecitePoemScreen < PM::Screen
     self.recite_poem_view.title = OPENING_POEM_TITLE
     add @rp_view
 =end
-    @layout = RecitePoemLayout.new
-    self.view = @layout.view
+    # @layout = RecitePoemLayout.new
+    # self.view = @layout.view
+    @layout = RecitePoemLayout.new(root: view).build
 
     set_button_actions
     # recite_poem unless RUBYMOTION_ENV == 'test'
