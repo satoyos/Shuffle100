@@ -34,6 +34,9 @@ class RecitePoemLayout < MotionKit::Layout
       # play_button
       add ReciteViewButton, :play_button
 
+
+      #%ToDo: 続きは、プログレスバーを配置するところから！
+
       # progress_bar
     end
 

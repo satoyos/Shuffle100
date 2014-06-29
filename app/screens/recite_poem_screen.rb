@@ -12,30 +12,10 @@ class RecitePoemScreen < PM::Screen
     init_properties_with_delegate
 
     view.backgroundColor = UIColor.redColor # 見えてはいけないviewが見えたらすぐ分かるよう着色
-=begin
-    @rp_view = create_recite_poem_view
-    self.recite_poem_view.title = OPENING_POEM_TITLE
-    add @rp_view
-=end
-    # @layout = RecitePoemLayout.new
-    # self.view = @layout.view
     @layout = RecitePoemLayout.new(root: view).build
 
     set_button_actions
     # recite_poem unless RUBYMOTION_ENV == 'test'
-  end
-
-    def will_appear
-=begin
-    top_guide_height = case self.navigationController
-                         when nil; 0
-                         else
-                           frame = self.navigationController.navigationBar.frame
-                           frame.origin.y + frame.size.height
-                       end
-    self.recite_poem_view.layout_with_top_offset(top_guide_height)
-=end
-    # @layout.add_constraints
   end
 
 
@@ -126,8 +106,8 @@ class RecitePoemScreen < PM::Screen
     set_player_volume
   end
 
-  def recite_poem_view
-    @rp_view
+  def rp_view
+    @rp_view ||= @layout.get(:rp_view)
   end
 
   private

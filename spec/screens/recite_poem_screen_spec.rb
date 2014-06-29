@@ -17,6 +17,10 @@ describe 'RecitePoemScreen' do
     it 'プロパティとしてcurrent_playerを持つ' do
       screen.current_player.should.not.be.nil
     end
+
+    it 'プロパティとしてrp_viewを持つ' do
+      screen.rp_view.should.not.be.nil
+    end
   end
 
   it 'should not rotate' do
