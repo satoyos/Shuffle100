@@ -34,7 +34,6 @@ class RecitePoemLayout < MotionKit::Layout
       # play_button
       add ReciteViewButton, :play_button
 
-
       # progress_bar
       add UIProgressView, :progress_bar
     end
@@ -47,9 +46,7 @@ class RecitePoemLayout < MotionKit::Layout
     # MotionKitのバグかどうか分からないけど、
     # ここでProgressViewの高さを指定しても、2pt固定になる。
     size ['60%', 10]
-    # frame from_bottom(size: ['60%', 10], up: get(:play_button).frame.origin.y/2)
     frame from_bottom(up: equalized_gap)
-
   end
 
   def rp_view_style
