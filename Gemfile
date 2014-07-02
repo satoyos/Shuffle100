@@ -6,7 +6,7 @@ gem 'bubble-wrap'
 gem 'motion-fontawesome'
 gem 'awesome_print_motion'
 gem 'motion-layout'
-gem 'ProMotion', '< 2.0.0rc3'
+gem 'ProMotion', '< 1.3'
 gem 'motion-weakattr'
 gem 'motion-kit'
 
