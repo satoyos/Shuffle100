@@ -46,8 +46,9 @@ class RecitePoemLayout < MotionKit::Layout
 
     # MotionKitのバグかどうか分からないけど、
     # ここでProgressViewの高さを指定しても、2pt固定になる。
-    frame from_bottom(size: ['60%', 10], up: get(:play_button).frame.origin.y/2)
-
+    size ['60%', 10]
+    # frame from_bottom(size: ['60%', 10], up: get(:play_button).frame.origin.y/2)
+    frame from_bottom(up: equalized_gap)
 
   end
 
@@ -88,7 +89,8 @@ class RecitePoemLayout < MotionKit::Layout
 
   def play_button_style
     size [PLAY_BUTTON_SIZE, PLAY_BUTTON_SIZE] # こっちが先であることが重要!!
-    center ['50%', '50%'] # centerを決めるのは、sizeが決まってからでないと！
+    frame below(:header_container, down: equalized_gap)
+    center x: '50%'
     title 'play'
     init_recite_view_button
     accessibility_label ACC_LABEL_PLAY_BUTTON
@@ -101,6 +103,12 @@ class RecitePoemLayout < MotionKit::Layout
 
   def set_header_button_size
     frame w: HEADER_BUTTON_SIZE, h: HEADER_BUTTON_SIZE
+  end
+
+  def equalized_gap
+    @equalized_gap ||=
+        (self.view.frame.size.height -
+            (STATUS_BAR_HEIGHT + HEADER_HEIGHT + PLAY_BUTTON_SIZE )) / 3
   end
 
 
