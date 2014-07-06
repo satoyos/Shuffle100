@@ -7,11 +7,18 @@ class RecitePoemLayout < MotionKit::Layout
 
   PLAY_BUTTON_SIZE = 260
   PLAY_BUTTON_FONT_SIZE = PLAY_BUTTON_SIZE * 0.5
-
   PLAY_BUTTON_PLAYING_TITLE = FontAwesome.icon('play')
   PLAY_BUTTON_PAUSING_TITLE = FontAwesome.icon('pause')
   PLAY_BUTTON_PLAYING_COLOR = '#007bbb'.to_color # 紺碧
   PLAY_BUTTON_PAUSING_COLOR = '#e2041b'.to_color # 猩々緋
+
+  # lower_container
+  SKIP_BUTTON_SIZE = 30
+  SKIP_BUTTON_FONT_SIZE = SKIP_BUTTON_SIZE * 0.5
+  SKIP_BUTTON_COLOR = PLAY_BUTTON_PLAYING_COLOR
+  FORWARD_BUTTON_TITLE = FontAwesome.icon('fast-forward')
+  REWIND_BUTTON_TITLE  = FontAwesome.icon('fast-backward')
+  GAP_FROM_BAR = 8
 
   ACC_LABEL_PLAY_BUTTON = 'play_button'
   ACC_LABEL_PLAY  = 'play'
@@ -34,19 +41,29 @@ class RecitePoemLayout < MotionKit::Layout
       # play_button
       add ReciteViewButton, :play_button
 
-      # progress_bar
-      add UIProgressView, :progress_bar
+      # progress_bar and skip_buttons
+      add UIView, :lower_container do
+        add UIProgressView, :progress_bar
+        add ReciteViewButton, :rewind_button
+        add ReciteViewButton, :forward_button
+      end
     end
 
   end
 
+  def lower_container_style
+    size [PLAY_BUTTON_SIZE, SKIP_BUTTON_SIZE]
+    frame from_bottom(up: equalized_gap)
+
+  end
+
   def progress_bar_style
-    progress_view_style UIProgressViewStyleDefault
+    # progress_view_style UIProgressViewStyleDefault
 
     # MotionKitのバグかどうか分からないけど、
     # ここでProgressViewの高さを指定しても、2pt固定になる。
-    size ['60%', 10]
-    frame from_bottom(up: equalized_gap)
+    size ['100% - 80', 10]
+    center ['50%', '50%']
   end
 
   def rp_view_style
@@ -96,6 +113,27 @@ class RecitePoemLayout < MotionKit::Layout
               color: PLAY_BUTTON_PAUSING_COLOR)
   end
 
+  def rewind_button_style
+    size [SKIP_BUTTON_SIZE, SKIP_BUTTON_SIZE]
+    origin x: 0
+    center y: '50%'
+    init_recite_view_button
+    accessibility_label ACC_LABEL_BACKWARD
+    titleLabel.font = FontAwesome.fontWithSize(SKIP_BUTTON_FONT_SIZE)
+    set_title(REWIND_BUTTON_TITLE, left_inset: 0, color: SKIP_BUTTON_COLOR)
+  end
+
+  def forward_button_style
+    size [SKIP_BUTTON_SIZE, SKIP_BUTTON_SIZE]
+    # frame from_right(:lower_container)
+    frame after(:progress_bar, right: GAP_FROM_BAR)
+    center y: '50%'
+    init_recite_view_button
+    accessibility_label ACC_LABEL_FORWARD
+    titleLabel.font = FontAwesome.fontWithSize(SKIP_BUTTON_FONT_SIZE)
+    set_title(FORWARD_BUTTON_TITLE, left_inset: 0, color: SKIP_BUTTON_COLOR)
+  end
+
   private
 
   def set_header_button_size
@@ -105,7 +143,8 @@ class RecitePoemLayout < MotionKit::Layout
   def equalized_gap
     @equalized_gap ||=
         (self.view.frame.size.height -
-            (STATUS_BAR_HEIGHT + HEADER_HEIGHT + PLAY_BUTTON_SIZE )) / 3
+            (STATUS_BAR_HEIGHT + HEADER_HEIGHT +
+                PLAY_BUTTON_SIZE + SKIP_BUTTON_SIZE )) / 3
   end
 
 
