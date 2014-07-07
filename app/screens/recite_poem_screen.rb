@@ -13,7 +13,6 @@ class RecitePoemScreen < PM::Screen
 
     view.backgroundColor = UIColor.redColor # 見えてはいけないviewが見えたらすぐ分かるよう着色
     @layout = RecitePoemLayout.new(root: view).build
-
     set_button_actions
     # recite_poem unless RUBYMOTION_ENV == 'test'
   end
@@ -127,6 +126,7 @@ class RecitePoemScreen < PM::Screen
   def set_button_actions
     set_button_of_symbol(:gear_button, action: 'open_on_game_settings:')
     set_button_of_symbol(:exit_button, action: 'quit_game')
+    set_button_of_symbol(:play_button, action: 'play_button_pushed:')
   end
 
   def set_button_of_symbol(sym, action: action_str)

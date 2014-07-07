@@ -1,4 +1,6 @@
 class RecitePoemLayout < MotionKit::Layout
+  include RecitePoemStyles
+
   STATUS_BAR_HEIGHT = 20 # これはシステムのステータスバーの値そのまま。好きに変えていいわけではない。
   HEADER_HEIGHT = 40
   HEADER_BUTTON_SIZE = 25
@@ -26,6 +28,8 @@ class RecitePoemLayout < MotionKit::Layout
   ACC_LABEL_FORWARD =  'forward'
   ACC_LABEL_BACKWARD = 'backward'
 
+
+  # weak_attr :delegate
 
   def layout
     root :rp_view do
@@ -57,6 +61,7 @@ class RecitePoemLayout < MotionKit::Layout
 
   end
 
+=begin
   def progress_bar_style
     # progress_view_style UIProgressViewStyleDefault
 
@@ -65,6 +70,7 @@ class RecitePoemLayout < MotionKit::Layout
     size ['100% - 80', 10]
     center ['50%', '50%']
   end
+=end
 
   def rp_view_style
     background_color UIColor.whiteColor
