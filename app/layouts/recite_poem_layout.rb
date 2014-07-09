@@ -1,40 +1,9 @@
 class RecitePoemLayout < MotionKit::Layout
   include RecitePoemStyles
 
-=begin
-  STATUS_BAR_HEIGHT = 20 # これはシステムのステータスバーの値そのまま。好きに変えていいわけではない。
-  HEADER_HEIGHT = 40
-  HEADER_BUTTON_SIZE = 25
-  HEADER_BUTTON_MARGIN = 10
-  BUTTON_IMAGE_SIZE = CGSizeMake(HEADER_BUTTON_SIZE, HEADER_BUTTON_SIZE)
-=end
+  PROGRESS_TIMER_INTERVAL = 0.1
 
-
-  # PLAY_BUTTON_SIZE = 260
-  # PLAY_BUTTON_FONT_SIZE = PLAY_BUTTON_SIZE * 0.5
-  # PLAY_BUTTON_PLAYING_TITLE = FontAwesome.icon('play')
-  # PLAY_BUTTON_PAUSING_TITLE = FontAwesome.icon('pause')
-  # PLAY_BUTTON_PLAYING_COLOR = '#007bbb'.to_color # 紺碧
-  # PLAY_BUTTON_PAUSING_COLOR = '#e2041b'.to_color # 猩々緋
-
-=begin
-  # lower_container
-  SKIP_BUTTON_SIZE = 30
-  SKIP_BUTTON_FONT_SIZE = SKIP_BUTTON_SIZE * 0.5
-  SKIP_BUTTON_COLOR = PLAY_BUTTON_PLAYING_COLOR
-  FORWARD_BUTTON_TITLE = FontAwesome.icon('fast-forward')
-  REWIND_BUTTON_TITLE  = FontAwesome.icon('fast-backward')
-  GAP_FROM_BAR = 8
-
-  ACC_LABEL_PLAY_BUTTON = 'play_button'
-  ACC_LABEL_PLAY  = 'play'
-  ACC_LABEL_PAUSE = 'pause'
-  ACC_LABEL_FORWARD =  'forward'
-  ACC_LABEL_BACKWARD = 'backward'
-=end
-
-
-  # weak_attr :delegate
+  weak_attr :delegate
 
   def layout
     root :rp_view do
@@ -60,21 +29,62 @@ class RecitePoemLayout < MotionKit::Layout
 
   end
 
+  def show_waiting_to_pause
+    show_play_button_title(PLAY_BUTTON_PAUSING_TITLE,
+                           left_inset: 0,
+                           color: PLAY_BUTTON_PAUSING_COLOR)
+    play_button.titleLabel.accessibilityLabel = ACC_LABEL_PAUSE
+    @timer = create_progress_update_timer(PROGRESS_TIMER_INTERVAL)
+  end
 
-=begin
+  def show_waiting_to_play
+    ap '- 再生の指示待ちです。' if BW::debug?
+    @timer.invalidate if @timer
+    show_play_button_title(PLAY_BUTTON_PLAYING_TITLE,
+                           left_inset: PLAY_MARK_INSET,
+                           color: PLAY_BUTTON_PLAYING_COLOR)
+    play_button.titleLabel.accessibilityLabel = ACC_LABEL_PLAY
+  end
+
   private
 
-  def set_header_button_size
-    frame w: HEADER_BUTTON_SIZE, h: HEADER_BUTTON_SIZE
+  def show_play_button_title(title, left_inset: l_inset, color: color)
+    play_button.tap do |b|
+      UIEdgeInsets.new.tap do |insets|
+        insets.left = l_inset
+        b.contentEdgeInsets = insets
+      end
+      b.setTitle(title, forState: UIControlStateNormal)
+      b.setTitleColor(color, forState: UIControlStateNormal)
+      b.setTitleColor(color.colorWithAlphaComponent(0.25),
+                      forState: UIControlStateHighlighted | UIControlStateDisabled)
+    end
   end
 
-  def equalized_gap
-    @equalized_gap ||=
-        (self.view.frame.size.height -
-            (STATUS_BAR_HEIGHT + HEADER_HEIGHT +
-                PLAY_BUTTON_SIZE + SKIP_BUTTON_SIZE )) / 3
+
+  def play_button
+    @play_button ||= get(:play_button)
   end
-=end
+
+  def progress_bar
+    @progress_bar ||= get(:progress_bar)
+  end
+
+  def create_progress_update_timer(interval_time)
+    NSTimer.scheduledTimerWithTimeInterval(interval_time,
+                                           target: self,
+                                           selector: 'update_progress',
+                                           userInfo: nil,
+                                           repeats: true)
+  end
+
+  def update_progress
+    progress_bar.progress = delegate.current_player_progress if delegate
+  end
+
+  ###############
+  # Class Methods
+  ###############
 
   class << self
     def gear_image

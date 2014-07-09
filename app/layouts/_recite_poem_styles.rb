@@ -7,6 +7,7 @@ module RecitePoemStyles
 
   PLAY_BUTTON_SIZE = 260
   PLAY_BUTTON_FONT_SIZE = PLAY_BUTTON_SIZE * 0.5
+  PLAY_MARK_INSET = PLAY_BUTTON_FONT_SIZE * 0.3
   PLAY_BUTTON_PLAYING_TITLE = FontAwesome.icon('play')
   PLAY_BUTTON_PAUSING_TITLE = FontAwesome.icon('pause')
   PLAY_BUTTON_PLAYING_COLOR = '#007bbb'.to_color # 紺碧

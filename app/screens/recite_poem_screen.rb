@@ -7,14 +7,19 @@ class RecitePoemScreen < PM::Screen
   title OPENING_POEM_TITLE
 
   attr_reader :supplier, :current_player, :reciting_settings
+  attr_reader :layout
 
   def on_load
     init_properties_with_delegate
 
     view.backgroundColor = UIColor.redColor # 見えてはいけないviewが見えたらすぐ分かるよう着色
-    @layout = RecitePoemLayout.new(root: view).build
+    @layout =
+        RecitePoemLayout.new(root: view).tap do |l|
+          l.build
+          l.delegate = self
+        end
     set_button_actions
-    # recite_poem unless RUBYMOTION_ENV == 'test'
+    recite_poem unless RUBYMOTION_ENV == 'test'
   end
 
 
@@ -54,8 +59,8 @@ class RecitePoemScreen < PM::Screen
   end
 
   def recite_poem
-    self.recite_poem_view.show_waiting_to_pause
-    set_player_volume
+    layout.show_waiting_to_pause
+    # set_player_volume
     @current_player.play
 
   end

@@ -5,8 +5,7 @@ module RecitePoemDelegate
   def play_button_pushed(view)
     if current_player.playing?
       current_player.pause
-      # recite_poem_view.show_waiting_to_play
-      rp_view.show_waiting_to_play
+      layout.show_waiting_to_play
     else
       recite_poem
     end
