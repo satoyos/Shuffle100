@@ -1,5 +1,6 @@
 module RecitePoemStyles
-  STATUS_BAR_HEIGHT = 20 # これはシステムのステータスバーの値そのまま。好きに変えていいわけではない。
+  # STATUS_BAR_HEIGHT = 20 # これはシステムのステータスバーの値そのまま。好きに変えていいわけではない。
+  STATUS_BAR_HEIGHT = 0 # これはシステムのステータスバーの値そのまま。好きに変えていいわけではない。
   HEADER_HEIGHT = 40
   HEADER_BUTTON_SIZE = 25
   HEADER_BUTTON_MARGIN = 10
@@ -27,23 +28,13 @@ module RecitePoemStyles
   ACC_LABEL_FORWARD =  'forward'
   ACC_LABEL_BACKWARD = 'backward'
 
-  def progress_bar_style
-    # progress_view_style UIProgressViewStyleDefault
 
-    # MotionKitのバグかどうか分からないけど、
-    # ここでProgressViewの高さを指定しても、2pt固定になる。
-    size ['100% - 80', 10]
-    center ['50%', '50%']
-  end
+  #################
+  # 画面上部のView群
+  #################
 
   def rp_view_style
     background_color UIColor.whiteColor
-  end
-
-  def lower_container_style
-    size [PLAY_BUTTON_SIZE, SKIP_BUTTON_SIZE]
-    frame from_bottom(up: equalized_gap)
-
   end
 
   def status_area_style
@@ -77,26 +68,30 @@ module RecitePoemStyles
     center y: '50%'
   end
 
+  ##################
+  # メインのPlayボタン
+  ##################
+
   def play_button_style
     size [PLAY_BUTTON_SIZE, PLAY_BUTTON_SIZE] # こっちが先であることが重要!!
     frame below(:header_container, down: equalized_gap)
     center x: '50%'
     title 'play'
-    init_recite_view_button
+    init_recite_view_button(:play_button.to_s)
     accessibility_label ACC_LABEL_PLAY_BUTTON
     titleLabel.font = FontAwesome.fontWithSize(PLAY_BUTTON_FONT_SIZE)
     set_title(PLAY_BUTTON_PAUSING_TITLE, left_inset: 0,
               color: PLAY_BUTTON_PAUSING_COLOR)
   end
 
-  def rewind_button_style
-    size [SKIP_BUTTON_SIZE, SKIP_BUTTON_SIZE]
-    origin x: 0
-    center y: '50%'
-    init_recite_view_button
-    accessibility_label ACC_LABEL_BACKWARD
-    titleLabel.font = FontAwesome.fontWithSize(SKIP_BUTTON_FONT_SIZE)
-    set_title(REWIND_BUTTON_TITLE, left_inset: 0, color: SKIP_BUTTON_COLOR)
+  #################
+  # 画面下部のView群
+  #################
+
+  def lower_container_style
+    size [PLAY_BUTTON_SIZE, SKIP_BUTTON_SIZE]
+    frame from_bottom(up: equalized_gap)
+
   end
 
   def forward_button_style
@@ -104,10 +99,28 @@ module RecitePoemStyles
     # frame from_right(:lower_container)
     frame after(:progress_bar, right: GAP_FROM_BAR)
     center y: '50%'
-    init_recite_view_button
+    init_recite_view_button(:forward_button.to_s)
     accessibility_label ACC_LABEL_FORWARD
     titleLabel.font = FontAwesome.fontWithSize(SKIP_BUTTON_FONT_SIZE)
     set_title(FORWARD_BUTTON_TITLE, left_inset: 0, color: SKIP_BUTTON_COLOR)
+  end
+
+  def rewind_button_style
+    size [SKIP_BUTTON_SIZE, SKIP_BUTTON_SIZE]
+    origin x: 0
+    center y: '50%'
+    init_recite_view_button(:rewind_button.to_s)
+    accessibility_label ACC_LABEL_BACKWARD
+    titleLabel.font = FontAwesome.fontWithSize(SKIP_BUTTON_FONT_SIZE)
+    set_title(REWIND_BUTTON_TITLE, left_inset: 0, color: SKIP_BUTTON_COLOR)
+  end
+
+  def progress_bar_style
+    progress_view_style UIProgressViewStyleDefault
+    size ['100% - 80', 10]
+    center ['50%', '50%']
+    # ProgressViewの高さは、frameでは指定できないので、アフィン変換で拡大する。
+    transform CGAffineTransformMakeScale(1.0, 2.0)
   end
 
   private

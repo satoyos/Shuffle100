@@ -6,28 +6,35 @@ class RecitePoemLayout < MotionKit::Layout
   weak_attr :delegate
 
   def layout
-    root :rp_view do
-      add UIView, :status_area
-      add UIView, :header_container do
-        add UILabel, :header_title do
-          text '序歌'
-        end
-        add UIButton, :gear_button
-        add UIButton, :exit_button
-      end
+    # header area
+    background_color UIColor.whiteColor
 
-      # play_button
-      add ReciteViewButton, :play_button
-
-      # progress_bar and skip_buttons
-      add UIView, :lower_container do
-        add UIProgressView, :progress_bar
-        add ReciteViewButton, :rewind_button
-        add ReciteViewButton, :forward_button
+    add UIView, :status_area
+    add UIView, :header_container do
+      add UILabel, :header_title do
+        text '序歌'
       end
+      add UIButton, :gear_button
+      add UIButton, :exit_button
     end
 
+    # play_button
+    add ReciteViewButton, :play_button
+
+    # progress_bar and skip_buttons
+    add UIView, :lower_container do
+      add UIProgressView, :progress_bar
+      add ReciteViewButton, :rewind_button
+      add ReciteViewButton, :forward_button
+    end
   end
+
+=begin
+  # @param [UIView] superview このLayoutのviewを載せる親View
+  def make_rp_view_appear_on(superview)
+    superview.insertSubview(view, atIndex: 0)
+  end
+=end
 
   def show_waiting_to_pause
     show_play_button_title(PLAY_BUTTON_PAUSING_TITLE,
@@ -46,6 +53,38 @@ class RecitePoemLayout < MotionKit::Layout
     play_button.titleLabel.accessibilityLabel = ACC_LABEL_PLAY
   end
 
+  def play_finished_successfully
+    play_button.enabled = false
+    @timer.invalidate if @timer and @timer.isValid
+  end
+
+  def locate_view(side)
+    case side
+      when :right
+        view.frame = [[view.frame.size.width, view.frame.origin.y], view.frame.size]
+      when :left
+        view.frame = [[-1 * view.frame.size.width, view.frame.origin.y], view.frame.size]
+      when :normal
+        view.frame = [[0, view.frame.origin.y], view.frame.size]
+      else
+        # 何もしない
+    end
+  end
+
+  def title=(title)
+    get(:header_title).text = title
+  end
+=begin
+  def slide_view_to_appear
+    show_waiting_to_play
+    view.frame = [[0, view.frame.origin.y], view.frame.size]
+  end
+=end
+
+  ###############
+  # Class Methods
+  ###############
+
   private
 
   def show_play_button_title(title, left_inset: l_inset, color: color)
@@ -60,7 +99,6 @@ class RecitePoemLayout < MotionKit::Layout
                       forState: UIControlStateHighlighted | UIControlStateDisabled)
     end
   end
-
 
   def play_button
     @play_button ||= get(:play_button)
