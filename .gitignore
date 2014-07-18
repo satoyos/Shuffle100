@@ -29,3 +29,6 @@ resources/fontawesome-webfont.ttf
 
 *.log
 debugger_cmds
+
+# ゴミ箱
+zz_trash/
