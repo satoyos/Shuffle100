@@ -1,6 +1,4 @@
 module RecitePoemStyles
-  # STATUS_BAR_HEIGHT = 20 # これはシステムのステータスバーの値そのまま。好きに変えていいわけではない。
-  STATUS_BAR_HEIGHT = 0 # これはシステムのステータスバーの値そのまま。好きに変えていいわけではない。
   HEADER_HEIGHT = 40
   HEADER_BUTTON_SIZE = 25
   HEADER_BUTTON_MARGIN = 10
@@ -37,14 +35,16 @@ module RecitePoemStyles
     background_color UIColor.whiteColor
   end
 
+=begin
   def status_area_style
     background_color AppDelegate::BAR_TINT_COLOR
     size ['100%', STATUS_BAR_HEIGHT]
   end
+=end
 
   def header_container_style
     background_color AppDelegate::BAR_TINT_COLOR
-    frame below(:status_area)
+    # frame below(:status_area)
     size ['100%', HEADER_HEIGHT]
   end
 
@@ -132,8 +132,8 @@ module RecitePoemStyles
   def equalized_gap
     @equalized_gap ||=
         (self.view.frame.size.height -
-            (STATUS_BAR_HEIGHT + HEADER_HEIGHT +
-                PLAY_BUTTON_SIZE + SKIP_BUTTON_SIZE )) / 3
+            # (STATUS_BAR_HEIGHT + HEADER_HEIGHT +
+            (HEADER_HEIGHT + PLAY_BUTTON_SIZE + SKIP_BUTTON_SIZE )) / 3
   end
 
 end

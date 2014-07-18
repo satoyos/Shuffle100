@@ -9,7 +9,6 @@ class RecitePoemLayout < MotionKit::Layout
     # header area
     background_color UIColor.whiteColor
 
-    add UIView, :status_area
     add UIView, :header_container do
       add UILabel, :header_title do
         text '序歌'
@@ -28,13 +27,6 @@ class RecitePoemLayout < MotionKit::Layout
       add ReciteViewButton, :forward_button
     end
   end
-
-=begin
-  # @param [UIView] superview このLayoutのviewを載せる親View
-  def make_rp_view_appear_on(superview)
-    superview.insertSubview(view, atIndex: 0)
-  end
-=end
 
   def show_waiting_to_pause
     show_play_button_title(PLAY_BUTTON_PAUSING_TITLE,
@@ -74,6 +66,7 @@ class RecitePoemLayout < MotionKit::Layout
   def title=(title)
     get(:header_title).text = title
   end
+
 =begin
   def slide_view_to_appear
     show_waiting_to_play
