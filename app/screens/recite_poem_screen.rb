@@ -35,11 +35,11 @@ class RecitePoemScreen < PM::Screen
 
     puts '- 読み上げが無事に終了！' if BW::debug?
     layout.play_finished_successfully
-    if @supplier.kami?
-      @supplier.step_into_shimo
+    if supplier.kami?
+      supplier.step_into_shimo
       transit_kami_shimo
     else
-      if @supplier.draw_next_poem # 次の歌がある
+      if supplier.draw_next_poem # 次の歌がある
         goto_next_poem
       else                        # 次の歌がない (最後の歌だった)
         end_of_the_game
@@ -50,7 +50,7 @@ class RecitePoemScreen < PM::Screen
    def recite_poem
     layout.show_waiting_to_pause
     set_player_volume
-    @current_player.play
+    current_player.play
   end
 
   private
@@ -80,14 +80,14 @@ class RecitePoemScreen < PM::Screen
   end
 
   def set_button_of_symbol(sym, action: action_str)
-    @layout.get(sym).addTarget(self,
-                               action: action_str,
-                               forControlEvents: UIControlEventTouchUpInside)
+    layout.get(sym).addTarget(self,
+                              action: action_str,
+                              forControlEvents: UIControlEventTouchUpInside)
   end
 
   def fetch_player
     @current_player = @supplier.player
-    @current_player.delegate = self
+    current_player.delegate = self
     set_player_volume
   end
 
@@ -98,7 +98,7 @@ class RecitePoemScreen < PM::Screen
   end
 
   def set_player_volume
-    @current_player.volume = app_delegate.reciting_settings.volume
+    current_player.volume = app_delegate.reciting_settings.volume
   end
 
   def go_back_to_kami
