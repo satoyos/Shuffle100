@@ -1,5 +1,6 @@
 module RecitePoemAnimation
   ID_NEXT_POEM_FLIP = 'next_poem_flip'
+  ID_GAME_END_FLIP  = 'game_end_flip'
 
   def self_view_animation_def(method_name, arg: arg, duration: duration, transition: transition, stop_selector: selector)
     UIView.beginAnimations(method_name, context: nil)
@@ -20,7 +21,25 @@ module RecitePoemAnimation
   end
 
   def next_poem_flip_animate(duration, stop_selector: selector, &block)
-    UIView.beginAnimations(ID_NEXT_POEM_FLIP, context: nil)
+    flip_view_animate(ID_NEXT_POEM_FLIP,
+                      duration: duration,
+                      stop_selector: selector,
+                      &block
+    )
+  end
+
+  def game_end_flip_animate(duration, stop_selector: selector, &block)
+    flip_view_animate(ID_GAME_END_FLIP,
+                      duration: duration,
+                      stop_selector: selector,
+                      &block
+    )
+  end
+
+  private
+
+  def flip_view_animate(animation_id, duration: duration, stop_selector: selector, &block)
+    UIView.beginAnimations(animation_id, context: nil)
     UIView.setAnimationDelegate(self)
     UIView.setAnimationDuration(duration)
     UIView.setAnimationTransition(UIViewAnimationTransitionFlipFromLeft,

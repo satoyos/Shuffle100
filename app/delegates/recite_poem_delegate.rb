@@ -54,7 +54,7 @@ module RecitePoemDelegate
     puts '- Quit Button Pushed!' if BW::debug?
     if current_player.playing?
       current_player.pause
-      recite_poem_view.show_waiting_to_play
+      layout.show_waiting_to_play
     end
 
     BW::UIAlertView.new({

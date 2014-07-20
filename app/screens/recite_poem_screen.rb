@@ -42,21 +42,12 @@ class RecitePoemScreen < PM::Screen
       if @supplier.draw_next_poem # 次の歌がある
         goto_next_poem
       else                        # 次の歌がない (最後の歌だった)
-        @rp_view =
-            GameEndView.alloc.initWithFrame(bounds,
-                                            header_height: @rp_view.header_height).tap do |ge_view|
-              ge_view.delegate = WeakRef.new(self)
-            end
-        self_view_animation_def('make_rp_view_appear_adding',
-                           arg: nil,
-                           duration: self.reciting_settings.interval_time,
-                           transition: UIViewAnimationTransitionFlipFromLeft,
-                           stop_selector: ANIME_STOP_SELECTOR)
+        end_of_the_game
       end
     end
   end
 
-  def recite_poem
+   def recite_poem
     layout.show_waiting_to_pause
     set_player_volume
     @current_player.play
@@ -141,11 +132,21 @@ class RecitePoemScreen < PM::Screen
     renew_layout_and_player
     layout.show_waiting_to_play
     layout.title = create_current_title
-    next_poem_flip_animate(reciting_settings.interval_time, stop_selector: ANIME_STOP_SELECTOR){
+    next_poem_flip_animate(reciting_settings.interval_time,
+                           stop_selector: ANIME_STOP_SELECTOR){
       remove view.subviews.first
       add layout.view
     }
+  end
 
+  def end_of_the_game
+    @layout = GameEndLayout.new.tap{|l| l.delegate = self}
+    layout.add_back_to_button_action
+    game_end_flip_animate(reciting_settings.interval_time,
+                          stop_selector: ANIME_STOP_SELECTOR){
+      remove view.subviews.first
+      add layout.view
+    }
   end
 
   def go_back_to_prev_poem

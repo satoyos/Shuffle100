@@ -1,7 +1,7 @@
 class RecitePoemLayout < MotionKit::Layout
   include RecitePoemStyles
 
-  PROGRESS_TIMER_INTERVAL = 0.1
+  PROGRESS_TIMER_INTERVAL = 0.01
 
   weak_attr :delegate
 
