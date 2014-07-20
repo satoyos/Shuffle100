@@ -14,7 +14,7 @@ class RecitePoemLayout < MotionKit::Layout
         text '序歌'
       end
       add UIButton, :gear_button
-      add UIButton, :exit_button
+      add UIButton, :quit_button
     end
 
     # play_button

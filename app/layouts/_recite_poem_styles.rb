@@ -24,8 +24,9 @@ module RecitePoemStyles
   ACC_LABEL_PLAY  = 'play'
   ACC_LABEL_PAUSE = 'pause'
   ACC_LABEL_FORWARD =  'forward'
-  ACC_LABEL_BACKWARD = 'backward'
-
+  ACC_LABEL_BACKWARD = 'rewind'
+  ACC_LABEL_GEAR_BUTTON = 'gear_button'
+  ACC_LABEL_QUIT_BUTTON = 'quit_button'
 
   #################
   # 画面上部のView群
@@ -34,13 +35,6 @@ module RecitePoemStyles
   def rp_view_style
     background_color UIColor.whiteColor
   end
-
-=begin
-  def status_area_style
-    background_color AppDelegate::BAR_TINT_COLOR
-    size ['100%', STATUS_BAR_HEIGHT]
-  end
-=end
 
   def header_container_style
     background_color AppDelegate::BAR_TINT_COLOR
@@ -59,13 +53,15 @@ module RecitePoemStyles
     set_header_button_size
     center y: '50%'
     frame x: HEADER_BUTTON_MARGIN
+    accessibility_label ACC_LABEL_GEAR_BUTTON
   end
 
-  def exit_button_style
+  def quit_button_style
     image self.class.exit_image, state: UIControlStateNormal
     set_header_button_size
     frame from_top_right(left: HEADER_BUTTON_MARGIN)
     center y: '50%'
+    accessibility_label ACC_LABEL_QUIT_BUTTON
   end
 
   ##################

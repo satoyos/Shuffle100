@@ -12,9 +12,14 @@ describe 'RecitePoemLayout' do
       @layout.view.backgroundColor.should == UIColor.whiteColor
     end
 
-
-    def test_view
-      UIView.alloc.initWithFrame(CGRectMake(0, 0, 360, 568))
+    it '各ボタンにAccessibilityLabelが付与されている' do
+      [:play_button, :quit_button, :gear_button].each do |button_sym|
+        @layout.get(button_sym).accessibilityLabel.should == button_sym.to_s
+      end
+      [:forward, :rewind].each do |button_sym|
+        @layout.get("#{button_sym}_button".to_sym).accessibilityLabel.should ==
+            button_sym.to_s
+      end
     end
   end
 
@@ -39,5 +44,4 @@ describe 'RecitePoemLayout' do
       end
     end
   end
-
 end

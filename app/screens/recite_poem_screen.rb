@@ -74,7 +74,7 @@ class RecitePoemScreen < PM::Screen
 
   def set_button_actions
     set_button_of_symbol(:gear_button, action: 'open_on_game_settings:')
-    set_button_of_symbol(:exit_button, action: 'quit_game')
+    set_button_of_symbol(:quit_button, action: 'quit_game')
     set_button_of_symbol(:play_button, action: 'play_button_pushed:')
     set_button_of_symbol(:forward_button, action: 'forward_skip')
   end
