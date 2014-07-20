@@ -2,8 +2,6 @@
 $:.unshift("/Library/RubyMotion/lib")
 require 'motion/project/template/ios'
 require 'bundler'
-require 'bubble-wrap/core'
-#require 'rubygems'
 require 'awesome_print_motion'
 require 'motion-layout'
 
