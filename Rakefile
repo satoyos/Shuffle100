@@ -2,8 +2,6 @@
 $:.unshift("/Library/RubyMotion/lib")
 require 'motion/project/template/ios'
 require 'bundler'
-require 'awesome_print_motion'
-require 'motion-layout'
 
 is_test = ARGV.join(' ') =~ /spec|frank/
 if is_test
