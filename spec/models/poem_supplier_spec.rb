@@ -130,4 +130,16 @@ describe 'PoemSupplier' do
       @supplier.kami?.should.be.false
     end
   end
+
+  describe 'バグ対策: 1枚目の上の句読み上げ中にrewindし、そこからforowad_skipしたら落ちた件' do
+    before do
+      @supplier = PoemSupplier.new
+    end
+
+    it 'もう落ちないよ！' do
+      @supplier.draw_next_poem       # 1枚目をめくる
+      @supplier.rollback_prev_poem.should.be.false   # 巻き戻そうとする
+      @supplier.poem.should.be.nil
+    end
+  end
 end

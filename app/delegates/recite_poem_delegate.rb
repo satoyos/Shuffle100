@@ -35,12 +35,16 @@ module RecitePoemDelegate
       layout.show_waiting_to_play
       layout.update_progress
     else
-      if supplier.kami?
-        return unless supplier.rollback_prev_poem
-        go_back_to_prev_poem
-      else
-        supplier.step_back_to_kami
-        go_back_to_kami
+      if supplier.current_index > 0
+        if supplier.kami?
+          back_to_top_screen unless supplier.rollback_prev_poem
+          go_back_to_prev_poem
+        else
+          supplier.step_back_to_kami
+          go_back_to_kami
+        end
+      else #詠んでいる歌が序歌の場合
+        back_to_top_screen
       end
     end
   end

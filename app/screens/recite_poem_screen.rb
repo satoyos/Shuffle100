@@ -120,6 +120,8 @@ class RecitePoemScreen < PM::Screen
     })
   end
 
+  #%ToDo: ↑と↓のtransitは、ほとんどのコードが同じなのでリファクタリングする！
+
   def transit_shimo_kami(to_recite)
     prev_view = view.subviews.first
     renew_layout_and_player

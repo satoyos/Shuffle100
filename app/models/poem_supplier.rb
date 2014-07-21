@@ -47,6 +47,7 @@ class PoemSupplier
     true
   end
 
+  # @return [Boolean] デッキの1つ前の歌に戻れればtrueを、戻れなければfalse
   def rollback_prev_poem
     @poem = @deck.rollback_poem
     return false unless @poem
