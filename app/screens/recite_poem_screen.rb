@@ -102,38 +102,27 @@ class RecitePoemScreen < PM::Screen
     current_player.volume = app_delegate.reciting_settings.volume
   end
 
-  def go_back_to_kami
-    transit_shimo_kami(false)
-  end
-
   def transit_kami_shimo
-    prev_view = view.subviews.first
-    renew_layout_and_player
-    layout.show_waiting_to_play
-    layout.title = create_current_title
-    add layout.view
-    layout.locate_view(:right)
-    UIView.animateWithDuration(SLIDING_EFFECT_DURATION, animations: lambda{
-      layout.locate_view(:normal)
-    }, completion: lambda{|finished|
-      remove prev_view
-    })
+    recite_view_slide_in_from(:right)
   end
 
-  #%ToDo: ↑と↓のtransitは、ほとんどのコードが同じなのでリファクタリングする！
+  def transit_shimo_kami
+    recite_view_slide_in_from(:left)
+  end
 
-  def transit_shimo_kami(to_recite)
+  def recite_view_slide_in_from(location)
     prev_view = view.subviews.first
     renew_layout_and_player
     layout.show_waiting_to_play
     layout.title = create_current_title
     add layout.view
-    layout.locate_view(:left)
+    layout.locate_view(location)
     UIView.animateWithDuration(SLIDING_EFFECT_DURATION, animations: lambda{
       layout.locate_view(:normal)
     }, completion: lambda{|finished|
       remove prev_view
     })
+
   end
 
   def goto_next_poem

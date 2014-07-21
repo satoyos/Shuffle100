@@ -41,7 +41,7 @@ module RecitePoemDelegate
           go_back_to_prev_poem
         else
           supplier.step_back_to_kami
-          go_back_to_kami
+          transit_shimo_kami
         end
       else #詠んでいる歌が序歌の場合
         back_to_top_screen
