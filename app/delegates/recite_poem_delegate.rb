@@ -28,10 +28,12 @@ module RecitePoemDelegate
   def rewind_skip
     return unless current_player
     if current_player.currentTime > 0.0 # 再生途中の場合
-      current_player.currentTime = 0.0
-      current_player.pause
-      recite_poem_view.show_waiting_to_play
-      recite_poem_view.update_progress
+      current_player.tap do  |player|
+        player.currentTime = 0.0
+        player.pause
+      end
+      layout.show_waiting_to_play
+      layout.update_progress
     else
       if supplier.kami?
         return unless supplier.rollback_prev_poem
@@ -46,7 +48,6 @@ module RecitePoemDelegate
   def open_on_game_settings(sender)
     puts "Let's start On_Game_Settings!" if BW::debug?
     play_button_pushed(nil) if self.current_player.playing?
-
     open OnGameSettingsScreen.new, modal: true, nav_bar: true
   end
 
@@ -57,6 +58,16 @@ module RecitePoemDelegate
       layout.show_waiting_to_play
     end
 
+    confirm_user_to_quit
+  end
+
+  def back_to_top_screen
+    close to_screen: :root
+  end
+
+  private
+
+  def confirm_user_to_quit
     BW::UIAlertView.new({
                             title: '試合を終了しますか？',
                             buttons: ['終了する', '続ける'],
@@ -72,7 +83,4 @@ module RecitePoemDelegate
     end.show
   end
 
-  def back_to_top_screen
-    close to_screen: :root
-  end
 end

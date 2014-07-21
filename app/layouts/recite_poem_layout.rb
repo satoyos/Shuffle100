@@ -67,16 +67,9 @@ class RecitePoemLayout < MotionKit::Layout
     get(:header_title).text = title
   end
 
-=begin
-  def slide_view_to_appear
-    show_waiting_to_play
-    view.frame = [[0, view.frame.origin.y], view.frame.size]
+  def update_progress
+    progress_bar.progress = delegate.current_player_progress if delegate
   end
-=end
-
-  ###############
-  # Class Methods
-  ###############
 
   private
 
@@ -107,10 +100,6 @@ class RecitePoemLayout < MotionKit::Layout
                                            selector: 'update_progress',
                                            userInfo: nil,
                                            repeats: true)
-  end
-
-  def update_progress
-    progress_bar.progress = delegate.current_player_progress if delegate
   end
 
   ###############

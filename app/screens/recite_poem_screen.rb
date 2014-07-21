@@ -77,6 +77,7 @@ class RecitePoemScreen < PM::Screen
     set_button_of_symbol(:quit_button, action: 'quit_game')
     set_button_of_symbol(:play_button, action: 'play_button_pushed:')
     set_button_of_symbol(:forward_button, action: 'forward_skip')
+    set_button_of_symbol(:rewind_button, action: 'rewind_skip')
   end
 
   def set_button_of_symbol(sym, action: action_str)
@@ -120,11 +121,17 @@ class RecitePoemScreen < PM::Screen
   end
 
   def transit_shimo_kami(to_recite)
-    raise 'まだ実装してないっす！'
-=begin
-    renew_layout_and_player(:left)
-    make_view_appear_with_sliding
-=end
+    prev_view = view.subviews.first
+    renew_layout_and_player
+    layout.show_waiting_to_play
+    layout.title = create_current_title
+    add layout.view
+    layout.locate_view(:left)
+    UIView.animateWithDuration(SLIDING_EFFECT_DURATION, animations: lambda{
+      layout.locate_view(:normal)
+    }, completion: lambda{|finished|
+      remove prev_view
+    })
   end
 
   def goto_next_poem
@@ -152,12 +159,12 @@ class RecitePoemScreen < PM::Screen
   def go_back_to_prev_poem
     puts 'Back to Prev Poem!' if BW::debug?
     renew_layout_and_player
-    self.recite_poem_view.show_waiting_to_play
-    self_view_animation_def('make_rp_view_appear_adding',
-                       arg: nil,
-                       duration: 0.5,
-                       transition: UIViewAnimationTransitionFlipFromRight,
-                       stop_selector: ANIME_STOP_SELECTOR)
+    layout.show_waiting_to_play
+    layout.title = create_current_title
+    prev_poem_flip_animate(0.5, stop_selector: ANIME_STOP_SELECTOR){
+      remove view.subviews.first
+      add layout.view
+    }
   end
 
   def create_current_title
