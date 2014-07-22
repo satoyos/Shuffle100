@@ -17,7 +17,6 @@ nbproject
 .idea
 vendor/*
 .DS_Store
-/*.lock
 
 
 
