@@ -13,5 +13,6 @@ group :spec, :development, :test do
   gem 'motion-stump', '<= 0.3.1'
   gem 'motion-redgreen'
   gem 'guard-motion'
+  gem 'rspec', '< 3.0.0' # 3.0.0になった瞬間、2014年春に作ったFrankテストが動かなくなる！
   gem 'motion-frank'
 end

@@ -10,16 +10,16 @@ Feature: As an 百人一首 player
     Then I should see "百首読み上げ"
 
   # 序歌画面
-  When I touch “試合開始”
-  Then I should see “序歌”
+  When I touch "試合開始"
+  Then I should see "序歌"
 
   # 歯車ボタンを押すと、各種設定画面が現れる。
-  When I touch “gear_button”
+  When I touch "gear_button"
   When I wait for 1 second
-  Then I should see “いろいろな設定”
+  Then I should see "いろいろな設定"
 
   # 最初のテーブルセルを押すと、歌間隔設定画面に遷移する。
 
-  When I touch the table cell marked “interval”
+  When I touch the table cell marked "interval"
   When I wait for 1 second
-  Then I should see “歌の間隔の変更”
+  Then I should see "歌の間隔の変更"

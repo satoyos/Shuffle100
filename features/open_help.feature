@@ -9,6 +9,7 @@ Background:
 Scenario:
 用意したヘルプ画面を一通り閲覧できる
 
+#  Then I should see "百首読み上げ"
   Then I should see "百首読み上げ"
 
   # まず、ヘルプメニュー画面を呼び出す
