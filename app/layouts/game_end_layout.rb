@@ -1,7 +1,9 @@
 class GameEndLayout < MotionKit::Layout
+=begin
   GAME_END_VIEW_TITLE =  '試合終了'
   BACK_TO_TOP_TITLE = 'トップに戻る'
   ACC_LABEL_BACK_TO_TOP_BUTTON = 'back_to_top'
+=end
 
   weak_attr :delegate
 
@@ -30,6 +32,7 @@ class GameEndLayout < MotionKit::Layout
     title_color 'lightGray'.to_color, state: UIControlStateHighlighted
     size ['50%', '30%']
     center ['50%', '50%']
+    accessibility_label 'back_to_top'
   end
 
 
