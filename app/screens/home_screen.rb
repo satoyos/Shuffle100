@@ -13,32 +13,11 @@ class HomeScreen < PM::GroupedTableScreen
         {
             title: '設定',
             title_view_height: 30,
-            cells: [
-                {
-                    title: SELECT_POEM_TITLE,
-                    cell_style: UITableViewCellStyleValue1,
-                    subtitle: '%d首' % loaded_selected_status.selected_num,
-                    action: :select_poems,
-                    accessoryType: UITableViewCellAccessoryDisclosureIndicator,
-                    accessibilityLabel: 'select_poem',
-                },
-                {
-                    title: FAKE_SETTING_TITLE,
-                    accessory: {
-                        view: :switch,
-                        value: app_delegate.game_settings.fake_flg,
-                        action: 'fake_switch_flipped:',
-                        accessibilityLabel: 'fake_switch'
-                    }
-                },
-            ]
+            cells: game_setting_cells
         },
         {
             title: '試合開始',
-            cells: [{title: '試合開始',
-                     action: :start_game,
-                     cell_class: GameStartCell,
-                    }]
+            cells: [start_game_cell]
         }
     ]
   end
@@ -92,6 +71,13 @@ class HomeScreen < PM::GroupedTableScreen
     app_delegate.settings_manager.save
   end
 
+  def beginner_switch_flipped(data_hash)
+    puts "初心者モードのスイッチが切り替わりました。(=> #{data_hash[:value]})" if BW::debug?
+    app_delegate.game_settings.beginner_flg = data_hash[:value]
+    app_delegate.settings_manager.save
+    update_table_view_data_animated
+  end
+
   def open_info
     puts '- Info Button pushed!' if BW::debug?
     open InfoMenuScreen.new
@@ -107,6 +93,13 @@ class HomeScreen < PM::GroupedTableScreen
 
   private
 
+  def update_table_view_data_animated
+    self.promotion_table_data.data = self.table_data
+    table_view.reloadSections(NSIndexSet.indexSetWithIndex(0),
+                              withRowAnimation: UITableViewRowAnimationFade)
+  end
+
+
   # @return [Deck] 選択された歌から構成されるDeck。歌の順序はShuffleされている。
   def selected_poems_deck
     Deck.create_from_bool100(loaded_selected_status.status_array).shuffle!
@@ -120,7 +113,57 @@ class HomeScreen < PM::GroupedTableScreen
     }.show
   end
 
+  def game_setting_cells
+    cells = [
+        select_poems_cell,
+        beginner_mode_switch_cell,
+    ]
+    cells << fake_mode_switch_cell unless app_delegate.game_settings.beginner_flg
+    cells
+  end
 
+  def select_poems_cell
+    {
+        title: SELECT_POEM_TITLE,
+        cell_style: UITableViewCellStyleValue1,
+        subtitle: '%d首' % loaded_selected_status.selected_num,
+        action: :select_poems,
+        accessoryType: UITableViewCellAccessoryDisclosureIndicator,
+        accessibilityLabel: 'select_poem',
+    }
+  end
+
+  def beginner_mode_switch_cell
+    {
+        title: '初心者モード',
+        accessory: {
+            view: :switch,
+            value: app_delegate.game_settings.beginner_flg,
+            action: 'beginner_switch_flipped:',
+            accessibilityLabel: 'beginner_switch'
+        }
+    }
+  end
+
+  def fake_mode_switch_cell
+    {
+        title: FAKE_SETTING_TITLE,
+        accessory: {
+            view: :switch,
+            value: app_delegate.game_settings.fake_flg,
+            action: 'fake_switch_flipped:',
+            accessibilityLabel: 'fake_switch'
+        }
+    }
+  end
+
+  def start_game_cell
+    {
+        title: '試合開始',
+        action: :start_game,
+        cell_class: GameStartCell,
+    }
+  end
 
 end
 
