@@ -1,10 +1,4 @@
 class GameEndLayout < MotionKit::Layout
-=begin
-  GAME_END_VIEW_TITLE =  '試合終了'
-  BACK_TO_TOP_TITLE = 'トップに戻る'
-  ACC_LABEL_BACK_TO_TOP_BUTTON = 'back_to_top'
-=end
-
   weak_attr :delegate
 
   def layout
