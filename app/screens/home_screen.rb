@@ -1,8 +1,8 @@
 class HomeScreen < PM::GroupedTableScreen
   include SelectedStatusHandler
+  include HomeScreenDelegate
   title 'トップ'
 
-  SELECT_POEM_TITLE = '取り札を用意する歌'
   FAKE_SETTING_TITLE = '空札を加える'
 
   INFO_BUTTON_SIZE = CGSizeMake(16, 16)
@@ -27,6 +27,7 @@ class HomeScreen < PM::GroupedTableScreen
         image: info_image,
         action: :open_info
     }
+
   end
 
   def will_appear
@@ -34,6 +35,9 @@ class HomeScreen < PM::GroupedTableScreen
     navigation_controller.setNavigationBarHidden(false, animated: false) if self.nav_bar?
     self.navigationItem.prompt = '百首読み上げ'
     update_table_data
+    @bd_view = UIView.alloc.initWithFrame([[0, 300], [30, 20]])
+    add @bd_view
+    bd_layout = BDAreaLayout.new(root: @bd_view).tap {|layout| layout.delegate = self}.build
   end
 
 
@@ -45,43 +49,8 @@ class HomeScreen < PM::GroupedTableScreen
     UIInterfaceOrientationPortrait
   end
 
-  def start_game
-    if loaded_selected_status.selected_num == 0
-      alert_no_poem_selected()
-      return
-    end
-    puts '++ 試合開始！' if BW::debug?
-    navigation_controller.setNavigationBarHidden(true, animated: true)
-    new_deck = app_delegate.game_settings.fake_flg ?
-        selected_poems_deck.add_fake_poems! :
-        selected_poems_deck
 
-    app_delegate.poem_supplier = PoemSupplier.new({deck: new_deck})
-    open RecitePoemScreen.new
-  end
-
-  def select_poems
-    puts ' - 歌を選ぶ画面へ！' if BW::debug?
-    open PoemPicker.new
-  end
-
-  def fake_switch_flipped(data_hash)
-    # ap data_hash if BW::debug?
-    app_delegate.game_settings.fake_flg = data_hash[:value]
-    app_delegate.settings_manager.save
-  end
-
-  def beginner_switch_flipped(data_hash)
-    puts "初心者モードのスイッチが切り替わりました。(=> #{data_hash[:value]})" if BW::debug?
-    app_delegate.game_settings.beginner_flg = data_hash[:value]
-    app_delegate.settings_manager.save
-    update_table_view_data_animated
-  end
-
-  def open_info
-    puts '- Info Button pushed!' if BW::debug?
-    open InfoMenuScreen.new
-  end
+  private
 
   def info_image
     ResizeUIImage.resizeImage(UIImage.imageNamed('info_white.png'),
@@ -91,26 +60,9 @@ class HomeScreen < PM::GroupedTableScreen
   end
 
 
-  private
-
-  def update_table_view_data_animated
-    self.promotion_table_data.data = self.table_data
-    table_view.reloadSections(NSIndexSet.indexSetWithIndex(0),
-                              withRowAnimation: UITableViewRowAnimationFade)
-  end
-
-
   # @return [Deck] 選択された歌から構成されるDeck。歌の順序はShuffleされている。
   def selected_poems_deck
     Deck.create_from_bool100(loaded_selected_status.status_array).shuffle!
-  end
-
-  def alert_no_poem_selected
-    UIAlertView.alloc.init.tap{|alert_view|
-      alert_view.title ='歌を選びましょう'
-      alert_view.message = "「#{SELECT_POEM_TITLE}」で、試合に使う歌を選んでください。"
-      alert_view.addButtonWithTitle('戻る')
-    }.show
   end
 
   def game_setting_cells
@@ -167,6 +119,7 @@ class HomeScreen < PM::GroupedTableScreen
 
 end
 
+=begin
 class UISwitch
 #  weak_attr delegate
 
@@ -179,4 +132,4 @@ class UISwitch
     self.on = false
   end
 end
-
+=end
