@@ -55,4 +55,11 @@ module HomeScreenDelegate
     }.show
   end
 
+  def beg_button_pushed
+    puts 'beg_button_pushed!' if BW::debug?
+    @beg_switch.setOn(true, animated: true)
+    beginner_switch_flipped({value: true})
+  end
+
+
 end

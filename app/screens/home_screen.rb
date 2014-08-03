@@ -27,7 +27,6 @@ class HomeScreen < PM::GroupedTableScreen
         image: info_image,
         action: :open_info
     }
-
   end
 
   def will_appear
@@ -35,11 +34,15 @@ class HomeScreen < PM::GroupedTableScreen
     navigation_controller.setNavigationBarHidden(false, animated: false) if self.nav_bar?
     self.navigationItem.prompt = '百首読み上げ'
     update_table_data
-    @bd_view = UIView.alloc.initWithFrame([[0, 300], [30, 20]])
-    add @bd_view
-    bd_layout = BDAreaLayout.new(root: @bd_view).tap {|layout| layout.delegate = self}.build
+    set_bd_layout
   end
 
+  def on_appear
+    @beg_switch = view.subviews.first.subviews[2].accessoryView unless
+        view.subviews.first.subviews.empty?
+    # ↑ここ、該当セルはCellのtextLabel.textでselectしてもいいよね！
+    puts "@beg_switch => #{@beg_switch}, value: #{@beg_switch.on?}" if BW::debug?
+  end
 
   def should_autorotate
     false
@@ -87,7 +90,7 @@ class HomeScreen < PM::GroupedTableScreen
 
   def beginner_mode_switch_cell
     {
-        title: '初心者モード',
+        title: '初心者モード(散らし取り)',
         accessory: {
             view: :switch,
             value: app_delegate.game_settings.beginner_flg,
@@ -119,17 +122,10 @@ class HomeScreen < PM::GroupedTableScreen
 
 end
 
-=begin
-class UISwitch
-#  weak_attr delegate
-
-  def set_on
-    puts 'スイッチをonにします！' if BW::debug?
-    self.on = true
-  end
-  def set_off
-    puts 'スイッチをoffにします！' if BW::debug?
-    self.on = false
-  end
+def set_bd_layout
+  @bd_view = UIView.alloc.initWithFrame([[0, 300], [30, 20]])
+  add @bd_view
+  bd_layout = BDAreaLayout.new(root: @bd_view).tap { |layout| layout.delegate = self }.build
+  bd_layout.get(:bd_beg_on_button).addTarget(self, action: 'beg_button_pushed', forControlEvents: UIControlEventTouchUpInside)
 end
-=end
+
