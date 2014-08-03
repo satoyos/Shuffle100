@@ -38,10 +38,8 @@ class HomeScreen < PM::GroupedTableScreen
   end
 
   def on_appear
-    # @beg_switch = view.subviews.first.subviews[2].accessoryView unless
     @beg_switch = view.subviews.first.subviews.find{|cell| cell.textLabel.text =~ /初心者/}.accessoryView unless
         view.subviews.first.subviews.empty?
-    # ↑ここ、該当セルはCellのtextLabel.textでselectしてもいいよね！
     puts "@beg_switch => #{@beg_switch}, value: #{@beg_switch.on?}" if BW::debug?
   end
 

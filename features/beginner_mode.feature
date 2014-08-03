@@ -14,3 +14,4 @@ Feature:
     When I touch "初心者モードon"
     Then I should not see "空札"
 
+    #%ToDo: 次は、初心者モード・スイッチをoffにするボタンを作るところから！
