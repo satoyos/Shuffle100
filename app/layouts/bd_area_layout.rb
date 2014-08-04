@@ -4,10 +4,8 @@ class BDAreaLayout < MotionKit::Layout
 
   def layout
     root :root_view do
-
       add UIButton, :bd_beg_on_button
       add UIButton, :bd_beg_off_button
-
     end
   end
 
@@ -21,4 +19,9 @@ class BDAreaLayout < MotionKit::Layout
     title '初心者モードon'
   end
 
+  def bd_beg_off_button_style
+    size [10, 10]
+    center ['90%', '50%']
+    title '初心者モードoff'
+  end
 end
