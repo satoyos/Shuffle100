@@ -18,4 +18,20 @@ Feature:
     When I touch "初心者モードon"
     Then I should not see "空札"
 
-    #%ToDo: 次は、初心者モード・スイッチをoffにするボタンを作るところから！
+    # 序歌画面
+    When I touch "試合開始"
+    Then I should see "序歌"
+    When I wait for 1 second
+
+    # スキップボタンを押して、早送りし、1首目の画面へ
+    When I touch the button marked "forward"
+    When I wait for 2 second
+    Then I should see "1首め"
+
+    # 上の句を詠み終えると、間隔を開けて、自動で下の句を読み上げる
+    When I wait to see "下の句"
+    When I wait for 2 second
+     # ↓ 競技かるたモード
+#    Then I should see a "play" button
+     # ↓ 初心者モード
+    Then I should see a "pause" button
