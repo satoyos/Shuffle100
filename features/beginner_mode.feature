@@ -32,6 +32,6 @@ Feature:
     When I wait to see "下の句"
     When I wait for 2 second
      # ↓ 競技かるたモード
-#    Then I should see a "play" button
+    Then I should see a "play" button
      # ↓ 初心者モード
-    Then I should see a "pause" button
+#    Then I should see a "pause" button
