@@ -39,7 +39,7 @@ class HomeScreen < PM::GroupedTableScreen
   def on_appear
     @beg_switch = view.subviews.first.subviews.find{|cell| cell.textLabel.text =~ /初心者/}.accessoryView unless
         view.subviews.first.subviews.empty?
-    puts "@beg_switch => #{@beg_switch}, value: #{@beg_switch.on?}" if BW2.debug?
+    # puts "@beg_switch => #{@beg_switch}, value: #{@beg_switch.on?}" if BW2.debug?
   end
 
   def should_autorotate
@@ -49,7 +49,6 @@ class HomeScreen < PM::GroupedTableScreen
   def supported_orientations
     UIInterfaceOrientationPortrait
   end
-
 
   private
 

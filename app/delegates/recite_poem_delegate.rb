@@ -72,19 +72,16 @@ module RecitePoemDelegate
   private
 
   def confirm_user_to_quit
-    BW::UIAlertView.new({
-                            title: '試合を終了しますか？',
-                            buttons: ['終了する', '続ける'],
-                            cancel_button_index: 0,
-                            accessibilityLabel: ACC_LABEL_QUIT_ALERT
-                        }) do |alert|
-      if alert.clicked_button.cancel?
+    UIAlertView.alert('試合を終了しますか？',
+                      buttons: ['終了する', '続ける']
+    ) do |button, button_index|
+      if button == '終了する'
         puts '[quit] 試合を終了します' if BW2.debug?
         back_to_top_screen
       else
         puts '[continue] 試合を続行します' if BW2.debug?
       end
-    end.show
+    end
   end
 
 end
