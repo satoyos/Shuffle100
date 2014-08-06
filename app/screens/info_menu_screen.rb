@@ -20,7 +20,7 @@ class InfoMenuScreen < PM::TableScreen
                 {
                     title: 'バージョン',
                     cell_style: UITableViewCellStyleValue1,
-                    subtitle: "#{App.version}"
+                    subtitle: "#{'CFBundleVersion'.info_plist}"
                 }
             ]
      }]
