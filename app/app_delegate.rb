@@ -9,7 +9,9 @@ class AppDelegate < PM::Delegate
   attr_accessor :settings_manager, :reciting_settings, :game_settings
 
   def on_load(app, options)
-    BW.debug = true unless App.info_plist['AppStoreRelease']
+    # BW.debug = true unless App.info_plist['AppStoreRelease']
+    # BW.debug = true unless 'AppStoreRelease'.info_plist
+    BW2.debug = true unless 'AppStoreRelease'.info_plist
 
     set_models
 
@@ -40,6 +42,14 @@ class AppDelegate < PM::Delegate
     UINavigationBar.appearance.barTintColor = BAR_TINT_COLOR
     UIApplication.sharedApplication.statusBarOrientation = UIInterfaceOrientationPortrait
   end
+end
 
+class BW2
+  def self.debug=(value)
+    @debug_flag = value
+  end
 
+  def self.debug?
+    @debug_flag ||= false
+  end
 end

@@ -30,7 +30,6 @@ class HomeScreen < PM::GroupedTableScreen
   end
 
   def will_appear
-    # puts 'home - will_appear' if BW::debug?
     navigation_controller.setNavigationBarHidden(false, animated: false) if self.nav_bar?
     self.navigationItem.prompt = '百首読み上げ'
     update_table_data
@@ -40,7 +39,7 @@ class HomeScreen < PM::GroupedTableScreen
   def on_appear
     @beg_switch = view.subviews.first.subviews.find{|cell| cell.textLabel.text =~ /初心者/}.accessoryView unless
         view.subviews.first.subviews.empty?
-    puts "@beg_switch => #{@beg_switch}, value: #{@beg_switch.on?}" if BW::debug?
+    puts "@beg_switch => #{@beg_switch}, value: #{@beg_switch.on?}" if BW2.debug?
   end
 
   def should_autorotate

@@ -22,7 +22,7 @@ class RecitePoemScreen < PM::Screen
   end
 
   def on_return
-    puts '// 読み上げ画面に帰ってきたぜ！' if BW::debug?
+    puts '// 読み上げ画面に帰ってきたぜ！' if BW2.debug?
     set_player_volume
   end
 
@@ -33,7 +33,7 @@ class RecitePoemScreen < PM::Screen
   def audioPlayerDidFinishPlaying(player, successfully:flag)
     return unless flag
 
-    puts '- 読み上げが無事に終了！' if BW::debug?
+    puts '- 読み上げが無事に終了！' if BW2.debug?
     layout.play_finished_successfully
     if supplier.kami?
       supplier.step_into_shimo
@@ -93,7 +93,7 @@ class RecitePoemScreen < PM::Screen
   end
 
   def renew_layout_and_player
-    puts '== LayoutとPlayerを更新します！' if BW::debug?
+    puts '== LayoutとPlayerを更新します！' if BW2.debug?
     create_new_layout
     fetch_player
   end
@@ -126,7 +126,7 @@ class RecitePoemScreen < PM::Screen
   end
 
   def goto_next_poem
-    puts 'Go to Next Poem!' if BW::debug?
+    puts 'Go to Next Poem!' if BW2.debug?
     renew_layout_and_player
     layout.show_waiting_to_play
     layout.title = create_current_title
@@ -148,7 +148,7 @@ class RecitePoemScreen < PM::Screen
   end
 
   def go_back_to_prev_poem
-    puts 'Back to Prev Poem!' if BW::debug?
+    puts 'Back to Prev Poem!' if BW2.debug?
     renew_layout_and_player
     layout.show_waiting_to_play
     layout.title = create_current_title
@@ -172,7 +172,7 @@ class RecitePoemScreen < PM::Screen
       when ID_NEXT_POEM_FLIP
         recite_poem
       else
-        puts "/////// このアニメーションの後処理はありません。 ///////" if BW::debug?
+        puts "/////// このアニメーションの後処理はありません。 ///////" if BW2.debug?
     end
   end
 end

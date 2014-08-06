@@ -8,6 +8,7 @@ gem 'motion-layout'
 gem 'ProMotion', '< 1.3'
 gem 'motion-weakattr'
 gem 'motion-kit'
+gem 'sugarcube'
 
 group :spec, :development, :test do
   gem 'motion-stump', '<= 0.3.1'

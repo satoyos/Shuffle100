@@ -37,7 +37,7 @@ class RecitePoemLayout < MotionKit::Layout
   end
 
   def show_waiting_to_play
-    ap '- 再生の指示待ちです。' if BW::debug?
+    ap '- 再生の指示待ちです。' if BW2.debug?
     @timer.invalidate if @timer
     show_play_button_title(PLAY_BUTTON_PLAYING_TITLE,
                            left_inset: PLAY_MARK_INSET,

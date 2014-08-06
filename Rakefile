@@ -11,7 +11,9 @@ if is_test
   Bundler.require :default, :spec
  else
   Bundler.require
-end
+ end
+
+require 'sugarcube-common'
 
 Motion::Project::App.setup do |app|
   # Use `rake config' to see complete project settings.

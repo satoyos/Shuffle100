@@ -22,19 +22,19 @@ class IntervalSettingScreen < PM::Screen
   end
 
   def will_appear
-    printf 'このViewのサイズ: ' if BW::debug?
-    ap self.view.frame.size if BW::debug?
+    printf 'このViewのサイズ: ' if BW2.debug?
+    ap self.view.frame.size if BW2.debug?
 
     top_guide_height = case self.navigationController
                          when nil; 0
                          else
-                           printf "NavigationBarのフレーム: " if BW::debug?
-                           ap self.navigationController.navigationBar.frame if BW::debug?
+                           printf "NavigationBarのフレーム: " if BW2.debug?
+                           ap self.navigationController.navigationBar.frame if BW2.debug?
                            frame = self.navigationController.navigationBar.frame
                            frame.origin.y + frame.size.height
                        end
 
-    puts "計算したTopLayoutGuide.length相当の値 => #{top_guide_height}" if BW::debug?
+    puts "計算したTopLayoutGuide.length相当の値 => #{top_guide_height}" if BW2.debug?
 
 
     # 以下、レイアウト
@@ -87,7 +87,7 @@ class IntervalSettingScreen < PM::Screen
   end
 
   def will_disappear
-    puts ' - interval_timeの値を %1.2f秒に書き換えます！' % self.interval_slider.value if BW::debug?
+    puts ' - interval_timeの値を %1.2f秒に書き換えます！' % self.interval_slider.value if BW2.debug?
     app_delegate.reciting_settings.interval_time = self.interval_slider.value.round(2)
   end
 
@@ -98,16 +98,16 @@ class IntervalSettingScreen < PM::Screen
   def audioPlayerDidFinishPlaying(player, successfully:flag)
     return unless flag
 
-    puts '- 読み上げが無事に終了！' if BW::debug?
+    puts '- 読み上げが無事に終了！' if BW2.debug?
     if @kami_playing
       update_interval_label_text
       return
     end
 
-    puts "- #{self.interval_time}秒間の間隔を開けます。" if BW::debug?
+    puts "- #{self.interval_time}秒間の間隔を開けます。" if BW2.debug?
     @last_time = self.interval_time
 
-    NSLog '  - Timer Start!' if BW::debug?
+    NSLog '  - Timer Start!' if BW2.debug?
     NSTimer.scheduledTimerWithTimeInterval(SHORTEN_INTERVAL,
                                            target: self,
                                            selector: 'shorten_last_time:',
@@ -121,7 +121,7 @@ class IntervalSettingScreen < PM::Screen
     if @last_time < SHORTEN_INTERVAL
       timer.invalidate
       self.interval_label.text = '%.02f' % 0.0
-      NSLog '  - Timer END!' if BW::debug?
+      NSLog '  - Timer END!' if BW2.debug?
       self.kami_player.play
       @kami_playing = true
     end
@@ -180,7 +180,7 @@ class IntervalSettingScreen < PM::Screen
 
   def slider_value_changed(sender)
     reset_players #これをSliderの値が変わるたびに呼ぶと、実機で重くなるので注意！
-    puts "- スライダーの値は #{self.interval_slider.value}" if BW::debug?
+    puts "- スライダーの値は #{self.interval_slider.value}" if BW2.debug?
     update_interval_label_text
   end
 
@@ -191,8 +191,8 @@ class IntervalSettingScreen < PM::Screen
   private
 
   def try_button_pushed(button)
-    puts "button #{button} is pushed" if BW::debug?
-    puts "このとき、スライダーの値は[#{self.interval_slider.value}]" if BW::debug?
+    puts "button #{button} is pushed" if BW2.debug?
+    puts "このとき、スライダーの値は[#{self.interval_slider.value}]" if BW2.debug?
     reset_players_if_needed
     @interval_time = self.interval_slider.value.round(2)
     self.shimo_player.play

@@ -2,7 +2,7 @@ module HomeScreenDelegate
   SELECT_POEM_TITLE = '取り札を用意する歌'
 
   def select_poems
-    puts ' - 歌を選ぶ画面へ！' if BW::debug?
+    puts ' - 歌を選ぶ画面へ！' if BW2.debug?
     open PoemPicker.new
   end
 
@@ -11,7 +11,7 @@ module HomeScreenDelegate
       alert_no_poem_selected()
       return
     end
-    puts '++ 試合開始！' if BW::debug?
+    puts '++ 試合開始！' if BW2.debug?
     navigation_controller.setNavigationBarHidden(true, animated: true)
     new_deck = app_delegate.game_settings.fake_flg ?
         selected_poems_deck.add_fake_poems! :
@@ -22,20 +22,20 @@ module HomeScreenDelegate
   end
 
   def fake_switch_flipped(data_hash)
-    # ap data_hash if BW::debug?
+    # ap data_hash if BW2.debug?
     app_delegate.game_settings.fake_flg = data_hash[:value]
     app_delegate.settings_manager.save
   end
 
   def beginner_switch_flipped(data_hash)
-    puts "初心者モードのスイッチが切り替わりました。(=> #{data_hash[:value]})" if BW::debug?
+    puts "初心者モードのスイッチが切り替わりました。(=> #{data_hash[:value]})" if BW2.debug?
     app_delegate.game_settings.beginner_flg = data_hash[:value]
     app_delegate.settings_manager.save
     update_table_view_data_animated
   end
 
   def open_info
-    puts '- Info Button pushed!' if BW::debug?
+    puts '- Info Button pushed!' if BW2.debug?
     open InfoMenuScreen.new
   end
 
@@ -56,13 +56,13 @@ module HomeScreenDelegate
   end
 
   def beg_button_pushed
-    puts 'beg_button_pushed!' if BW::debug?
+    puts 'beg_button_pushed!' if BW2.debug?
     @beg_switch.setOn(true, animated: true)
     beginner_switch_flipped({value: true})
   end
 
   def beg_off_button_pushed
-    puts 'beg_off_button_pushed!' if BW::debug?
+    puts 'beg_off_button_pushed!' if BW2.debug?
     @beg_switch.setOn(false, animated: true)
     beginner_switch_flipped({value: false})
   end

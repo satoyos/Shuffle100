@@ -37,17 +37,17 @@ class OnGameSettingsScreen < PM::TableScreen
   end
 
   def tapped_interval_cell
-    puts ' - IntervalCell is tapped!' if BW::debug?
+    puts ' - IntervalCell is tapped!' if BW2.debug?
     open IntervalSettingScreen.new, nav_bar: true
   end
 
   def tapped_volume_cell
-    puts ' - VolumeCell is tapped!' if BW::debug?
+    puts ' - VolumeCell is tapped!' if BW2.debug?
     open VolumeSettingScreen.new, nav_bar: true
   end
 
   def done_button_did_pushed
-    puts 'Done button pushed.' if BW::debug?
+    puts 'Done button pushed.' if BW2.debug?
     app_delegate.settings_manager.save
     close
   end

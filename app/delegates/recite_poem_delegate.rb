@@ -14,7 +14,7 @@ module RecitePoemDelegate
   def current_player_progress
     total = current_player.duration
     f = current_player.currentTime / total
-#    ap "  - f = #{f}" if BW::debug?
+#    ap "  - f = #{f}" if BW2.debug?
     f
   end
 
@@ -50,13 +50,13 @@ module RecitePoemDelegate
   end
 
   def open_on_game_settings(sender)
-    puts "Let's start On_Game_Settings!" if BW::debug?
+    puts "Let's start On_Game_Settings!" if BW2.debug?
     play_button_pushed(nil) if self.current_player.playing?
     open OnGameSettingsScreen.new, modal: true, nav_bar: true
   end
 
   def quit_game
-    puts '- Quit Button Pushed!' if BW::debug?
+    puts '- Quit Button Pushed!' if BW2.debug?
     if current_player.playing?
       current_player.pause
       layout.show_waiting_to_play
@@ -79,10 +79,10 @@ module RecitePoemDelegate
                             accessibilityLabel: ACC_LABEL_QUIT_ALERT
                         }) do |alert|
       if alert.clicked_button.cancel?
-        puts '[quit] 試合を終了します' if BW::debug?
+        puts '[quit] 試合を終了します' if BW2.debug?
         back_to_top_screen
       else
-        puts '[continue] 試合を続行します' if BW::debug?
+        puts '[continue] 試合を続行します' if BW2.debug?
       end
     end.show
   end
