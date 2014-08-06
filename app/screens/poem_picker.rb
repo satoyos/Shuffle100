@@ -1,7 +1,7 @@
 class PoemPicker < PM::TableScreen
   include SelectedStatusHandler
 
-  SELECTED_BG_COLOR = '#eebbcb'.to_color #撫子色
+  SELECTED_BG_COLOR = '#eebbcb'.uicolor #撫子色
   title '歌を選ぶ'
   searchable placeholder: '歌を検索'
 

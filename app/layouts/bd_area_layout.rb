@@ -10,7 +10,7 @@ class BDAreaLayout < MotionKit::Layout
   end
 
   def root_view_style
-    background_color 'blue'.to_color
+    background_color 'blue'.uicolor
   end
 
   def bd_beg_on_button_style
