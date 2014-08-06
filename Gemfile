@@ -1,7 +1,6 @@
 source 'https://rubygems.org'
 
 gem 'rake'
-# gem 'bubble-wrap', require: 'bubble-wrap/core'
 gem 'motion-fontawesome'
 gem 'awesome_print_motion'
 gem 'motion-layout'
