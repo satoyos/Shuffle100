@@ -54,7 +54,7 @@ EOF
   describe 'initialize' do
     describe 'Context: normal' do
       before do
-        @hash = JSONParser.parse(POEM_INIT_JSON)
+        @hash = OH::JSONParser.parse(POEM_INIT_JSON)
         @poem = Poem.new(@hash)
       end
 
@@ -82,7 +82,7 @@ EOF
 
     describe 'Context: 決まり字に全角スペースがある場合' do
       before do
-        @poem2 = Poem.new(JSONParser.parse(JSON_WITH_SPACE))
+        @poem2 = Poem.new(OH::JSONParser.parse(JSON_WITH_SPACE))
       end
 
       it 'should be a Poem' do
