@@ -1,13 +1,14 @@
 class HomeScreen < PM::GroupedTableScreen
   include SelectedStatusHandler
+  include HomeScreenDataSource
   include HomeScreenDelegate
   title 'トップ'
 
   FAKE_SETTING_TITLE = '空札を加える'
-
   INFO_BUTTON_SIZE = CGSizeMake(16, 16)
   ACC_LABEL_INFO_BUTTON = 'Info'
 
+=begin
   def table_data
     [
         {
@@ -21,6 +22,7 @@ class HomeScreen < PM::GroupedTableScreen
         }
     ]
   end
+=end
 
   def on_load
     set_nav_bar_button :right, {
