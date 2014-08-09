@@ -30,8 +30,10 @@ module HomeScreenDataSource
         cell_style: UITableViewCellStyleValue1,
         subtitle: '%d首' % loaded_selected_status.selected_num,
         action: :select_poems,
-        accessoryType: UITableViewCellAccessoryDisclosureIndicator,
-        accessibilityLabel: 'select_poem',
+        style: {
+            accessoryType: UITableViewCellAccessoryDisclosureIndicator,
+            accessibilityLabel: 'select_poem',
+        }
     }
   end
 
@@ -42,7 +44,9 @@ module HomeScreenDataSource
             view: :switch,
             value: app_delegate.game_settings.beginner_flg,
             action: 'beginner_switch_flipped:',
-            accessibilityLabel: 'beginner_switch'
+            style: {
+                accessibilityLabel: 'beginner_switch'
+            }
         }
     }
   end
@@ -54,7 +58,9 @@ module HomeScreenDataSource
             view: :switch,
             value: app_delegate.game_settings.fake_flg,
             action: 'fake_switch_flipped:',
-            accessibilityLabel: 'fake_switch'
+            style: {
+                accessibilityLabel: 'fake_switch'
+            }
         }
     }
   end
