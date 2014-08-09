@@ -19,7 +19,7 @@ class HomeScreen < PM::GroupedTableScreen
     navigation_controller.setNavigationBarHidden(false, animated: false) if self.nav_bar?
     self.navigationItem.prompt = '百首読み上げ'
     update_table_data
-    set_bd_layout
+    set_bd_layout if BW2.debug?
   end
 
   def on_appear
