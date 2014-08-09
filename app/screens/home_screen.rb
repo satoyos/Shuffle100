@@ -4,25 +4,9 @@ class HomeScreen < PM::GroupedTableScreen
   include HomeScreenDelegate
   title 'トップ'
 
-  FAKE_SETTING_TITLE = '空札を加える'
+  SELECT_POEM_TITLE = '取り札を用意する歌'
   INFO_BUTTON_SIZE = CGSizeMake(16, 16)
   ACC_LABEL_INFO_BUTTON = 'Info'
-
-=begin
-  def table_data
-    [
-        {
-            title: '設定',
-            title_view_height: 30,
-            cells: game_setting_cells
-        },
-        {
-            title: '試合開始',
-            cells: [start_game_cell]
-        }
-    ]
-  end
-=end
 
   def on_load
     set_nav_bar_button :right, {
@@ -41,7 +25,6 @@ class HomeScreen < PM::GroupedTableScreen
   def on_appear
     @beg_switch = view.subviews.first.subviews.find{|cell| cell.textLabel.text =~ /初心者/}.accessoryView unless
         view.subviews.first.subviews.empty?
-    # puts "@beg_switch => #{@beg_switch}, value: #{@beg_switch.on?}" if BW2.debug?
   end
 
   def should_autorotate
@@ -60,65 +43,6 @@ class HomeScreen < PM::GroupedTableScreen
       im.accessibilityLabel = 'info'
     end
   end
-
-
-  # @return [Deck] 選択された歌から構成されるDeck。歌の順序はShuffleされている。
-  def selected_poems_deck
-    Deck.create_from_bool100(loaded_selected_status.status_array).shuffle!
-  end
-
-  def game_setting_cells
-    cells = [
-        select_poems_cell,
-        beginner_mode_switch_cell,
-    ]
-    cells << fake_mode_switch_cell unless app_delegate.game_settings.beginner_flg
-    cells
-  end
-
-  def select_poems_cell
-    {
-        title: SELECT_POEM_TITLE,
-        cell_style: UITableViewCellStyleValue1,
-        subtitle: '%d首' % loaded_selected_status.selected_num,
-        action: :select_poems,
-        accessoryType: UITableViewCellAccessoryDisclosureIndicator,
-        accessibilityLabel: 'select_poem',
-    }
-  end
-
-  def beginner_mode_switch_cell
-    {
-        title: '初心者モード(散らし取り)',
-        accessory: {
-            view: :switch,
-            value: app_delegate.game_settings.beginner_flg,
-            action: 'beginner_switch_flipped:',
-            accessibilityLabel: 'beginner_switch'
-        }
-    }
-  end
-
-  def fake_mode_switch_cell
-    {
-        title: FAKE_SETTING_TITLE,
-        accessory: {
-            view: :switch,
-            value: app_delegate.game_settings.fake_flg,
-            action: 'fake_switch_flipped:',
-            accessibilityLabel: 'fake_switch'
-        }
-    }
-  end
-
-  def start_game_cell
-    {
-        title: '試合開始',
-        action: :start_game,
-        cell_class: GameStartCell,
-    }
-  end
-
 end
 
 def set_bd_layout

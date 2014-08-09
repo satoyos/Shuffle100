@@ -1,5 +1,4 @@
 module HomeScreenDelegate
-  SELECT_POEM_TITLE = '取り札を用意する歌'
 
   def select_poems
     puts ' - 歌を選ぶ画面へ！' if BW2.debug?
@@ -40,6 +39,11 @@ module HomeScreenDelegate
   end
 
   private
+
+  # @return [Deck] 選択された歌から構成されるDeck。歌の順序はShuffleされている。
+  def selected_poems_deck
+    Deck.create_from_bool100(loaded_selected_status.status_array).shuffle!
+  end
 
   def update_table_view_data_animated
     self.promotion_table_data.data = self.table_data
