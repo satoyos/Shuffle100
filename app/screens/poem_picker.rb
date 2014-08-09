@@ -27,14 +27,14 @@ class PoemPicker < PM::TableScreen
 
                # font: UIFont.fontWithName('HiraMinProN-W6', size: 16),
                subtitle: "　　 #{poem.poet}",
-               accessibility_label: '%03d' % poem.number,
-               accessory_type: acc_type_for_poem(poem),
-               background_color: bg_color_for_poem(poem),
                search_text: search_text_for_poem(poem),
                action: :poem_tapped,
                arguments: {number: poem.number},
                style: {
                    font: UIFont.fontWithName('HiraMinProN-W6', size: 16),
+                   background_color: bg_color_for_poem(poem),
+                   accessibility_label: '%03d' % poem.number,
+                   accessory_type: acc_type_for_poem(poem),
                }
            }
          }
