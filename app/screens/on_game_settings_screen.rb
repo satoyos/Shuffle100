@@ -25,13 +25,17 @@ class OnGameSettingsScreen < PM::TableScreen
                     cell_style: UITableViewCellStyleValue1,
                     subtitle: '%1.2f秒' % app_delegate.reciting_settings.interval_time,
                     action: :tapped_interval_cell,
-                    accessoryType: UITableViewCellAccessoryDisclosureIndicator,
-                    accessibilityLabel: ACC_LABEL_INTERVAL_CELL
+                    style: {
+                        accessoryType: UITableViewCellAccessoryDisclosureIndicator,
+                        accessibilityLabel: ACC_LABEL_INTERVAL_CELL
+                    }
                 },
                 {
                     title: '音量調整',
-                    accessoryType: UITableViewCellAccessoryDisclosureIndicator,
-                    action: :tapped_volume_cell
+                    action: :tapped_volume_cell,
+                    style: {
+                        accessoryType: UITableViewCellAccessoryDisclosureIndicator,
+                    }
                 }]
      }]
   end
