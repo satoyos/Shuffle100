@@ -20,7 +20,8 @@ class GameSettings
     self.statuses_for_deck = decoder.decodeObjectForKey(KEY_STATUSES) || initial_statuses
     self.fake_flg = decoder.decodeBoolForKey(KEY_FAKE_FLG) || false
     self.beginner_flg = decoder.decodeBoolForKey(KEY_BEGINNER_FLG) || false
-    self.interval_time = decoder.decodeObjectForKey(KEY_KAMI_SHIMO_INTERVAL) || DEFAULT_KAMI_SHIMO_INTERVAL_TIME
+    self.kami_shimo_interval =
+        decoder.decodeObjectForKey(KEY_KAMI_SHIMO_INTERVAL) || DEFAULT_KAMI_SHIMO_INTERVAL_TIME
     self
   end
 
