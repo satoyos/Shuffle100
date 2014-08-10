@@ -17,7 +17,11 @@ module HomeScreenDelegate
         selected_poems_deck
 
     app_delegate.poem_supplier = PoemSupplier.new({deck: new_deck})
-    open RecitePoemScreen.new
+    if app_delegate.game_settings.beginner_flg
+      open BeginnerReciteScreen.new
+    else
+      open RecitePoemScreen.new
+    end
   end
 
   def fake_switch_flipped(data_hash)
