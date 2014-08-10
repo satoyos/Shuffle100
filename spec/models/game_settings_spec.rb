@@ -29,5 +29,9 @@ describe 'GameSettings' do
       @settings.beginner_flg.should.be.false
     end
 
+    it 'kami_shimo_interval' do
+      # newで生成された場合、値は必ずデフォルト値になる。
+      @settings.kami_shimo_interval.should == GameSettings::DEFAULT_KAMI_SHIMO_INTERVAL_TIME
+    end
   end
 end
