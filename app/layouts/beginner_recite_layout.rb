@@ -7,9 +7,16 @@ class BeginnerReciteLayout < RecitePoemLayout
   end
 
   def message_label_style
-    self.message = INITIAL_MESSAGE
-    #%ToDo: 続きはここの実装から！
+    text INITIAL_MESSAGE
 
+    size_to_fit
+    frame below(:header_container, down: 5,  right: 5)
+    background_color :dark_gray.uicolor(0.8)
+    text_color :white.uicolor
+    layer do
+      corner_radius 5.5
+    end
+    clips_to_bounds true
   end
 
   def message
