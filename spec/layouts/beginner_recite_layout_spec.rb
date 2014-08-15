@@ -21,7 +21,6 @@ describe 'BeginnerReciteLayout' do
       @layout.message.should == BeginnerReciteLayout::INITIAL_MESSAGE
     end
 
-=begin
     it '各ボタンにAccessibilityLabelが付与されている' do
       [:play_button, :quit_button, :gear_button].each do |button_sym|
         @layout.get(button_sym).accessibilityLabel.should == button_sym.to_s
@@ -31,6 +30,5 @@ describe 'BeginnerReciteLayout' do
             button_sym.to_s
       end
     end
-=end
   end
 end
