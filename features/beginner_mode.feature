@@ -31,7 +31,7 @@ Feature:
     # 上の句を詠み終えると、間隔を開けて、自動で下の句を読み上げる
     When I wait to see "下の句"
     When I wait for 2 second
-     # ↓ 競技かるたモード
-    Then I should see a "play" button
-     # ↓ 初心者モード
-#    Then I should see a "pause" button
+    Then I should see play_button waiting "pause"
+
+    # 下の句を読み終えると、「次はどうする？」画面が現れる
+    When I wait to see "次はどうする？"
