@@ -10,10 +10,11 @@ describe 'WhatsNextLayout' do
     it 'is a kind of MotionKit::Layout' do
       @layout.should.be.kind_of MotionKit::Layout
     end
-=begin
-    it '「下の句をもう一度詠む」ボタンがある' do
-      #%ToDo: ここを書くところから！
+    it '「下の句をもう一度読む」ボタンがある' do
+      @layout.get(:refrain_button).tap do |button|
+        button.should.not.be.nil
+        button.titleForState(UIControlStateNormal).should == '下の句をもう一度読む'
+      end
     end
-=end
   end
 end
