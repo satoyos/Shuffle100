@@ -20,13 +20,13 @@ class BeginnerReciteScreen < RecitePoemScreen
         recite_poem
       end
     else
-      if supplier.draw_next_poem # 次の歌がある
+      supplier.draw_next_poem
+      if supplier.current_index == 1 # 序歌を読み終えた
         goto_next_poem
-      else                       # 次の歌がない
-        end_of_the_game
+      else
+        open_modal WhatsNextScreen.new(nav_bar: true)
       end
     end
-
   end
 
   private
