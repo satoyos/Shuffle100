@@ -36,7 +36,9 @@ Feature:
     # 下の句を読み終えると、「次はどうする？」画面が現れる
     When I touch the button marked "forward"
     Then I wait to see "次はどうする？"
+
+    # 「下の句をもう一度読む」を選んだ場合
     When I wait for 0.5 second
     When I touch "下の句をもう一度読む"
-#    Then I should see "1首め"
-#    Then I should see "下の句"
+    Then I should see "1首め"
+    Then I should see "下の句"

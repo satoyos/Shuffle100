@@ -29,6 +29,10 @@ class BeginnerReciteScreen < RecitePoemScreen
     end
   end
 
+  def on_return(args={})
+
+  end
+
   private
 
   def create_new_layout
