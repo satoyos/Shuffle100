@@ -55,3 +55,7 @@ Feature:
     #下の句の読み上げが始まる。
     Then I should see play_button waiting "pause"
 
+    # 次に下の句を読み終えたら、「次の歌へ！」を選ぶ
+    When I touch the button marked "forward"
+    When I wait to see "次はどうする？"
+    Then I touch "次の歌へ！"
