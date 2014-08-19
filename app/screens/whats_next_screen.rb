@@ -19,6 +19,6 @@ class WhatsNextScreen < PM::Screen
   end
 
   def refrain_button_pushed
-    close(next: :refrain11)
+    close(next: :refrain)
   end
 end

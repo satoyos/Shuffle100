@@ -21,7 +21,7 @@ class RecitePoemScreen < PM::Screen
     recite_poem unless RUBYMOTION_ENV == 'test'
   end
 
-  def on_return
+  def on_return(args={})
     puts '// 読み上げ画面に帰ってきたぜ！' if BW2.debug?
     set_player_volume
   end

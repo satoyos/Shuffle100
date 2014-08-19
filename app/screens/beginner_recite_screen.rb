@@ -20,8 +20,8 @@ class BeginnerReciteScreen < RecitePoemScreen
         recite_poem
       end
     else
-      supplier.draw_next_poem
-      if supplier.current_index == 1 # 序歌を読み終えた
+      if supplier.current_index == 0 # 序歌を読み終えた
+        supplier.draw_next_poem
         goto_next_poem
       else
         open_modal WhatsNextScreen.new(nav_bar: true)
@@ -30,7 +30,15 @@ class BeginnerReciteScreen < RecitePoemScreen
   end
 
   def on_return(args={})
-
+    super
+    return unless args[:next]
+    case args[:next]
+      when :refrain
+        current_player.prepareToPlay
+        recite_poem
+      else
+        raise "「次はどうする？」画面を[#{args[:next]}]で終える場合は、まだサポートしていません。"
+    end
   end
 
   private

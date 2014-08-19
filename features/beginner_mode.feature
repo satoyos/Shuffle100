@@ -23,6 +23,15 @@ Feature:
     Then I should see "序歌"
     When I wait for 1 second
 
+    # ここで音量調整を試みても、落ちない。
+    When I touch the button marked "gear_button"
+    When I wait for 1 second
+    Then I should see "いろいろな設定"
+    When I touch "設定終了"
+    When I wait for 1 second
+    Then I should see "序歌"
+    Then I should see play_button waiting "play"
+
     # スキップボタンを押して、早送りし、1首目の画面へ
     When I touch the button marked "forward"
     When I wait for 2 second
@@ -42,3 +51,7 @@ Feature:
     When I touch "下の句をもう一度読む"
     Then I should see "1首め"
     Then I should see "下の句"
+    When I wait for 1 second
+    #下の句の読み上げが始まる。
+    Then I should see play_button waiting "pause"
+
