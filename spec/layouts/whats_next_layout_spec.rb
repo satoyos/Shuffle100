@@ -16,5 +16,8 @@ describe 'WhatsNextLayout' do
         button.titleForState(UIControlStateNormal).should == '下の句をもう一度読む'
       end
     end
+    it '「次の歌へ！」ボタンがある' do
+      @layout.get(:next_poem_button).should.not.be.nil
+    end
   end
 end

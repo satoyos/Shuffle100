@@ -58,4 +58,7 @@ Feature:
     # 次に下の句を読み終えたら、「次の歌へ！」を選ぶ
     When I touch the button marked "forward"
     When I wait to see "次はどうする？"
-    Then I touch "次の歌へ！"
+    Then I wait for 0.5 second
+    When I touch "次の歌へ！"
+    When I wait for 3 second
+#    Then I should see "2首め"
