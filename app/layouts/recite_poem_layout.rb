@@ -34,7 +34,7 @@ class RecitePoemLayout < MotionKit::Layout
                            color: PLAY_BUTTON_PAUSING_COLOR)
     play_button.titleLabel.accessibilityLabel = ACC_LABEL_PAUSE
     @timer = create_progress_update_timer(PROGRESS_TIMER_INTERVAL)
-    play_button.enabled = true
+    # play_button.enabled = true # 問題無さそうならこのままコードから削除。
   end
 
   def show_waiting_to_play
@@ -44,11 +44,11 @@ class RecitePoemLayout < MotionKit::Layout
                            left_inset: PLAY_MARK_INSET,
                            color: PLAY_BUTTON_PLAYING_COLOR)
     play_button.titleLabel.accessibilityLabel = ACC_LABEL_PLAY
-    play_button.enabled = true
+    # play_button.enabled = true # 問題無さそうならこのままコードから削除。
   end
 
   def play_finished_successfully
-    play_button.enabled = false
+    # play_button.enabled = false # 問題無さそうならこのままコードから削除。
     @timer.invalidate if @timer and @timer.isValid
   end
 
