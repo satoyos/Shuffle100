@@ -30,9 +30,9 @@ module HomeScreenDataSource
         cell_style: UITableViewCellStyleValue1,
         subtitle: '%d首' % loaded_selected_status.selected_num,
         action: :select_poems,
+        cell_identifier: 'select_poem',
         style: {
             accessoryType: UITableViewCellAccessoryDisclosureIndicator,
-            accessibilityLabel: 'select_poem',
         }
     }
   end
@@ -40,13 +40,11 @@ module HomeScreenDataSource
   def beginner_mode_switch_cell
     {
         title: '初心者モード(散らし取り)',
+        cell_identifier: 'beginner_switch',
         accessory: {
             view: :switch,
             value: app_delegate.game_settings.beginner_flg,
             action: 'beginner_switch_flipped:',
-            style: {
-                accessibilityLabel: 'beginner_switch'
-            }
         }
     }
   end
@@ -54,13 +52,11 @@ module HomeScreenDataSource
   def fake_mode_switch_cell
     {
         title: FAKE_SETTING_TITLE,
+        cell_identifier: 'fake_switch',
         accessory: {
             view: :switch,
             value: app_delegate.game_settings.fake_flg,
             action: 'fake_switch_flipped:',
-            style: {
-                accessibilityLabel: 'fake_switch'
-            }
         }
     }
   end
