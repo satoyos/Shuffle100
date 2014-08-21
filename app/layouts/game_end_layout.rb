@@ -1,8 +1,10 @@
 class GameEndLayout < MotionKit::Layout
+  include NormalButtonStyles
+
   weak_attr :delegate
 
   def layout
-    background_color 'white'.uicolor
+    background_color :white.uicolor
     add UIView, :header do
       add UILabel, :title_label
     end
@@ -22,8 +24,7 @@ class GameEndLayout < MotionKit::Layout
 
   def back_to_top_button_style
     title 'トップに戻る'
-    title_color 'blue'.uicolor
-    title_color 'lightGray'.uicolor, state: UIControlStateHighlighted
+    set_button_title_color
     size ['50%', '30%']
     center ['50%', '50%']
     accessibility_label 'back_to_top'
