@@ -1,17 +1,21 @@
 Feature:
   As an 百人一首 player
-  I want to go through a correct path
+  I want to go through a correct path in normal mode
   So I can see I can play with thi App.
 
 Background:
   Given I launch the app
 
 Scenario:
-一通りゲームを進められる。
+通常モードで一通りゲームを進められる。
   Then I should see "百首読み上げ"
 
+  # 初心者モードをoffにする
+  When I touch "初心者モードoff"
+  Then I should see "空札"
+
   # 歌選択画面で、百首選ぶ
-  When I touch the table cell marked "select_poem"
+  When I touch "取り札を用意する歌"
   When I wait to see "歌を選ぶ"
   When I touch "全て選択"
   When I wait for 0.5 second
@@ -25,7 +29,6 @@ Scenario:
   Then I should see play_button waiting "pause"
 
   # 歌を百首分読み上げる
-#  Then I can go through 100 poems
   Then I can go through 100 poems with skip
 
 
