@@ -18,6 +18,16 @@ Feature:
     When I touch "初心者モードon"
     Then I should not see "空札"
 
+    # 歌選択画面で、歌を二首選ぶ
+    When I touch "取り札を用意する歌"
+    When I wait to see "歌を選ぶ"
+    When I touch "全て取消"
+    When I touch 2 poems at random
+    When I wait for 0.5 second
+    Then I should see "2首"
+    When I forced_touch "トップ"
+    Then I wait to see "百首読み上げ"
+
     # 序歌画面
     When I touch "試合開始"
     Then I should see "序歌"
@@ -62,3 +72,22 @@ Feature:
     When I touch "次の歌へ！"
     When I wait for 3 second
     Then I should see "2首め"
+
+    # 上の句を詠み終えると、間隔を開けて、自動で下の句を読み上げる
+    When I wait to see "下の句"
+    When I wait for 2 second
+    Then I should see play_button waiting "pause"
+
+    # 下の句を読み終えると、「次はどうする？」画面が現れる
+    When I touch the button marked "forward"
+    Then I wait to see "次はどうする？"
+
+    # 「次の歌へ！」ボタンを押すと、ゲーム終了画面へ
+    Then I wait for 0.5 second
+    When I touch "次の歌へ！"
+    Then I wait to see "トップに戻る"
+
+    # 「トップに戻る」ボタンを押すと、トップ画面に戻る
+    When I wait for 3 seconds
+    When I touch "トップに戻る"
+    Then I wait to see "百首読み上げ"
