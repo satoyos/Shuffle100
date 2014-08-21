@@ -139,7 +139,7 @@ class RecitePoemScreen < PM::Screen
 
   def end_of_the_game
     @layout = GameEndLayout.new.tap{|l| l.delegate = self}
-    layout.add_back_to_button_action
+    layout.get(:back_to_top_button).on(:touch){back_to_top_screen}
     game_end_flip_animate(reciting_settings.interval_time,
                           stop_selector: ANIME_STOP_SELECTOR){
       remove view.subviews.first

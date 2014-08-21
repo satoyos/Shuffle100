@@ -29,12 +29,4 @@ class GameEndLayout < MotionKit::Layout
     center ['50%', '50%']
     accessibility_label 'back_to_top'
   end
-
-
-  def add_back_to_button_action
-    return unless delegate
-    get(:back_to_top_button).addTarget(delegate,
-                                       action: 'back_to_top_screen',
-                                       forControlEvents: UIControlEventTouchUpInside)
-  end
 end
