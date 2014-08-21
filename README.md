@@ -33,7 +33,6 @@ RubyMotionで作っています。
   下の句を読み終えてから、次の歌の上の句を読み上げるまでの間隔を調整できます。
 
 
-
 This software is released under the MIT License, see LICENSE.txt.
 
 - - -
