@@ -11,6 +11,7 @@ class WhatsNextLayout < MotionKit::Layout
     size ['80%', 30]
     center ['50%', '50%']
     title '下の句をもう一度読む'
+    accessibility_label 'refrain_button'
     set_button_title_color
   end
 
@@ -20,15 +21,7 @@ class WhatsNextLayout < MotionKit::Layout
       size.equals(:refrain_button)
     end
     center ['50%', '70%']
+    accessibility_label 'next_poem_button'
     set_button_title_color
   end
-
-  private
-
-=begin
-  def set_button_title_color
-    title_color :blue.uicolor
-    title_color :red.uicolor, state: :highlighted.uicontrolstate
-  end
-=end
 end
