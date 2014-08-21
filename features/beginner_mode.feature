@@ -61,4 +61,4 @@ Feature:
     Then I wait for 0.5 second
     When I touch "次の歌へ！"
     When I wait for 3 second
-#    Then I should see "2首め"
+    Then I should see "2首め"

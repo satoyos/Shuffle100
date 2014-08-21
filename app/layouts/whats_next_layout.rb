@@ -1,4 +1,6 @@
 class WhatsNextLayout < MotionKit::Layout
+  include NormalButtonStyles
+
   def layout
     background_color :white.uicolor
     add UIButton, :refrain_button
@@ -23,8 +25,10 @@ class WhatsNextLayout < MotionKit::Layout
 
   private
 
+=begin
   def set_button_title_color
     title_color :blue.uicolor
     title_color :red.uicolor, state: :highlighted.uicontrolstate
   end
+=end
 end
