@@ -27,8 +27,18 @@ class OnGameSettingsScreen < PM::TableScreen
                     action: :tapped_interval_cell,
                     style: {
                         accessoryType: UITableViewCellAccessoryDisclosureIndicator,
-                        accessibilityLabel: ACC_LABEL_INTERVAL_CELL
+                        # accessibilityLabel: ACC_LABEL_INTERVAL_CELL
                     }
+                },
+                {
+                    title: '上の句と下の句の間隔',
+                    cell_style: UITableViewCellStyleValue1,
+                    subtitle: '%1.2f秒' % app_delegate.reciting_settings.kami_shimo_interval,
+                    action: :tapped_kami_shimo_interval_cell,
+                    style: {
+                        accessoryType: UITableViewCellAccessoryDisclosureIndicator,
+                    }
+
                 },
                 {
                     title: '音量調整',
@@ -43,6 +53,10 @@ class OnGameSettingsScreen < PM::TableScreen
   def tapped_interval_cell
     puts ' - IntervalCell is tapped!' if BW2.debug?
     open IntervalSettingScreen.new, nav_bar: true
+  end
+
+  def tapped_kami_shimo_interval_cell
+    puts ' - 上下IntervalCell is tapped!' if BW2.debug?
   end
 
   def tapped_volume_cell
