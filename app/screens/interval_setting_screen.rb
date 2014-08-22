@@ -4,6 +4,7 @@ class IntervalSettingScreen < PM::Screen
   SHORTEN_INTERVAL = 0.02
 
   TRY_BUTTON_TITLE = '試しに聞いてみる'
+  title '歌の間隔の変更'
 
   attr_reader :shimo_player, :kami_player, :interval_time
 
@@ -12,7 +13,6 @@ class IntervalSettingScreen < PM::Screen
 
     self.view = UIScrollView.alloc.initWithFrame(self.view.bounds)
     self.view.backgroundColor = UIColor.whiteColor
-    self.title = '歌の間隔の変更'
 
     self.view.addSubview self.interval_label
     self.view.addSubview self.blank_label
