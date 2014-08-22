@@ -163,13 +163,17 @@ class IntervalSettingScreen < PM::Screen
         UISlider.alloc.initWithFrame(CGRectZero).tap do  |sl|
           sl.minimumValue = MIN_INTERVAL_VALUE
           sl.maximumValue = MAX_INTERVAL_VALUE
-          sl.value = app_delegate.reciting_settings.interval_time
+          sl.value = initial_interval_time
           sl.addTarget(self, action: 'sliderChanging:',
                        forControlEvents: UIControlEventValueChanged)
           sl.addTarget(self, action:'slider_value_changed:',
                        forControlEvents: UIControlEventTouchUpInside |
                            UIControlEventTouchUpOutside)
         end
+  end
+
+  def initial_interval_time
+    app_delegate.reciting_settings.interval_time
   end
 
   def sliderChanging(sender)
