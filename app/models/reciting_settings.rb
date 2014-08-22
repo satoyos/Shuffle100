@@ -27,8 +27,8 @@ class RecitingSettings
 
   # @param [NSCoder] encoder
   def encodeWithCoder(encoder)
-    encoder.encodeObject(interval_time, forKey: KEY_INTERVAL_TIME)
-    encoder.encodeObject(interval_time, forKey: KEY_KAMI_SHIMO_INTERVAL)
-    encoder.encodeObject(volume,        forKey: KEY_VOLUME)
+    encoder.encodeObject(interval_time,       forKey: KEY_INTERVAL_TIME)
+    encoder.encodeObject(kami_shimo_interval, forKey: KEY_KAMI_SHIMO_INTERVAL)
+    encoder.encodeObject(volume,              forKey: KEY_VOLUME)
   end
 end
