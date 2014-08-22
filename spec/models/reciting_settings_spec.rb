@@ -22,5 +22,8 @@ describe 'RecitingSettings' do
     it 'volume' do
       @settings.volume.should.not.be.nil
     end
+    it 'kami_shimo_interval' do
+      @settings.kami_shimo_interval.should == RecitingSettings::DEFAULT_KAMI_SHIMO_INTERVAL
+    end
   end
 end
