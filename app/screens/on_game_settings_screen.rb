@@ -57,6 +57,7 @@ class OnGameSettingsScreen < PM::TableScreen
 
   def tapped_kami_shimo_interval_cell
     puts ' - 上下IntervalCell is tapped!' if BW2.debug?
+    open KamiShimoIntervalSettingScreen.new, nav_bar: true
   end
 
   def tapped_volume_cell
