@@ -20,11 +20,7 @@ class OnGameSettingsScreen < PM::TableScreen
 
   def table_data
     [{
-        cells: [
-            poems_interval_cell,
-            kami_shimo_interval_cell,
-            volume_setting_cell
-        ]
+        cells: on_game_setting_cells
      }]
   end
 
@@ -50,6 +46,15 @@ class OnGameSettingsScreen < PM::TableScreen
   end
 
   private
+
+  def on_game_setting_cells
+    cells = [
+        poems_interval_cell,
+        volume_setting_cell
+    ]
+    return cells unless app_delegate.game_settings.beginner_flg
+    cells.insert(1, kami_shimo_interval_cell)
+  end
 
   def poems_interval_cell
     {
