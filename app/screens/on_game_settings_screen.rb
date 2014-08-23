@@ -20,33 +20,11 @@ class OnGameSettingsScreen < PM::TableScreen
 
   def table_data
     [{
-        cells: [{
-                    title: '歌と歌の間隔',
-                    cell_style: UITableViewCellStyleValue1,
-                    subtitle: '%1.2f秒' % app_delegate.reciting_settings.interval_time,
-                    action: :tapped_interval_cell,
-                    style: {
-                        accessoryType: UITableViewCellAccessoryDisclosureIndicator,
-                        # accessibilityLabel: ACC_LABEL_INTERVAL_CELL
-                    }
-                },
-                {
-                    title: '上の句と下の句の間隔',
-                    cell_style: UITableViewCellStyleValue1,
-                    subtitle: '%1.2f秒' % app_delegate.reciting_settings.kami_shimo_interval,
-                    action: :tapped_kami_shimo_interval_cell,
-                    style: {
-                        accessoryType: UITableViewCellAccessoryDisclosureIndicator,
-                    }
-
-                },
-                {
-                    title: '音量調整',
-                    action: :tapped_volume_cell,
-                    style: {
-                        accessoryType: UITableViewCellAccessoryDisclosureIndicator,
-                    }
-                }]
+        cells: [
+            poems_interval_cell,
+            kami_shimo_interval_cell,
+            volume_setting_cell
+        ]
      }]
   end
 
@@ -69,6 +47,44 @@ class OnGameSettingsScreen < PM::TableScreen
     puts 'Done button pushed.' if BW2.debug?
     app_delegate.settings_manager.save
     close
+  end
+
+  private
+
+  def poems_interval_cell
+    {
+        title: '歌と歌の間隔',
+        cell_style: UITableViewCellStyleValue1,
+        subtitle: '%1.2f秒' % app_delegate.reciting_settings.interval_time,
+        action: :tapped_interval_cell,
+        style: {
+            accessoryType: UITableViewCellAccessoryDisclosureIndicator,
+            # accessibilityLabel: ACC_LABEL_INTERVAL_CELL
+        }
+    }
+  end
+
+  def kami_shimo_interval_cell
+    {
+        title: '上の句と下の句の間隔',
+        cell_style: UITableViewCellStyleValue1,
+        subtitle: '%1.2f秒' % app_delegate.reciting_settings.kami_shimo_interval,
+        action: :tapped_kami_shimo_interval_cell,
+        style: {
+            accessoryType: UITableViewCellAccessoryDisclosureIndicator,
+        }
+
+    }
+  end
+
+  def volume_setting_cell
+    {
+        title: '音量調整',
+        action: :tapped_volume_cell,
+        style: {
+            accessoryType: UITableViewCellAccessoryDisclosureIndicator,
+        }
+    }
   end
 
 end
