@@ -14,7 +14,7 @@ class BeginnerReciteScreen < RecitePoemScreen
     if supplier.kami?
       supplier.step_into_shimo
       transit_kami_shimo
-      SLIDING_EFFECT_DURATION.second.later do
+      slide_effect_duration.second.later do
         layout.show_waiting_to_pause
         layout.title = create_current_title
         recite_poem
@@ -58,5 +58,9 @@ class BeginnerReciteScreen < RecitePoemScreen
     else                        # 次の歌がない (最後の歌だった)
       end_of_the_game
     end
+  end
+
+  def slide_effect_duration
+    app_delegate.reciting_settings.kami_shimo_interval
   end
 end
