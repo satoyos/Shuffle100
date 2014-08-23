@@ -117,12 +117,16 @@ class RecitePoemScreen < PM::Screen
     layout.title = create_current_title
     add layout.view
     layout.locate_view(location)
-    UIView.animateWithDuration(SLIDING_EFFECT_DURATION, animations: lambda{
+    UIView.animateWithDuration(slide_effect_duration, animations: lambda{
       layout.locate_view(:normal)
     }, completion: lambda{|finished|
       remove prev_view
     })
 
+  end
+
+  def slide_effect_duration
+    SLIDING_EFFECT_DURATION
   end
 
   def goto_next_poem
