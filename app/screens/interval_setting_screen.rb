@@ -104,15 +104,7 @@ class IntervalSettingScreen < PM::Screen
       return
     end
 
-    puts "- #{self.interval_time}秒間の間隔を開けます。" if BW2.debug?
-    @last_time = self.interval_time
-
-    NSLog '  - Timer Start!' if BW2.debug?
-    NSTimer.scheduledTimerWithTimeInterval(SHORTEN_INTERVAL,
-                                           target: self,
-                                           selector: 'shorten_last_time:',
-                                           userInfo: nil,
-                                           repeats: true)
+    interval_count_down
   end
 
   def shorten_last_time(timer)
@@ -202,6 +194,19 @@ class IntervalSettingScreen < PM::Screen
     self.shimo_player.play
     @kami_playing = false
   end
+
+  def interval_count_down
+    puts "- #{self.interval_time}秒間の間隔を開けます。" if BW2.debug?
+    @last_time = self.interval_time
+
+    NSLog '  - Timer Start!' if BW2.debug?
+    NSTimer.scheduledTimerWithTimeInterval(SHORTEN_INTERVAL,
+                                           target: self,
+                                           selector: 'shorten_last_time:',
+                                           userInfo: nil,
+                                           repeats: true)
+  end
+
 
   def quarter_height
     (self.view.frame.size.height / 4).to_i
