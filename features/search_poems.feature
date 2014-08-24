@@ -11,7 +11,7 @@ Feature:
     Then I should see "百首読み上げ"
 
     # 「秋」と入力して
-    When I touch the table cell marked "select_poem"
+    When I touch "取り札を用意する歌"
     When I wait to see "歌を選ぶ"
     When I wait for 1 second
     When I touch "search_text_field"
