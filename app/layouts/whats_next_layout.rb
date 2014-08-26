@@ -13,6 +13,7 @@ class WhatsNextLayout < MotionKit::Layout
     center y: '30%'
     init_title_style_and_image('refrain.png')
     title '下の句をもう一度読む'
+    accessibility_label 'refrain_button'
   end
 
   def next_poem_button_style
@@ -21,5 +22,6 @@ class WhatsNextLayout < MotionKit::Layout
     center y: '60%'
     init_title_style_and_image('go_next.png')
     title '次の歌へ！      '
+    accessibility_label 'next_poem_button'
   end
 end
