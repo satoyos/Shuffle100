@@ -1,6 +1,6 @@
 module NormalButtonStyles
   def set_button_title_color
-    title_color :blue.uicolor
-    title_color :red.uicolor, state: :highlighted.uicontrolstate
+    setTitleColor(:blue.uicolor, forState: :normal.uicontrolstate)
+    setTitleColor(:blue.uicolor.mix_with(:black.uicolor, 0.75), forState: :highlighted.uicontrolstate)
   end
 end
