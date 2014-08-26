@@ -13,6 +13,7 @@ describe 'BeginnerReciteLayout' do
       @layout.should.be.kind_of RecitePoemLayout
     end
 
+=begin
     it 'has a message label' do
       @layout.get(:message_label).should.not.be.nil
     end
@@ -20,6 +21,7 @@ describe 'BeginnerReciteLayout' do
     it 'メッセージがある' do
       @layout.message.should == BeginnerReciteLayout::INITIAL_MESSAGE
     end
+=end
 
     it '各ボタンにAccessibilityLabelが付与されている' do
       [:play_button, :quit_button, :gear_button].each do |button_sym|

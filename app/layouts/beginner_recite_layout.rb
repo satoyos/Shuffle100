@@ -3,8 +3,7 @@ class BeginnerReciteLayout < RecitePoemLayout
 
   def layout
     super
-    # add UILabel, :message_label
-    add MessageLabel, :message_label
+    # add MessageLabel, :message_label
   end
 
   def message_label_style
