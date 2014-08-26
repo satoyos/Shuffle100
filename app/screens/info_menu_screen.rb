@@ -6,11 +6,27 @@ class InfoMenuScreen < PM::TableScreen
         cells:
             [
                 {
-                    title: '試合の流れ',
+                    title: '「初心者モード」とは？',
+                    action: :open_what_is_beginner_mode,
+                    style: {
+                        accessoryType: UITableViewCellAccessoryDisclosureIndicator,
+                        # accessibility_label: 'open_game_flow_help'
+                    }
+                },
+                {
+                    title: '試合の流れ (通常モード)',
                     action: :open_game_flow_help,
                     style: {
                         accessoryType: UITableViewCellAccessoryDisclosureIndicator,
-                        accessibility_label: 'open_game_flow_help'
+                        # accessibility_label: 'open_game_flow_help'
+                    }
+                },
+                {
+                    title: '試合の流れ (初心者モード)',
+                    action: :open_beginner_mode_flow_help,
+                    style: {
+                        accessoryType: UITableViewCellAccessoryDisclosureIndicator,
+                        # accessibility_label: 'open_game_flow_help'
                     }
                 },
                 {
@@ -18,7 +34,7 @@ class InfoMenuScreen < PM::TableScreen
                     action: :open_options_help,
                     style: {
                         accessoryType: UITableViewCellAccessoryDisclosureIndicator,
-                        accessibility_label: 'open_options_help'
+                        # accessibility_label: 'open_options_help'
                     }
                 },
                 {
@@ -38,11 +54,21 @@ class InfoMenuScreen < PM::TableScreen
     false
   end
 
+  def open_what_is_beginner_mode
+    open InfoScreen.new(url: 'html/what_is_beginner_mode.html', title: '「初心者モード」とは？')
+  end
+
   def open_options_help
     open InfoScreen.new(url: 'html/options.html', title: '設定できること')
   end
 
   def open_game_flow_help
-    open InfoScreen.new(url: 'html/game_flow.html', title: '試合の流れ')
+    open InfoScreen.new(url: 'html/game_flow.html', title: '試合の流れ (通常モード)')
   end
+
+  def open_beginner_mode_flow_help
+    open InfoScreen.new(url: 'html/beginner_mode_flow.html', title: '試合の流れ (初心者モード)')
+  end
+
+
 end
