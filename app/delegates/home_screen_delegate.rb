@@ -33,6 +33,7 @@ module HomeScreenDelegate
   def beginner_switch_flipped(data_hash)
     puts "初心者モードのスイッチが切り替わりました。(=> #{data_hash[:value]})" if BW2.debug?
     app_delegate.game_settings.beginner_flg = data_hash[:value]
+    app_delegate.game_settings.fake_flg = false if data_hash[:value]
     app_delegate.settings_manager.save
     update_table_view_data_animated
   end
