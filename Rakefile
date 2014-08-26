@@ -37,7 +37,7 @@ Motion::Project::App.setup do |app|
   APP_VERSION = '2.0'
 
   app.development do
-    app.version = APP_VERSION + 'β'
+    app.version = APP_VERSION + 'β2'
     app.codesign_certificate = 'iPhone Developer: Yoshifumi Sato'
     app.provisioning_profile = '/Users/yoshi/data/dev/Provisionings/Provisioning_for_100series_Tester_140429.mobileprovision'
   end
