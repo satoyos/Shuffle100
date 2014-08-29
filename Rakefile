@@ -11,7 +11,9 @@ if is_test
   Bundler.require :default, :spec
  else
   Bundler.require
-end
+ end
+
+require 'sugarcube-common'
 
 Motion::Project::App.setup do |app|
   # Use `rake config' to see complete project settings.
@@ -32,10 +34,10 @@ Motion::Project::App.setup do |app|
         'CFBundleURLSchemes' => ['Shuffle100'] }
   ]
 
-  APP_VERSION = '1.2.0'
+  APP_VERSION = '2.0'
 
   app.development do
-    app.version = APP_VERSION + 'β'
+    app.version = APP_VERSION + 'β2'
     app.codesign_certificate = 'iPhone Developer: Yoshifumi Sato'
     app.provisioning_profile = '/Users/yoshi/data/dev/Provisionings/Provisioning_for_100series_Tester_140429.mobileprovision'
   end
@@ -47,9 +49,7 @@ Motion::Project::App.setup do |app|
     app.provisioning_profile = '/Users/yoshi/data/dev/Provisionings/Provisioning_for_Shuffle100_Distribution.mobileprovision'
   end
 
-  # RubyMotionのバグ対策？
-  # 参考issue: https://github.com/rubymotion/BubbleWrap/issues/337
-  app.detect_dependencies = false
+  app.detect_dependencies = true
 
   if is_test
 #    app.redgreen_style = :full

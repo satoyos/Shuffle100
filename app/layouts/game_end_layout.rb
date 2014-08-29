@@ -1,14 +1,10 @@
 class GameEndLayout < MotionKit::Layout
-=begin
-  GAME_END_VIEW_TITLE =  '試合終了'
-  BACK_TO_TOP_TITLE = 'トップに戻る'
-  ACC_LABEL_BACK_TO_TOP_BUTTON = 'back_to_top'
-=end
+  include NormalButtonStyles
 
   weak_attr :delegate
 
   def layout
-    background_color 'white'.to_color
+    background_color :white.uicolor
     add UIView, :header do
       add UILabel, :title_label
     end
@@ -28,18 +24,9 @@ class GameEndLayout < MotionKit::Layout
 
   def back_to_top_button_style
     title 'トップに戻る'
-    title_color 'blue'.to_color
-    title_color 'lightGray'.to_color, state: UIControlStateHighlighted
+    set_button_title_color
     size ['50%', '30%']
     center ['50%', '50%']
     accessibility_label 'back_to_top'
-  end
-
-
-  def add_back_to_button_action
-    return unless delegate
-    get(:back_to_top_button).addTarget(delegate,
-                                       action: 'back_to_top_screen',
-                                       forControlEvents: UIControlEventTouchUpInside)
   end
 end

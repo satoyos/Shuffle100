@@ -28,8 +28,8 @@ class Deck
   end
 
   def read_poems(size)
-    path = App.resources_path.stringByAppendingPathComponent JSON_FILE
-    @poems = BW::JSON.parse(File.read(path)).map{|poem_hash| Poem.new(poem_hash)}[0..size-1]
+    @poems = OH::JSONParser.parse_from_file(JSON_FILE).
+        map{|poem_hash| Poem.new(poem_hash)}[0..size-1]
   end
 
   def next_poem

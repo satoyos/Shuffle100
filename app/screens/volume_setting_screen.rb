@@ -53,7 +53,7 @@ class VolumeSettingScreen < PM::Screen
   end
 
   def will_disappear
-    puts ' - interval_timeの値を %1.2f秒に書き換えます！' % self.volume_slider.value if BW::debug?
+    puts ' - interval_timeの値を %1.2f秒に書き換えます！' % self.volume_slider.value if BW2.debug?
     app_delegate.reciting_settings.volume = self.volume_slider.value.round(2)
   end
 
@@ -64,7 +64,7 @@ class VolumeSettingScreen < PM::Screen
   def audioPlayerDidFinishPlaying(player, successfully:flag)
     return unless flag
 
-    puts '- 読み上げが無事に終了！' if BW::debug?
+    puts '- 読み上げが無事に終了！' if BW2.debug?
     reset_player
     self.play_button.enabled = true
   end
@@ -100,7 +100,7 @@ class VolumeSettingScreen < PM::Screen
 
   def slider_value_changed(sender)
 #    reset_player_if_needed #これをSliderの値が変わるたびに呼ぶと、実機で重くなるので注意！
-    puts "- スライダーの値は #{self.volume_slider.value}" if BW::debug?
+    puts "- スライダーの値は #{self.volume_slider.value}" if BW2.debug?
     test_player.volume = sender.value
   end
 
@@ -109,8 +109,8 @@ class VolumeSettingScreen < PM::Screen
   private
 
   def play_button_pushed(button)
-    puts "button #{button} is pushed" if BW::debug?
-    puts "このとき、スライダーの値は[#{self.volume_slider.value}]" if BW::debug?
+    puts "button #{button} is pushed" if BW2.debug?
+    puts "このとき、スライダーの値は[#{self.volume_slider.value}]" if BW2.debug?
     reset_player
 #    @volume = self.volume_slider.value
     test_player.play

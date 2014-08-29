@@ -1,7 +1,7 @@
 class PoemPicker < PM::TableScreen
   include SelectedStatusHandler
 
-  SELECTED_BG_COLOR = '#eebbcb'.to_color #撫子色
+  SELECTED_BG_COLOR = '#eebbcb'.uicolor #撫子色
   title '歌を選ぶ'
   searchable placeholder: '歌を検索'
 
@@ -25,14 +25,17 @@ class PoemPicker < PM::TableScreen
                title: '%3d. %s %s %s' %
                    [poem.number, poem.liner[0], poem.liner[1], poem.liner[2]],
 
-               font: UIFont.fontWithName('HiraMinProN-W6', size: 16),
+               # font: UIFont.fontWithName('HiraMinProN-W6', size: 16),
                subtitle: "　　 #{poem.poet}",
-               accessibility_label: '%03d' % poem.number,
-               accessory_type: acc_type_for_poem(poem),
-               background_color: bg_color_for_poem(poem),
                search_text: search_text_for_poem(poem),
                action: :poem_tapped,
-               arguments: {number: poem.number}
+               arguments: {number: poem.number},
+               style: {
+                   font: UIFont.fontWithName('HiraMinProN-W6', size: 16),
+                   background_color: bg_color_for_poem(poem),
+                   accessibility_label: '%03d' % poem.number,
+                   accessory_type: acc_type_for_poem(poem),
+               }
            }
          }
      }]
@@ -41,16 +44,16 @@ class PoemPicker < PM::TableScreen
   def poem_tapped(arg_hash)
     status100.reverse_in_number(arg_hash[:number])
     update_table_and_prompt
-    puts "searching? => #{searching?}" if BW::debug?
+    puts "searching? => #{searching?}" if BW2.debug?
     if searching?
-      puts 'reset search word in poem tapped!' if BW::debug?
+      puts 'reset search word in poem tapped!' if BW2.debug?
       refresh_search_result_table
     end
   end
 
   def will_appear
     init_tool_bar
-    puts "main_view => [#{view}]" if BW::debug?
+    puts "main_view => [#{view}]" if BW2.debug?
     prepare_text_field
     update_table_and_prompt
   end
@@ -112,8 +115,8 @@ class PoemPicker < PM::TableScreen
     @table_search_display_controller.searchResultsTableView.subviews[0].subviews.
         select{|sv| sv.is_a?(UITableViewCell) and not sv.hidden?}.
         map{|cell| cell.accessibilityLabel.to_i}.tap { |numbers|
-      puts 'numbers in 検索結果 => ' if BW::debug?
-      ap numbers if BW::debug?
+      puts 'numbers in 検索結果 => ' if BW2.debug?
+      ap numbers if BW2.debug?
     }
   end
 

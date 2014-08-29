@@ -49,7 +49,7 @@ class ReciteViewButton < UIButton
 
   # @return [UIImage]
   def create_back_ground_image_for(name, colors: colors)
-    puts "- [#{name}]用のグラデーションイメージを作ります。" if BW::debug?
+    puts "- [#{name}]用のグラデーションイメージを作ります。" if BW2.debug?
     gradient = CAGradientLayer.alloc.init
     gradient.frame = self.bounds
     gradient.colors = colors

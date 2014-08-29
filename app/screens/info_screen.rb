@@ -18,7 +18,7 @@ class InfoScreen < PM::WebScreen
         navigationType == UIWebViewNavigationTypeOther
       url = request.URL.absoluteString
       unless url =~ /\Afile/ or url =~ /vimeo.com\//
-        puts  "- URL stopped! (#{url})" if BW::debug?
+        puts  "- URL stopped! (#{url})" if BW2.debug?
         return false
       end
     end

@@ -53,7 +53,7 @@ end
 
 When /^I touch (\d+) poems at random$/ do |ordinal|
   ordinal = ordinal.to_i
-  (1..8).to_a.shuffle.slice(0, ordinal).each do |number|
+  (1..7).to_a.shuffle.slice(0, ordinal).each do |number|
     puts ' - 歌番号[%3d]の歌を選びます。' % number
     quote = get_selector_quote(poem_number_label_of(number))
     touch("tableViewCell marked:#{quote}#{poem_number_label_of(number)}#{quote}")
@@ -149,6 +149,34 @@ Then /^I can go through (\d+) poems with skip$/ do |poems_num|
 
     # When I touch the button marked "forward"
     touch2 "forward"
+  end
+  puts "#{Time.now} - [#{poems_num}] Loop End!"
+end
+
+Then /^I can go through (\d+) poems with skip in beginner mode$/ do |poems_num|
+  puts "#{Time.now} - [#{poems_num}] Loop Start!"
+  puts "poems_num => #{poems_num} (#{poems_num.class})"
+  q = get_selector_quote(play_button_mark)
+  (1..poems_num.to_i).each do |idx|
+    # Then I wait to see "1首め"
+    wait_to_see('%d首め' % idx)
+    # スキップで上の句の読み上げが終わったら、下の句の読み上げ待ちになる
+    sleep 2
+    # When I touch the button marked "forward"
+    touch2 "forward"
+    # Then I wait to see "下"
+    sleep 2
+    wait_to_see('下')
+
+    # When I touch the button marked "forward"
+    touch2 "forward"
+
+    # 「次はどうする？」画面が現れる
+    wait_to_see('次はどうする？')
+    sleep 1
+
+    # 次の歌に進む
+    touch2 "next_poem_button"
   end
   puts "#{Time.now} - [#{poems_num}] Loop End!"
 end

@@ -1,15 +1,17 @@
 class AppDelegate < PM::Delegate
   include PM::Styling
 
-  BAR_TINT_COLOR = '#cee4ae'.to_color #夏虫色
-  BUTTON_NORMAL_COLOR = '#007bbb'.to_color # 紺碧
+  BAR_TINT_COLOR = '#cee4ae'.uicolor #夏虫色
+  BUTTON_NORMAL_COLOR = '#007bbb'.uicolor # 紺碧
   PROMPT = '百首読み上げ'
 
   attr_accessor :poem_supplier, :players_hash, :opening_player
   attr_accessor :settings_manager, :reciting_settings, :game_settings
 
   def on_load(app, options)
-    BW.debug = true unless App.info_plist['AppStoreRelease']
+    # BW.debug = true unless App.info_plist['AppStoreRelease']
+    # BW.debug = true unless 'AppStoreRelease'.info_plist
+    BW2.debug = true unless 'AppStoreRelease'.info_plist
 
     set_models
 
@@ -40,6 +42,14 @@ class AppDelegate < PM::Delegate
     UINavigationBar.appearance.barTintColor = BAR_TINT_COLOR
     UIApplication.sharedApplication.statusBarOrientation = UIInterfaceOrientationPortrait
   end
+end
 
+class BW2
+  def self.debug=(value)
+    @debug_flag = value
+  end
 
+  def self.debug?
+    @debug_flag ||= false
+  end
 end

@@ -3,7 +3,7 @@ class PoemSupplier
 
   def initialize(init_hash={})
     if init_hash[:deck]
-      puts '- PoemSupplierを、deckを指定する形で初期化しました。' if BW::debug?
+      puts '- PoemSupplierを、deckを指定する形で初期化しました。' if BW2.debug?
       @deck = init_hash[:deck]
       return
     end

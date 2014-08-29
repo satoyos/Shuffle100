@@ -24,12 +24,10 @@ describe 'GameSettings' do
 
     end
 
-
-
-=begin
-    it 'volume' do
-      @settings.volume.should.not.be.nil
+    it 'beginner_flg' do
+      # newで生成された場合、値は必ずfalseになる
+      @settings.beginner_flg.should.be.false
     end
-=end
+
   end
 end

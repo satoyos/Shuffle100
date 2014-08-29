@@ -21,8 +21,8 @@ class RecitePoemScreen < PM::Screen
     recite_poem unless RUBYMOTION_ENV == 'test'
   end
 
-  def on_return
-    puts '// 読み上げ画面に帰ってきたぜ！' if BW::debug?
+  def on_return(args={})
+    puts '// 読み上げ画面に帰ってきたぜ！' if BW2.debug?
     set_player_volume
   end
 
@@ -33,7 +33,7 @@ class RecitePoemScreen < PM::Screen
   def audioPlayerDidFinishPlaying(player, successfully:flag)
     return unless flag
 
-    puts '- 読み上げが無事に終了！' if BW::debug?
+    puts '- 読み上げが無事に終了！' if BW2.debug?
     layout.play_finished_successfully
     if supplier.kami?
       supplier.step_into_shimo
@@ -93,7 +93,7 @@ class RecitePoemScreen < PM::Screen
   end
 
   def renew_layout_and_player
-    puts '== LayoutとPlayerを更新します！' if BW::debug?
+    puts '== LayoutとPlayerを更新します！' if BW2.debug?
     create_new_layout
     fetch_player
   end
@@ -117,7 +117,7 @@ class RecitePoemScreen < PM::Screen
     layout.title = create_current_title
     add layout.view
     layout.locate_view(location)
-    UIView.animateWithDuration(SLIDING_EFFECT_DURATION, animations: lambda{
+    UIView.animateWithDuration(slide_effect_duration, animations: lambda{
       layout.locate_view(:normal)
     }, completion: lambda{|finished|
       remove prev_view
@@ -125,8 +125,12 @@ class RecitePoemScreen < PM::Screen
 
   end
 
+  def slide_effect_duration
+    SLIDING_EFFECT_DURATION
+  end
+
   def goto_next_poem
-    puts 'Go to Next Poem!' if BW::debug?
+    puts 'Go to Next Poem!' if BW2.debug?
     renew_layout_and_player
     layout.show_waiting_to_play
     layout.title = create_current_title
@@ -139,7 +143,7 @@ class RecitePoemScreen < PM::Screen
 
   def end_of_the_game
     @layout = GameEndLayout.new.tap{|l| l.delegate = self}
-    layout.add_back_to_button_action
+    layout.get(:back_to_top_button).on(:touch){back_to_top_screen}
     game_end_flip_animate(reciting_settings.interval_time,
                           stop_selector: ANIME_STOP_SELECTOR){
       remove view.subviews.first
@@ -148,7 +152,7 @@ class RecitePoemScreen < PM::Screen
   end
 
   def go_back_to_prev_poem
-    puts 'Back to Prev Poem!' if BW::debug?
+    puts 'Back to Prev Poem!' if BW2.debug?
     renew_layout_and_player
     layout.show_waiting_to_play
     layout.title = create_current_title
@@ -172,7 +176,7 @@ class RecitePoemScreen < PM::Screen
       when ID_NEXT_POEM_FLIP
         recite_poem
       else
-        puts "/////// このアニメーションの後処理はありません。 ///////" if BW::debug?
+        puts "/////// このアニメーションの後処理はありません。 ///////" if BW2.debug?
     end
   end
 end

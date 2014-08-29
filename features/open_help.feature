@@ -18,7 +18,8 @@ Scenario:
 
   # 「設定できること」画面を閲覧できる
   When I wait for 1 second
-  When I touch the table cell marked "open_options_help"
+#  When I touch the table cell marked "open_options_help"
+  When I touch "設定できること"
   Then I wait to see a navigation bar titled "設定できること"
   When I wait for 1 second
   When I forcedly navigate back
