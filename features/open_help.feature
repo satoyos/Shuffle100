@@ -13,7 +13,7 @@ Scenario:
   Then I should see "百首読み上げ"
 
   # まず、ヘルプメニュー画面を呼び出す
-  When I touch the button marked "info"
+  When I touch the button marked "help"
   Then I wait to see a navigation bar titled "ヘルプ"
 
   # 「設定できること」画面を閲覧できる

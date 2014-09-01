@@ -9,7 +9,7 @@ class HomeScreen < PM::GroupedTableScreen
 
   def on_load
     set_nav_bar_button :right, {
-        image: self.class.info_image,
+        image: self.class.help_image,
         action: :open_info
     }
     set_nav_bar_button :left, {
@@ -38,11 +38,11 @@ class HomeScreen < PM::GroupedTableScreen
     UIInterfaceOrientationPortrait
   end
 
-  def self.info_image
+  def self.help_image
     Dispatch.once{@info_iamge =
-        ResizeUIImage.resizeImage(UIImage.imageNamed('info_white.png'),
+        ResizeUIImage.resizeImage(UIImage.imageNamed('question_white.png'),
                                   newSize: NAV_BAR_BUTTON_SIZE).tap do |im|
-          im.accessibilityLabel = 'info'
+          im.accessibilityLabel = 'help'
         end
     }
     @info_iamge
