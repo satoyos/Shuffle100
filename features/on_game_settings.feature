@@ -13,6 +13,18 @@ Feature: As an 百人一首 player
     When I touch "初心者モードoff"
     Then I should see "空札"
 
+    # トップ画面でも、歯車ボタンを押すと、各種設定画面が現れる。
+    When I touch "gear"
+    When I wait for 1 second
+    Then I should see "いろいろな設定"
+    # 通常モードの時は、「上の句と下の句の間隔」セルが表示されない。
+    Then I should not see "上の句と下の句の間隔"
+
+    # トップ画面に戻る
+    When I touch "設定終了"
+    Then I should see "百首読み上げ"
+    Then I wait for 1 second
+
   # 序歌画面
     When I touch "試合開始"
     Then I should see "序歌"
@@ -35,9 +47,21 @@ Feature: As an 百人一首 player
   初心者モードでの「いろいろな設定」画面の確認
     Then I should see "百首読み上げ"
 
-# 起動時のモードは分からないが、とにかく初心者モードをoffにする。
+# 起動時のモードは分からないが、とにかく初心者モードをonにする。
     When I touch "初心者モードon"
     Then I should not see "空札"
+
+    # トップ画面でも、歯車ボタンを押すと、各種設定画面が現れる。
+    When I touch "gear"
+    When I wait for 1 second
+    Then I should see "いろいろな設定"
+    # 初心者モードの時は、「上の句と下の句の間隔」セルが表示される。
+    Then I should see "上の句と下の句の間隔"
+
+    # トップ画面に戻る
+    When I touch "設定終了"
+    Then I should see "百首読み上げ"
+    Then I wait for 1 second
 
   # 序歌画面
     When I touch "試合開始"

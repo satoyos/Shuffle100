@@ -43,6 +43,11 @@ module HomeScreenDelegate
     open InfoMenuScreen.new
   end
 
+  def open_on_game_settings
+    puts 'ホーム画面から「いろいろな設定」画面を開くよ！' if BW2.debug?
+    open OnGameSettingsScreen.new, modal: true, nav_bar: true
+  end
+
   private
 
   # @return [Deck] 選択された歌から構成されるDeck。歌の順序はShuffleされている。

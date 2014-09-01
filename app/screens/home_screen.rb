@@ -5,13 +5,16 @@ class HomeScreen < PM::GroupedTableScreen
   title 'トップ'
 
   SELECT_POEM_TITLE = '取り札を用意する歌'
-  INFO_BUTTON_SIZE = CGSizeMake(16, 16)
-  ACC_LABEL_INFO_BUTTON = 'Info'
+  NAV_BAR_BUTTON_SIZE = CGSizeMake(14, 14)
 
   def on_load
     set_nav_bar_button :right, {
-        image: info_image,
+        image: self.class.info_image,
         action: :open_info
+    }
+    set_nav_bar_button :left, {
+        image: self.class.gear_image,
+        action: :open_on_game_settings
     }
   end
 
@@ -35,14 +38,27 @@ class HomeScreen < PM::GroupedTableScreen
     UIInterfaceOrientationPortrait
   end
 
-  private
-
-  def info_image
-    ResizeUIImage.resizeImage(UIImage.imageNamed('info_white.png'),
-                              newSize: INFO_BUTTON_SIZE).tap do |im|
-      im.accessibilityLabel = 'info'
-    end
+  def self.info_image
+    Dispatch.once{@info_iamge =
+        ResizeUIImage.resizeImage(UIImage.imageNamed('info_white.png'),
+                                  newSize: NAV_BAR_BUTTON_SIZE).tap do |im|
+          im.accessibilityLabel = 'info'
+        end
+    }
+    @info_iamge
   end
+
+  def self.gear_image
+    Dispatch.once{@gear_iamge =
+        ResizeUIImage.resizeImage(UIImage.imageNamed('gear-520.png'),
+                                  newSize: NAV_BAR_BUTTON_SIZE).tap do |im|
+          im.accessibilityLabel = 'gear'
+        end
+    }
+    @gear_iamge
+  end
+
+
 end
 
 def set_bd_layout
