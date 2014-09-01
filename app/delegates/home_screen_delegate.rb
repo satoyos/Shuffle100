@@ -40,7 +40,7 @@ module HomeScreenDelegate
 
   def open_info
     puts '- Info Button pushed!' if BW2.debug?
-    open InfoMenuScreen.new
+    open HelpMenuScreen.new
   end
 
   def open_on_game_settings

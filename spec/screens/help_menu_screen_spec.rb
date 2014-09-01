@@ -1,8 +1,8 @@
-describe 'InfoMenuScreen' do
-  tests InfoMenuScreen
+describe 'HelpMenuScreen' do
+  tests HelpMenuScreen
 
   def controller
-    @controller ||= InfoMenuScreen.new
+    @controller ||= HelpMenuScreen.new
   end
   alias :screen :controller
 

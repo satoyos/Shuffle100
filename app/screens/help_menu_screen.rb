@@ -1,4 +1,4 @@
-class InfoMenuScreen < PM::TableScreen
+class HelpMenuScreen < PM::TableScreen
   title 'ヘルプ'
 
   def table_data
