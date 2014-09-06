@@ -1,6 +1,6 @@
 describe 'GameEndLayout' do
   before do
-    @layout = GameEndLayout.new
+    @layout = GameEndLayout.new.build
   end
 
   it 'should not be nil' do

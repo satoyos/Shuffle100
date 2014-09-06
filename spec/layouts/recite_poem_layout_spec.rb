@@ -1,7 +1,7 @@
 describe 'RecitePoemLayout' do
   describe '初期化' do
     before do
-      @layout = RecitePoemLayout.new
+      @layout = RecitePoemLayout.new.build
     end
 
     it 'should not be nil' do

@@ -1,7 +1,7 @@
 describe 'WhatsNextLayout' do
   describe '初期化' do
     before do
-      @layout = WhatsNextLayout.new
+      @layout = WhatsNextLayout.new.build
     end
 
     it 'should not be nil' do

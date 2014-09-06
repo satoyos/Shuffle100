@@ -2,7 +2,7 @@ describe 'BeginnerReciteLayout' do
 
   describe '初期化' do
     before do
-      @layout = BeginnerReciteLayout.new
+      @layout = BeginnerReciteLayout.new.build
     end
 
     it 'should not be nil' do
