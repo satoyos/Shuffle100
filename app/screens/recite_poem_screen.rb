@@ -56,7 +56,7 @@ class RecitePoemScreen < PM::Screen
   private
 
   def create_new_layout
-    @layout = RecitePoemLayout.new.tap{|l| l.delegate = self}
+    @layout = RecitePoemLayout.new.tap{|l| l.delegate = self}.build
     set_button_actions
   end
 

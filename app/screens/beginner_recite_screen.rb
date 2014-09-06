@@ -43,7 +43,7 @@ class BeginnerReciteScreen < RecitePoemScreen
   private
 
   def create_new_layout
-    @layout = BeginnerReciteLayout.new.tap{|l| l.delegate = self}
+    @layout = BeginnerReciteLayout.new.tap{|l| l.delegate = self}.build
     set_button_actions
   end
 
