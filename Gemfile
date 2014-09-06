@@ -6,7 +6,7 @@ gem 'awesome_print_motion'
 gem 'motion-layout'
 gem 'ProMotion'
 gem 'motion-weakattr'
-gem 'motion-kit', '< 0.11'
+gem 'motion-kit'
 gem 'sugarcube'
 
 group :spec, :development, :test do

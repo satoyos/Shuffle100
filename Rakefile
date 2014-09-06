@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-# $:.unshift("/Library/RubyMotion/lib")
-$:.unshift("/Library/RubyMotion2.31/lib")
+$:.unshift("/Library/RubyMotion/lib")
+# $:.unshift("/Library/RubyMotion2.31/lib")
 require 'motion/project/template/ios'
 require 'bundler'
 
