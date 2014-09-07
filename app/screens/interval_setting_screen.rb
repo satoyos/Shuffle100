@@ -7,10 +7,14 @@ class IntervalSettingScreen < PM::Screen
   title '歌の間隔の変更'
 
   attr_reader :shimo_player, :kami_player, :interval_time
+  attr_reader :layout
 
   def on_load
     set_kami_shimo_players
 
+    @layout = IntervalSettingLayout.new
+    self.view = layout.view
+=begin
     self.view = UIScrollView.alloc.initWithFrame(self.view.bounds)
     self.view.backgroundColor = UIColor.whiteColor
 
@@ -19,8 +23,10 @@ class IntervalSettingScreen < PM::Screen
     self.view.addSubview self.sec_label
     self.view.addSubview self.try_button
     self.view.addSubview self.interval_slider
+=end
   end
 
+=begin
   def will_appear
     printf 'このViewのサイズ: ' if BW2.debug?
     ap self.view.frame.size if BW2.debug?
@@ -85,6 +91,7 @@ class IntervalSettingScreen < PM::Screen
     update_interval_label_text
 
   end
+=end
 
   def will_disappear
     puts ' - interval_timeの値を %1.2f秒に書き換えます！' % self.interval_slider.value if BW2.debug?
