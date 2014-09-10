@@ -7,95 +7,22 @@ class IntervalSettingScreen < PM::Screen
   title '歌の間隔の変更'
 
   attr_reader :shimo_player, :kami_player, :interval_time
-  attr_reader :layout
+  attr_reader :layout, :slider, :interval_label
 
   def on_load
     set_kami_shimo_players
 
     @layout = IntervalSettingLayout.new
     self.view = layout.view
-=begin
-    self.view = UIScrollView.alloc.initWithFrame(self.view.bounds)
-    self.view.backgroundColor = UIColor.whiteColor
-
-    self.view.addSubview self.interval_label
-    self.view.addSubview self.blank_label
-    self.view.addSubview self.sec_label
-    self.view.addSubview self.try_button
-    self.view.addSubview self.interval_slider
-=end
+    @slider = layout.slider
+    @interval_label = layout.int_label
+    init_slider_value
+    set_parts_actions
   end
-
-=begin
-  def will_appear
-    printf 'このViewのサイズ: ' if BW2.debug?
-    ap self.view.frame.size if BW2.debug?
-
-    top_guide_height = case self.navigationController
-                         when nil; 0
-                         else
-                           printf "NavigationBarのフレーム: " if BW2.debug?
-                           ap self.navigationController.navigationBar.frame if BW2.debug?
-                           frame = self.navigationController.navigationBar.frame
-                           frame.origin.y + frame.size.height
-                       end
-
-    puts "計算したTopLayoutGuide.length相当の値 => #{top_guide_height}" if BW2.debug?
-
-
-    # 以下、レイアウト
-    Motion::Layout.new do |layout|
-
-      layout.view self.view
-      layout.subviews 'slider'    => self.interval_slider,
-                      'button'    => self.try_button,
-                      'int_label' => self.interval_label,
-                      'blank'     => self.blank_label,
-                      'sec_label' => self.sec_label
-      layout.metrics 'margin' => 20, 'height' => 40,
-                     'top_margin' => top_guide_height + 50,
-                     'il_height' => quarter_height
-
-      layout.vertical(
-          '|-(<=top_margin)-[int_label][blank(<=height)]-margin-[slider(blank)]-[button(blank)]-(<=margin@600)-|'
-      )
-      layout.horizontal '[blank(int_label)]'
-      layout.horizontal '[blank][sec_label(40)]-(>=margin)-|'
-      layout.horizontal '|-margin-[slider]-margin-|'
-      layout.horizontal '|-margin-[button]-margin-|'
-    end
-
-    # interval_labelのcenterXを、self.viewのcenterXと一致させる
-    self.view.addConstraint(
-        NSLayoutConstraint.constraintWithItem( self.interval_label,
-                                               attribute: NSLayoutAttributeCenterX,
-                                               relatedBy: NSLayoutRelationEqual,
-                                               toItem: self.view,
-                                               attribute: NSLayoutAttributeCenterX,
-                                               multiplier: 1,
-                                               constant: 0 )
-    )
-    # interval_labelの縦横比を1:2にする
-    self.interval_label.addConstraint(
-        NSLayoutConstraint.constraintWithItem( self.interval_label,
-                                               attribute: NSLayoutAttributeHeight,
-                                               relatedBy: NSLayoutRelationEqual,
-                                               toItem: self.interval_label,
-                                               attribute: NSLayoutAttributeWidth,
-                                               multiplier: 0.6,
-                                               constant: 0 )
-    )
-
-    # interval_labelのテキストを設定
-    @interval_label.font = @interval_label.font.fontWithSize(quarter_height)
-    update_interval_label_text
-
-  end
-=end
 
   def will_disappear
-    puts ' - interval_timeの値を %1.2f秒に書き換えます！' % self.interval_slider.value if BW2.debug?
-    app_delegate.reciting_settings.interval_time = self.interval_slider.value.round(2)
+    puts ' - interval_timeの値を %1.2f秒に書き換えます！' % slider.value if BW2.debug?
+    app_delegate.reciting_settings.interval_time = slider.value.round(2)
   end
 
   def should_autorotate
@@ -104,107 +31,60 @@ class IntervalSettingScreen < PM::Screen
 
   def audioPlayerDidFinishPlaying(player, successfully:flag)
     return unless flag
-
     puts '- 読み上げが無事に終了！' if BW2.debug?
     if @kami_playing
-      update_interval_label_text
+      layout.update_interval_label
       return
     end
-
     interval_count_down
   end
 
   def shorten_last_time(timer)
     @last_time -= SHORTEN_INTERVAL
-    self.interval_label.text = '%.02f' % @last_time
+    interval_label.text = '%.02f' % @last_time
     if @last_time < SHORTEN_INTERVAL
       timer.invalidate
-      self.interval_label.text = '%.02f' % 0.0
+      interval_label.text = '%.02f' % 0.0
       NSLog '  - Timer END!' if BW2.debug?
-      self.kami_player.play
+      kami_player.play
       @kami_playing = true
     end
-
   end
 
-  def interval_label
-    @interval_label ||=
-        UILabel.alloc.initWithFrame(CGRectZero).tap do |l|
-          l.textAlignment = UITextAlignmentCenter
-          l.adjustsFontSizeToFitWidth = true
-        end
-  end
-
-  def blank_label
-      @blank_label ||= UILabel.alloc.initWithFrame(CGRectZero)
-  end
-
-  def sec_label
-    @sec_label ||=
-        UILabel.alloc.initWithFrame(CGRectZero).tap do |l|
-          l.font = l.font.fontWithSize(20)
-          l.textAlignment =UITextAlignmentCenter
-          l.text = '秒'
-        end
-  end
-
-  def try_button
-    @try_button ||=
-        UIButton.buttonWithType(UIButtonTypeRoundedRect).tap do |b|
-          b.setTitle(TRY_BUTTON_TITLE, forState: UIControlStateNormal)
-          b.addTarget(self, action: 'try_button_pushed:',
-                      forControlEvents: UIControlEventTouchUpInside)
-        end
-  end
-
-  def interval_slider
-    @interval_slider ||=
-        UISlider.alloc.initWithFrame(CGRectZero).tap do  |sl|
-          sl.minimumValue = MIN_INTERVAL_VALUE
-          sl.maximumValue = MAX_INTERVAL_VALUE
-          sl.value = initial_interval_time
-          sl.addTarget(self, action: 'sliderChanging:',
-                       forControlEvents: UIControlEventValueChanged)
-          sl.addTarget(self, action:'slider_value_changed:',
-                       forControlEvents: UIControlEventTouchUpInside |
-                           UIControlEventTouchUpOutside)
-        end
-  end
-
-  def initial_interval_time
-    app_delegate.reciting_settings.interval_time
-  end
-
-  def sliderChanging(sender)
+  def slider_value_changed
+    puts 'Sliderの値が変わったよ！'
     reset_players_if_needed
-    sender.value = sender.value.round(2)
-    update_interval_label_text
+    layout.update_interval_label
   end
 
-  def slider_value_changed(sender)
-    reset_players #これをSliderの値が変わるたびに呼ぶと、実機で重くなるので注意！
-    puts "- スライダーの値は #{self.interval_slider.value}" if BW2.debug?
-    update_interval_label_text
-  end
-
-  def update_interval_label_text
-    self.interval_label.text = '%.02f' % self.interval_slider.value
+  def try_button_pushed
+    puts "お試しボタン is pushed" if BW2.debug?
+    puts "このとき、スライダーの値は[#{slider.value}]" if BW2.debug?
+    reset_players_if_needed
+    @interval_time = slider.value.round(2)
+    shimo_player.play
+    @kami_playing = false
   end
 
   private
 
-  def try_button_pushed(button)
-    puts "button #{button} is pushed" if BW2.debug?
-    puts "このとき、スライダーの値は[#{self.interval_slider.value}]" if BW2.debug?
-    reset_players_if_needed
-    @interval_time = self.interval_slider.value.round(2)
-    self.shimo_player.play
-    @kami_playing = false
+  def init_slider_value
+    slider.value = initial_interval_time
+    layout.update_interval_label
+  end
+
+  def initial_interval_time
+    app_delegate.reciting_settings.interval_time || 1.00
+  end
+
+  def set_parts_actions
+    layout.try_button.on(:touch){try_button_pushed}
+    layout.slider.on(:value_changed){slider_value_changed}
   end
 
   def interval_count_down
-    puts "- #{self.interval_time}秒間の間隔を開けます。" if BW2.debug?
-    @last_time = self.interval_time
+    puts "- #{interval_time}秒間の間隔を開けます。" if BW2.debug?
+    @last_time = interval_time
 
     NSLog '  - Timer Start!' if BW2.debug?
     NSTimer.scheduledTimerWithTimeInterval(SHORTEN_INTERVAL,
@@ -212,11 +92,6 @@ class IntervalSettingScreen < PM::Screen
                                            selector: 'shorten_last_time:',
                                            userInfo: nil,
                                            repeats: true)
-  end
-
-
-  def quarter_height
-    (self.view.frame.size.height / 4).to_i
   end
 
   def set_kami_shimo_players

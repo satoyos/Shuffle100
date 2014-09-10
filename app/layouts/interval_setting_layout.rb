@@ -7,7 +7,7 @@ class IntervalSettingLayout < MK::Layout
   MIN_INTERVAL_VALUE = 0.5
   MAX_INTERVAL_VALUE = 2.0
 
-  attr_reader :slider, :int_label
+  attr_reader :slider, :int_label, :try_button
 
   def layout
     background_color :white.uicolor
@@ -15,7 +15,7 @@ class IntervalSettingLayout < MK::Layout
     @int_label = add UILabel, :interval_label
     add UILabel, :sec_label
     @slider = add UISlider, :interval_slider
-    add UIButton, :try_button
+    @try_button = add UIButton, :try_button
   end
 
   def interval_label_style
@@ -48,5 +48,9 @@ class IntervalSettingLayout < MK::Layout
     frame below(:interval_slider, down: VERTICAL_BLANK_SIZE / 2)
     center x: '50%'
     set_button_title_color
+  end
+
+  def update_interval_label
+    int_label.text = '%.02f' % slider.value
   end
 end

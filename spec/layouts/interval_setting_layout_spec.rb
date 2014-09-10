@@ -19,6 +19,8 @@ describe 'IntervalSettingLayout' do
       l.get(:sec_label).should.not.be.nil
       l.get(:interval_slider).should.not.be.nil
       l.get(:try_button).should.not.be.nil
+      l.slider.should.not.be.nil
+      l.try_button.should.not.be.nil
     end
   end
 end

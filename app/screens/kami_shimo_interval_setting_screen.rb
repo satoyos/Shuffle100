@@ -2,15 +2,15 @@ class KamiShimoIntervalSettingScreen < IntervalSettingScreen
   title '上の句と下の句の間隔'
 
   def will_disappear
-    puts ' - 上下interval_timeの値を %1.2f秒に書き換えます！' % interval_slider.value if BW2.debug?
-    app_delegate.reciting_settings.kami_shimo_interval = interval_slider.value.round(2)
+    puts ' - 上下interval_timeの値を %1.2f秒に書き換えます！' % slider.value if BW2.debug?
+    app_delegate.reciting_settings.kami_shimo_interval = slider.value.round(2)
   end
 
   def audioPlayerDidFinishPlaying(player, successfully:flag)
     return unless flag
     puts '- 読み上げが無事に終了！' if BW2.debug?
     unless @kami_playing
-      update_interval_label_text
+      layout.update_interval_label
       return
     end
     interval_count_down
@@ -27,14 +27,14 @@ class KamiShimoIntervalSettingScreen < IntervalSettingScreen
   end
 
   def initial_interval_time
-    app_delegate.reciting_settings.kami_shimo_interval
+    app_delegate.reciting_settings.kami_shimo_interval || 1.00
   end
 
-  def try_button_pushed(button)
-    puts "button #{button} is pushed (初心者モード)" if BW2.debug?
-    puts "このとき、スライダーの値は[#{interval_slider.value}]" if BW2.debug?
+  def try_button_pushed
+    puts "お試しボタン is pushed (初心者モード)" if BW2.debug?
+    puts "このとき、スライダーの値は[#{slider.value}]" if BW2.debug?
     reset_players_if_needed
-    @interval_time = interval_slider.value.round(2)
+    @interval_time = slider.value.round(2)
     kami_player.play
     @kami_playing = true
   end
