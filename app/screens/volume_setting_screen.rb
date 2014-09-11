@@ -5,7 +5,6 @@ class VolumeSettingScreen < PM::Screen
 
   def on_load
     set_test_player
-
     @layout = VolumeSettingLayout.new.build
     self.view = layout.view
     init_slider_value
