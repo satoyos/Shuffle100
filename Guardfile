@@ -12,6 +12,7 @@ guard 'motion' do
   # dataSources, delegates for screens
   watch(%r{^app/dataSources/(.+)_data_source\.rb$})     { |m| "spec/screens/#{m[1]}_spec.rb" }
   watch(%r{^app/delegates/(.+)_delegate\.rb$})     { |m| "spec/screens/#{m[1]}_spec.rb" }
+  watch(%r{^app/layouts/_normal_button_styles\.rb$})   { |m| "spec/layouts/volume_setting_layout_spec.rb" }
 
 
   # RubyMotion App example
