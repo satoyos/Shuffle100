@@ -1,5 +1,4 @@
 class VolumeSettingScreen < PM::Screen
-  # PLAY_BUTTON_TITLE = 'テスト音声を再生する'
   title '音量の調整'
 
   attr_reader :test_player, :layout
@@ -64,7 +63,6 @@ class VolumeSettingScreen < PM::Screen
   end
 
   def reset_player
-    # test_player.currentTime = 0.0
     test_player.prepareToPlay
     play_button.enabled = true
   end

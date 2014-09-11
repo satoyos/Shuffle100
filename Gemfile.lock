@@ -62,7 +62,6 @@ GEM
       frank-cucumber (= 1.2.2)
     motion-kit (0.12.0)
       dbt (~> 1.1.5)
-    motion-layout (0.0.2)
     motion-redgreen (0.1.0)
     motion-stump (0.3.1)
     motion-weakattr (0.1)
@@ -116,7 +115,6 @@ DEPENDENCIES
   motion-fontawesome
   motion-frank
   motion-kit
-  motion-layout
   motion-redgreen
   motion-stump (<= 0.3.1)
   motion-weakattr
