@@ -13,14 +13,12 @@ module RecitePoemDelegate
 
   def current_player_progress
     total = current_player.duration
-    f = current_player.currentTime / total
-#    ap "  - f = #{f}" if BW2.debug?
-    f
+    current_player.currentTime / total
   end
 
   def forward_skip
     if current_player
-      current_player.currentTime = current_player.duration - 0.01
+      current_player.currentTime = current_player.duration - 0.05
       current_player.play
     end
   end
