@@ -18,7 +18,7 @@ module RecitePoemDelegate
 
   def forward_skip
     if current_player
-      current_player.currentTime = current_player.duration - 0.05
+      current_player.currentTime = current_player.duration - 0.1
       current_player.play
     end
   end
