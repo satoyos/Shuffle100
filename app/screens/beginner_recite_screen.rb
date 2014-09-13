@@ -48,6 +48,7 @@ class BeginnerReciteScreen < RecitePoemScreen
   end
 
   def refrain_shimo
+    current_player.currentTime = 0.0
     current_player.prepareToPlay
     recite_poem
   end
