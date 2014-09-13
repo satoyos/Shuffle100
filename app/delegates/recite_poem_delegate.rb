@@ -17,10 +17,8 @@ module RecitePoemDelegate
   end
 
   def forward_skip
-    if current_player
-      current_player.currentTime = current_player.duration - 0.1
-      current_player.play
-    end
+    current_player.stop if current_player.playing?
+    audioPlayerDidFinishPlaying(current_player, successfully: true)
   end
 
   def rewind_skip
