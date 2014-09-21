@@ -26,6 +26,7 @@ Motion::Project::App.setup do |app|
 
   # app.icons = ['Shuffle100.png', 'Shuffle100@2x.png', 'Shuffle100-60@2x.png']
   app.prerendered_icon = true
+  app.icons = Dir.glob('resources/Icon*.png').map{|icon| icon.split('/').last}
 
   app.identifier = 'com.sato0123.Shuffle100'
 
@@ -39,7 +40,7 @@ Motion::Project::App.setup do |app|
   app.development do
     app.version = APP_VERSION + 'β'
     app.codesign_certificate = 'iPhone Developer: Yoshifumi Sato'
-    app.provisioning_profile = '/Users/yoshi/data/dev/Provisionings/Provisioning_for_100series_Tester_140429.mobileprovision'
+    app.provisioning_profile = '/Users/yoshi/data/dev/Provisionings/Provisioning_for_100series_Tester_2014-09-21.mobileprovision'
   end
 
   app.release do
