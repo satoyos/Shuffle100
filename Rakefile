@@ -29,6 +29,7 @@ Motion::Project::App.setup do |app|
   app.icons = Dir.glob('resources/Icon*.png').map{|icon| icon.split('/').last}
 
   app.identifier = 'com.sato0123.Shuffle100'
+  app.device_family = [:iphone, :ipad]
 
   app.info_plist['CFBundleURLTypes'] = [
       { 'CFBundleURLName' => 'com.satoyos.Shuffle100',
