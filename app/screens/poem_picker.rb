@@ -22,10 +22,9 @@ class PoemPicker < PM::TableScreen
          cell_style: UITableViewCellStyleValue1,
          cells: poems.map{|poem|
            {
-               title: '%3d. %s %s %s' %
-                   [poem.number, poem.liner[0], poem.liner[1], poem.liner[2]],
+               title: '%3d. %s %s %s %s %s' %
+                   ([poem.number] + (0..4).to_a.map{|idx| poem.liner[idx]}),
 
-               # font: UIFont.fontWithName('HiraMinProN-W6', size: 16),
                subtitle: "　　 #{poem.poet}",
                search_text: search_text_for_poem(poem),
                action: :poem_tapped,
