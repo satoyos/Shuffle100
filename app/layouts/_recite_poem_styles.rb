@@ -69,13 +69,16 @@ module RecitePoemStyles
   ##################
 
   def play_button_style
-    size [PLAY_BUTTON_SIZE, PLAY_BUTTON_SIZE] # こっちが先であることが重要!!
+    # size [PLAY_BUTTON_SIZE, PLAY_BUTTON_SIZE] # こっちが先であることが重要!!
+    size [play_button_size, play_button_size]
+    size ['75%', :scale]
     frame below(:header_container, down: equalized_gap)
     center x: '50%'
     title 'play'
     init_recite_view_button(:play_button.to_s)
     accessibility_label ACC_LABEL_PLAY_BUTTON
-    titleLabel.font = FontAwesome.fontWithSize(PLAY_BUTTON_FONT_SIZE)
+    # titleLabel.font = FontAwesome.fontWithSize(PLAY_BUTTON_FONT_SIZE)
+    titleLabel.font = FontAwesome.fontWithSize(play_button_font_size)
     set_title(PLAY_BUTTON_PAUSING_TITLE, left_inset: 0,
               color: PLAY_BUTTON_PAUSING_COLOR)
   end
@@ -85,13 +88,16 @@ module RecitePoemStyles
   #################
 
   def lower_container_style
-    size [PLAY_BUTTON_SIZE, SKIP_BUTTON_SIZE]
+    # (HEADER_HEIGHT + PLAY_BUTTON_SIZE + SKIP_BUTTON_SIZE )) / 3
+    # size ['100%', HEADER_HEIGHT]
+    size [play_button_size, '7%']
     frame from_bottom(up: equalized_gap)
 
   end
 
   def forward_button_style
     size [SKIP_BUTTON_SIZE, SKIP_BUTTON_SIZE]
+    size [:scale, '100%']
     # frame from_right(:lower_container)
     frame after(:progress_bar, right: GAP_FROM_BAR)
     center y: '50%'
@@ -121,6 +127,14 @@ module RecitePoemStyles
 
   private
 
+  def play_button_size
+    play_button.frame.size.width
+  end
+
+  def play_button_font_size
+    play_button_size * 0.5
+  end
+
   def set_header_button_size
     frame w: HEADER_BUTTON_SIZE, h: HEADER_BUTTON_SIZE
   end
@@ -129,7 +143,8 @@ module RecitePoemStyles
     @equalized_gap ||=
         (self.view.frame.size.height -
             # (STATUS_BAR_HEIGHT + HEADER_HEIGHT +
-            (HEADER_HEIGHT + PLAY_BUTTON_SIZE + SKIP_BUTTON_SIZE )) / 3
+            # (HEADER_HEIGHT + PLAY_BUTTON_SIZE + SKIP_BUTTON_SIZE )) / 3
+            (HEADER_HEIGHT + play_button_size + SKIP_BUTTON_SIZE )) / 3
   end
 
 end
