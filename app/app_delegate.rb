@@ -7,16 +7,12 @@ class AppDelegate < PM::Delegate
 
   attr_accessor :poem_supplier, :players_hash, :opening_player
   attr_accessor :settings_manager, :reciting_settings, :game_settings
+  attr_reader :sizes
 
   def on_load(app, options)
-    # BW.debug = true unless App.info_plist['AppStoreRelease']
-    # BW.debug = true unless 'AppStoreRelease'.info_plist
     BW2.debug = true unless 'AppStoreRelease'.info_plist
-
     set_models
-
     set_appearance_defaults
-
     open HomeScreen.new(nav_bar: true)
   end
 
@@ -38,9 +34,20 @@ class AppDelegate < PM::Delegate
     self.game_settings.statuses_for_deck = [status100]
   end
 
+  private
+
   def set_appearance_defaults
     UINavigationBar.appearance.barTintColor = BAR_TINT_COLOR
     UIApplication.sharedApplication.statusBarOrientation = UIInterfaceOrientationPortrait
+    @sizzes = select_sizes
+  end
+
+  def select_sizes
+    case UIDevice.currentDevice.name
+      when /iPhone/; SizesIPhone.new
+      when /iPad/  ; SizesIPad.new
+      else         ; raize "Unsupported Device [#{UIDevice.currentDevice.name}]"
+    end
   end
 end
 

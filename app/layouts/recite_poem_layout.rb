@@ -3,12 +3,8 @@ class RecitePoemLayout < MotionKit::Layout
 
   PROGRESS_TIMER_INTERVAL = 0.01
 
+  attr_accessor :sizes
   weak_attr :delegate
-
-  def initialize
-    super
-    @sizes = select_sizes
-  end
 
   def layout
     background_color UIColor.whiteColor
@@ -76,14 +72,6 @@ class RecitePoemLayout < MotionKit::Layout
   end
 
   private
-
-  def select_sizes
-    case UIDevice.currentDevice.name
-      when /iPhone/; SizesIPhone.new
-      when /iPad/  ; SizesIPad.new
-      else         ; raize "Unsupported Device [#{UIDevice.currentDevice.name}]"
-    end
-  end
 
   def show_play_button_title(title, left_inset: l_inset, color: color)
     play_button.tap do |b|
