@@ -39,15 +39,7 @@ class AppDelegate < PM::Delegate
   def set_appearance_defaults
     UINavigationBar.appearance.barTintColor = BAR_TINT_COLOR
     UIApplication.sharedApplication.statusBarOrientation = UIInterfaceOrientationPortrait
-    @sizzes = select_sizes
-  end
-
-  def select_sizes
-    case UIDevice.currentDevice.name
-      when /iPhone/; SizesIPhone.new
-      when /iPad/  ; SizesIPad.new
-      else         ; raize "Unsupported Device [#{UIDevice.currentDevice.name}]"
-    end
+    @sizes = OH::DeviceSizeManager.select_sizes
   end
 end
 

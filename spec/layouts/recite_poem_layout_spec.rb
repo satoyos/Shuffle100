@@ -1,7 +1,9 @@
 describe 'RecitePoemLayout' do
   describe '初期化' do
     before do
-      @layout = RecitePoemLayout.new.build
+      @layout = RecitePoemLayout.new.tap{|l|
+        l.sizes = OH::DeviceSizeManager.select_sizes
+      }.build
     end
 
     it 'should not be nil' do
@@ -24,24 +26,30 @@ describe 'RecitePoemLayout' do
   end
 
   describe 'locate_rp_view' do
-    FRAME_WIDTH = 320
-
     before do
-      @layout = RecitePoemLayout.new
+      @layout = RecitePoemLayout.new.tap{|l|
+        l.sizes = OH::DeviceSizeManager.select_sizes
+      }
+    end
+
+    def width_of(view)
+      view.frame.size.width
     end
 
     context 'right' do
       it '画面の外(右側)に位置する' do
         @layout.locate_view(:right)
-        @layout.view.frame.origin.x.should == FRAME_WIDTH
+        @layout.view.frame.origin.x.should == width_of(@layout.view)
       end
     end
 
     context 'left' do
       it '画面の外(左側)に位置する' do
         @layout.locate_view(:left)
-        @layout.view.frame.origin.x.should == -1 * FRAME_WIDTH
+        @layout.view.frame.origin.x.should == -1 * width_of(@layout.view)
       end
     end
+
   end
 end
+

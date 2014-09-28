@@ -2,7 +2,9 @@ describe 'BeginnerReciteLayout' do
 
   describe '初期化' do
     before do
-      @layout = BeginnerReciteLayout.new.build
+      @layout = BeginnerReciteLayout.new.tap{|l|
+        l.sizes = OH::DeviceSizeManager.select_sizes
+      }.build
     end
 
     it 'should not be nil' do
@@ -12,16 +14,6 @@ describe 'BeginnerReciteLayout' do
     it 'ia a kind of RecitePoemLayout' do
       @layout.should.be.kind_of RecitePoemLayout
     end
-
-=begin
-    it 'has a message label' do
-      @layout.get(:message_label).should.not.be.nil
-    end
-
-    it 'メッセージがある' do
-      @layout.message.should == BeginnerReciteLayout::INITIAL_MESSAGE
-    end
-=end
 
     it '各ボタンにAccessibilityLabelが付与されている' do
       [:play_button, :quit_button, :gear_button].each do |button_sym|
@@ -34,3 +26,14 @@ describe 'BeginnerReciteLayout' do
     end
   end
 end
+
+=begin
+def select_sizes
+  case UIDevice.currentDevice.name
+    when /iPhone/; SizesIPhone.new
+    when /iPad/  ; SizesIPad.new
+    else         ; raize "Unsupported Device [#{UIDevice.currentDevice.name}]"
+  end
+end
+=end
+

@@ -58,7 +58,8 @@ class RecitePoemScreen < PM::Screen
   def create_new_layout
     @layout = RecitePoemLayout.new.tap{|l|
       l.delegate = self
-      l.sizes = app_delegate.sizes
+      l.sizes = app_delegate.sizes ? app_delegate.sizes :
+          OH::DeviceSizeManager.select_sizes # こっちはRSpecテスト用
     }.build
     set_button_actions
   end

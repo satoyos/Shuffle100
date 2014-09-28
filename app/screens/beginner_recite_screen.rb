@@ -1,4 +1,6 @@
 class BeginnerReciteScreen < RecitePoemScreen
+  include OneHundred::DeviceSizeManager
+
   title '初心者モードの歌詠み'
 
   def on_load
@@ -43,7 +45,11 @@ class BeginnerReciteScreen < RecitePoemScreen
   private
 
   def create_new_layout
-    @layout = BeginnerReciteLayout.new.tap{|l| l.delegate = self}.build
+    @layout = BeginnerReciteLayout.new.tap{|l|
+      l.delegate = self
+      l.sizes = app_delegate.sizes ? app_delegate.sizes :
+          OH::DeviceSizeManager.select_sizes # こっちはRSpecテスト用
+    }.build
     set_button_actions
   end
 

@@ -41,7 +41,7 @@ class RecitePoemLayout < MotionKit::Layout
     ap '- 再生の指示待ちです。' if BW2.debug?
     @timer.invalidate if @timer
     show_play_button_title(PLAY_BUTTON_PLAYING_TITLE,
-                           left_inset: PLAY_MARK_INSET,
+                           left_inset: play_mark_inset,
                            color: PLAY_BUTTON_PLAYING_COLOR)
     play_button.titleLabel.accessibilityLabel = ACC_LABEL_PLAY
   end

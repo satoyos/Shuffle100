@@ -19,6 +19,15 @@ describe 'SizesIPhone' do
   describe '#skip_button_size' do
     it 'should equal SkipButton size for iPhone' do
       @sizes.skip_button_size.should.not.be.nil
+      @sizes.skip_button_size.should == SizesIPhone::SKIP_BUTTON_SIZE
     end
   end
+
+=begin
+  describe '#play_mark_inset' do
+    it 'should equal PlayMarkInset size for iPhone' do
+
+    end
+  end
+=end
 end
