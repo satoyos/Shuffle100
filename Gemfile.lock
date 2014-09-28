@@ -63,7 +63,6 @@ GEM
     motion-kit (0.14.0)
       dbt (~> 1.1.5)
     motion-redgreen (0.1.0)
-    motion-stump (0.3.1)
     motion-weakattr (0.1)
     multi_json (1.10.1)
     multi_test (0.1.1)
@@ -115,7 +114,6 @@ DEPENDENCIES
   motion-frank
   motion-kit
   motion-redgreen
-  motion-stump (<= 0.3.1)
   motion-weakattr
   rake
   rspec (< 3.0.0)

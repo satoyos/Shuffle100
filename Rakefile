@@ -5,7 +5,6 @@ require 'bundler'
 
 is_test = ARGV.join(' ') =~ /spec|frank/
 if is_test
-  require 'motion-stump'
   require 'guard/motion'
   require 'motion-frank'
   Bundler.require :default, :spec
