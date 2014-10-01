@@ -23,11 +23,16 @@ describe 'SizesIPhone' do
     end
   end
 
-=begin
-  describe '#play_mark_inset' do
-    it 'should equal PlayMarkInset size for iPhone' do
-
+  describe '#whats_next_button_height' do
+    it 'should equal height of buttons in WhatsNextScreen for iPhone' do
+      @sizes.whats_next_button_height.should.not.be.nil
+      @sizes.whats_next_button_height.should == SizesIPhone::WHATS_NEXT_BUTTON_HEIGHT
     end
   end
-=end
+
+  describe '#image_offset_x' do
+    it 'should be valid offset for iPhone' do
+      @sizes.image_offset_x.should == SizesIPhone::IMAGE_OFFSET_X
+    end
+  end
 end

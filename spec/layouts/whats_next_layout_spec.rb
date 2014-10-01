@@ -1,7 +1,9 @@
 describe 'WhatsNextLayout' do
   describe '初期化' do
     before do
-      @layout = WhatsNextLayout.new.build
+      @layout = WhatsNextLayout.new.tap{|l|
+        l.sizes = OH::DeviceSizeManager.select_sizes
+      }.build
     end
 
     it 'should not be nil' do

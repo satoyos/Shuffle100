@@ -1,11 +1,19 @@
 class SizesIPad < SizesIPhone
+  IMAGE_OFFSET_X_IPAD = 200
 
   def play_button_size
-    PLAY_BUTTON_SIZE * 2
+    super * 2
   end
 
   def skip_button_size
-    SKIP_BUTTON_SIZE * 2
+    super * 2
   end
 
+  def whats_next_button_height
+    super * 2
+  end
+
+  def image_offset_x
+    IMAGE_OFFSET_X_IPAD
+  end
 end

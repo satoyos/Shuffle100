@@ -4,7 +4,10 @@ class WhatsNextScreen < PM::Screen
   attr_reader :layout
 
   def on_load
-    @layout = WhatsNextLayout.new
+    @layout = WhatsNextLayout.new.tap{|l|
+      l.sizes = app_delegate.sizes ? app_delegate.sizes :
+          OH::DeviceSizeManager.select_sizes  # こっちはRSpecテスト用。
+    }
     self.view = layout.view
     set_button_actions
   end
