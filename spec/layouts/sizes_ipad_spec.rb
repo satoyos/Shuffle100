@@ -33,4 +33,10 @@ describe 'SizesIPad' do
       @sizes.image_offset_x.should == SizesIPad::IMAGE_OFFSET_X_IPAD
     end
   end
+
+  describe '#nav_bar_button_size' do
+    it 'should be valid size for iPad NavigationBarButton' do
+      @sizes.nav_bar_button_size.should == SizesIPhone::NAV_BAR_BUTTON_SIZE * 2
+    end
+  end
 end

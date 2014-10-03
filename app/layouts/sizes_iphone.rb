@@ -3,6 +3,7 @@ class SizesIPhone
   SKIP_BUTTON_SIZE = 30
   WHATS_NEXT_BUTTON_HEIGHT = 50
   IMAGE_OFFSET_X = 30
+  NAV_BAR_BUTTON_SIZE = 25
 
   def initialize
     puts "+ #{self.class} is selected." if BW2.debug?
@@ -23,4 +24,9 @@ class SizesIPhone
   def image_offset_x
     IMAGE_OFFSET_X
   end
+
+  def nav_bar_button_size
+    NAV_BAR_BUTTON_SIZE
+  end
+
 end

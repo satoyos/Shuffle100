@@ -16,4 +16,8 @@ class SizesIPad < SizesIPhone
   def image_offset_x
     IMAGE_OFFSET_X_IPAD
   end
+
+  def nav_bar_button_size
+    super * 2
+  end
 end
