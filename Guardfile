@@ -14,7 +14,7 @@ guard 'motion' do
   watch(%r{^app/delegates/(.+)_delegate\.rb$})     { |m| "spec/screens/#{m[1]}_spec.rb" }
   watch(%r{^app/layouts/_normal_button_styles\.rb$})   { |m| "spec/layouts/volume_setting_layout_spec.rb" }
   watch(%r{^app/layouts/_recite_poem_styles\.rb$})   { |m| "spec/layouts/recite_poem_layout_spec.rb" }
-
+  watch(%r{^app/views/nav_bar_buton\.rb$})   { |m| "spec/views/bar_gear_button_spec.rb" }
 
   # RubyMotion App example
 end
