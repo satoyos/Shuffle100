@@ -6,16 +6,18 @@ class HomeScreen < PM::GroupedTableScreen
 
   SELECT_POEM_TITLE = '取り札を用意する歌'
   NAV_BAR_BUTTON_SIZE = CGSizeMake(14, 14)
+  BAR_BUTTON_SIZE = 28
 
   def on_load
     set_nav_bar_button :right, {
-        image: self.class.help_image,
-        action: :open_info
+        button: @help_button =
+            BarHelpButton.create_with_square_size(BAR_BUTTON_SIZE)
     }
     set_nav_bar_button :left, {
-        image: self.class.gear_image,
-        action: :open_on_game_settings
+        button: @gear_button =
+            BarGearButton.create_with_square_size(BAR_BUTTON_SIZE)
     }
+    set_nav_bar_button_actions
   end
 
   def will_appear
@@ -34,30 +36,12 @@ class HomeScreen < PM::GroupedTableScreen
     false
   end
 
-  def supported_orientations
-    UIInterfaceOrientationPortrait
-  end
+  private
 
-  def self.help_image
-    Dispatch.once{@info_iamge =
-        ResizeUIImage.resizeImage(UIImage.imageNamed('question_white.png'),
-                                  newSize: NAV_BAR_BUTTON_SIZE).tap do |im|
-          im.accessibilityLabel = 'help'
-        end
-    }
-    @info_iamge
+  def set_nav_bar_button_actions
+    @gear_button.on(:touch){open_on_game_settings}
+    @help_button.on(:touch){open_info}
   end
-
-  def self.gear_image
-    Dispatch.once{@gear_iamge =
-        ResizeUIImage.resizeImage(UIImage.imageNamed('gear-520.png'),
-                                  newSize: NAV_BAR_BUTTON_SIZE).tap do |im|
-          im.accessibilityLabel = 'gear'
-        end
-    }
-    @gear_iamge
-  end
-
 
 end
 
