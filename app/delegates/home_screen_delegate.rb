@@ -38,8 +38,8 @@ module HomeScreenDelegate
     update_table_view_data_animated
   end
 
-  def open_info
-    puts '- Info Button pushed!' if BW2.debug?
+  def open_help
+    puts '- Help Button pushed!' if BW2.debug?
     open HelpMenuScreen.new
   end
 
