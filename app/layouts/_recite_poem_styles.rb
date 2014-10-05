@@ -43,16 +43,16 @@ module RecitePoemStyles
   end
 
   def gear_button_style
-    image self.class.gear_image, state: UIControlStateNormal
     set_header_button_size
+    set_image_after_frame_is_set
     center y: '50%'
     frame x: HEADER_BUTTON_MARGIN
     accessibility_label ACC_LABEL_GEAR_BUTTON
   end
 
   def quit_button_style
-    image self.class.exit_image, state: UIControlStateNormal
     set_header_button_size
+    set_image_after_frame_is_set
     frame from_top_right(left: HEADER_BUTTON_MARGIN)
     center y: '50%'
     accessibility_label ACC_LABEL_QUIT_BUTTON

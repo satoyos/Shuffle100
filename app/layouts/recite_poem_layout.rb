@@ -14,8 +14,8 @@ class RecitePoemLayout < MotionKit::Layout
       add UILabel, :header_title do
         text '序歌'
       end
-      add UIButton, :gear_button
-      add UIButton, :quit_button
+      add BarGearButton, :gear_button
+      add BarExitButton, :quit_button
     end
 
     # play_button
@@ -100,27 +100,6 @@ class RecitePoemLayout < MotionKit::Layout
                                            selector: 'update_progress',
                                            userInfo: nil,
                                            repeats: true)
-  end
-
-  ###############
-  # Class Methods
-
-  class << self
-    def gear_image
-      @gear_image ||= header_button_from_image_file('gear-520.png')
-    end
-
-    def exit_image
-      @exit_image ||= header_button_from_image_file('exit_square_org.png')
-    end
-
-    private
-
-    def header_button_from_image_file(file_path)
-      ResizeUIImage.resizeImage(UIImage.imageNamed(file_path),
-                                newSize: RecitePoemStyles::BUTTON_IMAGE_SIZE).
-          imageWithRenderingMode(UIImageRenderingModeAlwaysTemplate)
-    end
   end
 
 end
