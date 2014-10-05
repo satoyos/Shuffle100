@@ -134,8 +134,6 @@ module RecitePoemStyles
   def equalized_gap
     @equalized_gap ||=
         (self.view.frame.size.height -
-            # (STATUS_BAR_HEIGHT + HEADER_HEIGHT +
-            # (HEADER_HEIGHT + PLAY_BUTTON_SIZE + SKIP_BUTTON_SIZE )) / 3
             (HEADER_HEIGHT + play_button_size + skip_button_size )) / 3
   end
 end
