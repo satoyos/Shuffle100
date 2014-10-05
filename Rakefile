@@ -35,7 +35,7 @@ Motion::Project::App.setup do |app|
         'CFBundleURLSchemes' => ['Shuffle100'] }
   ]
 
-  APP_VERSION = '2.2.1'
+  APP_VERSION = '2.3'
 
   app.development do
     app.version = APP_VERSION + 'β'
