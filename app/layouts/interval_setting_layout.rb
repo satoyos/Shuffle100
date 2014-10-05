@@ -9,7 +9,6 @@ class IntervalSettingLayout < MK::Layout
 
   def layout
     background_color :white.uicolor
-
     @int_label = add UILabel, :interval_label
     add UILabel, :sec_label
     @slider = add UISlider, :interval_slider
