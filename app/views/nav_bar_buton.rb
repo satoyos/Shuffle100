@@ -1,9 +1,15 @@
-class NavBarButton
+class NavBarButton < UIButton
+  def set_image_after_frame_is_set
+    raise 'Frame must be set before calling this method.' unless
+        frame.size and frame.size.height > 0
+    setImage(self.class.button_image(frame.size.height), forState: UIControlStateNormal)
+  end
+
   class << self
     def create_with_square_size(size)
-      UIButton.buttonWithType(UIButtonTypeRoundedRect).tap do |b|
+      self.buttonWithType(UIButtonTypeRoundedRect).tap do |b|
         b.frame = CGRectMake(0, 0, size, size)
-        b.setImage(button_image(size), forState: UIControlStateNormal)
+        b.set_image_after_frame_is_set
       end
     end
 
