@@ -12,7 +12,10 @@ class IntervalSettingScreen < PM::Screen
   def on_load
     set_kami_shimo_players
 
-    @layout = IntervalSettingLayout.new
+    @layout = IntervalSettingLayout.new.tap {|l|
+      l.sizes = app_delegate.sizes ? app_delegate.sizes :
+          OH::DeviceSizeManager.select_sizes # こっちはRSpecテスト用
+    }
     self.view = layout.view
     @slider = layout.slider
     @interval_label = layout.int_label

@@ -1,8 +1,9 @@
 describe 'IntervalSettingLayout' do
   before do
-    @layout = IntervalSettingLayout.new.build
+    @layout = IntervalSettingLayout.new.tap{|l|
+      l.sizes = OH::DeviceSizeManager.select_sizes
+    }.build
   end
-
 
   it 'should be a valid MK::Layout object' do
     @layout.should.not.be.nil

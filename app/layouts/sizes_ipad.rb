@@ -20,4 +20,16 @@ class SizesIPad < SizesIPhone
   def nav_bar_button_size
     super * 2
   end
+
+  def interval_sec_label_size
+    super * 2
+  end
+
+  def interval_vertical_blank
+    super * 2
+  end
+
+  def interval_label_height
+    super * 2
+  end
 end

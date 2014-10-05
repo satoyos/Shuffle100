@@ -4,6 +4,9 @@ class SizesIPhone
   WHATS_NEXT_BUTTON_HEIGHT = 50
   IMAGE_OFFSET_X = 30
   NAV_BAR_BUTTON_SIZE = 25
+  INTERVAL_SEC_LABEL_SIZE = 40
+  INTERVAL_LABEL_HEIGHT = 100
+  INTERVAL_VERTICAL_BLANK = INTERVAL_LABEL_HEIGHT * 4 / 10
 
   def initialize
     puts "+ #{self.class} is selected." if BW2.debug?
@@ -29,4 +32,15 @@ class SizesIPhone
     NAV_BAR_BUTTON_SIZE
   end
 
+  def interval_sec_label_size
+    INTERVAL_SEC_LABEL_SIZE
+  end
+
+  def interval_vertical_blank
+    INTERVAL_VERTICAL_BLANK
+  end
+
+  def interval_label_height
+    INTERVAL_LABEL_HEIGHT
+  end
 end
