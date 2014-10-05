@@ -7,5 +7,9 @@ describe 'HelpExitButton' do
       @button.should.not.be.nil
       @button.should.be.kind_of UIButton
     end
+
+    it 'should have an accessibilityLabel' do
+      @button.accessibilityLabel.should == 'help'
+    end
   end
 end

@@ -1,5 +1,12 @@
 class BarExitButton < NavBarButton
+  ACC_LABEL = 'exit'
+
   class << self
+    def create_with_square_size(size)
+      super.tap {|b|
+        b.accessibilityLabel = ACC_LABEL
+      }
+    end
 
     private
 

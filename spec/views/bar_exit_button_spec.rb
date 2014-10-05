@@ -7,5 +7,9 @@ describe 'BarExitButton' do
       @button.should.not.be.nil
       @button.should.be.kind_of UIButton
     end
+
+    it 'should have an accessibilityLabel' do
+      @button.accessibilityLabel.should == 'exit'
+    end
   end
 end

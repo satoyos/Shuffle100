@@ -1,5 +1,13 @@
 class BarHelpButton < NavBarButton
+  ACC_LABEL = 'help'
+
   class << self
+
+    def create_with_square_size(size)
+      super.tap {|b|
+        b.accessibilityLabel = ACC_LABEL
+      }
+    end
 
     private
 
