@@ -40,7 +40,7 @@ class HelpMenuScreen < PM::TableScreen
                 {
                     title: 'バージョン',
                     cell_style: UITableViewCellStyleValue1,
-                    subtitle: "#{'CFBundleVersion'.info_plist}"
+                    subtitle: "#{'CFBundleShortVersionString'.info_plist}"
                 }
             ]
      }]

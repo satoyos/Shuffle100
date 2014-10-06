@@ -38,14 +38,16 @@ Motion::Project::App.setup do |app|
   APP_VERSION = '2.3'
 
   app.development do
-    app.version = APP_VERSION + 'β'
+    app.version = submit_version(APP_VERSION) + 'β'
+    app.short_version = APP_VERSION + 'β'
     app.codesign_certificate = 'iPhone Developer: Yoshifumi Sato'
     app.provisioning_profile = '/Users/yoshi/data/dev/Provisionings/Provisioning_for_100series_Tester_2014-09-21.mobileprovision'
   end
 
   app.release do
     app.info_plist['AppStoreRelease'] = true
-    app.version = APP_VERSION
+    app.version = submit_version(APP_VERSION)
+    app.short_version = APP_VERSION
     app.codesign_certificate = 'iPhone Distribution: Yoshifumi Sato'
     app.provisioning_profile = '/Users/yoshi/data/dev/Provisionings/Provisioning_for_Shuffle100_Distribution.mobileprovision'
   end
@@ -56,4 +58,10 @@ Motion::Project::App.setup do |app|
 #    app.redgreen_style = :full
     app.redgreen_style = :focused
   end
+end
+
+require 'date'
+
+def submit_version(short_version)
+  "#{short_version}_#{Date.today}"
 end
