@@ -55,7 +55,6 @@ Motion::Project::App.setup do |app|
   app.detect_dependencies = true
 
   if is_test
-#    app.redgreen_style = :full
     app.redgreen_style = :focused
   end
 end
@@ -63,5 +62,5 @@ end
 require 'date'
 
 def submit_version(short_version)
-  "#{short_version}_#{Date.today}"
+  "#{short_version}.#{Date.today.to_s.gsub(/-/, '')}"
 end
