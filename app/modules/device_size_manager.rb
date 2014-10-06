@@ -5,8 +5,11 @@ module OneHundred
     def select_sizes
       case UIDevice.currentDevice.name
         when /iPhone/; SizesIPhone.new
+        when /iPod/;   SizesIPhone.new
         when /iPad/  ; SizesIPad.new
-        else         ; raize "Unsupported Device [#{UIDevice.currentDevice.name}]"
+        else
+          puts "Unsupported Device [#{UIDevice.currentDevice.name}] is detected." if BW2.debug?
+          SizesIPhone.new
       end
     end
   end
