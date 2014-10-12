@@ -35,13 +35,13 @@ Motion::Project::App.setup do |app|
         'CFBundleURLSchemes' => ['Shuffle100'] }
   ]
 
-  APP_VERSION = '2.3'
+  APP_VERSION = '2.3.1'
 
   app.development do
     app.version = submit_version(APP_VERSION) + 'β'
     app.short_version = APP_VERSION + 'β'
     app.codesign_certificate = 'iPhone Developer: Yoshifumi Sato'
-    app.provisioning_profile = '/Users/yoshi/data/dev/Provisionings/Provisioning_for_100series_Tester_2014-09-21.mobileprovision'
+    app.provisioning_profile = '/Users/yoshi/data/dev/Provisionings/Provisioning_for_100series_Tester.mobileprovision'
   end
 
   app.release do
