@@ -37,6 +37,7 @@ class BeginnerReciteScreen < RecitePoemScreen
     case args[:next]
       when :refrain; refrain_shimo
       when :next_poem; try_to_draw_next_poem
+      when :back_to_top; close to_screen: :root
       else
         raise "「次はどうする？」画面を[#{args[:next]}]で終える場合は、まだサポートしていません。"
     end
