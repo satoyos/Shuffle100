@@ -97,7 +97,7 @@ GEM
     tilt (1.4.1)
     timers (4.0.1)
       hitimes
-    xcodeproj (0.19.3)
+    xcodeproj (0.19.4)
       activesupport (~> 3.0)
       colored (~> 1.2)
 
