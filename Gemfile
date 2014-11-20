@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 gem 'rake'
 gem 'motion-fontawesome'
 gem 'awesome_print_motion'
-gem 'ProMotion', '< 2.0.1' # 2.0.1にすると、TableScreenのSwitchを変更した後の値が取得できない。
+gem 'ProMotion'
 gem 'motion-weakattr'
 gem 'motion-kit'
 gem 'sugarcube'

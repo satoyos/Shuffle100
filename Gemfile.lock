@@ -1,8 +1,8 @@
 GEM
   remote: https://rubygems.org/
   specs:
-    ProMotion (2.0.0)
-      methadone (~> 1.4)
+    ProMotion (2.1.0)
+      methadone (~> 1.7)
     activesupport (4.1.8)
       i18n (~> 0.6, >= 0.6.9)
       json (~> 1.7, >= 1.7.7)
@@ -112,7 +112,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  ProMotion (< 2.0.1)
+  ProMotion
   awesome_print_motion
   guard-motion
   motion-fontawesome
