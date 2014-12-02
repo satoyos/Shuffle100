@@ -30,7 +30,8 @@ class PoemPicker < PM::TableScreen
                action: :poem_tapped,
                arguments: {number: poem.number},
                style: {
-                   font: UIFont.fontWithName('HiraMinProN-W6', size: 16),
+                   # font: UIFont.fontWithName('HiraMinProN-W6', size: 16),
+                   font: UIFont.fontWithName('HiraMinProN-W6', size: MDT::Font.body.pointSize),
                    background_color: bg_color_for_poem(poem),
                    accessibility_label: '%03d' % poem.number,
                    accessory_type: acc_type_for_poem(poem),

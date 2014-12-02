@@ -7,6 +7,7 @@ gem 'ProMotion'
 gem 'motion-weakattr'
 gem 'motion-kit'
 gem 'sugarcube'
+gem 'motion-dynamic-type'
 
 LOCAL_GNUARD_MOTION = '/Users/yoshi/src/motion/guard-motion'
 

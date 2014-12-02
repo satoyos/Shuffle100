@@ -37,6 +37,7 @@ module RecitePoemStyles
   end
 
   def header_title_style
+    font MDT::Font.body
     text_alignment UITextAlignmentCenter
     size ['80%', '80%']
     center ['50%', '50%']

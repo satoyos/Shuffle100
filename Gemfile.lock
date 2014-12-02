@@ -63,6 +63,7 @@ GEM
       bundler
     method_source (0.8.2)
     minitest (5.4.3)
+    motion-dynamic-type (0.1.0)
     motion-fontawesome (0.0.1)
       rake
     motion-frank (1.2.2.0)
@@ -119,6 +120,7 @@ DEPENDENCIES
   ProMotion
   awesome_print_motion
   guard-motion!
+  motion-dynamic-type
   motion-fontawesome
   motion-frank
   motion-kit

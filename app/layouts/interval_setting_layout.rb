@@ -41,6 +41,7 @@ class IntervalSettingLayout < MK::Layout
 
   def try_button_style
     title '試しに聞いてみる'
+    font MDT::Font.body
     size ['80%', interval_vertical_blank]
     frame below(:interval_slider, down: interval_vertical_blank / 2)
     center x: '50%'

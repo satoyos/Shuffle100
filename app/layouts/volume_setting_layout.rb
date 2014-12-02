@@ -17,6 +17,7 @@ class VolumeSettingLayout < MK::Layout
 
   def play_button_style
     title 'テスト音声を再生する'
+    font MDT::Font.body
     size ['80%', VERTICAL_BLANK_SIZE]
     frame below(:slider, down: VERTICAL_BLANK_SIZE)
     center x: '50%'
