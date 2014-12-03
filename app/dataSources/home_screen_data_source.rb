@@ -45,6 +45,7 @@ module HomeScreenDataSource
             view: :switch,
             value: app_delegate.game_settings.beginner_flg,
             action: 'beginner_switch_flipped:',
+            arguments: {}
         }
     }
   end
@@ -57,6 +58,7 @@ module HomeScreenDataSource
             view: :switch,
             value: app_delegate.game_settings.fake_flg,
             action: 'fake_switch_flipped:',
+            arguments: {}
         }
     }
   end
