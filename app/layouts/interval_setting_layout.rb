@@ -52,6 +52,10 @@ class IntervalSettingLayout < MK::Layout
     int_label.text = '%.02f' % slider.value
   end
 
+  def font_changed(notification)
+    get(:try_button).titleLabel.font = MDT::Font.body
+  end
+
   private
 
   def interval_label_height

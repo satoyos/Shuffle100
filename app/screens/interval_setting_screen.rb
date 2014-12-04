@@ -1,4 +1,6 @@
 class IntervalSettingScreen < PM::Screen
+  include OH::Notifications
+
   MIN_INTERVAL_VALUE = 0.5
   MAX_INTERVAL_VALUE = 2.0
   SHORTEN_INTERVAL = 0.02
@@ -21,6 +23,7 @@ class IntervalSettingScreen < PM::Screen
     @interval_label = layout.int_label
     init_slider_value
     set_parts_actions
+    set_font_changed_notification
   end
 
   def will_disappear
@@ -67,6 +70,10 @@ class IntervalSettingScreen < PM::Screen
     @interval_time = slider.value.round(2)
     shimo_player.play
     @kami_playing = false
+  end
+
+  def font_changed(notification)
+    layout.font_changed(notification)
   end
 
   private
