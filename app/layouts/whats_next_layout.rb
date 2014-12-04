@@ -15,7 +15,6 @@ class WhatsNextLayout < MotionKit::Layout
     center y: '30%'
     init_title_style_and_image('refrain.png')
     title '下の句をもう一度読む'
-    font MDT::Font.body
     set_insets
     accessibility_label 'refrain_button'
   end
@@ -26,7 +25,6 @@ class WhatsNextLayout < MotionKit::Layout
     center y: '60%'
     init_title_style_and_image('go_next.png')
     title '次の歌へ！      '
-    font MDT::Font.body
     set_insets
     accessibility_label 'next_poem_button'
   end
