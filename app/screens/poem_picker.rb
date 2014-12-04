@@ -1,5 +1,6 @@
 class PoemPicker < PM::TableScreen
   include SelectedStatusHandler
+  include OH::Notifications
 
   SELECTED_BG_COLOR = '#eebbcb'.uicolor #撫子色
   title '歌を選ぶ'
@@ -9,6 +10,7 @@ class PoemPicker < PM::TableScreen
 
   def on_load
     init_members
+    set_font_changed_notification
     update_table_and_prompt
   end
 
@@ -68,6 +70,10 @@ class PoemPicker < PM::TableScreen
     @poems ||= Deck.original_deck.poems
   end
 
+
+  def font_changed(notification)
+    update_table_and_prompt
+  end
 
   private
 
