@@ -15,7 +15,7 @@ Scenario:
   Then I should not see "空札"
 
   # 歌選択画面で、百首選ぶ
-  When I touch "取り札を用意する歌"
+  When I forced_touch "取り札を用意する歌"
   When I wait to see "歌を選ぶ"
   When I touch "全て選択"
   When I wait for 0.5 second

@@ -30,7 +30,7 @@ Feature:
     Then I should not see "空札"
 
     # 歌選択画面で、歌を二首選ぶ
-    When I touch "取り札を用意する歌"
+    When I forced_touch "取り札を用意する歌"
     When I wait to see "歌を選ぶ"
     When I touch "全て取消"
     When I touch 2 poems at random
