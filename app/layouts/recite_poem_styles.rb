@@ -59,7 +59,7 @@ module RecitePoemStyles
     accessibility_label ACC_LABEL_QUIT_BUTTON
   end
 
-  ##################
+    ##################
   # メインのPlayボタン
   ##################
 

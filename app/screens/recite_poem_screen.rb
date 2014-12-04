@@ -2,6 +2,7 @@ class RecitePoemScreen < PM::Screen
   include RecitePoemAnimation
   include RecitePoemDataSource
   include RecitePoemDelegate
+  include OH::Notifications
 
   OPENING_POEM_TITLE = '序歌'
   SLIDING_EFFECT_DURATION = 0.2
@@ -19,6 +20,7 @@ class RecitePoemScreen < PM::Screen
     create_new_layout
     add layout.view
     recite_poem unless RUBYMOTION_ENV == 'test'
+    set_font_changed_notification
   end
 
   def on_return(args={})
@@ -51,6 +53,10 @@ class RecitePoemScreen < PM::Screen
     layout.show_waiting_to_pause
     set_player_volume
     current_player.play
+  end
+
+  def font_changed(notification)
+    layout.font_changed(notification)
   end
 
   private

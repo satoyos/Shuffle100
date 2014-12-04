@@ -71,6 +71,10 @@ class RecitePoemLayout < MotionKit::Layout
     progress_bar.progress = delegate.current_player_progress if delegate
   end
 
+  def font_changed(notification)
+    get(:header_title).font = MDT::Font.body
+  end
+
   private
 
   def show_play_button_title(title, left_inset: l_inset, color: color)
