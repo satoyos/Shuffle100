@@ -23,4 +23,8 @@ class VolumeSettingLayout < MK::Layout
     center x: '50%'
     set_button_title_color
   end
+
+  def font_changed(notification)
+    get(:play_button).titleLabel.font = MDT::Font.body
+  end
 end

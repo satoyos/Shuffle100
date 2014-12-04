@@ -1,4 +1,6 @@
 class VolumeSettingScreen < PM::Screen
+  include OH::Notifications
+
   title '音量の調整'
 
   attr_reader :test_player, :layout
@@ -9,6 +11,7 @@ class VolumeSettingScreen < PM::Screen
     self.view = layout.view
     init_slider_value
     set_parts_actions
+    set_font_changed_notification
   end
 
   def will_disappear
@@ -28,6 +31,9 @@ class VolumeSettingScreen < PM::Screen
     play_button.enabled = true
   end
 
+  def font_changed(notification)
+    layout.font_changed(notification)
+  end
 
   private
 
