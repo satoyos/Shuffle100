@@ -5,7 +5,7 @@ require 'bundler'
 
 is_test = ARGV.join(' ') =~ /spec|frank/
 if is_test
-  require 'guard/motion' if File.exist?('/Users/yoshi/src/motion/guard-motion')
+  # require 'guard/motion' if File.exist?('/Users/yoshi/src/motion/guard-motion')
   require 'motion-frank'
   Bundler.require :default, :spec
  else
