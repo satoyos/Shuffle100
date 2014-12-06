@@ -6,7 +6,7 @@ module HomeScreenDataSource
     [
         {
             title: '設定',
-            title_view_height: 30,
+            title_view_height: 40,
             cells: game_setting_cells
         },
         {
@@ -15,6 +15,8 @@ module HomeScreenDataSource
         }
     ]
   end
+
+  private
 
   def game_setting_cells
     cells = [
