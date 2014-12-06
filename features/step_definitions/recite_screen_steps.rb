@@ -53,7 +53,7 @@ end
 
 When /^I touch (\d+) poems at random$/ do |ordinal|
   ordinal = ordinal.to_i
-  (1..7).to_a.shuffle.slice(0, ordinal).each do |number|
+  (1..5).to_a.shuffle.slice(0, ordinal).each do |number|
     puts ' - 歌番号[%3d]の歌を選びます。' % number
     quote = get_selector_quote(poem_number_label_of(number))
     touch("tableViewCell marked:#{quote}#{poem_number_label_of(number)}#{quote}")
