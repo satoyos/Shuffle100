@@ -1,4 +1,5 @@
-class GameStartCell < UITableViewCell
+# class GameStartCell < UITableViewCell
+class GameStartCell < PM::TableViewCell
   CELL_STYLE = UITableViewCellStyleDefault
   CELL_ACCESSORY = UITableViewCellAccessoryNone
 
@@ -12,10 +13,16 @@ class GameStartCell < UITableViewCell
 
   def initWithStyle(style, reuseIdentifier: reuseIdentifier)
     super
+    set_style
+    self
+  end
 
+  def on_reuse
+    set_style
+  end
+
+  def set_style
     textLabel.textAlignment = UITextAlignmentCenter
     textLabel.textColor = UIColor.redColor
-
-    self
   end
 end

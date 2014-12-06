@@ -1,5 +1,6 @@
 module HomeScreenDataSource
   FAKE_SETTING_TITLE = '空札を加える'
+  GAME_START_STR = '試合開始'
 
   def table_data
     [
@@ -9,7 +10,7 @@ module HomeScreenDataSource
             cells: game_setting_cells
         },
         {
-            title: '試合開始',
+            title: GAME_START_STR,
             cells: [start_game_cell]
         }
     ]
@@ -65,7 +66,7 @@ module HomeScreenDataSource
 
   def start_game_cell
     {
-        title: '試合開始',
+        title: GAME_START_STR,
         action: :start_game,
         cell_class: GameStartCell,
     }
