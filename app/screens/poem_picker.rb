@@ -37,7 +37,8 @@ class PoemPicker < PM::TableScreen
                    background_color: bg_color_for_poem(poem),
                    accessibility_label: '%03d' % poem.number,
                    accessory_type: acc_type_for_poem(poem),
-               }
+               },
+               height: MDT::Font.body.pointSize * 3
            }
          }
      }]
