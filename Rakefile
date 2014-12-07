@@ -49,7 +49,8 @@ Motion::Project::App.setup do |app|
     app.version = submit_version(APP_VERSION)
     app.short_version = APP_VERSION
     app.codesign_certificate = 'iPhone Distribution: Yoshifumi Sato'
-    app.provisioning_profile = '/Users/yoshi/data/dev/Provisionings/Provisioning_for_Shuffle100_Distribution.mobileprovision'
+    app.provisioning_profile = '/Users/yoshi/data/dev/Provisionings/Shuffle100_Distribution.mobileprovision'
+    app.entitlements['beta-reports-active'] = true
   end
 
   app.detect_dependencies = true
@@ -62,5 +63,5 @@ end
 require 'date'
 
 def submit_version(short_version)
-  "#{short_version}.#{Date.today.to_s.gsub(/-/, '')}"
+  "#{short_version}.#{Time.now.strftime('%Y%m%d.%H%M')}"
 end
