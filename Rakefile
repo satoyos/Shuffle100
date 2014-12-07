@@ -63,5 +63,5 @@ end
 require 'date'
 
 def submit_version(short_version)
-  "#{short_version}.#{Time.now.strftime('%Y%m%d.%H%M')}"
+  Time.now.strftime('%Y%m%d.%H%M')
 end
