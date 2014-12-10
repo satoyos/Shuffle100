@@ -133,7 +133,7 @@ Feature: As an 百人一首 player
     Then I should see "試しに聞いてみる"
 
     # 元の「次はどうする？」画面まで戻る
-    When I touch "戻る"
+    When I navigate back
     When I wait for 1 second
     When I touch "設定終了"
     When I wait for 1 second
