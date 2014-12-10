@@ -1,7 +1,8 @@
 class PoemPicker < PM::TableScreen
   include SelectedStatusHandler
-  include OH::Notifications
   include PoemPickerDataSource
+  include PoemPickerDelegate
+  include OH::Notifications
 
   title '歌を選ぶ'
   searchable placeholder: '歌を検索'
@@ -19,16 +20,6 @@ class PoemPicker < PM::TableScreen
   def init_members
     self.status100 = loaded_selected_status
     self
-  end
-
-  def poem_tapped(arg_hash)
-    status100.reverse_in_number(arg_hash[:number])
-    update_table_and_prompt
-    puts "searching? => #{searching?}" if BW2.debug?
-    if searching?
-      puts 'reset search word in poem tapped!' if BW2.debug?
-      refresh_search_result_table
-    end
   end
 
   def will_appear
@@ -50,10 +41,6 @@ class PoemPicker < PM::TableScreen
 
   def font_changed(notification)
     update_table_and_prompt
-  end
-
-  def poem_long_pressed(arg_hash)
-    puts "... Poem[#{arg_hash[:number]}] has been long pressed" if BW2.debug?
   end
 
   private
@@ -86,17 +73,6 @@ class PoemPicker < PM::TableScreen
     table_search_display_controller.searchBar.text = table_search_display_controller.searchBar.text
   end
 
-  def select_all_poems
-    if searching?
-      status100.select_in_numbers(search_result_poem_numbers)
-      update_table_and_prompt
-      refresh_search_result_table
-    else
-      status100.select_all
-      update_table_and_prompt
-    end
-  end
-
   # @return [Array] 検索結果として表示されている歌全ての番号
   def search_result_poem_numbers
     @table_search_display_controller.searchResultsTableView.subviews[0].subviews.
@@ -105,25 +81,6 @@ class PoemPicker < PM::TableScreen
       puts 'numbers in 検索結果 => ' if BW2.debug?
       ap numbers if BW2.debug?
     }
-  end
-
-  def cancel_all_poems
-    if searching?
-      status100.cancel_in_numbers(search_result_poem_numbers)
-      update_table_and_prompt
-      refresh_search_result_table
-    else
-      status100.cancel_all
-      update_table_and_prompt
-    end
-  end
-
-  def select_by_ngram
-    if searching?
-      alert_ngram_picker_disabled
-      return
-    end
-    open NGramPicker.new
   end
 
   def prepare_text_field
