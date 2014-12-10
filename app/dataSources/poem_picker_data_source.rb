@@ -13,6 +13,7 @@ module PoemPickerDataSource
                subtitle: "　　 #{poem.poet}",
                search_text: search_text_for_poem(poem),
                action: :poem_tapped,
+               long_press_action: :poem_long_pressed,
                arguments: {number: poem.number},
                style: {
                    # font: UIFont.fontWithName('HiraMinProN-W6', size: 16),

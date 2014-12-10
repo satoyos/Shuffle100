@@ -5,6 +5,7 @@ class PoemPicker < PM::TableScreen
 
   title '歌を選ぶ'
   searchable placeholder: '歌を検索'
+  longpressable
 
   attr_accessor :status100
   attr_reader :table_search_display_controller
@@ -49,6 +50,10 @@ class PoemPicker < PM::TableScreen
 
   def font_changed(notification)
     update_table_and_prompt
+  end
+
+  def poem_long_pressed(arg_hash)
+    puts "... Poem[#{arg_hash[:number]}] has been long pressed" if BW2.debug?
   end
 
   private
