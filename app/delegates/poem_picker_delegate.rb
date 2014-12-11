@@ -12,6 +12,17 @@ module PoemPickerDelegate
 
   def poem_long_pressed(arg_hash)
     puts "... Poem[#{arg_hash[:number]}] has been long pressed" if BW2.debug?
+    set_toolbar_items false
+    @fuda_layout = FudaLayout.new.tap{ |l|
+      l.top_guide = self.topLayoutGuide
+      l.bottom_guide = self.bottomLayoutGuide
+    }
+    add @fuda_layout.view
+    @fuda_layout.get(:close_button).on(:touch){
+      remove @fuda_layout.view
+      @fuda_layout = nil
+      init_tool_bar
+    }
   end
 
   private
