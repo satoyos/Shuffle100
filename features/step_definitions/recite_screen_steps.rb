@@ -111,6 +111,17 @@ def touch2(mark)
   sleep 1
 end
 
+When /^I long_touch "([^\"]*)"$/ do |mark|
+  quote = get_selector_quote(mark)
+  selector = "view marked:#{quote}#{mark}#{quote} first"
+  if element_exists(selector)
+    tap_and_hold( selector, 1.5 )
+  else
+    raise "Could not touch [#{mark}], it does not exist."
+  end
+  sleep 1
+end
+
 Then /^I can go through (\d+) poems$/ do |poems_num|
   puts "#{Time.now} - [#{poems_num}] Loop Start!"
   puts "poems_num => #{poems_num} (#{poems_num.class})"

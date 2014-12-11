@@ -5,7 +5,6 @@ class FudaLayout < MK::Layout
 
   def layout
     root(:root) do
-      background_color BASE_BACK_COLOR
       add UIButton, :close_button
     end
   end
@@ -13,6 +12,8 @@ class FudaLayout < MK::Layout
   def root_style
     puts '<<< in root_style of FudaLayout >>>'
     puts "self.view.height => #{height = self.view.frame.size.height}"
+    background_color BASE_BACK_COLOR
+    accessibility_label 'FudaLayoutView'
     width = self.view.frame.size.width
     if top_guide
       puts '- top_guide =>'
