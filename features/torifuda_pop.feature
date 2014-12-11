@@ -16,3 +16,8 @@ Scenario:
   When I long_touch "001"
   Then I should see "閉じる"
   Then I should see "FudaLayoutView"
+  Then I should see "fuda_view"
+
+  # 「閉じる」ボタンを押すと、取り札画面が閉じる。
+  When I touch "閉じる"
+  Then I should not see "FudaLayoutView"

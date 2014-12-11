@@ -9,12 +9,6 @@ class FudaView < UIImageView
 
   # サイズ以外の定数の設定
   INSIDE_COLOR = '#FFF7E5'.uicolor
-=begin
-  FONT_NAME_HASH = {
-      hiraminN:   'HiraMinProN-W3',
-      timesroman: 'TimesNewRomanPS-ItalicMT',
-  }
-=end
   WASHI_JPG_FILE  = 'washi_darkgreen 001.jpg'
   STRING_NOT_SET_MESSAGE = '札の文字はまだ決まっていません'
   ACCESSIBILITY_LABEL = 'fuda_view'
