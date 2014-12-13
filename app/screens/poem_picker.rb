@@ -9,7 +9,7 @@ class PoemPicker < PM::TableScreen
   longpressable
 
   attr_accessor :status100
-  attr_reader :table_search_display_controller
+  attr_reader :table_search_display_controller, :poems
 
   def on_load
     init_members
@@ -29,6 +29,10 @@ class PoemPicker < PM::TableScreen
     update_table_and_prompt
   end
 
+  def on_appear
+    fetch_frame_for_fuda_layout
+  end
+
   def will_disappear
     app_delegate.settings_manager.save
     navigation_controller.setToolbarHidden(true, animated: false) if navigation_controller
@@ -43,7 +47,21 @@ class PoemPicker < PM::TableScreen
     update_table_and_prompt
   end
 
+  class << self
+    attr_accessor :fuda_layout_size, :fuda_layout_origin
+  end
+
   private
+
+  def fetch_frame_for_fuda_layout
+    self.class.fuda_layout_origin =
+        CGPointMake(self.topLayoutGuide.size.width, self.topLayoutGuide.size.height)
+    self.class.fuda_layout_size =
+        CGSizeMake(view.frame.size.width,
+                   view.frame.size.height +
+                       self.bottomLayoutGuide.origin.y +
+                       self.bottomLayoutGuide.size.height)
+  end
 
   def update_table_and_prompt
     self.navigationItem.prompt = '選択中: %d首' % status100.selected_num

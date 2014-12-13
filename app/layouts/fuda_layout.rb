@@ -1,7 +1,7 @@
 class FudaLayout < MK::Layout
   BASE_BACK_COLOR = 0xdddddd.uicolor(0.9)
 
-  attr_accessor :top_guide, :bottom_guide
+  attr_accessor :view_size, :view_origin, :shimo_str
 
   def layout
     root(:root) do
@@ -13,11 +13,9 @@ class FudaLayout < MK::Layout
   def root_style
     background_color BASE_BACK_COLOR
     accessibility_label 'FudaLayoutView'
-    height = self.view.frame.size.height
-    width = self.view.frame.size.width
-    if top_guide
-      origin [0, 0]
-      size [width, height + bottom_guide.origin.y + 20]
+    if view_size
+      origin [view_origin.x, view_origin.y]
+      size [view_size.width, view_size.height]
     end
   end
 
@@ -29,7 +27,7 @@ class FudaLayout < MK::Layout
   end
 
   def fuda_view_style
-    init_with_string 'あっちょんぶりけ'
+    init_with_string shimo_str || 'あっちょんぶりけ'
     set_all_sizes_by 300
     center ['50%', '50%']
   end
