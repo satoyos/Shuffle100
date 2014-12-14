@@ -16,9 +16,13 @@ module PoemPickerDelegate
       l.view_size = self.class.fuda_layout_size
       l.view_origin = self.class.fuda_layout_origin
       l.shimo_str = poems[arg_hash[:number]-1].in_hiragana.shimo
+      l.view.alpha = 0
       view.superview.addSubview(l.view) if view.superview
+      l.view.fade_in(duration: 0.1)
       l.get(:close_button).on(:touch){
-        l.view.removeFromSuperview
+        l.view.fade_out do
+          l.view.removeFromSuperview
+        end
         init_tool_bar
       }
     }
