@@ -1,4 +1,6 @@
 class FudaLayout < MK::Layout
+  include NormalButtonStyles
+
   BASE_BACK_COLOR = 0xdddddd.uicolor(0.9)
 
   attr_accessor :view_size, :view_origin, :shimo_str
@@ -21,7 +23,7 @@ class FudaLayout < MK::Layout
 
   def close_button_style
     title '閉じる'
-    title_color :blue.uicolor
+    set_button_title_color
     size_to_fit
     frame from_top_right(down: 10, left: 5)
   end
