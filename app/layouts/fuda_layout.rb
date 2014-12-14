@@ -28,7 +28,18 @@ class FudaLayout < MK::Layout
 
   def fuda_view_style
     init_with_string shimo_str || 'あっちょんぶりけ'
-    set_all_sizes_by 300
+    height = fuda_height_on_me(2.to_f/3)
+    puts "-- 計算された高さは [#{height}]" if BW2.debug?
+    set_all_sizes_by height
     center ['50%', '50%']
   end
+
+  private
+
+  def fuda_height_on_me(ratio)
+    return 300 unless view_size
+    [view_size.height * ratio,
+        view_size.width * ratio / FudaView::FUDA_SIZE_IN_MM.width * FudaView::FUDA_SIZE_IN_MM.height].min
+  end
+
 end
