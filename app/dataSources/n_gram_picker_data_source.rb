@@ -1,11 +1,22 @@
 module NGramPickerDataSource
-#  include NGramSections
-
-  BC_FULL_IMG = UIImage.imageNamed('blue_circle_full.png')
-  BC_HALF_IMG = UIImage.imageNamed('blue_circle_half.png')
-  BC_NONE_IMG = UIImage.imageNamed('blue_circle_empty.png')
+  BC_FULL_IMG = 'blue_circle_full.png'.uiimage
+  BC_HALF_IMG = 'blue_circle_half.png'.uiimage
+  BC_NONE_IMG = 'blue_circle_empty.png'.uiimage
 
   FIRST_CHAR_PATTERN = '「%s」で始まる歌'
+
+  class << self
+    def cell_hashes_made_of(single_hash_array)
+      cell_hashes = []
+      single_hash_array.each do |single_hash|
+        single_hash.each do |id_key, char_value|
+          cell_hashes << {id: id_key, title: FIRST_CHAR_PATTERN % char_value}
+        end
+      end
+      cell_hashes
+    end
+  end
+
   N_GRAM_SECTIONS = [
       {section_id: :one,
        header_title: '一枚札',
@@ -15,31 +26,18 @@ module NGramPickerDataSource
       },
       {section_id: :two,
        header_title: '二枚札',
-       items: [
-           {id: :u,   title: FIRST_CHAR_PATTERN % 'う'},
-           {id: :tsu, title: FIRST_CHAR_PATTERN % 'つ'},
-           {id: :shi, title: FIRST_CHAR_PATTERN % 'し'},
-           {id: :mo,  title: FIRST_CHAR_PATTERN % 'も'},
-           {id: :yu,  title: FIRST_CHAR_PATTERN % 'ゆ'},
-       ]
+       items: cell_hashes_made_of([
+         {u:   'う'}, {tsu: 'つ'}, {shi: 'し'}, {mo:  'も'}, {yu:  'ゆ'}])
       },
       {section_id: :three,
        header_title: '三枚札',
-       items: [
-           {id: :i,   title: FIRST_CHAR_PATTERN % 'い'},
-           {id: :chi, title: FIRST_CHAR_PATTERN % 'ち'},
-           {id: :hi,  title: FIRST_CHAR_PATTERN % 'ひ'},
-           {id: :ki,  title: FIRST_CHAR_PATTERN % 'き'},
-       ]
+       items: cell_hashes_made_of([
+         {i:   'い'}, {chi: 'ち'}, {hi:  'ひ'}, {ki:  'き'}]),
       },
       {section_id: :four,
        header_title: '四枚札',
-       items: [
-           {id: :ha,  title: FIRST_CHAR_PATTERN % 'は'},
-           {id: :ya,  title: FIRST_CHAR_PATTERN % 'や'},
-           {id: :yo,  title: FIRST_CHAR_PATTERN % 'よ'},
-           {id: :ka,  title: FIRST_CHAR_PATTERN % 'か'},
-       ]
+       items: cell_hashes_made_of([
+         {ha: 'は'}, {ya: 'や'}, {yo: 'よ'}, {ka: 'か'}])
       },
       {section_id: :five,
        header_title: '五枚札',
@@ -49,17 +47,13 @@ module NGramPickerDataSource
       },
       {section_id: :six,
        header_title: '六枚札',
-       items: [
-           {id: :ta,  title: FIRST_CHAR_PATTERN % 'た'},
-           {id: :ko,  title: FIRST_CHAR_PATTERN % 'こ'},
-       ]
+       items: cell_hashes_made_of([
+           {ta: 'た'}, {ko: 'こ'}])
       },
       {section_id: :seven,
        header_title: '七枚札',
-       items: [
-           {id: :o,   title: FIRST_CHAR_PATTERN % 'お'},
-           {id: :wa,  title: FIRST_CHAR_PATTERN % 'わ'},
-       ]
+       items: cell_hashes_made_of([
+           {o:  'お'}, {wa: 'わ'}])
       },
       {section_id: :eight,
        header_title: '八枚札',
@@ -72,7 +66,7 @@ module NGramPickerDataSource
        items: [
            {id: :a,   title: FIRST_CHAR_PATTERN % 'あ'},
        ]
-      },
+      }
   ]
 
   def numberOfSectionsInTableView(tableView)
@@ -131,4 +125,5 @@ module NGramPickerDataSource
   def id_of(indexPath)
     item_hash(indexPath)[:id]
   end
+
 end
