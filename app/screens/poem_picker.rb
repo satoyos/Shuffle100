@@ -30,7 +30,7 @@ class PoemPicker < PM::TableScreen
   end
 
   def on_appear
-    fetch_frame_for_fuda_layout
+    fetch_frame_for_fuda_layout unless self.class.fuda_layout_size
   end
 
   def will_disappear
