@@ -59,4 +59,12 @@ class BW2
   def self.debug?
     @debug_flag ||= false
   end
+
+  def self.ios_version
+    @ios_version ||= UIDevice.currentDevice.systemVersion
+  end
+
+  def self.ios_version_7?
+    self.ios_version =~ /\A7/ ? true : false
+  end
 end

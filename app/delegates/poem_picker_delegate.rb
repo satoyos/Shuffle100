@@ -11,6 +11,11 @@ module PoemPickerDelegate
   end
 
   def poem_long_pressed(arg_hash)
+    if BW2.ios_version_7?
+      table_offset = tableView.contentOffset
+      puts 'table_offset => ' if BW2.debug?
+      ap table_offset if BW2.debug?
+    end
     set_toolbar_items false
     FudaLayout.new.tap{ |l|
       l.view_size = self.class.fuda_layout_size
@@ -20,10 +25,12 @@ module PoemPickerDelegate
       view.superview.addSubview(l.view) if view.superview
       l.view.fade_in(duration: 0.1)
       l.get(:close_button).on(:touch){
+        init_tool_bar
+        self.tableView.setContentOffset(table_offset, animated: false) if BW2.ios_version_7?
         l.view.fade_out do
           l.view.removeFromSuperview
+          double_tap_to_avoid_ios7_bug if BW2.ios_version_7?
         end
-        init_tool_bar
       }
     }
   end

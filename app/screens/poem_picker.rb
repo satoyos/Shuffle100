@@ -31,6 +31,7 @@ class PoemPicker < PM::TableScreen
 
   def on_appear
     fetch_frame_for_fuda_layout unless self.class.fuda_layout_size
+    double_tap_to_avoid_ios7_bug if BW2.ios_version_7?
   end
 
   def will_disappear
@@ -53,14 +54,41 @@ class PoemPicker < PM::TableScreen
 
   private
 
+  def double_tap_to_avoid_ios7_bug
+    status100.reverse_in_number(1)
+    update_table_and_prompt
+    status100.reverse_in_number(1)
+    update_table_and_prompt
+  end
+
   def fetch_frame_for_fuda_layout
+    if BW2.debug?
+      puts "iOS Version => #{BW2.ios_version}"
+      puts '+ TopLayoutGuide => '
+      ap topLayoutGuide
+      puts '+ BottomLayoutGuide => '
+      ap bottomLayoutGuide
+    end
     self.class.fuda_layout_origin =
-        CGPointMake(self.topLayoutGuide.size.width, self.topLayoutGuide.size.height)
+        CGPointMake(topLayoutGuide.size.width, topLayoutGuide.size.height)
     self.class.fuda_layout_size =
-        CGSizeMake(view.frame.size.width,
-                   view.frame.size.height +
-                       self.bottomLayoutGuide.origin.y +
-                       self.bottomLayoutGuide.size.height)
+        CGSizeMake(frame.size.width,
+                   frame.size.height + adjust_by_bottom_layout_guide + adjust_ios_version)
+  end
+
+  def adjust_by_bottom_layout_guide
+    bottomLayoutGuide.origin.y + bottomLayoutGuide.size.height
+  end
+
+  def adjust_ios_version
+    case BW2.ios_version_7?
+      when true
+        puts 'iOS7.xですから！' if BW2.debug?
+        -1 * topLayoutGuide.size.height
+      else
+        puts 'iOS8以降ですから！' if BW2.debug?
+        0
+    end
   end
 
   def update_table_and_prompt
