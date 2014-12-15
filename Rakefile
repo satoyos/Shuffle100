@@ -3,7 +3,7 @@ $:.unshift("/Library/RubyMotion/lib")
 require 'motion/project/template/ios'
 require 'bundler'
 
-is_test = ARGV.join(' ') =~ /spec|frank/
+is_test = ARGV.join(' ') =~ /spec|frank|simulator/
 if is_test
   # require 'guard/motion' if File.exist?('/Users/yoshi/src/motion/guard-motion')
   require 'motion-frank'
@@ -38,6 +38,9 @@ Motion::Project::App.setup do |app|
   APP_VERSION = '2.5'
 
   app.development do
+    app.pods do
+      pod 'Reveal-iOS-SDK'
+    end
     app.version = submit_version(APP_VERSION) + 'β'
     app.short_version = APP_VERSION + 'β'
     app.codesign_certificate = 'iPhone Developer: Yoshifumi Sato'
