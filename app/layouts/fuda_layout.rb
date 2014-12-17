@@ -1,7 +1,7 @@
 class FudaLayout < MK::Layout
   include NormalButtonStyles
 
-  BASE_BACK_COLOR = 0xdddddd.uicolor(0.9)
+  BASE_BACK_COLOR = 'tatami_moved.jpg'.uicolor
 
   attr_accessor :view_size, :view_origin, :shimo_str
 
@@ -24,8 +24,12 @@ class FudaLayout < MK::Layout
   def close_button_style
     title '閉じる'
     set_button_title_color
+    background_color :white.uicolor(0.4)
+    layer do
+      corner_radius 3.0
+    end
     size_to_fit
-    frame from_top_right(down: 10, left: 5)
+    frame from_top_right(down: 10, left: 10)
   end
 
   def fuda_view_style
