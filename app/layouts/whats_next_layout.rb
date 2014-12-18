@@ -7,12 +7,13 @@ class WhatsNextLayout < MotionKit::Layout
     background_color :white.uicolor
     add WhatsNextButton, :refrain_button
     add WhatsNextButton, :next_poem_button
+    add WhatsNextButton, :torifuda_button
   end
 
   def refrain_button_style
     size ['100%', whats_next_button_height]
     origin x: 0
-    center y: '30%'
+    center y: '50%'
     init_title_style_and_image('refrain.png')
     title '下の句をもう一度読む'
     set_insets
@@ -22,11 +23,21 @@ class WhatsNextLayout < MotionKit::Layout
   def next_poem_button_style
     size ['100%', whats_next_button_height]
     origin x: 0
-    center y: '60%'
+    center y: '70%'
     init_title_style_and_image('go_next.png')
     title '次の歌へ！      '
     set_insets
     accessibility_label 'next_poem_button'
+  end
+
+  def torifuda_button_style
+    size ['100%', whats_next_button_height]
+    origin x: 0
+    center y: '30%'
+    init_title_style_and_image('torifuda.png')
+    title '取り札を見る     '
+    set_insets
+    accessibility_label 'torifuda_button'
   end
 
   private
