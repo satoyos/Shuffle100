@@ -11,31 +11,49 @@ module PoemPickerDelegate
   end
 
   def poem_long_pressed(arg_hash)
-    if BW2.ios_version_7?
-      table_offset = tableView.contentOffset
-      puts 'table_offset => ' if BW2.debug?
-      ap table_offset if BW2.debug?
-    end
+    org_table_offset = BW2.ios_version_7? ? tableView.contentOffset : CGPointZero
     set_toolbar_items false
     FudaLayout.new.tap{ |l|
+      set_up_fuda_layout(l, with_poem: poems[arg_hash[:number]-1])
+      show_up_fuda_layout(l)
+      set_actions_on_fuda_layout(l, table_offset: org_table_offset)
+    }
+  end
+
+  private
+
+  def set_up_fuda_layout(layout, with_poem: poem)
+    layout.tap do |l|
       l.view_size = self.class.fuda_layout_size
       l.view_origin = self.class.fuda_layout_origin
-      l.shimo_str = poems[arg_hash[:number]-1].in_hiragana.shimo
+      l.shimo_str = poem.in_hiragana.shimo
+    end
+  end
+
+  def show_up_fuda_layout(layout)
+    layout.tap do |l|
       l.view.alpha = 0
       view.superview.addSubview(l.view) if view.superview
       l.view.fade_in(duration: 0.1)
-      l.get(:close_button).on(:touch){
+    end
+  end
+
+  def set_actions_on_fuda_layout(layout, table_offset: offset)
+    layout.tap do |l|
+      l.get(:close_button).on(:touch) {
         init_tool_bar
-        self.tableView.setContentOffset(table_offset, animated: false) if BW2.ios_version_7?
+        tableView.setContentOffset(offset, animated: false) if BW2.ios_version_7?
         l.view.fade_out do
           l.view.removeFromSuperview
           double_tap_to_avoid_ios7_bug if BW2.ios_version_7?
         end
       }
-    }
+    end
   end
 
-  private
+  def table_offset
+    BW2.ios_version_7? ? tableView.contentOffset : CGPointZero
+  end
 
   def select_all_poems
     if searching?
