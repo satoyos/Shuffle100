@@ -4,6 +4,7 @@ before_install:
     - sudo chown -R travis ~/Library/RubyMotion
     - mkdir -p ~/Library/RubyMotion/build
     - sudo motion update
+    - brew install ios-sim
 script:
     - bundle install
     - bundle exec rake clean
