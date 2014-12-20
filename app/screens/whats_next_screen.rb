@@ -1,5 +1,6 @@
 class WhatsNextScreen < PM::Screen
   include GameQuitDelegate
+  include LayoutGuideHelper
 
   title '次はどうする？'
 
@@ -18,11 +19,11 @@ class WhatsNextScreen < PM::Screen
   end
 
   def on_appear
-    fetch_frame_for_fuda_layout unless self.class.fuda_layout_size
+    fetch_frame_for_fuda_layout unless self.class.fuda_layout_frame
   end
 
   class << self
-    attr_accessor :fuda_layout_size, :fuda_layout_origin
+    attr_accessor :fuda_layout_frame
   end
 
   private
@@ -70,39 +71,23 @@ class WhatsNextScreen < PM::Screen
   end
 
   def show_torifuda
-    FudaLayout.new.tap{ |l|
-      l.view_size = self.class.fuda_layout_size
-      l.view_origin = self.class.fuda_layout_origin
-      l.shimo_str = parent_screen.supplier.poem.in_hiragana.shimo
+    FudaLayout.create_with_frame(self.class.fuda_layout_frame,
+                                 str: parent_screen.poem.in_hiragana.shimo).tap {|l|
       l.view.tap do |v|
         v.alpha = 0
         add v
         v.fade_in(duration: 0.1)
       end
       l.get(:close_button).on(:touch){
-        l.view.fade_out do
-          l.view.removeFromSuperview
-        end
+        l.view.fade_out {l.view.removeFromSuperview}
       }
     }
   end
 
   def fetch_frame_for_fuda_layout
-    if BW2.debug?
-      puts "iOS Version => #{BW2.ios_version}"
-      puts '+ TopLayoutGuide => '
-      ap topLayoutGuide
-      puts '+ BottomLayoutGuide => '
-      ap bottomLayoutGuide
-    end
-    self.class.fuda_layout_origin =
-        CGPointMake(topLayoutGuide.size.width, top_layout_guide_height)
-    self.class.fuda_layout_size =
-        CGSizeMake(frame.size.width,
-                   frame.size.height - top_layout_guide_height)
-  end
-
-  def top_layout_guide_height
-    topLayoutGuide.size.height
+    puts_info_about_layout_guide if BW2.debug?
+    origin = CGPointMake(topLayoutGuide.size.width, top_guide_height)
+    size = CGSizeMake(frame.size.width, frame.size.height - top_guide_height)
+    self.class.fuda_layout_frame = CGRectMake(origin.x, origin.y, size.width, size.height)
   end
 end

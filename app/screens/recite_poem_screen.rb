@@ -59,6 +59,10 @@ class RecitePoemScreen < PM::Screen
     layout.font_changed(notification)
   end
 
+  def poem
+    supplier.poem
+  end
+
   private
 
   def create_new_layout

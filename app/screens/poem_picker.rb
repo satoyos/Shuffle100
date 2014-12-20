@@ -3,6 +3,7 @@ class PoemPicker < PM::TableScreen
   include PoemPickerDataSource
   include PoemPickerDelegate
   include OH::Notifications
+  include LayoutGuideHelper
 
   title '歌を選ぶ'
   searchable placeholder: '歌を検索'
@@ -30,7 +31,7 @@ class PoemPicker < PM::TableScreen
   end
 
   def on_appear
-    fetch_frame_for_fuda_layout unless self.class.fuda_layout_size
+    fetch_frame_for_fuda_layout unless self.class.fuda_layout_frame
     double_tap_to_avoid_ios7_bug if BW2.ios_version_7?
   end
 
@@ -43,13 +44,12 @@ class PoemPicker < PM::TableScreen
     @poems ||= Deck.original_deck.poems
   end
 
-
   def font_changed(notification)
     update_table_and_prompt
   end
 
   class << self
-    attr_accessor :fuda_layout_size, :fuda_layout_origin
+    attr_accessor :fuda_layout_frame
   end
 
   private
@@ -62,21 +62,14 @@ class PoemPicker < PM::TableScreen
   end
 
   def fetch_frame_for_fuda_layout
-    if BW2.debug?
-      puts "iOS Version => #{BW2.ios_version}"
-      puts '+ TopLayoutGuide => '
-      ap topLayoutGuide
-      puts '+ BottomLayoutGuide => '
-      ap bottomLayoutGuide
-    end
-    self.class.fuda_layout_origin =
-        CGPointMake(topLayoutGuide.size.width, topLayoutGuide.size.height)
-    self.class.fuda_layout_size =
-        CGSizeMake(frame.size.width,
-                   frame.size.height + adjust_by_bottom_layout_guide + adjust_ios_version)
+    puts_info_about_layout_guide if BW2.debug?
+    origin = CGPointMake(topLayoutGuide.size.width, top_guide_height)
+    size = CGSizeMake(frame.size.width,
+                      frame.size.height + adjust_by_bottom_layout_guide + adjust_ios_version)
+    self.class.fuda_layout_frame = CGRectMake(origin.x, origin.y, size.width, size.height)
   end
 
-  def adjust_by_bottom_layout_guide
+    def adjust_by_bottom_layout_guide
     bottomLayoutGuide.origin.y + bottomLayoutGuide.size.height
   end
 
@@ -149,5 +142,4 @@ class PoemPicker < PM::TableScreen
       alert_view.addButtonWithTitle('戻る')
     }.show
   end
-
 end
