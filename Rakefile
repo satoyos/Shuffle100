@@ -41,15 +41,15 @@ Motion::Project::App.setup do |app|
     app.pods do
       pod 'Reveal-iOS-SDK'
     end
-    app.version = submit_version(APP_VERSION) + 'β'
-    app.short_version = APP_VERSION + 'β'
+    app.version = build_number
+    app.short_version = APP_VERSION + 'β' + " (#{build_number})"
     app.codesign_certificate = 'iPhone Developer: Yoshifumi Sato'
     app.provisioning_profile = '/Users/yoshi/data/dev/Provisionings/Provisioning_for_100series_Tester.mobileprovision'
   end
 
   app.release do
     app.info_plist['AppStoreRelease'] = true
-    app.version = submit_version(APP_VERSION)
+    app.version = build_number
     app.short_version = APP_VERSION
     app.codesign_certificate = 'iPhone Distribution: Yoshifumi Sato'
     app.provisioning_profile = '/Users/yoshi/data/dev/Provisionings/Shuffle100_Distribution.mobileprovision'
@@ -65,6 +65,6 @@ end
 
 require 'date'
 
-def submit_version(short_version)
+def build_number
   Time.now.strftime('%Y%m%d.%H%M')
 end
