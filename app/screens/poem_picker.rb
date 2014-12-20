@@ -32,7 +32,7 @@ class PoemPicker < PM::TableScreen
   end
 
   def on_appear
-    fetch_frame_for_fuda_layout unless self.class.fuda_layout_frame
+    self.class.fuda_layout_frame ||= frame_for_fuda_layout
     double_tap_to_avoid_ios7_bug if BW2.ios_version_7?
   end
 
@@ -50,7 +50,7 @@ class PoemPicker < PM::TableScreen
   end
 
   class << self
-    attr_accessor :fuda_layout_frame
+    attr_accessor :fuda_layout_frame, :fuda_layout_frame_searching
   end
 
   private
@@ -62,12 +62,12 @@ class PoemPicker < PM::TableScreen
     update_table_and_prompt
   end
 
-  def fetch_frame_for_fuda_layout
+  def frame_for_fuda_layout
     puts_info_about_layout_guide if BW2.debug?
     origin = CGPointMake(topLayoutGuide.size.width, top_guide_height)
     size = CGSizeMake(frame.size.width,
                       frame.size.height + adjust_by_bottom_layout_guide + adjust_ios_version)
-    self.class.fuda_layout_frame = CGRectMake(origin.x, origin.y, size.width, size.height)
+    CGRectMake(origin.x, origin.y, size.width, size.height)
   end
 
   def adjust_by_bottom_layout_guide

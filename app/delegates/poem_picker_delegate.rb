@@ -13,11 +13,13 @@ module PoemPickerDelegate
   def poem_long_pressed(arg_hash)
     org_table_offset = BW2.ios_version_7? ? tableView.contentOffset : CGPointZero
     set_toolbar_items false
-    FudaLayout.create_with_frame(self.class.fuda_layout_frame,
+    fuda_layout_frame = searching? ? frame_for_fuda_layout_searching : self.class.fuda_layout_frame
+    FudaLayout.create_with_frame(fuda_layout_frame,
                                  str: poems[arg_hash[:number]-1].in_hiragana.shimo).tap{|l|
       show_up_fuda_layout(l)
       set_actions_on_fuda_layout(l, table_offset: org_table_offset)
     }
+
   end
 
   private
