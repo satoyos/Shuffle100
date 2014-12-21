@@ -3,7 +3,6 @@ class FudaLayout < MK::Layout
 
   BASE_BACK_COLOR = UIColor.colorWithPatternImage 'tatami_moved.jpg'.uiimage
 
-  # attr_accessor :view_size, :view_origin, :shimo_str
   attr_accessor :view_frame, :shimo_str
 
   def layout
@@ -16,12 +15,6 @@ class FudaLayout < MK::Layout
   def root_style
     background_color BASE_BACK_COLOR
     accessibility_label 'FudaLayoutView'
-=begin
-    if view_size
-      origin [view_origin.x, view_origin.y]
-      size [view_size.width, view_size.height]
-    end
-=end
     frame view_frame if view_frame
   end
 
