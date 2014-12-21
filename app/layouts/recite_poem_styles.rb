@@ -6,8 +6,8 @@ module RecitePoemStyles
 
   PLAY_BUTTON_PLAYING_TITLE = FontAwesome.icon('play')
   PLAY_BUTTON_PAUSING_TITLE = FontAwesome.icon('pause')
-  PLAY_BUTTON_PLAYING_COLOR = '#007bbb'.uicolor # 紺碧
-  PLAY_BUTTON_PAUSING_COLOR = '#e2041b'.uicolor # 猩々緋
+  PLAY_BUTTON_PLAYING_COLOR = 0x007bbb.uicolor # 紺碧
+  PLAY_BUTTON_PAUSING_COLOR = 0xe2041b.uicolor # 猩々緋
 
   # lower_container
   SKIP_BUTTON_COLOR = PLAY_BUTTON_PLAYING_COLOR

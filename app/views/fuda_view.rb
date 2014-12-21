@@ -8,7 +8,7 @@ class FudaView < UIImageView
   OFFSET_DIVIDED_BY_POWER = 2     # これに@fuda_powerをかけたものが@green_offsetの値となる。
 
   # サイズ以外の定数の設定
-  INSIDE_COLOR = '#FFF7E5'.uicolor
+  INSIDE_COLOR = 0xFFF7E5.uicolor
   WASHI_JPG_FILE  = 'washi_darkgreen 001.jpg'
   STRING_NOT_SET_MESSAGE = '札の文字はまだ決まっていません'
   ACCESSIBILITY_LABEL = 'fuda_view'

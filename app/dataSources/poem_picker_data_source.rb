@@ -1,6 +1,6 @@
 module PoemPickerDataSource
 
-  SELECTED_BG_COLOR = '#eebbcb'.uicolor #撫子色
+  SELECTED_BG_COLOR = 0xeebbcb.uicolor #撫子色
 
   def table_data
     [{
