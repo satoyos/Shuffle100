@@ -2,17 +2,24 @@
 $:.unshift("/Library/RubyMotion/lib")
 require 'motion/project/template/ios'
 require 'bundler'
-
-is_test = ARGV.join(' ') =~ /spec|frank|simulator/
-if is_test
-  # require 'guard/motion' if File.exist?('/Users/yoshi/src/motion/guard-motion')
-  require 'motion-frank'
-  Bundler.require :default, :spec
- else
-  Bundler.require
- end
-
 require 'sugarcube-common'
+
+in_simulator = in_spec = nil
+
+case ARGV.join(' ')
+  when /spec/
+    in_spec = true
+    require 'awesome_print_motion'
+    Bundler.require :spec
+  when /frank/
+    Bundler.require :frank
+  when /simulator|device|pod/
+    in_simulator = true
+    require 'awesome_print_motion'
+    Bundler.require :simulator
+end
+
+Bundler.require
 
 Motion::Project::App.setup do |app|
   # Use `rake config' to see complete project settings.
@@ -38,9 +45,9 @@ Motion::Project::App.setup do |app|
   APP_VERSION = '2.5'
 
   app.development do
-    app.pods do
+    app.pods {
       pod 'Reveal-iOS-SDK'
-    end
+    } if in_simulator
     app.version = build_number
     app.short_version = APP_VERSION + 'β' + ".#{build_number})"
     app.codesign_certificate = 'iPhone Developer: Yoshifumi Sato'
@@ -58,12 +65,8 @@ Motion::Project::App.setup do |app|
 
   app.detect_dependencies = true
 
-  if is_test
-    app.redgreen_style = :focused
-  end
+  app.redgreen_style = :focused if in_spec
 end
-
-require 'date'
 
 def build_number
   Time.now.strftime('%Y%m%d.%H%M')
