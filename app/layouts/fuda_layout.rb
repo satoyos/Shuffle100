@@ -1,7 +1,7 @@
 class FudaLayout < MK::Layout
   include NormalButtonStyles
 
-  BASE_BACK_COLOR = UIColor.colorWithPatternImage 'tatami_moved.jpg'.uiimage
+  BASE_BACK_COLOR = 'tatami_moved.jpg'.uicolor
 
   attr_accessor :view_frame, :shimo_str
 

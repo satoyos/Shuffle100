@@ -1,8 +1,8 @@
 class AppDelegate < PM::Delegate
   include PM::Styling
 
-  BAR_TINT_COLOR = 0xcee4ae.uicolor #夏虫色
-  BUTTON_NORMAL_COLOR = 0x007bbb.uicolor # 紺碧
+  BAR_TINT_COLOR = '#cee4ae'.uicolor #夏虫色
+  BUTTON_NORMAL_COLOR = '#007bbbjjj'.uicolor # 紺碧
   PROMPT = '百首読み上げ'
 
   attr_accessor :poem_supplier, :players_hash, :opening_player
