@@ -29,19 +29,19 @@ class FudaScreen < PM::Screen
       when nil ; 0
       else
         print_about_nav_bar if BW2.debug?
-        nav_bar_frame.size.height + 30
+        nav_bar.size.height + 30
         # ↑ iOS7とiOS8でnav_bar.origin.yが取得できたりできなかったりするので、いっそ固定値で。
     end
   end
 
   def print_about_nav_bar
     puts '** navigationBar => '
-    ap navigationController.navigationBar
+    ap nav_bar
     puts '*** navigationBar.backgroudImage => '
-    ap navigationController.navigationBar.subviews.first
+    ap nav_bar.subviews.first
   end
 
-  def nav_bar_frame
+  def nav_bar
     navigationController.navigationBar
   end
 
