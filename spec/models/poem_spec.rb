@@ -93,6 +93,18 @@ EOF
         @poem2.kimari_ji.should.not =~ /　/
       end
     end
+  end
 
+  describe '#str_with_number_and_liner' do
+    before do
+      @hash = OH::JSONParser.parse(POEM_INIT_JSON)
+      @str = Poem.new(@hash).str_with_number_and_liner
+    end
+    it 'should be a String' do
+      @str.is_a?(String).should.be.true
+    end
+    it '歌番号と歌文字列からなる文字列を返す' do
+      @str.should == '2. 春過ぎて 夏来にけらし 白妙の 衣干すてふ 天の香具山'
+    end
   end
 end
