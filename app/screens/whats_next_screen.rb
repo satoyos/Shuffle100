@@ -71,17 +71,8 @@ class WhatsNextScreen < PM::Screen
   end
 
   def show_torifuda
-    FudaLayout.create_with_frame(self.class.fuda_layout_frame,
-                                 str: parent_screen.poem.in_hiragana.shimo).tap {|l|
-      l.view.tap do |v|
-        v.alpha = 0
-        add v
-        v.fade_in(duration: 0.1)
-      end
-      l.get(:close_button).on(:touch){
-        l.view.fade_out {l.view.removeFromSuperview}
-      }
-    }
+    open_modal FudaScreen.new(nav_bar: true).tap{|s|
+                 s.fuda_str = parent_screen.poem.in_hiragana.shimo}
   end
 
   def fetch_frame_for_fuda_layout
