@@ -14,8 +14,7 @@ module PoemPickerDelegate
     open_modal FudaScreen.new(nav_bar: true).tap{|s|
                  poem = poems[arg_hash[:number]-1]
                  s.fuda_str = poem.in_hiragana.shimo
-                 s.nav_bar_title = '%d. %s %s %s %s %s' %
-                     ([poem.number] + (0..4).to_a.map{|idx| poem.liner[idx]})
+                 s.nav_bar_title = poem.str_with_number_and_liner
                }
   end
 
