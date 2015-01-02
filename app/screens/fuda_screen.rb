@@ -2,10 +2,12 @@ class FudaScreen < PM::Screen
   include LayoutGuideHelper
 
   attr_reader :layout
-  attr_accessor :fuda_str
+  attr_accessor :fuda_str, :nav_bar_title
 
   def on_load
-    puts "nav_bar_offset => #{nav_bar_offset}"
+    puts "nav_bar_offset => #{nav_bar_offset}" if BW2.debug?
+    puts "nav_bar_title  => #{nav_bar_title}" if BW2.debug?
+    self.title = nav_bar_title if nav_bar_title
     @layout = FudaLayout.new.tap {|l|
       l.top_offset = nav_bar_offset
       l.shimo_str = fuda_str || 'あかさたなはまやらわ'

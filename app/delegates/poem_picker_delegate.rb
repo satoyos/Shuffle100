@@ -12,7 +12,11 @@ module PoemPickerDelegate
 
   def poem_long_pressed(arg_hash)
     open_modal FudaScreen.new(nav_bar: true).tap{|s|
-                 s.fuda_str = poems[arg_hash[:number]-1].in_hiragana.shimo}
+                 poem = poems[arg_hash[:number]-1]
+                 s.fuda_str = poem.in_hiragana.shimo
+                 s.nav_bar_title = '%d. %s %s %s %s %s' %
+                     ([poem.number] + (0..4).to_a.map{|idx| poem.liner[idx]})
+               }
   end
 
   private
