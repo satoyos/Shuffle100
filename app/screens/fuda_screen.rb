@@ -8,7 +8,8 @@ class FudaScreen < PM::Screen
     puts "nav_bar_offset => #{nav_bar_offset}"
     @layout = FudaLayout.new.tap {|l|
       l.top_offset = nav_bar_offset
-      l.shimo_str = 'あかさたなはまやらわ'}
+      l.shimo_str = fuda_str || 'あかさたなはまやらわ'
+    }
     self.view = layout.view
   end
 
