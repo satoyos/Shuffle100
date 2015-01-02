@@ -14,6 +14,10 @@ class FudaScreen < PM::Screen
     set_nav_bar_buttons
   end
 
+  def should_autorotate
+    false
+  end
+
   private
 
   def set_nav_bar_buttons
