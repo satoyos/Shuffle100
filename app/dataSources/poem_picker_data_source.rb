@@ -7,16 +7,13 @@ module PoemPickerDataSource
          cell_style: UITableViewCellStyleValue1,
          cells: poems.map{|poem|
            {
-               title: '%3d. %s %s %s %s %s' %
-                   ([poem.number] + (0..4).to_a.map{|idx| poem.liner[idx]}),
-
+               title: poem.str_with_number_and_liner('%3d. %s %s %s %s %s'),
                subtitle: "　　 #{poem.poet}",
                search_text: search_text_for_poem(poem),
                action: :poem_tapped,
                long_press_action: :poem_long_pressed,
                arguments: {number: poem.number},
                style: {
-                   # font: UIFont.fontWithName('HiraMinProN-W6', size: 16),
                    font: UIFont.fontWithName('HiraMinProN-W6', size: MDT::Font.body.pointSize),
                    background_color: bg_color_for_poem(poem),
                    accessibility_label: '%03d' % poem.number,
