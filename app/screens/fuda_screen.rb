@@ -11,9 +11,14 @@ class FudaScreen < PM::Screen
       l.shimo_str = fuda_str || 'あかさたなはまやらわ'
     }
     self.view = layout.view
+    set_nav_bar_buttons
   end
 
   private
+
+  def set_nav_bar_buttons
+    set_nav_bar_button :right, {title: '閉じる', action: :close}
+  end
 
   def nav_bar_offset
     case navigationController
