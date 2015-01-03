@@ -5,8 +5,6 @@ class FudaScreen < PM::Screen
   attr_accessor :fuda_str, :nav_bar_title
 
   def on_load
-    puts "nav_bar_offset => #{nav_bar_offset}" if BW2.debug?
-    puts "nav_bar_title  => #{nav_bar_title}" if BW2.debug?
     self.title = nav_bar_title if nav_bar_title
     @layout = FudaLayout.new.tap {|l|
       l.top_offset = nav_bar_offset

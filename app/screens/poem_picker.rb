@@ -3,7 +3,6 @@ class PoemPicker < PM::TableScreen
   include PoemPickerDataSource
   include PoemPickerDelegate
   include OH::Notifications
-  include LayoutGuideHelper
   include PoemPickerSearchHelper
 
   title '歌を選ぶ'
@@ -26,7 +25,6 @@ class PoemPicker < PM::TableScreen
 
   def will_appear
     init_tool_bar
-    puts "main_view => [#{view}]" if BW2.debug?
     prepare_text_field
     update_table_and_prompt
   end
@@ -63,7 +61,6 @@ class PoemPicker < PM::TableScreen
   end
 
   def frame_for_fuda_layout
-    puts_info_about_layout_guide if BW2.debug?
     origin = CGPointMake(topLayoutGuide.size.width, top_guide_height)
     size = CGSizeMake(frame.size.width,
                       frame.size.height + adjust_by_bottom_layout_guide + adjust_ios_version)
