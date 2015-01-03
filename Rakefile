@@ -49,7 +49,7 @@ Motion::Project::App.setup do |app|
       pod 'Reveal-iOS-SDK'
     } if in_simulator
     app.version = build_number
-    app.short_version = APP_VERSION + 'β' + ".#{build_number})"
+    app.short_version = APP_VERSION + 'β' + ".#{build_number}"
     app.codesign_certificate = 'iPhone Developer: Yoshifumi Sato'
     app.provisioning_profile = '/Users/yoshi/data/dev/Provisionings/Provisioning_for_100series_Tester.mobileprovision'
   end
