@@ -1,5 +1,4 @@
 class FudaScreen < PM::Screen
-  include LayoutGuideHelper
 
   attr_reader :layout
   attr_accessor :fuda_str, :nav_bar_title

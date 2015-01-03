@@ -26,16 +26,6 @@ module PoemPickerSearchHelper
     text_field.keyboardType = UIKeyboardTypeDefault
   end
 
-  def frame_for_fuda_layout_searching
-    puts_info_about_layout_guide if BW2.debug?
-    origin = CGPointMake(topLayoutGuide.size.width, top_guide_height)
-    size = CGSizeMake(frame.size.width,
-                      frame.size.height +
-                          adjust_by_bottom_layout_guide +
-                          adjust_ios_version_searching)
-    CGRectMake(origin.x, origin.y, size.width, size.height)
-  end
-
   def adjust_ios_version_searching
     case BW2.ios_version_7?
       when true

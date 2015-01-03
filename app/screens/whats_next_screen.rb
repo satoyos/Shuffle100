@@ -1,6 +1,5 @@
 class WhatsNextScreen < PM::Screen
   include GameQuitDelegate
-  include LayoutGuideHelper
 
   title '次はどうする？'
 
@@ -16,14 +15,6 @@ class WhatsNextScreen < PM::Screen
     self.view = layout.view
     set_navigation_bar_buttons
     set_button_actions
-  end
-
-  def on_appear
-    fetch_frame_for_fuda_layout unless self.class.fuda_layout_frame
-  end
-
-  class << self
-    attr_accessor :fuda_layout_frame
   end
 
   private
@@ -75,12 +66,5 @@ class WhatsNextScreen < PM::Screen
                  s.fuda_str = parent_screen.poem.in_hiragana.shimo
                  s.nav_bar_title = parent_screen.poem.str_with_number_and_liner
                }
-  end
-
-  def fetch_frame_for_fuda_layout
-    puts_info_about_layout_guide if BW2.debug?
-    origin = CGPointMake(topLayoutGuide.size.width, top_guide_height)
-    size = CGSizeMake(frame.size.width, frame.size.height - top_guide_height)
-    self.class.fuda_layout_frame = CGRectMake(origin.x, origin.y, size.width, size.height)
   end
 end
