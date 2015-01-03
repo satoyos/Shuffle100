@@ -72,7 +72,9 @@ class WhatsNextScreen < PM::Screen
 
   def show_torifuda
     open_modal FudaScreen.new(nav_bar: true).tap{|s|
-                 s.fuda_str = parent_screen.poem.in_hiragana.shimo}
+                 s.fuda_str = parent_screen.poem.in_hiragana.shimo
+                 s.nav_bar_title = parent_screen.poem.str_with_number_and_liner
+               }
   end
 
   def fetch_frame_for_fuda_layout
