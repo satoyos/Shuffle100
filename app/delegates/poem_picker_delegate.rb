@@ -20,39 +20,6 @@ module PoemPickerDelegate
 
   private
 
-  def set_up_fuda_layout(layout, with_poem: poem)
-    layout.tap do |l|
-      l.view_size = self.class.fuda_layout_size
-      l.view_origin = self.class.fuda_layout_origin
-      l.shimo_str = poem.in_hiragana.shimo
-    end
-  end
-
-  def show_up_fuda_layout(layout)
-    layout.tap do |l|
-      l.view.alpha = 0
-      view.superview.addSubview(l.view) if view.superview
-      l.view.fade_in(duration: 0.1)
-    end
-  end
-
-  def set_actions_on_fuda_layout(layout, table_offset: offset)
-    layout.tap do |l|
-      l.get(:close_button).on(:touch) {
-        init_tool_bar
-        tableView.setContentOffset(offset, animated: false) if BW2.ios_version_7?
-        l.view.fade_out do
-          l.view.removeFromSuperview
-          double_tap_to_avoid_ios7_bug if BW2.ios_version_7?
-        end
-      }
-    end
-  end
-
-  def table_offset
-    BW2.ios_version_7? ? tableView.contentOffset : CGPointZero
-  end
-
   def select_all_poems
     if searching?
       status100.select_in_numbers(search_result_poem_numbers)

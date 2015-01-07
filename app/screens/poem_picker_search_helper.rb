@@ -26,14 +26,4 @@ module PoemPickerSearchHelper
     text_field.keyboardType = UIKeyboardTypeDefault
   end
 
-  def adjust_ios_version_searching
-    case BW2.ios_version_7?
-      when true
-        puts 'iOS7.xですから！' if BW2.debug?
-        -1 * topLayoutGuide.size.height
-      else
-        puts 'iOS8以降ですから！' if BW2.debug?
-        -1 * bottomLayoutGuide.origin.y
-    end
-  end
 end
