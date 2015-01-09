@@ -1,3 +1,4 @@
+=begin
 module ProMotion
   module Table
     module Longpressable
@@ -27,6 +28,7 @@ module ProMotion
     end
   end
 end
+=end
 
 
 class PoemPicker < PM::TableScreen
