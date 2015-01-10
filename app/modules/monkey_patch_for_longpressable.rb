@@ -18,6 +18,12 @@ module ProMotion
         gesture_point = gesture.locationInView(table_view)
         puts '!! gesture_point => '
         ap gesture_point
+        puts '!! contentOffset of tableView => '
+        ap table_view.contentOffset
+        if searching?
+          puts '!! contentOffset of searchResutsView => '
+          ap table_search_display_controller.searchResultsTableView.contentOffset
+        end
         index_path = table_view.indexPathForRowAtPoint(gesture_point)
         puts '!! index_path => '
         ap index_path
