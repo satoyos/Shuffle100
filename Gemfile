@@ -8,6 +8,7 @@ gem 'motion-weakattr'
 gem 'motion-dynamic-type'
 gem 'motion-fontawesome'
 gem 'awesome_print_motion'
+gem 'newclear'
 
 group :simulator do # rake simulator
   gem 'motion-cocoapods'
