@@ -16,6 +16,7 @@ class PoemPicker < PM::TableScreen
     init_members
     set_font_changed_notification
     update_table_and_prompt
+    set_kvo_searching
   end
 
   def init_members
