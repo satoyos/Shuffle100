@@ -25,7 +25,7 @@ module PoemPickerDelegate
 
   def select_all_poems
     if searching?
-      status100.select_in_numbers(search_result_poem_numbers)
+      status100.select_in_numbers(filtered_poem_numbers)
       update_table_and_prompt
       refresh_search_result_table
     else
@@ -36,7 +36,7 @@ module PoemPickerDelegate
 
   def cancel_all_poems
     if searching?
-      status100.cancel_in_numbers(search_result_poem_numbers)
+      status100.cancel_in_numbers(filtered_poem_numbers)
       update_table_and_prompt
       refresh_search_result_table
     else
