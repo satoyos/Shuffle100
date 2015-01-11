@@ -5,12 +5,7 @@ module PoemPickerSearchHelper
 
   # @return [Array] 検索結果として表示されている歌全ての番号
   def search_result_poem_numbers
-    @table_search_display_controller.searchResultsTableView.subviews[0].subviews.
-        select{|sv| sv.is_a?(UITableViewCell) and not sv.hidden?}.
-        map{|cell| cell.accessibilityLabel.to_i}.tap { |numbers|
-      puts 'numbers in 検索結果 => ' if BW2.debug?
-      ap numbers if BW2.debug?
-    }
+    filtered_poem_numbers
   end
 
   def prepare_text_field
@@ -53,4 +48,9 @@ module PoemPickerSearchHelper
     end
   end
 
+  def filtered_poem_numbers
+    promotion_table_data.filtered_data[0][:cells].map { |cell_hash|
+      cell_hash[:arguments][:number]
+    }
+  end
 end
