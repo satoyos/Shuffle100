@@ -2,30 +2,21 @@ module ProMotion
   module Table
     module Longpressable
 
-=begin
-      def make_longpressable(params={})
-        params = {
-            min_duration: 1.0
-        }.merge(params)
-
-        long_press_gesture = UILongPressGestureRecognizer.alloc.initWithTarget(self, action:"on_long_press:")
-        long_press_gesture.minimumPressDuration = params[:min_duration]
-        long_press_gesture.delegate = self
-        self.table_view.addGestureRecognizer(long_press_gesture)
-      end
-=end
-
       def on_long_press(gesture)
         return unless gesture.state == UIGestureRecognizerStateBegan
         gesture_point = gesture.locationInView(table_view)
         if searching?
-          puts '!! contentOffset of searchResutsView => '
-          ap table_search_display_controller.searchResultsTableView.contentOffset
+          if BW2.debug?
+            puts '!! contentOffset of searchResutsView => '
+            ap table_search_display_controller.searchResultsTableView.contentOffset
+          end
           gesture_point = point_on_scrolled_screen(gesture_point)
         end
         index_path = table_view.indexPathForRowAtPoint(gesture_point)
-        puts '!! index_path => '
-        ap index_path
+        if BW2.debug?
+          puts '!! index_path => '
+          ap index_path
+        end
         return unless index_path # <= これ、pull requestしていいかも？？
         data_cell = self.promotion_table_data.cell(index_path: index_path)
         return unless data_cell
