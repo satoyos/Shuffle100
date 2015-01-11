@@ -26,8 +26,9 @@ module ProMotion
         index_path = table_view.indexPathForRowAtPoint(gesture_point)
         puts '!! index_path => '
         ap index_path
-        return unless index_path and cell_exist?(index_path: index_path) # <= これ、pull requestしていいかも？？
+        return unless index_path # <= これ、pull requestしていいかも？？
         data_cell = self.promotion_table_data.cell(index_path: index_path)
+        return unless data_cell
         trigger_action(data_cell[:long_press_action], data_cell[:arguments], index_path) if data_cell[:long_press_action]
       end
 
@@ -42,19 +43,19 @@ module ProMotion
         table_search_display_controller.searchResultsTableView.contentOffset.y -
             @searching_offset_y
       end
+    end
+  end
 
-      def cell_exist?(given_params={})
-        params = index_path_to_section_index(given_params)
-        table_section = params[:unfiltered] ?
-            promotion_table_data.data[params[:section]] :
-            promotion_table_data.section(params[:section])
-        case table_section[:cells].at(params[:index].to_i)
-          when nil
-            puts "！そのindex_pathにはセルが存在しません！！(#{params})" if BW2.debug?
-            false
-          else ; true
-        end
+  class TableData
+    def cell(params={})
+      params = index_path_to_section_index(params)
+      table_section = params[:unfiltered] ? self.data[params[:section]] : self.section(params[:section])
+      c = table_section[:cells].at(params[:index].to_i)
+      unless c
+        puts "！そのindex_pathにはセルが存在しません！！(#{params})" if BW2.debug?
+        return nil
       end
+      set_data_cell_defaults c
     end
   end
 end
