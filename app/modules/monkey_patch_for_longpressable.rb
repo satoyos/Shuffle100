@@ -2,6 +2,7 @@ module ProMotion
   module Table
     module Longpressable
 
+=begin
       def make_longpressable(params={})
         params = {
             min_duration: 1.0
@@ -12,6 +13,7 @@ module ProMotion
         long_press_gesture.delegate = self
         self.table_view.addGestureRecognizer(long_press_gesture)
       end
+=end
 
       def on_long_press(gesture)
         return unless gesture.state == UIGestureRecognizerStateBegan
