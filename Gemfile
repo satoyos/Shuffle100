@@ -6,7 +6,7 @@ gem 'motion-kit'
 gem 'ProMotion'
 gem 'motion-weakattr'
 gem 'motion-dynamic-type'
-gem 'motion-fontawesome'
+gem 'motion-awesome'
 gem 'awesome_print_motion'
 gem 'newclear'
 

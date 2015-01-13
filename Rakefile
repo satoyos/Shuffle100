@@ -3,6 +3,7 @@ $:.unshift("/Library/RubyMotion/lib")
 require 'motion/project/template/ios'
 require 'bundler'
 require 'sugarcube-common'
+require 'sugarcube-awesome'
 
 in_simulator = in_spec = nil
 
@@ -33,6 +34,8 @@ Motion::Project::App.setup do |app|
   # app.icons = ['Shuffle100.png', 'Shuffle100@2x.png', 'Shuffle100-60@2x.png']
   app.prerendered_icon = true
   app.icons = Dir.glob('resources/Icon*.png').map{|icon| icon.split('/').last}
+
+  app.fonts = ['fontawesome-webfont.ttf']
 
   app.identifier = 'com.sato0123.Shuffle100'
   app.device_family = [:iphone, :ipad]

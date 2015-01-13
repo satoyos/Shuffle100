@@ -67,15 +67,16 @@ GEM
       bundler
     minitest (5.5.0)
     molinillo (0.1.2)
+    motion-awesome (0.0.6)
+      motion-map
     motion-cocoapods (1.7.0)
       cocoapods (>= 0.34)
     motion-dynamic-type (0.1.0)
-    motion-fontawesome (0.0.1)
-      rake
     motion-frank (1.2.2.0)
       frank-cucumber (= 1.2.2)
     motion-kit (0.17.0)
       dbt (~> 1.1.5)
+    motion-map (0.0.4)
     motion-redgreen (1.0.0)
     motion-weakattr (0.1)
     multi_json (1.10.1)
@@ -122,9 +123,9 @@ DEPENDENCIES
   ProMotion
   awesome_print_motion
   i18n (< 0.7)
+  motion-awesome
   motion-cocoapods
   motion-dynamic-type
-  motion-fontawesome
   motion-frank
   motion-kit
   motion-redgreen

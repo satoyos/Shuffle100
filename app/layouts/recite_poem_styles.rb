@@ -4,15 +4,15 @@ module RecitePoemStyles
   HEADER_BUTTON_MARGIN = 10
   BUTTON_IMAGE_SIZE = CGSizeMake(HEADER_BUTTON_SIZE, HEADER_BUTTON_SIZE)
 
-  PLAY_BUTTON_PLAYING_TITLE = FontAwesome.icon('play')
-  PLAY_BUTTON_PAUSING_TITLE = FontAwesome.icon('pause')
+  PLAY_BUTTON_PLAYING_TITLE = :play.awesome_icon.string
+  PLAY_BUTTON_PAUSING_TITLE = :pause.awesome_icon.string
   PLAY_BUTTON_PLAYING_COLOR = '#007bbb'.uicolor # 紺碧
   PLAY_BUTTON_PAUSING_COLOR = '#e2041b'.uicolor # 猩々緋
 
   # lower_container
   SKIP_BUTTON_COLOR = PLAY_BUTTON_PLAYING_COLOR
-  FORWARD_BUTTON_TITLE = FontAwesome.icon('fast-forward')
-  REWIND_BUTTON_TITLE  = FontAwesome.icon('fast-backward')
+  FORWARD_BUTTON_TITLE = :fast_forward.awesome_icon.string
+  REWIND_BUTTON_TITLE  = :fast_backward.awesome_icon.string
   GAP_FROM_BAR = 8
 
   ACC_LABEL_PLAY_BUTTON = 'play_button'
@@ -59,7 +59,7 @@ module RecitePoemStyles
     accessibility_label ACC_LABEL_QUIT_BUTTON
   end
 
-    ##################
+  ##################
   # メインのPlayボタン
   ##################
 
@@ -70,7 +70,7 @@ module RecitePoemStyles
     title 'play'
     init_recite_view_button(:play_button.to_s)
     accessibility_label ACC_LABEL_PLAY_BUTTON
-    titleLabel.font = FontAwesome.fontWithSize(play_button_font_size)
+    titleLabel.font = MotionAwesome::font(play_button_font_size)
     set_title(PLAY_BUTTON_PAUSING_TITLE, left_inset: 0,
               color: PLAY_BUTTON_PAUSING_COLOR)
   end
@@ -88,7 +88,7 @@ module RecitePoemStyles
     frame from_right(size: [skip_button_size, skip_button_size])
     init_recite_view_button(:forward_button.to_s)
     accessibility_label ACC_LABEL_FORWARD
-    titleLabel.font = FontAwesome.fontWithSize(skip_button_font_size)
+    titleLabel.font = MotionAwesome::font(skip_button_font_size)
     set_title(FORWARD_BUTTON_TITLE, left_inset: 0, color: SKIP_BUTTON_COLOR)
   end
 
@@ -96,7 +96,7 @@ module RecitePoemStyles
     frame from_left(size: [skip_button_size, skip_button_size])
     init_recite_view_button(:rewind_button.to_s)
     accessibility_label ACC_LABEL_BACKWARD
-    titleLabel.font = FontAwesome.fontWithSize(skip_button_font_size)
+    titleLabel.font = MotionAwesome::font(skip_button_font_size)
     set_title(REWIND_BUTTON_TITLE, left_inset: 0, color: SKIP_BUTTON_COLOR)
   end
 
