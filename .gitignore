@@ -18,16 +18,15 @@ nbproject
 vendor/*
 .DS_Store
 
-
-
 flipping1393244595.png
-
 flipping1393244985.png
-
-resources/fontawesome-webfont.ttf
 
 *.log
 debugger_cmds
 
 # ゴミ箱
 zz_trash/
+
+# motion-awesome
+resources/fontawesome.plist
+resources/fontawesome-webfont.ttf
