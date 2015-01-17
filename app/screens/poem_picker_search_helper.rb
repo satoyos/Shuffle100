@@ -22,6 +22,7 @@ module PoemPickerSearchHelper
     text_field.keyboardType = UIKeyboardTypeDefault
   end
 
+=begin
   ####################
   # KVO
   def set_kvo_searching
@@ -48,4 +49,5 @@ module PoemPickerSearchHelper
       }
     end
   end
+=end
 end

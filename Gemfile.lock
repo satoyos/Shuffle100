@@ -1,8 +1,13 @@
-GEM
-  remote: https://rubygems.org/
+GIT
+  remote: git@github.com:clearsightstudio/ProMotion.git
+  revision: 9f229324f7926a2a3f0638a30f36cb43817e1a48
   specs:
     ProMotion (2.2.0)
       methadone (~> 1.7)
+
+GEM
+  remote: https://rubygems.org/
+  specs:
     activesupport (4.1.9)
       i18n (~> 0.6, >= 0.6.9)
       json (~> 1.7, >= 1.7.7)
@@ -120,7 +125,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  ProMotion
+  ProMotion!
   awesome_print_motion
   i18n (< 0.7)
   motion-awesome

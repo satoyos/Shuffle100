@@ -1,4 +1,5 @@
 module ProMotion
+=begin
   module Table
     module Longpressable
 
@@ -49,4 +50,5 @@ module ProMotion
       set_data_cell_defaults c
     end
   end
+=end
 end
