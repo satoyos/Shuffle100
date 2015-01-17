@@ -10,13 +10,11 @@ class PoemPicker < PM::TableScreen
   longpressable
 
   attr_accessor :status100
-  # attr_reader :table_search_display_controller, :poems
 
   def on_load
     init_members
     set_font_changed_notification
     update_table_and_prompt
-    # set_kvo_searching
   end
 
   def init_members
