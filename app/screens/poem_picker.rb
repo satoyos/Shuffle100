@@ -26,9 +26,12 @@ class PoemPicker < PM::TableScreen
     init_tool_bar
   end
 
+  def will_appear
+    update_table_and_prompt
+  end
+
   def on_present
     prepare_text_field
-    update_table_and_prompt
   end
 
   def will_disappear
