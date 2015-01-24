@@ -31,4 +31,9 @@ Feature:
     When I forcedly navigate back
     Then I should see "7首"
 
+  # トップ画面に戻る
+    When I forcedly navigate back
+    Then I should see "トップ"
+    Then I should see "7首"
+
 
