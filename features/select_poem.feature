@@ -21,4 +21,14 @@ Feature:
   # 「1文字目で選ぶ」画面に遷移
     When I touch "1字目で選ぶ"
     Then I should see "一字決まりの歌"
+    Then I should see "0首"
+
+    When I wait for 0.5 second
+    When I touch "一字決まりの歌"
+    Then I should see "7首"
+
+  # 「歌を選ぶ」画面に戻る
+    When I forcedly navigate back
+    Then I should see "7首"
+
 
