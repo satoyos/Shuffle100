@@ -1,7 +1,7 @@
  class Poem
   DEFAULT_LABEL_PATTERN = 'poem%03d'
   DEFAULT_STR_OUT_PATTERN = '%d. %s %s %s %s %s'
-  PROPERTIES = [:number, :poet, :liner, :in_hiragana, :in_modern_kana, :kimari_ji]
+  PROPERTIES = [:number, :poet, :liner, :in_hiragana, :in_modern_kana, :kimari_ji, :living_years]
   PROPERTIES.each do |prop|
     attr_accessor prop
   end

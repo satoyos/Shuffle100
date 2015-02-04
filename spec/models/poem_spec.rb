@@ -3,6 +3,7 @@ describe Poem do
 {
     "number": 2,
     "poet": "持統天皇",
+    "living_years": "(645〜702)",
     "liner": [
       "春過ぎて",
       "夏来にけらし",
@@ -77,6 +78,9 @@ EOF
         # @poem.in_modern_kana.should.not.be.nil
         expect(@poem.in_modern_kana).not.to.be.equal nil
         @poem.in_modern_kana[4].should == 'あまのかぐやま'
+      end
+      it '生年・没年データを正しく読み込める' do
+        @poem.living_years.should == '(645〜702)'
       end
     end
 
