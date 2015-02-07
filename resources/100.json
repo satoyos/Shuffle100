@@ -98,7 +98,7 @@
   {
     "number": 5,
     "poet": "猿丸大夫",
-    "living_years": "(？〜？)",
+    "living_years": "(?〜?)",
     "liner": [
       "奥山に",
       "紅葉踏み分け",
@@ -170,7 +170,7 @@
   {
     "number": 8,
     "poet": "喜撰法師",
-    "living_years": "(？〜？)",
+    "living_years": "(?〜?)",
     "liner": [
       "我が庵は",
       "都のたつみ",
@@ -194,7 +194,7 @@
   {
     "number": 9,
     "poet": "小野小町",
-    "living_years": "(？〜？)",
+    "living_years": "(?〜?)",
     "liner": [
       "花の色は",
       "移りにけりな",
@@ -218,7 +218,7 @@
   {
     "number": 10,
     "poet": "蝉丸",
-    "living_years": "(？〜？)",
+    "living_years": "(?〜?)",
     "liner": [
       "これやこの",
       "行くも帰るも",
