@@ -12,7 +12,7 @@ module PoemPickerDataSource
                search_text: search_text_for_poem(poem),
                action: :poem_tapped,
                long_press_action: :poem_long_pressed,
-               arguments: {number: poem.number},
+               arguments: poem,
                style: {
                    font: UIFont.fontWithName('HiraMinProN-W6', size: MDT::Font.body.pointSize),
                    background_color: bg_color_for_poem(poem),
