@@ -8,7 +8,7 @@ module PoemPickerDataSource
          cells: poems.map{|poem|
            {
                title: poem.str_with_number_and_liner('%3d. %s %s %s %s %s'),
-               subtitle: "　　 #{poem.poet}",
+               subtitle: "　　 #{poem.poet}  #{poem.living_years}",
                search_text: search_text_for_poem(poem),
                action: :poem_tapped,
                long_press_action: :poem_long_pressed,
