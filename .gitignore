@@ -15,6 +15,7 @@ nbproject
 .eprj
 .sass-cache
 .idea
+.bundle
 vendor/*
 .DS_Store
 
