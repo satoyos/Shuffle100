@@ -20,8 +20,6 @@ module PoemPickerDelegate
                }
   end
 
-  private
-
   def select_all_poems
     if searching?
       status100.select_in_numbers(filtered_poem_numbers)
