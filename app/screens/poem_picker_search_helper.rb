@@ -1,11 +1,11 @@
 module PoemPickerSearchHelper
   def refresh_search_result_table
-    table_search_display_controller.searchBar.text = table_search_display_controller.searchBar.text
+    @table_search_display_controller.searchBar.text = @table_search_display_controller.searchBar.text
   end
 
   def filtered_poem_numbers
     promotion_table_data.filtered_data[0][:cells].map { |cell_hash|
-      cell_hash[:arguments][:number]
+      cell_hash[:arguments].number
     }
   end
 
