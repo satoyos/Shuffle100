@@ -45,7 +45,7 @@ Motion::Project::App.setup do |app|
         'CFBundleURLSchemes' => ['Shuffle100'] }
   ]
 
-  APP_VERSION = '2.6'
+  APP_VERSION = '2.6.1'
 
   app.development do
     app.pods {
@@ -54,7 +54,7 @@ Motion::Project::App.setup do |app|
     app.version = build_number
     app.short_version = APP_VERSION + 'β' + ".#{build_number}"
     app.codesign_certificate = 'iPhone Developer: Yoshifumi Sato'
-    app.provisioning_profile = '/Users/yoshi/data/dev/Provisionings/Provisioning_for_100series_Tester.mobileprovision'
+    app.provisioning_profile = ENV['PROVISIONING_PROFILE_DEVELOPMENT']
   end
 
   app.release do
@@ -62,7 +62,7 @@ Motion::Project::App.setup do |app|
     app.version = build_number
     app.short_version = APP_VERSION
     app.codesign_certificate = 'iPhone Distribution: Yoshifumi Sato'
-    app.provisioning_profile = '/Users/yoshi/data/dev/Provisionings/Shuffle100_Distribution.mobileprovision'
+    app.provisioning_profile = ENV['PROVISIONING_PROFILE_DISTRIBUTION']
     app.entitlements['beta-reports-active'] = true
   end
 
