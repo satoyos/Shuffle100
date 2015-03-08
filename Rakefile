@@ -5,25 +5,28 @@ require 'bundler'
 require 'sugarcube-common'
 require 'sugarcube-awesome'
 
-in_simulator = in_spec = nil
-
-case ARGV.join(' ')
-  when /spec/
-    in_spec = true
-    require 'awesome_print_motion'
-    Bundler.require :spec
-  when /frank/
-    Bundler.require :frank
-  when /simulator|device|pod/
-    in_simulator = true
-    require 'awesome_print_motion'
-    Bundler.require :simulator
+def rake_mode
+  case ARGV.join(' ')
+    when /simulator|device|pod|\A\z/ ; :simulator
+    when /spec/ ; :spec
+    when /frank/ ; :frank
+  end
 end
 
 Bundler.require
 
+case rake_mode
+  when :spec
+    require 'awesome_print_motion'
+    Bundler.require :spec
+  when :frank
+    Bundler.require :frank
+  when :simulator
+    require 'awesome_print_motion'
+    Bundler.require :simulator
+end
+
 Motion::Project::App.setup do |app|
-  # Use `rake config' to see complete project settings.
   app.name = 'Shuffle100'
 
   app.deployment_target = '7.0'
@@ -31,7 +34,6 @@ Motion::Project::App.setup do |app|
   app.frameworks += ['AVFoundation', 'AudioToolbox']
   app.frameworks += ['QuartzCore']
 
-  # app.icons = ['Shuffle100.png', 'Shuffle100@2x.png', 'Shuffle100-60@2x.png']
   app.prerendered_icon = true
   app.icons = Dir.glob('resources/Icon*.png').map{|icon| icon.split('/').last}
 
@@ -50,7 +52,7 @@ Motion::Project::App.setup do |app|
   app.development do
     app.pods {
       pod 'Reveal-iOS-SDK'
-    } if in_simulator
+    } if rake_mode == :simulator
     app.version = build_number
     app.short_version = APP_VERSION + 'β' + ".#{build_number}"
     app.codesign_certificate = 'iPhone Developer: Yoshifumi Sato'
@@ -68,9 +70,10 @@ Motion::Project::App.setup do |app|
 
   app.detect_dependencies = true
 
-  app.redgreen_style = :focused if in_spec
+  app.redgreen_style = :focused if rake_mode == :spec
 end
 
 def build_number
   Time.now.strftime('%Y%m%d.%H%M')
 end
+
