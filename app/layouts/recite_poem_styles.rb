@@ -60,6 +60,17 @@ module RecitePoemStyles
   end
 
   ##################
+  # notice_label
+  def notice_label_style
+    background_color :light_gray.uicolor
+    text 'この歌は試合の前に必ず読まれます。'
+    size_to_fit
+    frame below(:header_container, down: equalized_gap / 2)
+    center x: '50%'
+    alpha 0.0
+  end
+
+  ##################
   # メインのPlayボタン
   ##################
 

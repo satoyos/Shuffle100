@@ -23,6 +23,10 @@ class RecitePoemScreen < PM::Screen
     set_font_changed_notification
   end
 
+  def on_appear
+    layout.show_opening_notice if layout.title_text == OPENING_POEM_TITLE
+  end
+
   def on_return(args={})
     puts '// 読み上げ画面に帰ってきたぜ！' if BW2.debug?
     set_player_volume

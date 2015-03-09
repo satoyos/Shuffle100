@@ -27,6 +27,9 @@ class RecitePoemLayout < MotionKit::Layout
       add ReciteViewButton, :rewind_button
       add ReciteViewButton, :forward_button
     end
+
+    add UILabel, :notice_label
+
   end
 
   def show_waiting_to_pause
@@ -63,6 +66,10 @@ class RecitePoemLayout < MotionKit::Layout
     end
   end
 
+  def title_text
+    get(:header_title).text
+  end
+
   def title=(title)
     get(:header_title).text = title
   end
@@ -73,6 +80,14 @@ class RecitePoemLayout < MotionKit::Layout
 
   def font_changed(notification)
     get(:header_title).font = MDT::Font.body
+  end
+
+  def show_opening_notice
+    UIView.animation_chain(duration: 2) do
+      get(:notice_label).fade_in
+    end.and_then(duration: 2) do
+      get(:notice_label).fade_out
+    end.start
   end
 
   private
