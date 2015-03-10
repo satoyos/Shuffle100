@@ -26,7 +26,7 @@ describe 'RecitePoemLayout' do
     it 'notice_labelが設定されている' do
       @layout.get(:notice_label).tap do |n_label|
         n_label.should.not.be.nil
-        n_label.backgroundColor.should == UIColor.lightGrayColor
+        n_label.backgroundColor.should == RecitePoemStyles::NOTICE_LABEL_BACKCOLOR
       end
     end
   end

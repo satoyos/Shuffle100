@@ -2,6 +2,7 @@ class RecitePoemLayout < MotionKit::Layout
   include RecitePoemStyles
 
   PROGRESS_TIMER_INTERVAL = 0.01
+  GOLDEN_RATIO = 1.618
 
   attr_accessor :sizes
   weak_attr :delegate
@@ -29,7 +30,6 @@ class RecitePoemLayout < MotionKit::Layout
     end
 
     add UILabel, :notice_label
-
   end
 
   def show_waiting_to_pause
@@ -82,10 +82,12 @@ class RecitePoemLayout < MotionKit::Layout
     get(:header_title).font = MDT::Font.body
   end
 
+  NOTICE_ANIMATE_DURATION = 2.0
+
   def show_opening_notice
-    UIView.animation_chain(duration: 2) do
+    UIView.animation_chain(duration: NOTICE_ANIMATE_DURATION) do
       get(:notice_label).fade_in
-    end.and_then(duration: 2) do
+    end.and_then(duration: NOTICE_ANIMATE_DURATION * GOLDEN_RATIO) do
       get(:notice_label).fade_out
     end.start
   end

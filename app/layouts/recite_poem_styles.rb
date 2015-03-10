@@ -23,6 +23,9 @@ module RecitePoemStyles
   ACC_LABEL_GEAR_BUTTON = 'gear_button'
   ACC_LABEL_QUIT_BUTTON = 'quit_button'
 
+  NOTICE_LABEL_BACKCOLOR = :dark_gray.uicolor(0.8)
+  NOTICE_LABEL_TEXTCOLOR = :white.uicolor
+
   #################
   # 画面上部のView群
   #################
@@ -62,7 +65,8 @@ module RecitePoemStyles
   ##################
   # notice_label
   def notice_label_style
-    background_color :light_gray.uicolor
+    background_color NOTICE_LABEL_BACKCOLOR
+    text_color NOTICE_LABEL_TEXTCOLOR
     text 'この歌は試合の前に必ず読まれます。'
     size_to_fit
     frame below(:header_container, down: equalized_gap / 2)
