@@ -1,0 +1,3 @@
+class NoticeLabel < UILabel
+
+end

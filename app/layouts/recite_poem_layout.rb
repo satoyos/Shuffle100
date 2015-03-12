@@ -29,7 +29,7 @@ class RecitePoemLayout < MotionKit::Layout
       add ReciteViewButton, :forward_button
     end
 
-    add UILabel, :notice_label
+    add NoticeLabel, :notice_label
   end
 
   def show_waiting_to_pause

@@ -70,6 +70,7 @@ module RecitePoemStyles
     text 'この歌は試合の前に必ず読まれます。'
     size_to_fit
     frame below(:header_container, down: equalized_gap / 2)
+    move_up_half_height
     center x: '50%'
     alpha 0.0
   end
