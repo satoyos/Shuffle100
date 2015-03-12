@@ -73,6 +73,10 @@ module RecitePoemStyles
     move_up_half_height
     center x: '50%'
     alpha 0.0
+    layer do
+      masks_to_bounds true
+      corner_radius 4.0
+    end
   end
 
   ##################
