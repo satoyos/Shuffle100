@@ -1,4 +1,4 @@
-class NoticeLabel < UILabel
+class UIView
   def move_up_half_height
     f = self.frame
     self.frame =
