@@ -41,6 +41,13 @@ RubyMotionで作っています。
 ## 5 上の句と下の句の間隔(秒数)】(初心者モードのみ)
   初心者モードで、上の句を読み終えてから下の句を読み始めるまでの間隔を調整できます。
 
+# VOCALOIDの歌唱データ
+
+こちらの[GitHubページ](https://github.com/satoyos/HyakuninIsshuVocaloidScore)で公開しています。  
+VOCALOID Editorをお持ちでしたら、ぜひ改良してやってください。  
+(データはVOCALOID4 Editorで作成しています。)
+
+
 Copyright (c) 2014-2015 Yoshifumi Sato  
 This software is released under the MIT License, see LICENSE.txt.
 
