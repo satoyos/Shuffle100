@@ -76,10 +76,12 @@ describe 'SelectedState100' do
       @status100.of_number(16).should == !INITIAL_STATUS
     end
 
+=begin
     it 'idxの値が異常値の場合は例外になる' do
      should.raise{ @status100.of_number(-1)}
      should.raise{ @status100.of_number(101)}
     end
+=end
 
   end
 
