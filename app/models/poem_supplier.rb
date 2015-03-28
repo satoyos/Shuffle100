@@ -42,7 +42,6 @@ class PoemSupplier
     return false if current_index >= size
     @poem = @deck.next_poem
     @kami = true
-#    @player = UIApplication.sharedApplication.delegate.players_hash['%03da' % @poem.number]
     @player = current_player
     true
   end
@@ -68,8 +67,8 @@ class PoemSupplier
 
   def current_player
     path = case @kami
-             when true ; 'audio/%03da' % self.poem.number
-             else      ; 'audio/%03db' % self.poem.number
+             when true ; 'audio/ia/%03da' % self.poem.number
+             else      ; 'audio/ia/%03db' % self.poem.number
            end
     AudioPlayerFactory.create_player_by_path(path, ofType: 'm4a')
   end

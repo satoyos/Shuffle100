@@ -17,7 +17,7 @@ class AppDelegate < PM::Delegate
   end
 
   def set_models
-    AudioPlayerFactory.prepare_audio_players({opening: 'audio/序歌'})
+    AudioPlayerFactory.prepare_audio_players({opening: 'audio/ia/序歌'})
     self.opening_player = AudioPlayerFactory.players[:opening]
     self.poem_supplier = PoemSupplier.new({size: 50, shuffle: true, limit: 3}) # データができているのは10番まで
     self.settings_manager = SettingsManager.new
