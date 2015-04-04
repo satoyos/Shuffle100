@@ -20,6 +20,7 @@ Feature:
 
     # その状態で、もう一度rewindボタンを押すと、今度はTop画面に戻る
     When I touch the button marked "rewind"
+    When I wait for 1 second
     Then I should see "百首読み上げ"
 
   Scenario:
