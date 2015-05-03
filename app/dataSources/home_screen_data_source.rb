@@ -24,6 +24,7 @@ module HomeScreenDataSource
         beginner_mode_switch_cell,
     ]
     cells << fake_mode_switch_cell unless app_delegate.game_settings.beginner_flg
+    cells << select_singer_cell
     cells
   end
 
@@ -62,6 +63,19 @@ module HomeScreenDataSource
             value: app_delegate.game_settings.fake_flg,
             action: 'fake_switch_flipped:',
             arguments: {}
+        }
+    }
+  end
+
+  def select_singer_cell
+    {
+        title: '読手',
+        cell_identifier: 'select_singer',
+        cell_style: UITableViewCellStyleValue1,
+        subtitle: 'IA(ボーカロイド)',
+        action: :select_singer,
+        style: {
+            accessoryType: UITableViewCellAccessoryDisclosureIndicator,
         }
     }
   end

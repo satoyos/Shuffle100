@@ -7,7 +7,7 @@ class AppDelegate < PM::Delegate
 
   attr_accessor :poem_supplier, :players_hash, :opening_player
   attr_accessor :settings_manager, :reciting_settings, :game_settings
-  attr_reader :sizes
+  attr_reader :sizes, :prompt
 
   def on_load(app, options)
     BW2.debug = true unless 'AppStoreRelease'.info_plist
@@ -23,6 +23,7 @@ class AppDelegate < PM::Delegate
     self.settings_manager = SettingsManager.new
     self.reciting_settings = settings_manager.reciting_settings
     self.game_settings     = settings_manager.game_settings
+    @prompt = PROMPT
   end
 
   def current_status100

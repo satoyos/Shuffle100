@@ -5,6 +5,11 @@ module HomeScreenDelegate
     open PoemPicker.new
   end
 
+  def select_singer
+    puts ' - 読手を選ぶ画面へ！' if BW2.debug?
+    open SelectSingerScreen.new
+  end
+
   def start_game
     if loaded_selected_status.selected_num == 0
       alert_no_poem_selected()

@@ -21,8 +21,11 @@ class HomeScreen < PM::GroupedTableScreen
   end
 
   def will_appear
-    navigation_controller.setNavigationBarHidden(false, animated: false) if self.nav_bar?
-    self.navigationItem.prompt = '百首読み上げ'
+    navigation_controller.tap do |nc|
+      nc.setNavigationBarHidden(false, animated: false)
+      nc.navigationBar.translucent = false
+    end if self.nav_bar?
+    self.navigationItem.prompt = app_delegate.prompt
     update_table_data
     set_bd_layout if BW2.debug?
   end
