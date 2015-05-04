@@ -6,7 +6,6 @@ describe 'SelectSingerScreen' do
     end
     alias :screen :controller
 
-
     it 'should not be nil' do
       screen.should.not.be.nil
     end
@@ -17,6 +16,11 @@ describe 'SelectSingerScreen' do
     it 'タイトルが設定されている' do
       screen.title.should == '読手を選ぶ'
     end
+    it '読み手データを正しく読み込んでいる' do
+      screen.singers.size.should == Singer::SINGERS_DATA.size
+      screen.singers.first.is_a?(Singer).should.be.true
+    end
+
   end
 end
 

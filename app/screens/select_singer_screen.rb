@@ -1,9 +1,11 @@
 class SelectSingerScreen < PM::Screen
   title '読手を選ぶ'
 
+  attr_reader :singers
+
   def on_load
-    # self.navigationController.navigationBar.translucent = false
-    view.backgroundColor = :white.uicolor
+    init_base_view
+    fetch_singers
     set_picker_view
   end
 
@@ -20,18 +22,26 @@ class SelectSingerScreen < PM::Screen
   end
 
   def pickerView(pickerView, numberOfRowsInComponent: component)
-    3
+    singers.size
   end
 
   def pickerView(pickerView, titleForRow: row, forComponent: component)
-    %w(aaa bbb ccc)[row]
+    singers[row].name
   end
 
   def pickerView(pickerView, widthForComponent: component)
-    200
+    view.frame.size.width
   end
 
   private
+
+  def init_base_view
+    view.backgroundColor = :white.uicolor
+  end
+
+  def fetch_singers
+    @singers = Singer.singers
+  end
 
   def set_picker_view
     @picker_view = UIPickerView.alloc.init
