@@ -19,14 +19,20 @@ describe 'Singer' do
   end
 
   describe 'self.singers' do
-    before do
-      @singers = Singer.singers
-    end
     it 'should be an Array of Singer' do
-      @singers.tap do |ss|
+      Singer.singers.tap do |ss|
         ss.is_a?(Array).should.be.true
         ss.size.should == 2
         ss.first.is_a?(Singer).should.be.true
+      end
+    end
+  end
+
+  describe 'self.default_singer' do
+    it 'should be a 1st singer' do
+      Singer.default_singer.tap do |s|
+        s.is_a?(Singer).should.be.true
+        s.id.should == Singer::SINGERS_DATA.first[:id]
       end
     end
   end

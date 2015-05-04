@@ -25,5 +25,9 @@ class Singer
     def singers
       @singers ||= SINGERS_DATA.map{|hash| Singer.new(hash)}
     end
+
+    def default_singer
+      singers.first
+    end
   end
 end
