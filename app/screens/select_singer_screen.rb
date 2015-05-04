@@ -1,7 +1,8 @@
 class SelectSingerScreen < PM::Screen
   title '読手を選ぶ'
+  PICKER_VIEW_ACC_LABEL = 'picker_view'
 
-  attr_reader :singers
+  attr_reader :singers, :picker_view
 
   def on_load
     init_base_view
@@ -50,6 +51,7 @@ class SelectSingerScreen < PM::Screen
       p_view.dataSource = self
       p_view.showsSelectionIndicator = true
       p_view.selectRow(0, inComponent: 0, animated: false)
+      p_view.accessibilityLabel = PICKER_VIEW_ACC_LABEL
       view.addSubview(p_view)
     end
   end

@@ -20,6 +20,9 @@ describe 'SelectSingerScreen' do
       screen.singers.size.should == Singer::SINGERS_DATA.size
       screen.singers.first.is_a?(Singer).should.be.true
     end
+    it 'PickerViewにAccessibilityLabelが設定されている' do
+      screen.picker_view.accessibilityLabel.should == 'picker_view'
+    end
 
   end
 end
