@@ -36,5 +36,26 @@ describe 'Singer' do
       end
     end
   end
+
+  describe 'self.get_idx_of_singer_id' do
+    it '正しいindexを取得する' do
+      Singer.get_idx_of_singer_id(:ia).should == 0
+    end
+  end
+
+  describe 'self.get_singer_of_id' do
+    it '正しいSingerオブジェクト(IA)を取得する' do
+      Singer.get_singer_of_id(:ia).tap do |singer|
+        singer.is_a?(Singer).should.be.true
+        singer.id.should == :ia
+      end
+    end
+    it '正しいSingerオブジェクト(いなばくん)を取得する' do
+      Singer.get_singer_of_id(:inaba).tap do |singer|
+        singer.is_a?(Singer).should.be.true
+        singer.id.should == :inaba
+      end
+    end
+  end
 end
 

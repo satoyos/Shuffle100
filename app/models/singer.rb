@@ -29,5 +29,13 @@ class Singer
     def default_singer
       singers.first
     end
+
+    def get_singer_of_id(id)
+      singers.find{|singer| singer.id == id }
+    end
+
+    def get_idx_of_singer_id(id)
+      singers.index{|singer| singer.id == id}
+    end
   end
 end
