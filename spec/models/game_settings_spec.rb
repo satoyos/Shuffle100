@@ -29,5 +29,10 @@ describe 'GameSettings' do
       @settings.beginner_flg.should.be.false
     end
 
+    it 'singer_indexを管理' do
+      # newで生成された場合、値は必ず0になる
+      @settings.singer_index.should == 0
+    end
+
   end
 end
