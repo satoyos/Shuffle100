@@ -72,7 +72,7 @@ module HomeScreenDataSource
         title: '読手',
         cell_identifier: 'select_singer',
         cell_style: UITableViewCellStyleValue1,
-        subtitle: 'IA(ボーカロイド)',
+        subtitle: saved_singers_name,
         action: :select_singer,
         style: {
             accessoryType: UITableViewCellAccessoryDisclosureIndicator,
@@ -86,5 +86,12 @@ module HomeScreenDataSource
         action: :start_game,
         cell_class: GameStartCell,
     }
+  end
+
+  private
+
+  def saved_singers_name
+    saved_index = app_delegate.game_settings.singer_index
+    Singer.singers[saved_index].name
   end
 end

@@ -1,6 +1,7 @@
 class SelectSingerScreen < PM::Screen
   title '読手を選ぶ'
   PICKER_VIEW_ACC_LABEL = 'picker_view'
+  COMPONENT_ID = 0
 
   attr_reader :singers, :picker_view
 
@@ -12,6 +13,14 @@ class SelectSingerScreen < PM::Screen
 
   def will_appear
     self.navigationItem.prompt = app_delegate.prompt
+    picker_view.selectRow(app_delegate.game_settings.singer_index,
+                          inComponent: COMPONENT_ID,
+                          animated: false)
+  end
+
+  def will_disappear
+    app_delegate.game_settings.singer_index = picker_view.selectedRowInComponent(COMPONENT_ID)
+    app_delegate.settings_manager.save
   end
 
   def should_autorotate
@@ -50,7 +59,7 @@ class SelectSingerScreen < PM::Screen
       p_view.delegate = self
       p_view.dataSource = self
       p_view.showsSelectionIndicator = true
-      p_view.selectRow(0, inComponent: 0, animated: false)
+      p_view.selectRow(0, inComponent: COMPONENT_ID, animated: false)
       p_view.accessibilityLabel = PICKER_VIEW_ACC_LABEL
       view.addSubview(p_view)
     end
