@@ -5,12 +5,12 @@ class Singer
       {
           id: :ia,
           name: 'IA（ボーカロイド）',
-          path: 'resources/audio/ia',
+          path: 'audio/ia',
       },
       {
           id: :inaba,
           name: 'いなばくん（人間）',
-          path: 'resources/audio/inaba',
+          path: 'audio/inaba',
       }
   ]
 
