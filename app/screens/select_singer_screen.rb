@@ -5,12 +5,13 @@ class SelectSingerScreen < PM::Screen
   PICKER_VIEW_ACC_LABEL = 'picker_view'
   COMPONENT_ID = 0
 
-  attr_reader :singers, :picker_view
+  attr_reader :singers, :picker_view, :try_button, :player
 
   def on_load
     init_base_view
     fetch_singers
     set_picker_view
+    set_try_button
   end
 
   def will_appear
@@ -21,7 +22,7 @@ class SelectSingerScreen < PM::Screen
   end
 
   def will_disappear
-    app_delegate.game_settings.singer_index = picker_view.selectedRowInComponent(COMPONENT_ID)
+    app_delegate.game_settings.singer_index = current_singer_id
     app_delegate.settings_manager.save
   end
 
@@ -57,6 +58,41 @@ class SelectSingerScreen < PM::Screen
       p_view.accessibilityLabel = PICKER_VIEW_ACC_LABEL
       view.addSubview(p_view)
     end
+  end
+
+  def set_try_button
+    @try_button = UIButton.alloc.init.tap do |b|
+      b.title = '試しに聞いてみる'
+      b.sizeToFit
+      b.frame = [
+          [0, picker_view.frame.size.height + 20],
+          [view.frame.size.width, b.frame.size.height]
+      ]
+      b.setTitleColor(:blue.uicolor, forState: :normal.uicontrolstate)
+      b.setTitleColor(:red.uicolor,  forState: :highlighted.uicontrolstate)
+      b.setTitleColor(:light_gray.uicolor,  forState: :disabled.uicontrolstate)
+      b.on(:touch){play_current_singer}
+      view.addSubview(b)
+    end
+  end
+
+  def play_current_singer
+    puts "++ #{current_singer.name}の声で読みます" if BW2.debug?
+    path = current_singer.path + '/001a'
+    @player = AudioPlayerFactory.create_player_by_path(path, ofType: 'm4a').tap do |p|
+      p.volume = app_delegate.reciting_settings.volume
+      p.delegate = self
+      p.prepareToPlay
+    end
+    player.play
+  end
+
+  def current_singer
+    singers[current_singer_id]
+  end
+
+  def current_singer_id
+    picker_view.selectedRowInComponent(COMPONENT_ID)
   end
 
 end
