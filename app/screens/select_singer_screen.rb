@@ -1,4 +1,6 @@
 class SelectSingerScreen < PM::Screen
+  include SelectSingerScreenDelegate
+
   title '読手を選ぶ'
   PICKER_VIEW_ACC_LABEL = 'picker_view'
   COMPONENT_ID = 0
@@ -33,14 +35,6 @@ class SelectSingerScreen < PM::Screen
 
   def pickerView(pickerView, numberOfRowsInComponent: component)
     singers.size
-  end
-
-  def pickerView(pickerView, titleForRow: row, forComponent: component)
-    singers[row].name
-  end
-
-  def pickerView(pickerView, widthForComponent: component)
-    view.frame.size.width
   end
 
   private
