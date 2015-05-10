@@ -82,11 +82,11 @@ And Some settings are available;
 
 | Name | Type |
 | ---- | ----------- |
-| IA   | VOCALOID(#1) voice |
-| Inaba-kun (#2) | Human voice |
+| IA   | VOCALOID(#2) voice |
+| Inaba-kun (#3) | Human voice |
 
- (#1 .. VOCALOID is a registered trademark of Yamaha Corporation.)
- (#2 .. in Japanese; いなばくん. See footer note #6 about Copyright.)
+ (#2 .. VOCALOID is a registered trademark of Yamaha Corporation.)  
+ (#3 .. in Japanese; いなばくん. See footer note #7 about Copyright.)
 
 ## 2. Play Mode (sets timing of pause)
 
@@ -97,12 +97,12 @@ And Some settings are available;
 
 ## 3. Verses to sing
   You can select verses to use as you like.  
-  When you long-press a verse in "Select Verses" screen(#3), you can confirm "Tori-Fuda" image(#4) of the verse.  
-  (#3 .. in Japanese; 「歌を選ぶ」画面)  
-  (#4 .. in Japanese; 「取り札」イメージ)
+  When you long-press a verse in "Select Verses" screen(#4), you can confirm "Tori-Fuda" image(#5) of the verse.  
+  (#4 .. in Japanese; 「歌を選ぶ」画面)  
+  (#5 .. in Japanese; 「取り札」イメージ)
 
-## 4. Use "Kara Fuda"(#5), or not.
-  (#5 .. It means "Fake Verses", 「空札」 in Japanese)  
+## 4. Use "Kara Fuda"(#6), or not.
+  (#6 .. It means "Fake Verses", 「空札」 in Japanese)  
   Fake Verses can be added in Normal mode. Additional fake verses are collected at random, as many as "Verses to sing" you selected.
 
 ## 5. Interval time between verses
@@ -121,5 +121,5 @@ Copyright (c) 2014-2015 Yoshifumi Sato
 This software is released under the MIT License, see LICENSE.txt.
 
 - - -
-(#6) Human voice files in `/resources/audio/inaba` folder are derived from [Naniwazu Inaba-kun](http://homepage3.nifty.com/naniwazu).
+(#7) Human voice files in `/resources/audio/inaba` folder are derived from [Naniwazu Inaba-kun](http://homepage3.nifty.com/naniwazu).
  So, the author of the software has the copyright of these voice files. When you redistribute them, the author's permission is needed. 
