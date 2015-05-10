@@ -1,0 +1,1 @@
+(C) Copyright 2002-2015 naniwazu (なにはづ) All rights reserved.
