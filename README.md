@@ -4,10 +4,10 @@ Shuffle100 (百首読み上げ)
 [![Code Climate](https://codeclimate.com/github/satoyos/Shuffle100.png)](https://codeclimate.com/github/satoyos/Shuffle100)
 [![Build Status](https://travis-ci.org/satoyos/Shuffle100.png?branch=master)](https://travis-ci.org/satoyos/Shuffle100)
 
+(English follows Japanese)
+
 実際の百人一首かるたを使って対戦や練習をするときに、人の代わりに百人一首の歌の読み手を務めるiOSアプリです。
 RubyMotionで作っています。
-
-**[English Descriptions of this App are attached at the end.]**
 
 ![Image](http://postachio-images.s3-website-us-east-1.amazonaws.com/bdc9788b9b5c8ff218c37223f302b9a4/511242b6e6a9f3507107fc8f1c2af6e2/w600_df90791d0bf5c6022857a54b3700d61b.png)
 
@@ -70,34 +70,46 @@ Kyogi-Karuta is a Japanese traditional game using the “Hyaku-nin-Isshu"(#1) Ka
 
 (#1 .. It means "Single Verses by a Hundred People", selected by Teika Fujiwara about 800 years ago, as "The All Time Best 100 in these 600 years" at that time.)
 
-This App, now in [App Store](https://itunes.apple.com/jp/app/bai-shou-dumi-shangge/id857819404?mt=8) , supports playing the game, by singing verses at random, with VOCALOID voice. 
+This App, now in [App Store](https://itunes.apple.com/jp/app/bai-shou-dumi-shangge/id857819404?mt=8) , supports playing the game, by singing verses at random. 
 
 You can watch Demo video at [this page](https://vimeo.com/88511077).
 
 And Some settings are available;
 
-## 1. Play Mode (sets timing of pause)
+## 1. Singer
+
+  You can select Verse-Singer.
+
+| Name | Type |
+| ---- | ----------- |
+| IA   | VOCALOID(#1) voice |
+| Inaba-kun (#2) | Human voice |
+
+ (#1 .. VOCALOID is a registered trademark of Yamaha Corporation.)
+ (#2 .. in Japanese; いなばくん. See footer note #6 about Copyright.)
+
+## 2. Play Mode (sets timing of pause)
 
 | Mode | Description |
 | ---- | ----------- |
-| Normal mode   | Mode for Kyogi-Karuta. VOCALOID pauses singing just after 1st half of a verse. |
-| Beginner mode | Recommended mode for Beginner. VOCALOID pauses after singing a whole verse. |
+| Normal mode   | Mode for Kyogi-Karuta. Singer pauses singing just after 1st half of a verse. |
+| Beginner mode | Recommended mode for Beginner. Singer pauses after singing a whole verse. |
 
-## 2. Verses to sing
+## 3. Verses to sing
   You can select verses to use as you like.  
-  When you long-press a verse in "Select Verses" screen(#2), you can confirm "Tori-Fuda" image(#3) of the verse.  
-  (#2 .. in Japanese; 「歌を選ぶ」画面)  
-  (#3 .. in Japanese; 「取り札」イメージ)
+  When you long-press a verse in "Select Verses" screen(#3), you can confirm "Tori-Fuda" image(#4) of the verse.  
+  (#3 .. in Japanese; 「歌を選ぶ」画面)  
+  (#4 .. in Japanese; 「取り札」イメージ)
 
-## 3. Use "Kara Fuda"(#4), or not.
-  (#4 .. It means "Fake Verses", 「空札」 in Japanese)  
+## 4. Use "Kara Fuda"(#5), or not.
+  (#5 .. It means "Fake Verses", 「空札」 in Japanese)  
   Fake Verses can be added in Normal mode. Additional fake verses are collected at random, as many as "Verses to sing" you selected.
 
-## 4. Interval time between verses
+## 5. Interval time between verses
 
 (by second)
 
-## 5. Interval time between 1st half of a verse, and 2nd half of it
+## 6. Interval time between 1st half of a verse, and 2nd half of it
 
 (by second, in Beginner mode only)
 
@@ -109,4 +121,5 @@ Copyright (c) 2014-2015 Yoshifumi Sato
 This software is released under the MIT License, see LICENSE.txt.
 
 - - -
-VOCALOID is a registered trademark of Yamaha Corporation.
+(#6) Human voice files in `/resources/audio/inaba` folder are derived from [Naniwazu Inaba-kun](http://homepage3.nifty.com/naniwazu).
+ So, the author of the software has the copyright of these voice files. When you redistribute them, the author's permission is needed. 
