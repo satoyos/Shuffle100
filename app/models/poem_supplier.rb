@@ -1,4 +1,6 @@
 class PoemSupplier
+  include AppDelegateAccessor
+
   attr_reader :poem, :player
 
   def initialize(init_hash={})
@@ -67,10 +69,9 @@ class PoemSupplier
 
   def current_player
     path = case @kami
-             when true ; 'audio/ia/%03da' % self.poem.number
-             else      ; 'audio/ia/%03db' % self.poem.number
+             when true ; app_delegate.current_singer_folder +  '/%03da' % poem.number
+             else      ; app_delegate.current_singer_folder +  '/%03db' % poem.number
            end
     AudioPlayerFactory.create_player_by_path(path, ofType: 'm4a')
   end
-
 end

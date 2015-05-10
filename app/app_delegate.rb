@@ -35,6 +35,10 @@ class AppDelegate < PM::Delegate
     self.game_settings.statuses_for_deck = [status100]
   end
 
+  def current_singer_folder
+    Singer.singers[game_settings.singer_index].path
+  end
+
   private
 
   def set_appearance_defaults
