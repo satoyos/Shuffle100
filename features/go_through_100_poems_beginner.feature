@@ -23,6 +23,17 @@ Scenario:
   When I forced_touch "トップ"
   Then I wait to see "百首読み上げ"
 
+  # 読手を選ぶ画面に進む
+  When I touch "読手"
+  Then I should see "読手を選ぶ"
+
+  # 2番目の読手を選んでみる
+  When I select 2nd row in picker "picker_view"
+
+  # ホーム画面に戻ると、その読手が設定されている
+  When I forcedly navigate back
+  Then I should see "いなばくん"
+
   # 序歌画面
   When I touch "試合開始"
   Then I should see "序歌"
