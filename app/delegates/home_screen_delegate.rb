@@ -20,7 +20,7 @@ module HomeScreenDelegate
     new_deck = app_delegate.game_settings.fake_flg ?
         selected_poems_deck.add_fake_poems! :
         selected_poems_deck
-
+    app_delegate.set_opening_player
     app_delegate.poem_supplier = PoemSupplier.new({deck: new_deck})
     if app_delegate.game_settings.beginner_flg
       open BeginnerReciteScreen.new

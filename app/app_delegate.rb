@@ -17,13 +17,18 @@ class AppDelegate < PM::Delegate
   end
 
   def set_models
-    AudioPlayerFactory.prepare_audio_players({opening: 'audio/ia/序歌'})
-    self.opening_player = AudioPlayerFactory.players[:opening]
+    # AudioPlayerFactory.prepare_audio_players({opening: 'audio/ia/序歌'})
     self.poem_supplier = PoemSupplier.new({size: 50, shuffle: true, limit: 3}) # データができているのは10番まで
     self.settings_manager = SettingsManager.new
     self.reciting_settings = settings_manager.reciting_settings
     self.game_settings     = settings_manager.game_settings
+    set_opening_player
     @prompt = PROMPT
+  end
+
+  def set_opening_player
+    AudioPlayerFactory.prepare_audio_players({opening: current_singer_folder + '/序歌'})
+    self.opening_player = AudioPlayerFactory.players[:opening]
   end
 
   def current_status100
