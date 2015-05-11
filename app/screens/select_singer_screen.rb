@@ -53,6 +53,10 @@ class SelectSingerScreen < PM::Screen
     @picker_view.tap do |p_view|
       p_view.delegate = self
       p_view.dataSource = self
+      p_view.frame = [
+          [0, 0],
+          [view.frame.size.width, picker_view.frame.size.height]
+      ]
       p_view.showsSelectionIndicator = true
       p_view.selectRow(0, inComponent: COMPONENT_ID, animated: false)
       p_view.accessibilityLabel = PICKER_VIEW_ACC_LABEL
