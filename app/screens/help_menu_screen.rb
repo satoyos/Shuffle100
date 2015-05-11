@@ -6,11 +6,10 @@ class HelpMenuScreen < PM::TableScreen
         cells:
             [
                 {
-                    title: '「初心者モード」とは？',
-                    action: :open_what_is_beginner_mode,
+                    title: '設定できること',
+                    action: :open_options_help,
                     style: {
                         accessoryType: UITableViewCellAccessoryDisclosureIndicator,
-                        # accessibility_label: 'open_game_flow_help'
                     }
                 },
                 {
@@ -18,7 +17,13 @@ class HelpMenuScreen < PM::TableScreen
                     action: :open_game_flow_help,
                     style: {
                         accessoryType: UITableViewCellAccessoryDisclosureIndicator,
-                        # accessibility_label: 'open_game_flow_help'
+                    }
+                },
+                {
+                    title: '「初心者モード」とは？',
+                    action: :open_what_is_beginner_mode,
+                    style: {
+                        accessoryType: UITableViewCellAccessoryDisclosureIndicator,
                     }
                 },
                 {
@@ -26,15 +31,13 @@ class HelpMenuScreen < PM::TableScreen
                     action: :open_beginner_mode_flow_help,
                     style: {
                         accessoryType: UITableViewCellAccessoryDisclosureIndicator,
-                        # accessibility_label: 'open_game_flow_help'
                     }
                 },
                 {
-                    title: '設定できること',
-                    action: :open_options_help,
+                    title: '「いなばくん」について',
+                    action: :open_about_inaba_kun,
                     style: {
                         accessoryType: UITableViewCellAccessoryDisclosureIndicator,
-                        # accessibility_label: 'open_options_help'
                     }
                 },
                 {
@@ -70,5 +73,8 @@ class HelpMenuScreen < PM::TableScreen
     open InfoScreen.new(url: 'html/beginner_mode_flow.html', title: '試合の流れ (初心者モード)')
   end
 
+  def open_about_inaba_kun
+    open InfoScreen.new(url: 'html/about_inaba_kun.html', title: '「いなばくん」とは？')
+  end
 
 end
