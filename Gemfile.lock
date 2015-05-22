@@ -1,8 +1,9 @@
 GEM
   remote: https://rubygems.org/
   specs:
-    ProMotion (2.4.0)
+    ProMotion (2.4.2)
       methadone (~> 1.7)
+      motion_print (~> 1.0)
     activesupport (4.1.10)
       i18n (~> 0.6, >= 0.6.9)
       json (~> 1.7, >= 1.7.7)
@@ -81,6 +82,7 @@ GEM
     motion-map (0.0.4)
     motion-redgreen (1.0.0)
     motion-weakattr (0.1)
+    motion_print (1.0.0)
     multi_json (1.11.0)
     multi_test (0.1.2)
     nap (0.8.0)
