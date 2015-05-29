@@ -47,6 +47,10 @@ Motion::Project::App.setup do |app|
         'CFBundleURLSchemes' => ['Shuffle100'] }
   ]
 
+  app.pods {
+    pod 'BBBadgeBarButtonItem'
+  }
+
   APP_VERSION = '3.0'
 
   app.development do

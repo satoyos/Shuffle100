@@ -10,15 +10,21 @@ class PoemPicker < PM::TableScreen
   longpressable
 
   attr_accessor :status100
+  attr_reader :badge_button
 
   def on_load
     init_members
     set_font_changed_notification
+    set_badge_button
     update_table_and_prompt
   end
 
   def init_members
     self.status100 = loaded_selected_status
+    @badge_button = BBBadgeBarButtonItem.alloc.initWithCustomUIButton(UIButton.alloc.init).tap do |bb|
+      bb.badgeOriginX = -50.0
+      bb.shouldHideBadgeAtZero = false
+    end
     self
   end
 
@@ -50,7 +56,9 @@ class PoemPicker < PM::TableScreen
   private
 
   def update_table_and_prompt
-    self.navigationItem.prompt = '選択中: %d首' % status100.selected_num
+    # self.navigationItem.prompt = '選択中: %d首' % status100.selected_num
+    self.navigationItem.prompt = AppDelegate::PROMPT
+    badge_button.badgeValue = "#{status100.selected_num}首"
     update_table_data
   end
 
@@ -79,5 +87,11 @@ class PoemPicker < PM::TableScreen
       alert_view.message = '歌を検索している時には、このボタンは使えません。'
       alert_view.addButtonWithTitle('戻る')
     }.show
+  end
+
+  def set_badge_button
+    set_nav_bar_button :right, {
+                                 button: badge_button
+                             }
   end
 end

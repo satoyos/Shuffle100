@@ -21,6 +21,10 @@ describe 'PoemPicker' do
       screen.status100.should.not.be.nil
       screen.status100.size.should == 100
     end
+
+    it 'has a budge button that indicates number of selected poems' do
+      screen.badge_button.should.not.be.nil
+    end
   end
 
   describe '検索' do

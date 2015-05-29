@@ -9,10 +9,7 @@ gem 'motion-dynamic-type'
 gem 'motion-awesome'
 gem 'awesome_print_motion'
 gem 'newclear'
-
-group :simulator do # rake simulator
-  gem 'motion-cocoapods'
-end
+gem 'motion-cocoapods'
 
 group :spec do # rake spec
   gem 'motion-redgreen'
