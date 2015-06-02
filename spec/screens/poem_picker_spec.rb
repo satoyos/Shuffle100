@@ -24,6 +24,7 @@ describe 'PoemPicker' do
 
     it 'has a budge button that indicates number of selected poems' do
       screen.badge_button.should.not.be.nil
+      screen.badge_button.badgeFont.is_a?(UIFont).should.be.true
     end
   end
 

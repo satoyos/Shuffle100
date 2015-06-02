@@ -16,6 +16,7 @@ class PoemPicker < PM::TableScreen
     init_members
     set_font_changed_notification
     set_badge_button
+    budge_button_size_plus(2)
     update_table_and_prompt
   end
 
@@ -56,10 +57,14 @@ class PoemPicker < PM::TableScreen
   private
 
   def update_table_and_prompt
-    # self.navigationItem.prompt = '選択中: %d首' % status100.selected_num
     self.navigationItem.prompt = AppDelegate::PROMPT
     badge_button.badgeValue = "#{status100.selected_num}首"
     update_table_data
+  end
+
+  def budge_button_size_plus(plus_size)
+    org_font_size = badge_font.pointSize
+    badge_button.badgeFont = badge_font.fontWithSize(org_font_size + plus_size)
   end
 
   def init_tool_bar
@@ -93,5 +98,9 @@ class PoemPicker < PM::TableScreen
     set_nav_bar_button :right, {
                                  button: badge_button
                              }
+  end
+
+  def badge_font
+    badge_button.badgeFont
   end
 end
