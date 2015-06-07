@@ -5,8 +5,12 @@ before_install:
     - mkdir -p ~/Library/RubyMotion/build
     - sudo motion update
     - brew install ios-sim
-script:
-    - bundle install
-    - bundle exec rake clean
+cache:
+  directories:
+    - vendor/bundle
+    - vendor/Pods
+install:
+    - bundle install --path=vendor/bundle
     - bundle exec rake pod:install
+script:
     - bundle exec rake spec
