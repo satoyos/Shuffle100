@@ -4,7 +4,7 @@ GEM
     ProMotion (2.4.2)
       methadone (~> 1.7)
       motion_print (~> 1.0)
-    activesupport (4.1.10)
+    activesupport (4.1.11)
       i18n (~> 0.6, >= 0.6.9)
       json (~> 1.7, >= 1.7.7)
       minitest (~> 5.1)
@@ -87,10 +87,10 @@ GEM
     multi_test (0.1.2)
     nap (0.8.0)
     netrc (0.7.8)
-    newclear (1.1)
+    newclear (1.2)
       reset-sim
     plist (3.1.0)
-    rack (1.6.1)
+    rack (1.6.4)
     rack-protection (1.5.3)
       rack
     rake (10.4.2)
