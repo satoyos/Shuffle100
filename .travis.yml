@@ -11,6 +11,6 @@ cache:
     - vendor/Pods
 install:
     - bundle install --path=vendor/bundle
-    - bundle exec rake pod:install
+    - bundle exec rake pod:install --silent
 script:
     - bundle exec rake spec
