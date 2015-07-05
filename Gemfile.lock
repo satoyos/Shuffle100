@@ -83,7 +83,7 @@ GEM
     motion-redgreen (1.0.0)
     motion-weakattr (0.1)
     motion_print (1.1.2)
-    multi_json (1.11.1)
+    multi_json (1.11.2)
     multi_test (0.1.2)
     nap (0.8.0)
     netrc (0.7.8)
