@@ -46,6 +46,7 @@ Motion::Project::App.setup do |app|
       { 'CFBundleURLName' => 'com.satoyos.Shuffle100',
         'CFBundleURLSchemes' => ['Shuffle100'] }
   ]
+  app.info_plist['AppStoreID'] = '857819404'
 
   app.pods {
     pod 'BBBadgeBarButtonItem'

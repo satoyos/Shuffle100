@@ -41,6 +41,13 @@ class HelpMenuScreen < PM::TableScreen
                     }
                 },
                 {
+                    title: 'このアプリを評価する',
+                    action: :confirm_user_to_review,
+                    style: {
+                        accessoryType: UITableViewCellAccessoryDisclosureIndicator,
+                    }
+                },
+                {
                     title: 'バージョン',
                     cell_style: UITableViewCellStyleValue1,
                     subtitle: "#{'CFBundleShortVersionString'.info_plist}"
@@ -77,4 +84,26 @@ class HelpMenuScreen < PM::TableScreen
     open InfoScreen.new(url: 'html/about_inaba_kun.html', title: '「いなばくん」とは？')
   end
 
+  def review_page_url
+    'itms-apps://itunes.apple.com/app/id' + 'AppStoreID'.info_plist
+  end
+
+  def confirm_user_to_review
+    UIAlertView.alert('このアプリを評価するために、App Storeアプリを立ち上げますか？',
+                      buttons: ['立ち上げる', 'やめておく']
+    ) do |button, button_index|
+      if button == '立ち上げる'
+        puts '[move] App Storeアプリに遷移します' if BW2.debug?
+        open_review_page
+      else
+        puts '[cancel] 評価は行いません' if BW2.debug?
+      end
+    end
+  end
+
+  private
+
+  def open_review_page
+    app.openURL(review_page_url.nsurl)
+  end
 end
