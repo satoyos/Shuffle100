@@ -18,11 +18,28 @@ Scenario:
 
   # 「設定できること」画面を閲覧できる
   When I wait for 1 second
-#  When I touch the table cell marked "open_options_help"
   When I touch "設定できること"
   Then I wait to see a navigation bar titled "設定できること"
   When I wait for 1 second
   When I forcedly navigate back
   Then I wait to see a navigation bar titled "ヘルプ"
 
-  #%ToDo: このテストの続きを書く！(ここまではちゃんと動いたで！)
+  # 「このアプリを評価する」を選ぶ
+  When I wait for 1 second
+  When I touch "このアプリを評価する"
+  Then I wait to see "立ち上げる"
+
+  # 確認ダイアログでキャンセルする
+  When I touch "やめておく"
+  Then I should not see "立ち上げる"
+
+  # もう一度「このアプリを評価する」を選んで…
+  When I wait for 1 second
+  When I touch "このアプリを評価する"
+  Then I wait to see "立ち上げる"
+
+  # 今度は「立ち上げる」を推してみる
+  When I touch "立ち上げる"
+  Then I should not see "立ち上げる"
+  # シミュレータではApp Storeアプリが起動しないので、何も起こらない。(クラッシュしないことだけ確認)
+  Then I wait for 1 second
