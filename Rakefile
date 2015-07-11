@@ -52,7 +52,7 @@ Motion::Project::App.setup do |app|
     pod 'BBBadgeBarButtonItem'
   }
 
-  APP_VERSION = '3.1'
+  APP_VERSION = '3.1.1'
 
   app.development do
 =begin
