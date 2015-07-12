@@ -10,8 +10,8 @@ describe 'HelpMenuScreen' do
     screen.should.not.be.nil
   end
 
-  it 'is a TableScreen' do
-    screen.should.be.kind_of PM::TableScreen
+  it 'is a GroupedTableScreen' do
+    screen.should.be.kind_of PM::GroupedTableScreen
   end
 
   it 'should not rotate' do
