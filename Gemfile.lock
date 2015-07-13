@@ -137,6 +137,3 @@ DEPENDENCIES
   rake
   rspec (< 3.0.0)
   sugarcube
-
-BUNDLED WITH
-   1.10.4
