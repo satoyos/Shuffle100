@@ -24,6 +24,7 @@ Scenario:
   Then I wait to see "百首読み上げ"
 
   # 読手を選ぶ画面に進む
+  When I wait for 1 second
   When I touch "読手"
   Then I should see "読手を選ぶ"
 
@@ -35,6 +36,7 @@ Scenario:
   Then I should see "いなばくん"
 
   # 序歌画面
+  When I wait for 1 second
   When I touch "試合開始"
   Then I should see "序歌"
   Then I should see play_button waiting "pause"

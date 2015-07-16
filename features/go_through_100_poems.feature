@@ -35,6 +35,7 @@ Scenario:
   Then I should see "IA"
 
   # 序歌画面
+  When I wait for 1 second
   When I touch "試合開始"
   Then I should see "序歌"
   Then I should see play_button waiting "pause"

@@ -22,6 +22,7 @@ Feature:
     Then I should see "IA"
 
     # 改めて読手を選ぶ画面に進む
+    When I wait for 1 second
     When I touch "読手"
     Then I should see "読手を選ぶ"
 
