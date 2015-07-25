@@ -46,11 +46,7 @@ class BeginnerReciteScreen < RecitePoemScreen
   private
 
   def create_new_layout
-    @layout = BeginnerReciteLayout.new.tap{|l|
-      l.delegate = self
-      l.sizes = app_delegate.sizes ? app_delegate.sizes :
-          OH::DeviceSizeManager.select_sizes # こっちはRSpecテスト用
-    }.build
+    @layout = BeginnerReciteLayout.create_with_delegate(self, sizes: get_sizes)
     set_button_actions
   end
 

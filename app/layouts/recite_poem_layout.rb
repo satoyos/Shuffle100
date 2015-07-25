@@ -92,6 +92,15 @@ class RecitePoemLayout < MotionKit::Layout
     end.start
   end
 
+  class << self
+    def create_with_delegate(delegate, sizes: sizes)
+      self.new.tap{|l|
+        l.delegate = delegate
+        l.sizes = sizes
+      }.build
+    end
+  end
+
   private
 
   def show_play_button_title(title, left_inset: l_inset, color: color)
