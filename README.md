@@ -59,7 +59,10 @@ This software is released under the MIT License, see LICENSE.txt.
 
 (※1) ボーカロイドはヤマハ株式会社の登録商標です。  
 (※2) [難波津いなばくん](http://homepage3.nifty.com/naniwazu/)の音声データ「いなばくん」を、著作権者（なにはづ様）の許諾を得て使用しています。
-`/resources/audio/inaba`フォルダの音声データを再配布する際には、著作権者（なにはづ様）の許諾を得てください。
+`/resources/audio/inaba`フォルダの音声データの取り扱いについては、次のような制限があります。
+
+- このアプリの動作確認を目的として、本リポジトリを音声データごとダウンロード(あるいはclone、forkなど)をすることについては、著作権者の許諾済みですので、改めて著作権者の許諾を得る必要はありません。
+- 他の目的で`/resources/audio/inaba`の音声データを利用する場合には、著作権者の許諾を得てください。
 
 
 - - -
@@ -122,4 +125,7 @@ This software is released under the MIT License, see LICENSE.txt.
 
 - - -
 (#7) Human voice files in `/resources/audio/inaba` folder are derived from [Naniwazu Inaba-kun](http://homepage3.nifty.com/naniwazu).
- So, the author of the software has the copyright of these voice files. When you redistribute them, the author's permission is needed. 
+ So, the author of the software has the copyright of these voice files.
+ 
+ - For the purpose of checking how this app works, you can download (clone, fork) the voice files without confirming author's permisson, because the author has already confirmed it.
+ - For other purposes, the author's permission is required.
