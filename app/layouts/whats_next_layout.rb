@@ -11,8 +11,7 @@ class WhatsNextLayout < MotionKit::Layout
   end
 
   def refrain_button_style
-    size ['100%', whats_next_button_height]
-    origin x: 0
+    typical_button_styling
     center y: '50%'
     init_title_style_and_image('refrain.png')
     title '下の句をもう一度読む'
@@ -21,8 +20,7 @@ class WhatsNextLayout < MotionKit::Layout
   end
 
   def next_poem_button_style
-    size ['100%', whats_next_button_height]
-    origin x: 0
+    typical_button_styling
     center y: '70%'
     init_title_style_and_image('go_next.png')
     title '次の歌へ！      '
@@ -31,8 +29,7 @@ class WhatsNextLayout < MotionKit::Layout
   end
 
   def torifuda_button_style
-    size ['100%', whats_next_button_height]
-    origin x: 0
+    typical_button_styling
     center y: '30%'
     init_title_style_and_image('torifuda.png')
     title '取り札を見る     '
@@ -41,6 +38,11 @@ class WhatsNextLayout < MotionKit::Layout
   end
 
   private
+
+  def typical_button_styling
+    size ['100%', whats_next_button_height]
+    origin x: 0
+  end
 
   def set_insets
     image_edge_insets UIEdgeInsetsMake(
