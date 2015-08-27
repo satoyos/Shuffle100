@@ -17,9 +17,9 @@ class IntervalSettingLayout < MK::Layout
 
   def interval_label_style
     text '0.00'
-    size [interval_label_height * 2, interval_label_height]
-    center ['50%', '40%']
     font :system.uifont(interval_label_height)
+    size_to_fit
+    center ['50%', '40%']
   end
 
   def sec_label_style
