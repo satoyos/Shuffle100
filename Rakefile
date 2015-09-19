@@ -47,6 +47,7 @@ Motion::Project::App.setup do |app|
         'CFBundleURLSchemes' => ['Shuffle100'] }
   ]
   app.info_plist['AppStoreID'] = '857819404'
+  app.info_plist['NSAppTransportSecurity'] = { 'NSAllowsArbitraryLoads' => true }
 
   app.pods {
     pod 'BBBadgeBarButtonItem'
