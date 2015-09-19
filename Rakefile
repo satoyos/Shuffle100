@@ -42,10 +42,6 @@ Motion::Project::App.setup do |app|
   app.identifier = 'com.sato0123.Shuffle100'
   app.device_family = [:iphone, :ipad]
 
-  app.info_plist['CFBundleURLTypes'] = [
-      { 'CFBundleURLName' => 'com.satoyos.Shuffle100',
-        'CFBundleURLSchemes' => ['Shuffle100'] }
-  ]
   app.info_plist['AppStoreID'] = '857819404'
   app.info_plist['NSAppTransportSecurity'] = { 'NSAllowsArbitraryLoads' => true }
 
