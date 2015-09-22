@@ -1,5 +1,9 @@
+# coding: utf-8
 require "rubygems"
 require "appium_lib"
+
+TITLE = '百首読み上げ'
+JOKA  = '序歌'
 
 def desired_caps
   {
@@ -26,6 +30,29 @@ RSpec.configure { |c|
     @driver.quit
   }
 }
+
+def click_element_of(class_name, name: nil)
+  element = find_elements(:class_name, class_name).find{|c| c.name == name}
+  element.click
+end
+
+def elems_of_str(text)
+  find_elements(:name, text)
+end
+
+def can_see(text)
+  expect(elems_of_str(text)).not_to be_empty
+end
+
+def can_not_see(text)
+  expect(elems_of_str(text)).to be_empty
+end
+
+def open_game
+    click_element_of('UIATableCell', name: '試合開始')
+    can_see(JOKA)
+end
+
 
 module StringWithUTF8Mac
   def ==(other)
