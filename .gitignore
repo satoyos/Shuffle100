@@ -31,3 +31,6 @@ zz_trash/
 # motion-awesome
 resources/fontawesome.plist
 resources/fontawesome-webfont.ttf
+
+# appium
+appium_tests/vendor/
