@@ -16,13 +16,13 @@ def desired_caps
 end
 
 RSpec.configure { |c|
-  c.before(:each) {
+  c.before(:all) {
     @driver = Appium::Driver.new(desired_caps).start_driver
     @driver.manage.timeouts.implicit_wait = 5
     Appium.promote_appium_methods Object
   }
 
-  c.after(:each) {
+  c.after(:all) {
     @driver.quit
   }
 }
