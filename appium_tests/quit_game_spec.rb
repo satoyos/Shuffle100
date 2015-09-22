@@ -1,3 +1,4 @@
+# coding: utf-8
 require_relative 'spec_helper'
 require 'uri'
 
@@ -24,12 +25,7 @@ describe "試合終了テスト" do
   end
 
   it '試合開始' do
-=begin
-    start_cell = find_elements(:class_name, 'UIATableCell').find{|c| c.name == '試合開始'}
-    start_cell.click
-=end
     click_element_of('UIATableCell', name: '試合開始')
-    # expect(find_element(:name, '序歌')).not_to be nil
     can_see('序歌')
   end
 
