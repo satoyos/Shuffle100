@@ -22,7 +22,7 @@ end
 RSpec.configure { |c|
   c.before(:all) {
     @driver = Appium::Driver.new(desired_caps).start_driver
-    @driver.manage.timeouts.implicit_wait = 5
+    @driver.manage.timeouts.implicit_wait = 2
     Appium.promote_appium_methods Object
   }
 
@@ -31,9 +31,13 @@ RSpec.configure { |c|
   }
 }
 
+def elem_of_class(class_name, name: nil)
+  find_elements(:class_name, class_name).find{|c| c.name == name}
+end
+
 def click_element_of(class_name, name: nil)
-  element = find_elements(:class_name, class_name).find{|c| c.name == name}
-  element.click
+  # element = find_elements(:class_name, class_name).find{|c| c.name == name}
+  elem_of_class(class_name, name: name).click
 end
 
 def elems_of_str(text)
