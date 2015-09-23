@@ -57,6 +57,9 @@ def open_game
     can_see(JOKA)
 end
 
+def first_text_elem
+  find_elements(:xpath, '//UIAStaticText').first
+end
 
 module StringWithUTF8Mac
   def ==(other)

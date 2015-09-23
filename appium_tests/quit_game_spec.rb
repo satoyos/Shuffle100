@@ -81,10 +81,6 @@ end
 
 private
 
-def first_text_elem
-  find_elements(:xpath, '//UIAStaticText[1]').first
-end
-
 def open_quit_dialogue(label)
     button(label).click
     can_see(DIALOGUE_MESSAGE)
