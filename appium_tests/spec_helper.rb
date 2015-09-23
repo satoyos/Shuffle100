@@ -1,6 +1,7 @@
 # coding: utf-8
 require "rubygems"
 require "appium_lib"
+require_relative 'string_with_utf8_mac'
 
 TITLE = '百首読み上げ'
 JOKA  = '序歌'
@@ -59,14 +60,4 @@ end
 
 def first_text_elem
   find_elements(:xpath, '//UIAStaticText').first
-end
-
-module StringWithUTF8Mac
-  def ==(other)
-    self.encode('UTF-8', 'UTF-8-Mac').eql? other.encode('UTF-8', 'UTF-8-Mac')
-  end
-end
-
-class String
-  prepend StringWithUTF8Mac
 end
