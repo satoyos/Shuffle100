@@ -12,7 +12,6 @@ class FudaLayout < MK::Layout
 
   def layout
     background_color BASE_BACK_COLOR
-    accessibility_label 'FudaLayoutView'
     add FudaView, :fuda_view
   end
 
@@ -22,6 +21,7 @@ class FudaLayout < MK::Layout
     puts "-- 計算された高さは [#{height}]" if BW2.debug?
     set_all_sizes_by height
     center ['50%', "50% + #{top_offset / 2}"]
+    accessibility_label 'torifuda_view'
   end
 
   private
