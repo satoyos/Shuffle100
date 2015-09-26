@@ -70,7 +70,7 @@ GEM
     json (1.8.3)
     methadone (1.9.1)
       bundler
-    minitest (5.8.0)
+    minitest (5.8.1)
     molinillo (0.3.1)
     motion-awesome (0.0.6)
       motion-map
@@ -140,3 +140,6 @@ DEPENDENCIES
   rake
   rspec (< 3.0.0)
   sugarcube
+
+BUNDLED WITH
+   1.10.5
