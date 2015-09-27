@@ -17,10 +17,12 @@ describe '読手を選ぶテスト' do
       can_see('読手を選ぶ')
     end
 
-    it '「いなばくん」を選んで、ホーム画面に戻る' do
+    it '「いなばくん」を選んで、ホーム画面に戻ると、それが読手として設定されている' do
       wheel = find_element(class_name: 'UIAPickerWheel')
       wheel.send_keys 'いなばくん（人間）'
       back
+      can_see 'いなばくん（人間）'
+      can_not_see('IA（ボーカロイド）')
     end
   end
 end
