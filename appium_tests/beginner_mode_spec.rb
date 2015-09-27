@@ -8,7 +8,7 @@ describe "初心者モードのテスト" do
     can_see(TITLE)
   end
 
-  describe '歌読み上げ画面からの試合終了' do
+  describe '「次はどうする？」画面での動作各員' do
 
     it '初心者モードをonにする' do
       can_see('空札を加える')
@@ -44,18 +44,6 @@ describe "初心者モードのテスト" do
       can_see('torifuda_view')
       button('閉じる').click # 取り札画面を閉じて、また「次はどうする？」画面に戻る
     end
-
-=begin
-    it 'quitボタンを押すと、ダイアログが開く' do
-      open_quit_dialogue('exit')
-    end
-
-    it '「終了する」を押すと、トップ画面に戻る' do
-      alert_dismiss
-      can_see(TITLE)
-      can_not_see(JOKA)
-    end
-=end
   end
 end
 
