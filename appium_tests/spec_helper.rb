@@ -5,6 +5,7 @@ require_relative 'string_with_utf8_mac'
 
 TITLE = '百首読み上げ'
 JOKA  = '序歌'
+WHATS_NEXT_STR = '次はどうする？'
 
 def desired_caps
   {
