@@ -64,7 +64,7 @@ describe "試合終了テスト" do
 
     it 'もう一度早送りボタンを押すと、「次はどうする？」画面になる' do
       button('forward').click
-      expect(first_text_elem.value).to eq '次はどうする？'
+      expect(first_text_elem.value).to eq WHATS_NEXT_STR
     end
 
     it 'quitボタンを押すと、ダイアログが開く' do

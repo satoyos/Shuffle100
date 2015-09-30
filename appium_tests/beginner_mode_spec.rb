@@ -30,7 +30,7 @@ describe "初心者モードのテスト" do
 
     it 'もう一度早送りボタンを押すと、「次はどうする？」画面になる' do
       button('forward').click
-      expect(first_text_elem.value).to eq '次はどうする？'
+      expect(first_text_elem.value).to eq WHATS_NEXT_STR
     end
 
     it '「下の句をもう一度読む」ボタンを押すと、下の句の読み上げを繰り返す' do
