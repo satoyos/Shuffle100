@@ -45,9 +45,7 @@ end
 describe '試合途中で変更可能な設定のテスト(初心者モード)' do
   DURATION_BETWEEN_KAMI_SHIMO = '上の句と下の句の間隔'
   it '初心者モードをonにする' do
-    beginner_mode_switch = elem_of_class('UIASwitch', name: '初心者モード(散らし取り)')
-    beginner_mode_switch.click if beginner_mode_switch.value == 0
-    can_not_see('空札を加える')
+    set_beginner_mode_on
   end
   it '試合を開始し、早送りボタンを押して、1首めへ' do
     open_game

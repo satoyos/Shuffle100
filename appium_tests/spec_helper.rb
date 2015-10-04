@@ -62,3 +62,10 @@ end
 def first_text_elem
   find_elements(:xpath, '//UIAStaticText').first
 end
+
+def set_beginner_mode_on
+  beginner_mode_switch = elem_of_class('UIASwitch', name: '初心者モード(散らし取り)')
+  beginner_mode_switch.click if beginner_mode_switch.value == 0
+  can_not_see('空札を加える')
+end
+
