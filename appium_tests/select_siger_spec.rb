@@ -18,10 +18,7 @@ describe '読手を選ぶテスト' do
     end
 
     it '「いなばくん」を選んで、ホーム画面に戻ると、それが読手として設定されている' do
-      wheel = find_element(class_name: 'UIAPickerWheel')
-      wheel.send_keys 'いなばくん（人間）'
-      back
-      can_see 'いなばくん（人間）'
+      set_singer_inaba_kun
       can_not_see('IA（ボーカロイド）')
     end
   end

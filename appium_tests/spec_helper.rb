@@ -69,3 +69,11 @@ def set_beginner_mode_on
   can_not_see('空札を加える')
 end
 
+def set_singer_inaba_kun
+  click_element_of('UIATableCell', name: '読手') if elems_of_str('試しに聞いてみる').empty?
+  wheel = find_element(class_name: 'UIAPickerWheel')
+  wheel.send_keys 'いなばくん（人間）'
+  back
+  can_see 'いなばくん（人間）'
+end
+
