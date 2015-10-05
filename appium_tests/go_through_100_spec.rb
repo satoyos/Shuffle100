@@ -39,7 +39,7 @@ describe '初心者モードで、百首を通して(問題を起こさず)読�
   end
   it '試合を開始し、早送りボタンを押して、1首めへ' do
     open_game
-    button('forward').click # 序歌画面をスキップ
+    click_forward_button
     expect(first_text_elem.value).to match_regex /\A1首め/
   end
   it '残り、百首まで問題無く読み上げられる' do
@@ -57,13 +57,13 @@ end
 private
 
 def skip_start_skip
-  button('forward').click # 上の句の終わりまで
+  click_forward_button
   button('play').click # 下の句から読み上げ再開
-  button('forward').click # 読み上げをスキップ
+  click_forward_button
 end
 
 def skip_skip_next
-  button('forward').click    # 上の句の終わりまで
-  button('forward').click    # 下の句の終わりまで
+  click_forward_button
+  click_forward_button
   button('next_poem_button').click # 次の歌に進む
 end
