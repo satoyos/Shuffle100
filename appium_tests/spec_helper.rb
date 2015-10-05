@@ -77,3 +77,6 @@ def set_singer_inaba_kun
   can_see 'いなばくん（人間）'
 end
 
+def click_forward_button
+  button('forward').click
+end
