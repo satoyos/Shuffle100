@@ -58,7 +58,7 @@ private
 
 def skip_start_skip
   button('forward').click # 上の句の終わりまで
-  button('play_button').click # 下の句から読み上げ再開
+  button('play').click # 下の句から読み上げ再開
   button('forward').click # 読み上げをスキップ
 end
 

@@ -113,6 +113,10 @@ class RecitePoemLayout < MotionKit::Layout
       b.setTitleColor(color, forState: UIControlStateNormal)
       b.setTitleColor(color.colorWithAlphaComponent(0.25),
                       forState: UIControlStateHighlighted | UIControlStateDisabled)
+      b.accessibilityLabel = case title
+                               when PLAY_BUTTON_PAUSING_TITLE ; ACC_LABEL_PAUSE
+                               else ; ACC_LABEL_PLAY
+                             end
     end
   end
 
