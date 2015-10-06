@@ -5,13 +5,13 @@ TITLE_FOR_ON_GAME_SETTINGS = 'いろいろな設定'
 CLOSE_ON_GAME_SETTINGS = '設定終了'
 
 describe '試合途中で変更可能な設定のテスト(通常モード)' do
+  DURATION_BETWEEN_KAMI_SHIMO = '上の句と下の句の間隔'
 
   it 'アプリのタイトルが正しく表示される' do
     can_see(TITLE)
   end
 
   describe '通常モードでの各種設定' do
-    DURATION_BETWEEN_KAMI_SHIMO = '上の句と下の句の間隔'
     DURATION_BETWEEN_SONGS = '歌と歌の間隔'
     TITLE_FOR_DURATION_BETWEEN_SONGS = '歌の間隔の変更'
 
@@ -43,7 +43,6 @@ describe '試合途中で変更可能な設定のテスト(通常モード)' do
 end
 
 describe '試合途中で変更可能な設定のテスト(初心者モード)' do
-  DURATION_BETWEEN_KAMI_SHIMO = '上の句と下の句の間隔'
   it '初心者モードをonにする' do
     set_beginner_mode_on
   end
