@@ -27,7 +27,6 @@ class HomeScreen < PM::GroupedTableScreen
     end if self.nav_bar?
     self.navigationItem.prompt = app_delegate.prompt
     update_table_data
-    set_bd_layout if BW2.debug?
   end
 
   def on_appear
@@ -44,15 +43,5 @@ class HomeScreen < PM::GroupedTableScreen
   def set_nav_bar_button_actions
     @gear_button.on(:touch){open_on_game_settings}
     @help_button.on(:touch){open_help}
-  end
-
-  def set_bd_layout
-    @bd_view = UIView.alloc.initWithFrame([[0, 300], [30, 20]])
-    add @bd_view
-    bd_layout = BDAreaLayout.new(root: @bd_view).tap { |layout| layout.delegate = self }.build
-    bd_layout.tap do |l|
-      l.get(:bd_beg_on_button).addTarget(self, action: 'beg_button_pushed', forControlEvents: UIControlEventTouchUpInside)
-      l.get(:bd_beg_off_button).addTarget(self, action: 'beg_off_button_pushed', forControlEvents: UIControlEventTouchUpInside)
-    end
   end
 end

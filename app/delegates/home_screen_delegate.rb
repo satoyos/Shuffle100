@@ -73,17 +73,4 @@ module HomeScreenDelegate
       alert_view.addButtonWithTitle('戻る')
     }.show
   end
-
-  def beg_button_pushed
-    puts 'beg_button_pushed!' if BW2.debug?
-    @beg_switch.setOn(true, animated: true)
-    beginner_switch_flipped({value: true})
-  end
-
-  def beg_off_button_pushed
-    puts 'beg_off_button_pushed!' if BW2.debug?
-    @beg_switch.setOn(false, animated: true)
-    beginner_switch_flipped({value: false})
-  end
-
 end

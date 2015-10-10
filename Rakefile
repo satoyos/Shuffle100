@@ -9,7 +9,6 @@ def rake_mode
   case ARGV.join(' ')
     when /simulator|device|pod|\A\z/ ; :simulator
     when /spec/ ; :spec
-    when /frank/ ; :frank
   end
 end
 
@@ -19,8 +18,6 @@ case rake_mode
   when :spec
     require 'awesome_print_motion'
     Bundler.require :spec
-  when :frank
-    Bundler.require :frank
   when :simulator
     require 'awesome_print_motion'
     Bundler.require :simulator
