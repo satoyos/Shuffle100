@@ -11,7 +11,7 @@ def desired_caps
   {
       caps: {
           platformName:  "iOS",
-          versionNumber: "9.0",
+          versionNumber: "9.1",
           deviceName:    "iPhone 5s",
           app: '../build/iPhoneSimulator-8.0-Development/Shuffle100.app',
       },
