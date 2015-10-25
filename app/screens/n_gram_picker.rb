@@ -13,7 +13,7 @@ class NGramPicker < PM::Screen
     init_table_view
     add table_view
     set_badge_button
-    budge_button_size_plus(2)
+    badge_button.button_size_plus(2)
   end
 
   def init_table_view
@@ -37,23 +37,12 @@ class NGramPicker < PM::Screen
 
   def init_members
     @status100 = loaded_selected_status
-    @badge_button = BBBadgeBarButtonItem.alloc.initWithCustomUIButton(UIButton.alloc.init).tap do |bb|
-      bb.badgeOriginX = -50.0
-    end
-  end
-
-  def budge_button_size_plus(plus_size)
-    org_font_size = badge_font.pointSize
-    badge_button.badgeFont = badge_font.fontWithSize(org_font_size + plus_size)
+    @badge_button = PoemsNumberSelectedItem.create_with_origin_x(-50)
   end
 
   def set_badge_button
     set_nav_bar_button :right, {
         button: badge_button
     }
-  end
-
-  def badge_font
-    badge_button.badgeFont
   end
 end

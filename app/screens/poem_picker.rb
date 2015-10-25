@@ -16,16 +16,13 @@ class PoemPicker < PM::TableScreen
     init_members
     set_font_changed_notification
     set_badge_button
-    budge_button_size_plus(2)
+    badge_button.button_size_plus(2)
     update_table_and_prompt
   end
 
   def init_members
     self.status100 = loaded_selected_status
-    @badge_button = BBBadgeBarButtonItem.alloc.initWithCustomUIButton(UIButton.alloc.init).tap do |bb|
-      bb.badgeOriginX = -50.0
-      bb.shouldHideBadgeAtZero = false
-    end
+    @badge_button = PoemsNumberSelectedItem.create_with_origin_x(-50)
     self
   end
 
@@ -62,11 +59,6 @@ class PoemPicker < PM::TableScreen
     update_table_data
   end
 
-  def budge_button_size_plus(plus_size)
-    org_font_size = badge_font.pointSize
-    badge_button.badgeFont = badge_font.fontWithSize(org_font_size + plus_size)
-  end
-
   def init_tool_bar
     return unless navigation_controller
     items = [{
@@ -88,7 +80,6 @@ class PoemPicker < PM::TableScreen
 
   def alert_ngram_picker_disabled
     UIAlertView.alloc.init.tap{|alert_view|
-      # alert_view.title ='歌を選びましょう'
       alert_view.message = '歌を検索している時には、このボタンは使えません。'
       alert_view.addButtonWithTitle('戻る')
     }.show
@@ -98,9 +89,5 @@ class PoemPicker < PM::TableScreen
     set_nav_bar_button :right, {
                                  button: badge_button
                              }
-  end
-
-  def badge_font
-    badge_button.badgeFont
   end
 end
