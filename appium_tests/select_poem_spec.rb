@@ -36,4 +36,17 @@ describe '歌を選ぶテスト' do
       can_see '7首'
     end
   end
+
+  describe '1首も歌が選ばれていない状態で試合を開始すると、警告を出す' do
+    it '歌選択画面を開き、全く歌が選ばれていない状態にする' do
+      click_element_of('UIATableCell', name: '取り札を用意する歌')
+      button('全て取消').click
+      back
+      can_see '0首'
+    end
+    it 'この状態で試合を開始すると、警告(AlertView)が表示される' do
+      click_element_of('UIATableCell', name: '試合開始')
+      can_see '歌を選びましょう'
+    end
+  end
 end
