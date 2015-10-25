@@ -1,6 +1,5 @@
 module NGramPickerDelegate
   def tableView(tableView, didSelectRowAtIndexPath:indexPath)
-#    puts "- 選ばれた1文字目は[#{id_of(indexPath)}]です。"
     case selected_status_of_char(id_of(indexPath))
       when :full ; release_poems_of_char(id_of(indexPath))
       else       ; select_all_poems_of_char(id_of(indexPath))
@@ -10,7 +9,8 @@ module NGramPickerDelegate
   end
 
   def tableView(tableView, willDisplayCell: cell, forRowAtIndexPath: indexPath)
-    self.navigationItem.prompt = '選択中: %d首' % @status100.selected_num
+    self.navigationItem.prompt = AppDelegate::PROMPT
+    badge_button.badgeValue = "#{@status100.selected_num}首"
   end
 
 
