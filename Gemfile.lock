@@ -52,7 +52,7 @@ GEM
     molinillo (0.4.0)
     motion-awesome (0.0.6)
       motion-map
-    motion-cocoapods (1.7.4)
+    motion-cocoapods (1.7.5)
       cocoapods (>= 0.34)
     motion-dynamic-type (0.1.0)
     motion-kit (0.18.0)
