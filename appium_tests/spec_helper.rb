@@ -12,7 +12,8 @@ def desired_caps
       caps: {
           platformName:  "iOS",
           versionNumber: "9.1",
-          deviceName:    "iPhone 5s",
+          # deviceName:    "iPhone 5s",
+          deviceName:    "iPad Pro",
           app: '../build/iPhoneSimulator-8.0-Development/Shuffle100.app',
       },
       appium_lib: {
