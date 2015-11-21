@@ -58,7 +58,7 @@ class IntervalSettingScreen < PM::Screen
   end
 
   def slider_value_changed
-    puts 'Sliderの値が変わったよ！'
+    puts 'Sliderの値が変わったよ！' if BW2.debug?
     reset_players_if_needed
     layout.update_interval_label
   end

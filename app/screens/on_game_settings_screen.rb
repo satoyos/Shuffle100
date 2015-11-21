@@ -34,6 +34,11 @@ class OnGameSettingsScreen < PM::TableScreen
     open KamiShimoIntervalSettingScreen.new, nav_bar: true
   end
 
+  def tapped_speed_cell
+    puts ' - SpeedCell is tapped!' if BW2.debug?
+    open SpeedSettingScreen.new, nav_bar: true
+  end
+
   def tapped_volume_cell
     puts ' - VolumeCell is tapped!' if BW2.debug?
     open VolumeSettingScreen.new, nav_bar: true
@@ -50,6 +55,7 @@ class OnGameSettingsScreen < PM::TableScreen
   def on_game_setting_cells
     cells = [
         poems_interval_cell,
+        speed_setting_cell,
         volume_setting_cell
     ]
     return cells unless app_delegate.game_settings.beginner_flg
@@ -86,6 +92,18 @@ class OnGameSettingsScreen < PM::TableScreen
     {
         title: '音量調整',
         action: :tapped_volume_cell,
+        style: {
+            accessoryType: UITableViewCellAccessoryDisclosureIndicator,
+        }
+    }
+  end
+
+  def speed_setting_cell
+    {
+        title: '読み上げスピード',
+        cell_style: UITableViewCellStyleValue1,
+        action: :tapped_speed_cell,
+        subtitle: '%1.1f倍速' % app_delegate.reciting_settings.speed_rate,
         style: {
             accessoryType: UITableViewCellAccessoryDisclosureIndicator,
         }

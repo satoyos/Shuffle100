@@ -1,5 +1,4 @@
 module AudioPlayerFactory
-
   module_function
 
   def players
@@ -35,8 +34,19 @@ module AudioPlayerFactory
     url = NSURL.fileURLWithPath(bundle_by_basename(basename, ofType: type))
     er = Pointer.new(:object)
     player = AVAudioPlayer.alloc.initWithContentsOfURL(url, error: er)
+    player.enableRate = true
+    player.rate = app_delegate.reciting_settings.speed_rate || 1.0
     player.prepareToPlay
     player
+  end
+
+  def create_player_of(poem, side: kami_or_shimo)
+    path = case kami_or_shimo
+             when :kami  ; app_delegate.current_singer_folder +  '/%03da' % poem.number
+             when :shimo ; app_delegate.current_singer_folder +  '/%03db' % poem.number
+             else        ; raise('Choose :kami or :shimo with "side" parameter')
+           end
+    create_player_by_path(path, ofType: 'm4a')
   end
 
   :private
@@ -48,4 +58,9 @@ module AudioPlayerFactory
     end
     bundle
   end
+
+  def app_delegate
+    AppDelegateAccessor.app_delegate
+  end
+
 end
