@@ -1,7 +1,7 @@
 GEM
   remote: https://rubygems.org/
   specs:
-    ProMotion (2.4.2)
+    ProMotion (2.5.0)
       methadone (~> 1.7)
       motion_print (~> 1.0)
     activesupport (4.2.5)
@@ -48,7 +48,7 @@ GEM
     json (1.8.3)
     methadone (1.9.2)
       bundler
-    minitest (5.8.2)
+    minitest (5.8.3)
     molinillo (0.4.0)
     motion-awesome (0.0.6)
       motion-map
