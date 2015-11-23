@@ -66,13 +66,6 @@ describe 'PoemSupplier' do
           @supplier.player.is_a?(AVAudioPlayer).should.be.true
         end
 
-        # Travis CIを通すため、無効にする
-=begin
-        it 'playerは再生可能' do
-          @supplier.player.play
-          @supplier.player.playing?.should.be.true
-        end
-=end
       end
 
 
@@ -119,7 +112,7 @@ describe 'PoemSupplier' do
     end
   end
 
-  describe 'step_into_shimo' do
+  describe '#step_into_shimo' do
     before do
       @supplier = PoemSupplier.new
       @supplier.draw_next_poem
@@ -128,6 +121,22 @@ describe 'PoemSupplier' do
     it '管理対象が上の句から下の句に移行する' do
       @supplier.step_into_shimo
       @supplier.kami?.should.be.false
+    end
+  end
+
+  describe '#side' do
+    before do
+      @supplier = PoemSupplier.new
+      @supplier.draw_next_poem
+    end
+
+    it '上の句のときは、:kamiを返す' do
+      @supplier.side.should == :kami
+    end
+
+    it '下の句に遷移した場合は :shimoを返す' do
+      @supplier.step_into_shimo
+      @supplier.side.should == :shimo
     end
   end
 

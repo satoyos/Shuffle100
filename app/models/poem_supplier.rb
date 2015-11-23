@@ -40,6 +40,10 @@ class PoemSupplier
     @kami
   end
 
+  def side
+    @kami ? :kami : :shimo
+  end
+
   def draw_next_poem
     return false if current_index >= size
     @poem = @deck.next_poem
@@ -68,10 +72,6 @@ class PoemSupplier
   end
 
   def current_player
-    path = case @kami
-             when true ; app_delegate.current_singer_folder +  '/%03da' % poem.number
-             else      ; app_delegate.current_singer_folder +  '/%03db' % poem.number
-           end
-    AudioPlayerFactory.create_player_by_path(path, ofType: 'm4a')
+    AudioPlayerFactory.create_player_of(poem, side: self.side)
   end
 end
