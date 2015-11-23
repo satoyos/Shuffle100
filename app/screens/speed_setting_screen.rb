@@ -63,7 +63,6 @@ class SpeedSettingScreen < PM::Screen
   end
 
   def reset_player_if_needed
-    # return unless kami_player.playing?
     kami_player.pause if kami_player.playing?
     kami_player.currentTime = 0.0
     kami_player.rate = current_rate
@@ -73,5 +72,4 @@ class SpeedSettingScreen < PM::Screen
   def current_rate
     slider.value.round(1)
   end
-
 end

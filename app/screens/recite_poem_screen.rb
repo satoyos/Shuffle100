@@ -29,7 +29,8 @@ class RecitePoemScreen < PM::Screen
 
   def on_return(args={})
     puts '// 読み上げ画面に帰ってきたぜ！' if BW2.debug?
-    set_player_volume
+    set_player_volume_and_speed
+    # puts "// 読み上げスピード => #{current_player.rate}倍速" if BW2.debug?
   end
 
   def should_autorotate
@@ -55,7 +56,7 @@ class RecitePoemScreen < PM::Screen
 
    def recite_poem
     layout.show_waiting_to_pause
-    set_player_volume
+    set_player_volume_and_speed
     current_player.play
   end
 
@@ -108,7 +109,7 @@ class RecitePoemScreen < PM::Screen
   def fetch_player
     @current_player = @supplier.player
     current_player.delegate = self
-    set_player_volume
+    set_player_volume_and_speed
   end
 
   def renew_layout_and_player
@@ -117,8 +118,9 @@ class RecitePoemScreen < PM::Screen
     fetch_player
   end
 
-  def set_player_volume
+  def set_player_volume_and_speed
     current_player.volume = app_delegate.reciting_settings.volume
+    current_player.rate = app_delegate.reciting_settings.speed_rate
   end
 
   def transit_kami_shimo
