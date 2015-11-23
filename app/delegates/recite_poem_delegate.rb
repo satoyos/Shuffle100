@@ -35,8 +35,11 @@ module RecitePoemDelegate
     else
       if supplier.current_index > 0
         if supplier.kami?
-          back_to_top_screen unless supplier.rollback_prev_poem
-          go_back_to_prev_poem
+          if supplier.rollback_prev_poem # 一つ前の歌がある
+            go_back_to_prev_poem
+          else                           # 一つ前の歌は無い。
+            back_to_top_screen
+          end
         else
           supplier.step_back_to_kami
           transit_shimo_kami

@@ -24,7 +24,7 @@ describe 'PoemSupplier' do
 
     it '初期状態では、扱っている歌は無い' do
       @supplier.poem.should.be.nil
-      @supplier.player.should.be.nil
+      # @supplier.player.should.be.nil
       @supplier.kami?.should.be.nil
     end
   end
@@ -57,6 +57,7 @@ describe 'PoemSupplier' do
         end
       end
 
+=begin
       describe 'playerの確認' do
         before do
           @supplier.draw_next_poem
@@ -67,6 +68,7 @@ describe 'PoemSupplier' do
         end
 
       end
+=end
 
 
       describe 'kami?の確認' do

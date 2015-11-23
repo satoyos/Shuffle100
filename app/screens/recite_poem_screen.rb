@@ -107,7 +107,8 @@ class RecitePoemScreen < PM::Screen
   end
 
   def fetch_player
-    @current_player = @supplier.player
+    # @current_player = @supplier.player
+    @current_player = AudioPlayerFactory.create_player_of(supplier.poem, side: supplier.side)
     current_player.delegate = self
     set_player_volume_and_speed
   end
@@ -124,10 +125,12 @@ class RecitePoemScreen < PM::Screen
   end
 
   def transit_kami_shimo
+    @current_player = AudioPlayerFactory.create_player_of(poem, side: :shimo)
     recite_view_slide_in_from(:right)
   end
 
   def transit_shimo_kami
+    @current_player = AudioPlayerFactory.create_player_of(poem, side: :kami)
     recite_view_slide_in_from(:left)
   end
 

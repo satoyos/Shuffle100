@@ -21,9 +21,11 @@ class KamiShimoIntervalSettingScreen < IntervalSettingScreen
   def set_kami_shimo_players
     supplier = PoemSupplier.new  # 間隔調節用に、全く新規のsupplierを作る
     supplier.draw_next_poem
-    @kami_player = supplier.player.tap {|p| p.delegate = self}
+    # @kami_player = supplier.player.tap {|p| p.delegate = self}
+    @kami_player = fetch_player_of(supplier)
     supplier.step_into_shimo
-    @shimo_player = supplier.player.tap {|p| p.delegate = self}
+    # @shimo_player = supplier.player.tap {|p| p.delegate = self}
+    @shimo_player = fetch_player_of(supplier)
   end
 
   def initial_interval_time

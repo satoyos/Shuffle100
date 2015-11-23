@@ -108,12 +108,16 @@ class IntervalSettingScreen < PM::Screen
     supplier = PoemSupplier.new  # 間隔調節用に、全く新規のsupplierを作る
     supplier.draw_next_poem
     supplier.step_into_shimo
-    @shimo_player = supplier.player # 一首目の下の句を再生するプレーヤー
-    @shimo_player.delegate = self
+    # @shimo_player = supplier.player # 一首目の下の句を再生するプレーヤー
+    @shimo_player = fetch_player_of(supplier)
 
     supplier.draw_next_poem
-    @kami_player = supplier.player  # 二首目の下の句を再生するプレーヤー
-    @kami_player.delegate = self
+    # @kami_player = supplier.player  # 二首目の下の句を再生するプレーヤー
+    @kami_player = fetch_player_of(supplier)
+  end
+
+  def fetch_player_of(supplier)
+    AudioPlayerFactory.create_player_of(supplier.poem, side: supplier.side).tap {|p| p.delegate = self}
   end
 
   def reset_players_if_needed

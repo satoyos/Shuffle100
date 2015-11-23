@@ -1,7 +1,8 @@
 class PoemSupplier
   include AppDelegateAccessor
 
-  attr_reader :poem, :player
+  # attr_reader :poem, :player
+  attr_reader :poem
 
   def initialize(init_hash={})
     if init_hash[:deck]
@@ -48,7 +49,7 @@ class PoemSupplier
     return false if current_index >= size
     @poem = @deck.next_poem
     @kami = true
-    @player = current_player
+    # @player = current_player
     true
   end
 
@@ -57,21 +58,23 @@ class PoemSupplier
     @poem = @deck.rollback_poem
     return false unless @poem
     @kami = false
-    @player = current_player
+    # @player = current_player
     true
   end
 
   def step_into_shimo
     @kami = false
-    @player = current_player
+    # @player = current_player
   end
 
   def step_back_to_kami
     @kami = true
-    @player = current_player
+    # @player = current_player
   end
 
+=begin
   def current_player
     AudioPlayerFactory.create_player_of(poem, side: self.side)
   end
+=end
 end

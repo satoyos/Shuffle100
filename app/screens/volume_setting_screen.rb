@@ -61,10 +61,17 @@ class VolumeSettingScreen < PM::Screen
   def set_test_player
     supplier = PoemSupplier.new
     supplier.draw_next_poem
+=begin
     @test_player = supplier.player.tap do |player|
       player.delegate = self
       player.volume = app_delegate.reciting_settings.volume
     end
+=end
+    @test_player = fetch_player_of(supplier).tap{|p| p.volume = app_delegate.reciting_settings.volume}
+  end
+
+  def fetch_player_of(supplier)
+    AudioPlayerFactory.create_player_of(supplier.poem, side: supplier.side).tap {|p| p.delegate = self}
   end
 
   def reset_player
