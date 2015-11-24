@@ -3,7 +3,6 @@ module RecitePoemDelegate
 
   ACC_LABEL_QUIT_ALERT = 'quit_alert_view'
 
-
   def play_button_pushed(view)
     if current_player.playing?
       current_player.pause
@@ -26,24 +25,10 @@ module RecitePoemDelegate
   def rewind_skip
     return unless current_player
     if current_player.currentTime > 0.0 # 再生途中の場合
-      current_player.tap do  |player|
-        player.currentTime = 0.0
-        player.pause
-      end
-      layout.show_waiting_to_play
-      layout.update_progress
+      set_player_back_to_zero
     else
       if supplier.current_index > 0
-        if supplier.kami?
-          if supplier.rollback_prev_poem # 一つ前の歌がある
-            go_back_to_prev_poem
-          else                           # 一つ前の歌は無い。
-            back_to_top_screen
-          end
-        else
-          supplier.step_back_to_kami
-          transit_shimo_kami
-        end
+        back_to_prev_screen
       else #詠んでいる歌が序歌の場合
         back_to_top_screen
       end
@@ -70,4 +55,27 @@ module RecitePoemDelegate
     close to_screen: :root
   end
 
+  private
+
+  def set_player_back_to_zero
+    current_player.tap do |player|
+      player.currentTime = 0.0
+      player.pause
+    end
+    layout.show_waiting_to_play
+    layout.update_progress
+  end
+
+  def back_to_prev_screen
+    if supplier.kami?
+      if supplier.rollback_prev_poem # 一つ前の歌がある
+        go_back_to_prev_poem
+      else # 一つ前の歌は無い。
+        back_to_top_screen
+      end
+    else
+      supplier.step_back_to_kami
+      transit_shimo_kami
+    end
+  end
 end
