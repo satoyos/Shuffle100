@@ -53,6 +53,7 @@ describe '初心者モードで、百首を通して(問題を起こさず)読�
       skip_skip_next
       # 通常モードと同様の理由により、↓この確認は諦める。
       # expect(first_text_elem.value).to match_regex Regexp.new("\\A#{i}首め")
+      puts "  -#{i}首目を読み上げ中。"
     }
     expect(1).to eq 1
   end
