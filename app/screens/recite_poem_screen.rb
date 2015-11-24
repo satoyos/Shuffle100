@@ -30,7 +30,6 @@ class RecitePoemScreen < PM::Screen
   def on_return(args={})
     puts '// 読み上げ画面に帰ってきたぜ！' if BW2.debug?
     set_player_volume_and_speed
-    # puts "// 読み上げスピード => #{current_player.rate}倍速" if BW2.debug?
   end
 
   def should_autorotate

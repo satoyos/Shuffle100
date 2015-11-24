@@ -57,20 +57,6 @@ describe 'PoemSupplier' do
         end
       end
 
-=begin
-      describe 'playerの確認' do
-        before do
-          @supplier.draw_next_poem
-        end
-        it 'AVAudioPlayerオブジェクトを保持している' do
-          @supplier.player.should.not.be.nil
-          @supplier.player.is_a?(AVAudioPlayer).should.be.true
-        end
-
-      end
-=end
-
-
       describe 'kami?の確認' do
         before do
           @supplier.draw_next_poem

@@ -8,7 +8,6 @@ describe 'IntervalSettingController' do
       screen.should.not.be.nil
     end
 
-
     it '下の句プレーヤーと上の句プレーヤーを持つ' do
       screen.kami_player.tap do |player|
         player.should.not.be.nil
@@ -16,7 +15,6 @@ describe 'IntervalSettingController' do
       end
       screen.shimo_player.should.not.be.nil
     end
-
   end
 
   it 'should not rotate' do
