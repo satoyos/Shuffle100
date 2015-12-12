@@ -6,7 +6,6 @@ class RecitingSettings
   KEY_INTERVAL_TIME = 'interval_time'
   KEY_KAMI_SHIMO_INTERVAL = 'kami_shimo_interval'
   KEY_VOLUME = 'volume'
-  KEY_SPEED_RATE = 'speed_rate'
 
   attr_accessor :interval_time, :volume, :kami_shimo_interval, :speed_rate
 
@@ -14,7 +13,6 @@ class RecitingSettings
     self.interval_time = DEFAULT_INTERVAL_TIME
     self.kami_shimo_interval = DEFAULT_KAMI_SHIMO_INTERVAL
     self.volume        = DEFAULT_VOLUME
-    self.speed_rate    = DEFAULT_SPEED_RATE
   end
 
   # @param [NSCoder] decoder
@@ -25,8 +23,6 @@ class RecitingSettings
         decoder.decodeObjectForKey(KEY_KAMI_SHIMO_INTERVAL) || DEFAULT_KAMI_SHIMO_INTERVAL
     self.volume =
         decoder.decodeObjectForKey(KEY_VOLUME) || DEFAULT_VOLUME
-    self.speed_rate =
-        decoder.decodeObjectForKey(KEY_SPEED_RATE) || DEFAULT_SPEED_RATE
     self
   end
 
@@ -35,6 +31,5 @@ class RecitingSettings
     encoder.encodeObject(interval_time,       forKey: KEY_INTERVAL_TIME)
     encoder.encodeObject(kami_shimo_interval, forKey: KEY_KAMI_SHIMO_INTERVAL)
     encoder.encodeObject(volume,              forKey: KEY_VOLUME)
-    encoder.encodeObject(speed_rate,          forKey: KEY_SPEED_RATE)
   end
 end

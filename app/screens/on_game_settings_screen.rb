@@ -55,7 +55,6 @@ class OnGameSettingsScreen < PM::TableScreen
   def on_game_setting_cells
     cells = [
         poems_interval_cell,
-        speed_setting_cell,
         volume_setting_cell
     ]
     return cells unless app_delegate.game_settings.beginner_flg
@@ -98,6 +97,7 @@ class OnGameSettingsScreen < PM::TableScreen
     }
   end
 
+=begin
   def speed_setting_cell
     {
         title: '読み上げスピード',
@@ -109,5 +109,6 @@ class OnGameSettingsScreen < PM::TableScreen
         }
     }
   end
+=end
 
 end

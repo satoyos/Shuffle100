@@ -19,7 +19,6 @@ describe '試合途中で変更可能な設定のテスト(通常モード)' do
       button('gear').click
       can_see TITLE_FOR_ON_GAME_SETTINGS
     end
-=begin
     it '通常モードの時には、「上の句と下の句の間隔」セルが表示されない' do
       can_not_see DURATION_BETWEEN_KAMI_SHIMO
     end
@@ -40,14 +39,9 @@ describe '試合途中で変更可能な設定のテスト(通常モード)' do
       back
       quit_settings_and_see JOKA
     end
-=end
-    it '「読み上げスピード」が表示されている' do
-      can_see '読み上げスピード'
-    end
   end
 end
 
-=begin
 describe '試合途中で変更可能な設定のテスト(初心者モード)' do
   it '初心者モードをonにする' do
     set_beginner_mode_on
@@ -82,7 +76,6 @@ describe '試合途中で変更可能な設定のテスト(初心者モード)' 
   end
 
 end
-=end
 
 private
 
