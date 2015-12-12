@@ -34,8 +34,6 @@ module AudioPlayerFactory
     url = NSURL.fileURLWithPath(bundle_by_basename(basename, ofType: type))
     er = Pointer.new(:object)
     player = AVAudioPlayer.alloc.initWithContentsOfURL(url, error: er)
-    player.enableRate = true
-    player.rate = app_delegate.reciting_settings.speed_rate || 1.0
     player.prepareToPlay
     player
   end

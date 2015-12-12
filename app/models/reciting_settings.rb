@@ -7,7 +7,7 @@ class RecitingSettings
   KEY_KAMI_SHIMO_INTERVAL = 'kami_shimo_interval'
   KEY_VOLUME = 'volume'
 
-  attr_accessor :interval_time, :volume, :kami_shimo_interval, :speed_rate
+  attr_accessor :interval_time, :volume, :kami_shimo_interval
 
   def initialize
     self.interval_time = DEFAULT_INTERVAL_TIME
