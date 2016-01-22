@@ -48,7 +48,7 @@ GEM
     json (1.8.3)
     methadone (1.9.2)
       bundler
-    minitest (5.8.3)
+    minitest (5.8.4)
     molinillo (0.4.1)
     motion-awesome (0.0.6)
       motion-map
