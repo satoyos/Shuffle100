@@ -5,13 +5,18 @@ class GameSettings
   KEY_SINGER_INDEX = 'singer_index'
 
   attr_accessor :statuses_for_deck, :fake_flg
-  attr_accessor :beginner_flg, :singer_index
+  attr_accessor :singer_index
+  attr_reader :beginner_flg, :recite_mode
 
   def initialize
     self.statuses_for_deck = initial_statuses
     self.fake_flg = false
-    self.beginner_flg = false
     self.singer_index = 0
+=begin
+    self.beginner_flg = false
+    self.recite_mode = :normal
+=end
+    set_recite_mode(:normal)
   end
 
   # @param [NSCoder] decoder
@@ -35,5 +40,21 @@ class GameSettings
     [
         SelectedStatus100.new(true)
     ]
+  end
+
+  def set_recite_mode(mode)
+    case mode
+      when :normal
+        @beginner_flg = false
+        @recite_mode = :normal
+      when :nonstop
+        @beginner_flg = false
+        @recite_mode = :nonstop
+      when :beginner
+        @beginner_flg = true
+        @recite_mode = :beginner
+      else
+        raise("Unsupported recite mode [#{mode}]")
+    end
   end
 end

@@ -34,5 +34,24 @@ describe 'GameSettings' do
       @settings.singer_index.should == 0
     end
 
+    it 'recite_modeを管理' do
+      @settings.recite_mode.should == :normal
+    end
+  end
+
+  describe '#set_recite_mode' do
+    before do
+      @settings = GameSettings.new
+    end
+
+    context '通常モードに設定' do
+      it 'beginner_flgとrecite_modeが正しく設定されている' do
+        @settings.tap do |s|
+          s.set_recite_mode(:normal)
+          s.beginner_flg.should == false
+          s.recite_mode.should == :normal
+        end
+      end
+    end
   end
 end
