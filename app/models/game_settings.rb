@@ -3,6 +3,7 @@ class GameSettings
   KEY_FAKE_FLG = 'fake_flg'
   KEY_BEGINNER_FLG = 'beginner_flg'
   KEY_SINGER_INDEX = 'singer_index'
+  KEY_RECITE_MODE = 'recite_mode'
 
   attr_accessor :statuses_for_deck, :fake_flg
   attr_accessor :singer_index
@@ -23,7 +24,12 @@ class GameSettings
   def initWithCoder(decoder)
     self.statuses_for_deck = decoder.decodeObjectForKey(KEY_STATUSES) || initial_statuses
     self.fake_flg = decoder.decodeBoolForKey(KEY_FAKE_FLG) || false
-    self.beginner_flg = decoder.decodeBoolForKey(KEY_BEGINNER_FLG) || false
+    if (flg = decoder.decodeBoolForKey(KEY_BEGINNER_FLG)).nil?
+      set_recite_mode(:normal)
+    else
+      @beginner_flg = flg
+      @recite_mode = fix_recite_mode(decoder)
+    end
     self.singer_index = decoder.decodeIntForKey(KEY_SINGER_INDEX) || 0
     self
   end
@@ -34,6 +40,7 @@ class GameSettings
     encoder.encodeBool(self.fake_flg, forKey: KEY_FAKE_FLG)
     encoder.encodeBool(self.beginner_flg, forKey: KEY_BEGINNER_FLG)
     encoder.encodeInt(self.singer_index, forKey: KEY_SINGER_INDEX)
+    encoder.encodeObject(self.recite_mode, forKey: KEY_RECITE_MODE)
   end
 
   def initial_statuses
@@ -55,6 +62,16 @@ class GameSettings
         @recite_mode = :beginner
       else
         raise("Unsupported recite mode [#{mode}]")
+    end
+  end
+
+  private
+
+  def fix_recite_mode(decoder)
+    fetch_data = decoder.decodeObjectForKey(KEY_RECITE_MODE)
+    case fetch_data
+      when nil ; :normal
+      else     ; fetch_data.to_sym
     end
   end
 end

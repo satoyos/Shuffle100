@@ -26,7 +26,7 @@ end
 Motion::Project::App.setup do |app|
   app.name = 'Shuffle100'
 
-  app.deployment_target = '8.0'
+  app.deployment_target = '9.0'
 
   app.frameworks += ['AVFoundation', 'AudioToolbox']
   app.frameworks += ['QuartzCore']
@@ -52,7 +52,7 @@ Motion::Project::App.setup do |app|
     pod 'BBBadgeBarButtonItem', git: 'https://github.com/TanguyAladenise/BBBadgeBarButtonItem.git'
   }
 
-  APP_VERSION = '3.1.7'
+  APP_VERSION = '4.0'
 
   app.development do
 =begin
