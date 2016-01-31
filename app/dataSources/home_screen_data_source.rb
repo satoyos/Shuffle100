@@ -21,7 +21,7 @@ module HomeScreenDataSource
   def game_setting_cells
     cells = [
         select_poems_cell,
-        beginner_mode_switch_cell,
+        recite_mode_cell,
     ]
     cells << fake_mode_switch_cell unless app_delegate.game_settings.beginner_flg
     cells << select_singer_cell
@@ -41,16 +41,16 @@ module HomeScreenDataSource
     }
   end
 
-  def beginner_mode_switch_cell
+  def recite_mode_cell
     {
-        title: '初心者モード(散らし取り)',
-        cell_identifier: 'beginner_switch',
-        accessory: {
-            view: :switch,
-            value: app_delegate.game_settings.beginner_flg,
-            action: 'beginner_switch_flipped:',
-            arguments: {}
-        }
+        title: '読み上げモード',
+        cell_identifier: 'recite_mode',
+        cell_style: UITableViewCellStyleValue1,
+        subtitle: ReciteMode.get_recite_mode_of_id(app_delegate.game_settings.recite_mode_id).name,
+        style: {
+            accessoryType: UITableViewCellAccessoryDisclosureIndicator,
+        },
+        action: :select_recite_mode
     }
   end
 

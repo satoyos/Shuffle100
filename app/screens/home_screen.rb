@@ -29,10 +29,12 @@ class HomeScreen < PM::GroupedTableScreen
     update_table_data
   end
 
+=begin
   def on_appear
     @beg_switch = view.subviews.first.subviews.find{|cell| cell.textLabel.text =~ /初心者/}.accessoryView unless
         view.subviews.first.subviews.empty?
   end
+=end
 
   def should_autorotate
     false

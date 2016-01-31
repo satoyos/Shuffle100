@@ -1,5 +1,5 @@
 class ModeSelectScreen < PM::Screen
-  # include SelectSingerScreenDelegate
+  include ModeSelectScreenDelegate
 
   title '読み上げモードを選ぶ'
   PICKER_VIEW_ACC_LABEL = 'picker_view'

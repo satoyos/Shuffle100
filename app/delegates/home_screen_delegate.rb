@@ -10,6 +10,11 @@ module HomeScreenDelegate
     open SelectSingerScreen.new
   end
 
+  def select_recite_mode
+    puts ' - 読み上げモードを選ぶ画面へ！' if BW2.debug?
+    open ModeSelectScreen.new
+  end
+
   def start_game
     if loaded_selected_status.selected_num == 0
       alert_no_poem_selected()
@@ -35,6 +40,7 @@ module HomeScreenDelegate
     app_delegate.settings_manager.save
   end
 
+=begin
   def beginner_switch_flipped(data_hash)
     puts "初心者モードのスイッチが切り替わりました。(=> #{data_hash[:value]})" if BW2.debug?
     # app_delegate.game_settings.beginner_flg = data_hash[:value]
@@ -43,6 +49,7 @@ module HomeScreenDelegate
     app_delegate.settings_manager.save
     update_table_view_data_animated
   end
+=end
 
   def open_help
     puts '- Help Button pushed!' if BW2.debug?
