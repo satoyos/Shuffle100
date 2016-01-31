@@ -27,11 +27,7 @@ module HomeScreenDelegate
         selected_poems_deck
     app_delegate.set_opening_player
     app_delegate.poem_supplier = PoemSupplier.new({deck: new_deck})
-    if app_delegate.game_settings.beginner_flg
-      open BeginnerReciteScreen.new
-    else
-      open RecitePoemScreen.new
-    end
+    open_recite_screen_of(app_delegate.game_settings.recite_mode_id)
   end
 
   def fake_switch_flipped(data_hash)
@@ -39,17 +35,6 @@ module HomeScreenDelegate
     app_delegate.game_settings.fake_flg = data_hash[:value]
     app_delegate.settings_manager.save
   end
-
-=begin
-  def beginner_switch_flipped(data_hash)
-    puts "初心者モードのスイッチが切り替わりました。(=> #{data_hash[:value]})" if BW2.debug?
-    # app_delegate.game_settings.beginner_flg = data_hash[:value]
-    app_delegate.game_settings.set_recite_mode(mode_from_beginner_flg(data_hash[:value]))
-    app_delegate.game_settings.fake_flg = false if data_hash[:value]
-    app_delegate.settings_manager.save
-    update_table_view_data_animated
-  end
-=end
 
   def open_help
     puts '- Help Button pushed!' if BW2.debug?
@@ -87,5 +72,14 @@ module HomeScreenDelegate
   def mode_from_beginner_flg(flg)
     return :beginner if flg
     return :normal
+  end
+
+  def open_recite_screen_of(mode)
+    case mode
+      when :normal   ; open RecitePoemScreen.new
+      when :beginner ; open BeginnerReciteScreen.new
+      when :nonstop  ; puts 'ノンストップ・モードの実装はまだです！'
+      else ; raise("読み上げモード[#{mode}]はサポートしていません！")
+    end
   end
 end
