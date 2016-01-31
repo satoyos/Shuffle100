@@ -10,10 +10,11 @@ describe "初心者モードのテスト" do
 
   describe '「次はどうする？」画面での動作各員' do
 
-    it '初心者モードをonにする' do
+    it '初心者モードにする' do
       can_see('空札を加える')
-      beginner_mode_switch = elem_of_class('UIASwitch', name: '初心者モード(散らし取り)')
-      beginner_mode_switch.click if beginner_mode_switch.value == 0
+      click_element_of('UIATableCell', name: '読み上げモード')
+      can_see('読み上げモードを選ぶ')
+      set_recite_mode_beginner
       can_not_see('空札を加える')
     end
 

@@ -11,10 +11,10 @@ def desired_caps
   {
       caps: {
           platformName:  "iOS",
-          versionNumber: "9.1",
+          versionNumber: "9.2",
           deviceName:    "iPhone 5s",
           # deviceName:    "iPad Pro",
-          app: '../build/iPhoneSimulator-8.0-Development/Shuffle100.app',
+          app: '../build/iPhoneSimulator-9.0-Development/Shuffle100.app'
       },
       appium_lib: {
           wait: 10
@@ -76,6 +76,13 @@ def set_singer_inaba_kun
   wheel.send_keys 'いなばくん（人間）'
   back
   can_see 'いなばくん（人間）'
+end
+
+def set_recite_mode_beginner
+  wheel = find_element(class_name: 'UIAPickerWheel')
+  wheel.send_keys '初心者（散らし取り）'
+  back
+  can_see '初心者'
 end
 
 def click_forward_button
