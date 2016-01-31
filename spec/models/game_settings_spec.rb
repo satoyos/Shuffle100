@@ -35,7 +35,7 @@ describe 'GameSettings' do
     end
 
     it 'recite_modeを管理' do
-      @settings.recite_mode.should == :normal
+      @settings.recite_mode_id.should == :normal
     end
   end
 
@@ -49,7 +49,7 @@ describe 'GameSettings' do
         @settings.tap do |s|
           s.set_recite_mode(:normal)
           s.beginner_flg.should == false
-          s.recite_mode.should == :normal
+          s.recite_mode_id.should == :normal
         end
       end
     end

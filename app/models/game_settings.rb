@@ -3,11 +3,11 @@ class GameSettings
   KEY_FAKE_FLG = 'fake_flg'
   KEY_BEGINNER_FLG = 'beginner_flg'
   KEY_SINGER_INDEX = 'singer_index'
-  KEY_RECITE_MODE = 'recite_mode'
+  KEY_RECITE_MODE_ID = 'recite_mode_id'
 
   attr_accessor :statuses_for_deck, :fake_flg
   attr_accessor :singer_index
-  attr_reader :beginner_flg, :recite_mode
+  attr_reader :beginner_flg, :recite_mode_id
 
   def initialize
     self.statuses_for_deck = initial_statuses
@@ -15,7 +15,7 @@ class GameSettings
     self.singer_index = 0
 =begin
     self.beginner_flg = false
-    self.recite_mode = :normal
+    self.recite_mode_id = :normal
 =end
     set_recite_mode(:normal)
   end
@@ -28,7 +28,7 @@ class GameSettings
       set_recite_mode(:normal)
     else
       @beginner_flg = flg
-      @recite_mode = fix_recite_mode(decoder)
+      @recite_mode_id = fix_recite_mode_id(decoder)
     end
     self.singer_index = decoder.decodeIntForKey(KEY_SINGER_INDEX) || 0
     self
@@ -40,7 +40,7 @@ class GameSettings
     encoder.encodeBool(self.fake_flg, forKey: KEY_FAKE_FLG)
     encoder.encodeBool(self.beginner_flg, forKey: KEY_BEGINNER_FLG)
     encoder.encodeInt(self.singer_index, forKey: KEY_SINGER_INDEX)
-    encoder.encodeObject(self.recite_mode, forKey: KEY_RECITE_MODE)
+    encoder.encodeObject(self.recite_mode_id, forKey: KEY_RECITE_MODE_ID)
   end
 
   def initial_statuses
@@ -53,13 +53,13 @@ class GameSettings
     case mode
       when :normal
         @beginner_flg = false
-        @recite_mode = :normal
+        @recite_mode_id = :normal
       when :nonstop
         @beginner_flg = false
-        @recite_mode = :nonstop
+        @recite_mode_id = :nonstop
       when :beginner
         @beginner_flg = true
-        @recite_mode = :beginner
+        @recite_mode_id = :beginner
       else
         raise("Unsupported recite mode [#{mode}]")
     end
@@ -67,8 +67,8 @@ class GameSettings
 
   private
 
-  def fix_recite_mode(decoder)
-    fetch_data = decoder.decodeObjectForKey(KEY_RECITE_MODE)
+  def fix_recite_mode_id(decoder)
+    fetch_data = decoder.decodeObjectForKey(KEY_RECITE_MODE_ID)
     case fetch_data
       when nil ; :normal
       else     ; fetch_data.to_sym

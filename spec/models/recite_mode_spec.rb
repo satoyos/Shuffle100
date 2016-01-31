@@ -1,18 +1,18 @@
 describe 'ReciteMode' do
-  INIT_HASH = {
+  RM_INIT_HASH = {
       id: :normal,
       name: '通常（競技かるた）',
   }
   describe '初期化' do
     before do
-      @recite_mode = ReciteMode.new(INIT_HASH)
+      @recite_mode = ReciteMode.new(RM_INIT_HASH)
     end
     it 'should be a valid object' do
       @recite_mode.should.not.be.nil
     end
     it '初期化時に与えたプロパティを保持する' do
-      INIT_HASH.keys.each do |key|
-        @recite_mode.send(key).should == INIT_HASH[key]
+      RM_INIT_HASH.keys.each do |key|
+        @recite_mode.send(key).should == RM_INIT_HASH[key]
       end
     end
   end
