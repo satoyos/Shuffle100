@@ -2,9 +2,9 @@
 require_relative 'spec_helper'
 
 
-describe "初心者モードのテスト" do
+describe '初心者モードのテスト' do
 
-  it "アプリのタイトルが正しく表示される" do
+  it 'アプリのタイトルが正しく表示される' do
     can_see(TITLE)
   end
 
@@ -12,8 +12,6 @@ describe "初心者モードのテスト" do
 
     it '初心者モードにする' do
       can_see('空札を加える')
-      click_element_of('UIATableCell', name: '読み上げモード')
-      can_see('読み上げモードを選ぶ')
       set_recite_mode_beginner
       can_not_see('空札を加える')
     end

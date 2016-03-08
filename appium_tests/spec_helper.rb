@@ -79,6 +79,8 @@ def set_singer_inaba_kun
 end
 
 def set_recite_mode_beginner
+  click_element_of('UIATableCell', name: '読み上げモード')
+  can_see('読み上げモードを選ぶ')
   wheel = find_element(class_name: 'UIAPickerWheel')
   wheel.send_keys '初心者（散らし取り）'
   back
