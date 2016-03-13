@@ -43,8 +43,10 @@ describe '試合途中で変更可能な設定のテスト(通常モード)' do
 end
 
 describe '試合途中で変更可能な設定のテスト(初心者モード)' do
-  it '初心者モードをonにする' do
-    set_beginner_mode_on
+  it '初心者モードにする' do
+    can_see('空札を加える')
+    set_recite_mode_beginner
+    can_not_see('空札を加える')
   end
   it '試合を開始し、早送りボタンを押して、1首めへ' do
     open_game
