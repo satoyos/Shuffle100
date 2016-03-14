@@ -1,6 +1,7 @@
 # coding: utf-8
 require_relative 'spec_helper'
 
+=begin
 describe '百首を通しで読み上げるテスト' do
 
   it 'アプリのタイトルが正しく表示される' do
@@ -64,6 +65,31 @@ describe '初心者モードで、百首を通して(問題を起こさず)読�
     can_see '試合終了'
   end
 end
+=end
+
+describe 'ノンストップ・モードで、百首を通して(問題を起こさず)読み上げられる' do
+  it 'ノンストップモードにする' do
+    can_see('空札を加える')
+    set_recite_mode_nostop
+  end
+  it '試合を開始し、早送りボタンを押して、1首めへ' do
+    open_game
+    click_forward_button
+    expect(1).to eq 1
+  end
+  it '残り、百首まで問題無く読み上げられる' do
+    (2..100).each { |i|
+      skip_skip
+      puts "  -#{i}首目を読み上げ中。"
+    }
+    expect(1).to eq 1
+  end
+  it '百首めが終わると、試合終了画面が表示される' do
+    skip_skip
+    can_see '試合終了'
+  end
+end
+
 
 private
 
@@ -77,4 +103,9 @@ def skip_skip_next
   click_forward_button
   click_forward_button
   button('next_poem_button').click # 次の歌に進む
+end
+
+def skip_skip
+  click_forward_button
+  click_forward_button
 end

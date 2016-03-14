@@ -64,11 +64,13 @@ def first_text_elem
   find_elements(:xpath, '//UIAStaticText').first
 end
 
+=begin
 def set_beginner_mode_on
   beginner_mode_switch = elem_of_class('UIASwitch', name: '初心者モード(散らし取り)')
   beginner_mode_switch.click if beginner_mode_switch.value == 0
   can_not_see('空札を加える')
 end
+=end
 
 def set_singer_inaba_kun
   click_element_of('UIATableCell', name: '読手') if elems_of_str('試しに聞いてみる').empty?
@@ -86,6 +88,16 @@ def set_recite_mode_beginner
   back
   can_see '初心者'
 end
+
+def set_recite_mode_nostop
+  click_element_of('UIATableCell', name: '読み上げモード')
+  can_see('読み上げモードを選ぶ')
+  wheel = find_element(class_name: 'UIAPickerWheel')
+  wheel.send_keys 'ノンストップ（止まらない）'
+  back
+  can_see 'ノンストップ'
+end
+
 
 def click_forward_button
   button('forward').click
