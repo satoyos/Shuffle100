@@ -78,7 +78,8 @@ module HomeScreenDelegate
     case mode
       when :normal   ; open RecitePoemScreen.new
       when :beginner ; open BeginnerReciteScreen.new
-      when :nonstop  ; puts 'ノンストップ・モードの実装はまだです！'
+      # when :nonstop  ; puts 'ノンストップ・モードの実装はまだです！'
+      when :nonstop  ; open NonstopReciteScreen.new
       else ; raise("読み上げモード[#{mode}]はサポートしていません！")
     end
   end

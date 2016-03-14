@@ -57,7 +57,8 @@ class OnGameSettingsScreen < PM::TableScreen
         poems_interval_cell,
         volume_setting_cell
     ]
-    return cells unless app_delegate.game_settings.beginner_flg
+    # return cells unless app_delegate.game_settings.beginner_flg
+    return cells unless app_delegate.game_settings.needs_kami_shimo_interval?
     cells.insert(1, kami_shimo_interval_cell)
   end
 

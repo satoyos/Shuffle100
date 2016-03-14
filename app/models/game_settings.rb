@@ -65,6 +65,10 @@ class GameSettings
     end
   end
 
+  def needs_kami_shimo_interval?
+    @recite_mode_id != :normal
+  end
+
   private
 
   def fix_recite_mode_id(decoder)

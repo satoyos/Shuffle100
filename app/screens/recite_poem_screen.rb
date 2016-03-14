@@ -45,15 +45,11 @@ class RecitePoemScreen < PM::Screen
       supplier.step_into_shimo
       transit_kami_shimo
     else
-      if supplier.draw_next_poem # 次の歌がある
-        goto_next_poem
-      else                        # 次の歌がない (最後の歌だった)
-        end_of_the_game
-      end
+      recite_next_poem_without_pause
     end
   end
 
-   def recite_poem
+  def recite_poem
     layout.show_waiting_to_pause
     set_player_volume
     current_player.play
@@ -68,6 +64,14 @@ class RecitePoemScreen < PM::Screen
   end
 
   private
+
+  def recite_next_poem_without_pause
+    if supplier.draw_next_poem # 次の歌がある
+      goto_next_poem
+    else # 次の歌がない (最後の歌だった)
+      end_of_the_game
+    end
+  end
 
   def create_new_layout
     @layout = RecitePoemLayout.create_with_delegate(self, sizes: get_sizes)

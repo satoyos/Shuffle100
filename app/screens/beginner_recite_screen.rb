@@ -14,13 +14,7 @@ class BeginnerReciteScreen < RecitePoemScreen
     puts '- 読み上げが無事に終了！(初心者モード)' if BW2.debug?
     layout.play_finished_successfully
     if supplier.kami?
-      supplier.step_into_shimo
-      transit_kami_shimo
-      slide_effect_duration.second.later do
-        layout.show_waiting_to_pause
-        layout.title = create_current_title
-        recite_poem
-      end
+      recite_shimo_without_pause
     else
       if supplier.current_index == 0 # 序歌を読み終えた
         supplier.draw_next_poem
@@ -44,6 +38,16 @@ class BeginnerReciteScreen < RecitePoemScreen
   end
 
   private
+
+  def recite_shimo_without_pause
+    supplier.step_into_shimo
+    transit_kami_shimo
+    slide_effect_duration.second.later do
+      layout.show_waiting_to_pause
+      layout.title = create_current_title
+      recite_poem
+    end
+  end
 
   def create_new_layout
     @layout = BeginnerReciteLayout.create_with_delegate(self, sizes: get_sizes)
