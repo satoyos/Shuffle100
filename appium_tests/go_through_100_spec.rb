@@ -1,7 +1,6 @@
 # coding: utf-8
 require_relative 'spec_helper'
 
-=begin
 describe '百首を通しで読み上げるテスト' do
 
   it 'アプリのタイトルが正しく表示される' do
@@ -65,7 +64,6 @@ describe '初心者モードで、百首を通して(問題を起こさず)読�
     can_see '試合終了'
   end
 end
-=end
 
 describe 'ノンストップ・モードで、百首を通して(問題を起こさず)読み上げられる' do
   it 'ノンストップモードにする' do
