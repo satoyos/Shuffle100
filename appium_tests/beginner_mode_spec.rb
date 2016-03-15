@@ -2,7 +2,6 @@
 require_relative 'spec_helper'
 
 
-=begin
 describe '初心者モードのテスト' do
 
   it 'アプリのタイトルが正しく表示される' do
@@ -46,9 +45,8 @@ describe '初心者モードのテスト' do
     end
   end
 end
-=end
 
-describe '他のモードで空札をonにした後、初心者モードで起動する' do
+describe '他のモードで空札をonにした後でも、初心者モードで起動すると、空札設定はoffになる' do
   it '空札を加えるモードにする' do
     set_fake_mode_on
   end

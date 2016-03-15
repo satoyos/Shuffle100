@@ -60,6 +60,7 @@ class GameSettings
       when :beginner
         @beginner_flg = true
         @recite_mode_id = :beginner
+        self.fake_flg = false
       else
         raise("Unsupported recite mode [#{mode}]")
     end
