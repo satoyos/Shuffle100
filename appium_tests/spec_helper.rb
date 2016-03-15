@@ -6,6 +6,7 @@ require_relative 'string_with_utf8_mac'
 TITLE = '百首読み上げ'
 JOKA  = '序歌'
 WHATS_NEXT_STR = '次はどうする？'
+DIALOGUE_MESSAGE_FOR_QUIT = '試合を終了しますか？'
 
 def desired_caps
   {
@@ -64,13 +65,10 @@ def first_text_elem
   find_elements(:xpath, '//UIAStaticText').first
 end
 
-=begin
-def set_beginner_mode_on
-  beginner_mode_switch = elem_of_class('UIASwitch', name: '初心者モード(散らし取り)')
-  beginner_mode_switch.click if beginner_mode_switch.value == 0
-  can_not_see('空札を加える')
+def set_fake_mode_on
+  fake_mode_switch = elem_of_class('UIASwitch', name: '空札を加える')
+  fake_mode_switch.click if fake_mode_switch.value == 0
 end
-=end
 
 def set_singer_inaba_kun
   click_element_of('UIATableCell', name: '読手') if elems_of_str('試しに聞いてみる').empty?
@@ -98,7 +96,11 @@ def set_recite_mode_nostop
   can_see 'ノンストップ'
 end
 
-
 def click_forward_button
   button('forward').click
+end
+
+def open_quit_dialogue(label)
+  button(label).click
+  can_see(DIALOGUE_MESSAGE_FOR_QUIT)
 end

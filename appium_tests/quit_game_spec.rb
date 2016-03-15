@@ -3,7 +3,7 @@ require_relative 'spec_helper'
 
 
 describe "試合終了テスト" do
-  DIALOGUE_MESSAGE_FOR_QUIT = '試合を終了しますか？'
+  # DIALOGUE_MESSAGE_FOR_QUIT = '試合を終了しますか？'
 
   it "アプリのタイトルが正しく表示される" do
     can_see(TITLE)
@@ -81,9 +81,11 @@ describe "試合終了テスト" do
   end
 end
 
+=begin
 private
 
 def open_quit_dialogue(label)
     button(label).click
     can_see(DIALOGUE_MESSAGE_FOR_QUIT)
 end
+=end
