@@ -43,7 +43,15 @@ module HelpMenuScreenDataSource
             style: {
                 accessoryType: UITableViewCellAccessoryDisclosureIndicator,
             }
-        }
+        },
+        {
+            title: '「ノンストップ・モード」とは？',
+            action: :open_what_is_nonstop_mode,
+            style: {
+                accessoryType: UITableViewCellAccessoryDisclosureIndicator,
+            }
+        },
+
     ]
   end
 

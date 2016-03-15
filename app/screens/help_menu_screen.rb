@@ -28,6 +28,10 @@ class HelpMenuScreen < PM::GroupedTableScreen
     open InfoScreen.new(url: 'html/beginner_mode_flow.html', title: '試合の流れ (初心者モード)')
   end
 
+  def open_what_is_nonstop_mode
+    open InfoScreen.new(url: 'html/what_is_nonstop_mode.html', title: 'ノンストップ・モードとは？')
+  end
+
   def open_about_inaba_kun
     open InfoScreen.new(url: 'html/about_inaba_kun.html', title: '「いなばくん」とは？')
   end
