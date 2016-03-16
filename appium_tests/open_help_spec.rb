@@ -24,8 +24,24 @@ describe 'ヘルプメニューのテスト' do
     it '「試合の流れ (通常モード)」画面を閲覧できる' do
       click_element_of('UIATableCell', name: '試合の流れ (通常モード)')
       expect(first_text_elem.value).to eq '試合の流れ (通常モード)'
-      # ↓この画面の中のリンクをクリックすると、Appiumでは落ちる
-      # find_element(:class_name, 'UIALink').click
+      back
+    end
+
+    it '「初心者モード」とは？画面を閲覧できる' do
+      click_element_of('UIATableCell', name: '「初心者モード」とは？')
+      expect(first_text_elem.value).to eq '「初心者モード」とは？'
+      back
+    end
+
+    it '「試合の流れ（初心者モード）」画面を閲覧できる' do
+      click_element_of('UIATableCell', name: '試合の流れ (初心者モード)')
+      expect(first_text_elem.value).to eq '試合の流れ (初心者モード)'
+      back
+    end
+
+    it 'ノンストップ・モードとは？画面を閲覧できる' do
+      click_element_of('UIATableCell', name: '「ノンストップ・モード」とは？')
+      expect(first_text_elem.value).to eq 'ノンストップ・モードとは？'
       back
     end
 
