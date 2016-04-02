@@ -93,12 +93,3 @@ describe '他のモードで空札をonにした後でも、初心者モード�
   end
 
 end
-
-=begin
-private
-
-def open_quit_dialogue(label)
-    button(label).click
-    can_see(DIALOGUE_MESSAGE_FOR_QUIT)
-end
-=end
