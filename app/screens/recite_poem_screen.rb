@@ -152,10 +152,7 @@ class RecitePoemScreen < PM::Screen
 
   def create_current_title
     "#{@supplier.current_index}首め:" +
-        case @supplier.kami?
-          when true; '上の句'
-          else     ; '下の句'
-        end +
+        (@supplier.kami? ? '上の句' : '下の句') +
         " (全#{@supplier.size}首)"
   end
 end
