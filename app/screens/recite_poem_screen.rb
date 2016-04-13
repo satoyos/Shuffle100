@@ -108,8 +108,6 @@ class RecitePoemScreen < PM::Screen
     fetch_player
   end
 
-  # ANIME_STOP_SELECTOR = 'view_animation_has_finished:'
-
   def create_current_title
     "#{@supplier.current_index}首め:" +
         (@supplier.kami? ? '上の句' : '下の句') +
