@@ -2,7 +2,6 @@ Shuffle100 (百首読み上げ)
 ==========
 
 [![Code Climate](https://codeclimate.com/github/satoyos/Shuffle100.png)](https://codeclimate.com/github/satoyos/Shuffle100)
-[![Build Status](https://travis-ci.org/satoyos/Shuffle100.png?branch=master)](https://travis-ci.org/satoyos/Shuffle100)
 
 (English follows Japanese)
 
