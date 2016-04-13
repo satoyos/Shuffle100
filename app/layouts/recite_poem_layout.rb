@@ -3,6 +3,7 @@ class RecitePoemLayout < MotionKit::Layout
 
   PROGRESS_TIMER_INTERVAL = 0.01
   GOLDEN_RATIO = 1.618
+  OPENING_POEM_TITLE = '序歌'
 
   attr_accessor :sizes
   weak_attr :delegate
@@ -13,7 +14,7 @@ class RecitePoemLayout < MotionKit::Layout
     # header area
     add UIView, :header_container do
       add UILabel, :header_title do
-        text '序歌'
+        text OPENING_POEM_TITLE
       end
       add BarGearButton, :gear_button
       add BarExitButton, :quit_button
@@ -84,7 +85,8 @@ class RecitePoemLayout < MotionKit::Layout
 
   NOTICE_ANIMATE_DURATION = 2.0
 
-  def show_opening_notice
+  def show_opening_notice_if_needed
+    return unless self.title_text == OPENING_POEM_TITLE
     UIView.animation_chain(duration: NOTICE_ANIMATE_DURATION) do
       get(:notice_label).fade_in
     end.and_then(duration: NOTICE_ANIMATE_DURATION * GOLDEN_RATIO) do
