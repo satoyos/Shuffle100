@@ -3,8 +3,7 @@ class RecitePoemScreen < PM::Screen
   include RecitePoemDelegate
   include OH::Notifications
   include ReciteAnimationAndPlayer
-
-  ANIME_STOP_SELECTOR = 'view_animation_has_finished:'
+  include RecitePoemDriveScreen
 
   attr_reader :supplier, :current_player, :reciting_settings
   attr_reader :layout
@@ -67,14 +66,6 @@ class RecitePoemScreen < PM::Screen
     add layout.view
   end
 
-  def recite_next_poem_without_pause
-    if supplier.draw_next_poem # 次の歌がある
-      goto_next_poem
-    else # 次の歌がない (最後の歌だった)
-      end_of_the_game
-    end
-  end
-
   def create_new_layout
     @layout = RecitePoemLayout.create_with_delegate(self, sizes: get_sizes)
     set_button_actions
@@ -117,38 +108,7 @@ class RecitePoemScreen < PM::Screen
     fetch_player
   end
 
-  def goto_next_poem
-    puts 'Go to Next Poem!' if BW2.debug?
-    renew_layout_and_player
-    layout.show_waiting_to_play
-    layout.title = create_current_title
-    next_poem_flip_animate(reciting_settings.interval_time,
-                           stop_selector: ANIME_STOP_SELECTOR){
-      remove view.subviews.first
-      add layout.view
-    }
-  end
-
-  def end_of_the_game
-    @layout = GameEndLayout.new.tap{|l| l.delegate = self}.build
-    layout.get(:back_to_top_button).on(:touch){back_to_top_screen}
-    game_end_flip_animate(reciting_settings.interval_time,
-                          stop_selector: ANIME_STOP_SELECTOR){
-      remove view.subviews.first
-      add layout.view
-    }
-  end
-
-  def go_back_to_prev_poem
-    puts 'Back to Prev Poem!' if BW2.debug?
-    renew_layout_and_player
-    layout.show_waiting_to_play
-    layout.title = create_current_title
-    prev_poem_flip_animate(0.5, stop_selector: ANIME_STOP_SELECTOR){
-      remove view.subviews.first
-      add layout.view
-    }
-  end
+  # ANIME_STOP_SELECTOR = 'view_animation_has_finished:'
 
   def create_current_title
     "#{@supplier.current_index}首め:" +
