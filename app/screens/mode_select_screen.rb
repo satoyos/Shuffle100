@@ -1,9 +1,8 @@
 class ModeSelectScreen < PM::Screen
   include ModeSelectScreenDelegate
+  include InitPickerView
 
   title '読み上げモードを選ぶ'
-  PICKER_VIEW_ACC_LABEL = 'picker_view'
-  COMPONENT_ID = 0
 
   attr_reader :recite_modes, :picker_view
 
@@ -45,22 +44,6 @@ class ModeSelectScreen < PM::Screen
 
   def fetch_recite_modes
     @recite_modes = ReciteMode.recite_modes
-  end
-
-  def set_picker_view
-    @picker_view = UIPickerView.alloc.init
-    @picker_view.tap do |p_view|
-      p_view.delegate = self
-      p_view.dataSource = self
-      p_view.frame = [
-          [0, 0],
-          [view.frame.size.width, picker_view.frame.size.height]
-      ]
-      p_view.showsSelectionIndicator = true
-      p_view.selectRow(0, inComponent: COMPONENT_ID, animated: false)
-      p_view.accessibilityLabel = PICKER_VIEW_ACC_LABEL
-      view.addSubview(p_view)
-    end
   end
 
   def current_mode
