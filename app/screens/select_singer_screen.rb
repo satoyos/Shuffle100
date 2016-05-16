@@ -58,12 +58,16 @@ class SelectSingerScreen < PM::Screen
           [0, picker_view.frame.size.height + 20],
           [view.frame.size.width, b.frame.size.height]
       ]
-      b.setTitleColor(:blue.uicolor, forState: :normal.uicontrolstate)
-      b.setTitleColor(:red.uicolor,  forState: :highlighted.uicontrolstate)
-      b.setTitleColor(:light_gray.uicolor,  forState: :disabled.uicontrolstate)
+      set_button_title_color(b)
       b.on(:touch){play_current_singer}
       view.addSubview(b)
     end
+  end
+
+  def set_button_title_color(b)
+    b.setTitleColor(:blue.uicolor, forState: :normal.uicontrolstate)
+    b.setTitleColor(:red.uicolor, forState: :highlighted.uicontrolstate)
+    b.setTitleColor(:light_gray.uicolor, forState: :disabled.uicontrolstate)
   end
 
   def play_current_singer
