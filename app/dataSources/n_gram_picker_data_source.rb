@@ -66,6 +66,11 @@ module NGramPickerDataSource
        items: [
            {id: :a,   title: FIRST_CHAR_PATTERN % 'あ'},
        ]
+      },
+      {section_id: :dummy, # 最後の『「あ」で始まる歌』までスクロールでき名問題を回避するため、余計なダミーを入れた。
+                           # その問題を正しく解決できれば、このダミーは取り除きたい。
+       header_title: ' ',
+       items: []
       }
   ]
 
