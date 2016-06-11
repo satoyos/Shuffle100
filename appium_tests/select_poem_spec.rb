@@ -47,6 +47,18 @@ describe '歌を選ぶテスト' do
     it 'この状態で試合を開始すると、警告(AlertView)が表示される' do
       click_element_of('UIATableCell', name: '試合開始')
       can_see '歌を選びましょう'
+      button('戻る').click
     end
+  end
+
+  describe 'スクロールの練習' do
+    it '歌選択画面を開く' do
+      click_element_of('UIATableCell', name: '取り札を用意する歌')
+      can_see('歌を選ぶ')
+    end
+    it '50首めまでスクロールする' do
+      execute_script "mobile: scrollTo", :element => find_element(:name, "050").ref
+    end
+
   end
 end
