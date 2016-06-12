@@ -1,11 +1,12 @@
 module NGramPickerDelegate
   def tableView(tableView, didSelectRowAtIndexPath:indexPath)
+    content_offset = tableView.contentOffset.y
     case selected_status_of_char(id_of(indexPath))
       when :full ; release_poems_of_char(id_of(indexPath))
       else       ; select_all_poems_of_char(id_of(indexPath))
     end
     tableView.deselectRowAtIndexPath(indexPath, animated: true)
-    @table_view.reloadData
+    reload_table_data_and_prepare(content_offset)
   end
 
   def tableView(tableView, willDisplayCell: cell, forRowAtIndexPath: indexPath)

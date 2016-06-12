@@ -26,7 +26,7 @@ class NGramPicker < PM::Screen
   end
 
   def on_appear
-    table_view.reloadData
+    reload_table_data_and_prepare
   end
 
   def test_set_status100(bool_or_booleans)
@@ -45,4 +45,23 @@ class NGramPicker < PM::Screen
         button: badge_button
     }
   end
+
+  def reload_table_data_and_prepare(content_offset=nil)
+    table_view.reloadData
+    enlarge_content_size(100) # この拡張値は、見栄えがよい適当な数字。
+    set_content_offset(content_offset) if content_offset
+    # ↑ tableViewのcontentSizeをムリに拡張している（いつかこのムリは直したい）分、再描画時のオフセットがズレる。
+    #   そのズレを無くすため、描画前のオフセットを維持するようにしている。
+  end
+
+  def enlarge_content_size(plus_to_height)
+    table_view.contentSize =
+        CGSizeMake(table_view.contentSize.width,
+                   table_view.contentSize.height + plus_to_height)
+  end
+
+  def set_content_offset(content_offset)
+    table_view.setContentOffset(CGSizeMake(0, content_offset))
+  end
+
 end
