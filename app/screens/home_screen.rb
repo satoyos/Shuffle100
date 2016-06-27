@@ -29,12 +29,10 @@ class HomeScreen < PM::GroupedTableScreen
     update_table_data
   end
 
-=begin
   def on_appear
-    @beg_switch = view.subviews.first.subviews.find{|cell| cell.textLabel.text =~ /初心者/}.accessoryView unless
-        view.subviews.first.subviews.empty?
+    # ↓ これでなぜ落ちるか分からない。
+    allow_sleeping
   end
-=end
 
   def should_autorotate
     false
@@ -46,4 +44,15 @@ class HomeScreen < PM::GroupedTableScreen
     @gear_button.on(:touch){open_on_game_settings}
     @help_button.on(:touch){open_help}
   end
+  def prohibit_sleeping
+    puts 'xxx 寝たらあかんで！Ψ(｀∀´)Ψ' if BW2.debug?
+    UIApplication.sharedApplication.idleTimerDisabled = true
+  end
+
+  def allow_sleeping
+    puts 'ooo 寝てもええんやで。ヽ(´ー`)ノ`' if BW2.debug?
+    UIApplication.sharedApplication.idleTimerDisabled = false
+  end
+
+
 end

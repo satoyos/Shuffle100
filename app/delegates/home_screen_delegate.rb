@@ -27,6 +27,7 @@ module HomeScreenDelegate
         selected_poems_deck
     app_delegate.set_opening_player
     app_delegate.poem_supplier = PoemSupplier.new({deck: new_deck})
+    prohibit_sleeping
     open_recite_screen_of(app_delegate.game_settings.recite_mode_id)
   end
 
