@@ -21,13 +21,13 @@ module HomeScreenDelegate
       return
     end
     puts '++ 試合開始！' if BW2.debug?
+    prohibit_sleeping
     navigation_controller.setNavigationBarHidden(true, animated: true)
     new_deck = app_delegate.game_settings.fake_flg ?
         selected_poems_deck.add_fake_poems! :
         selected_poems_deck
     app_delegate.set_opening_player
     app_delegate.poem_supplier = PoemSupplier.new({deck: new_deck})
-    prohibit_sleeping
     open_recite_screen_of(app_delegate.game_settings.recite_mode_id)
   end
 

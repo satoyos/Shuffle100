@@ -30,7 +30,6 @@ class HomeScreen < PM::GroupedTableScreen
   end
 
   def on_appear
-    # ↓ これでなぜ落ちるか分からない。
     allow_sleeping
   end
 
@@ -44,8 +43,9 @@ class HomeScreen < PM::GroupedTableScreen
     @gear_button.on(:touch){open_on_game_settings}
     @help_button.on(:touch){open_help}
   end
+
   def prohibit_sleeping
-    puts 'xxx 寝たらあかんで！Ψ(｀∀´)Ψ' if BW2.debug?
+    puts 'xxx 寝たらあかんで！(￣ー￣)' if BW2.debug?
     UIApplication.sharedApplication.idleTimerDisabled = true
   end
 
@@ -53,6 +53,4 @@ class HomeScreen < PM::GroupedTableScreen
     puts 'ooo 寝てもええんやで。ヽ(´ー`)ノ`' if BW2.debug?
     UIApplication.sharedApplication.idleTimerDisabled = false
   end
-
-
 end
