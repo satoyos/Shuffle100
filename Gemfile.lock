@@ -58,7 +58,7 @@ GEM
     motion-cocoapods (1.8.0)
       cocoapods (>= 1.0.0)
     motion-dynamic-type (0.1.0)
-    motion-kit (1.0.0)
+    motion-kit (1.0.1)
       dbt (~> 1.1, >= 1.1.5)
     motion-map (0.0.4)
     motion-redgreen (1.0.0)
@@ -70,7 +70,7 @@ GEM
       reset-sim
     rake (11.2.2)
     reset-sim (1.1.1)
-    sugarcube (3.3.7)
+    sugarcube (3.4.0)
     thread_safe (0.3.5)
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
