@@ -36,3 +36,4 @@ resources/fontawesome-webfont.ttf
 # appium
 appium_tests/vendor/
 vendor/
+node_modules/
