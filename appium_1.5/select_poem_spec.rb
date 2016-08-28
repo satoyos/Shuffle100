@@ -51,14 +51,16 @@ describe '歌を選ぶテスト' do
     end
   end
 
+  # Appium1.5では、scrollToコマンドが削除されたようなので、以下の練習テストは省く。
+=begin
   describe 'スクロールの練習' do
     it '歌選択画面を開く' do
       click_element_of('UIATableCell', name: '取り札を用意する歌')
       can_see('歌を選ぶ')
     end
     it '50首めまでスクロールする' do
-      execute_script "mobile: scrollTo", :element => find_element(:name, "050").ref
+      execute_script "mobile: scrollTo", :element => find_element(:accessibility_id, "050").ref
     end
-
   end
+=end
 end
