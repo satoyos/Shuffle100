@@ -13,7 +13,7 @@ describe '歌を検索するテスト' do
       can_see('歌を選ぶ')
     end
     it '検索窓に「秋」を入力すると、1番, 5番, 22番…という順に歌が選ばれている。' do
-      find_element(:name, "search_text_field").send_keys "秋"
+      find_element(:accessibility_id, "search_text_field").send_keys "秋"
       cell_names = find_elements(:class_name, 'UIATableCell').map{|e| e.name}
       expect(cell_names.first).to eq '001'
       expect(cell_names[1]).to eq '005'

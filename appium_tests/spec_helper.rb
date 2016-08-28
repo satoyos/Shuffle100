@@ -15,7 +15,8 @@ def desired_caps
           versionNumber: "9.2",
           deviceName:    "iPhone 5s",
           # deviceName:    "iPad Pro",
-          app: '../build/iPhoneSimulator-9.0-Development/Shuffle100.app'
+          app: '../build/iPhoneSimulator-9.0-Development/Shuffle100.app',
+          fullReset: true,  # Appium1.5+(試したのは1.5.3)で、シミュレータの2回起動を抑止する。
       },
       appium_lib: {
           wait: 10
@@ -45,7 +46,7 @@ def click_element_of(class_name, name: nil)
 end
 
 def elems_of_str(text)
-  find_elements(:name, text)
+  find_elements(:accessibility_id, text)
 end
 
 def can_see(text)
