@@ -81,6 +81,6 @@ Motion::Project::App.setup do |app|
 end
 
 def build_number
-  Time.now.strftime('%Y/%m/%d.%H:%M')
+  Time.now.strftime('%Y/%m/%dT%H:%M')
 end
 
