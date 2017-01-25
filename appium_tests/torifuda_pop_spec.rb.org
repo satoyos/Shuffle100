@@ -14,7 +14,7 @@ describe '取り札画面を表示する機能のテスト' do
     end
     it '1首目のセルを長押しすると、「わかころもてに…」の取り札画面が表示される' do
       first_cell = find_elements(:class_name, 'UIATableCell').first
-      action = Appium::TouchAction.new.long_press(element: first_cell).release
+      action = Appium::TouchAction.new.long_press(element: first_cell, duration: 2.0).release
       action.perform
       can_see('torifuda_view')
     end
