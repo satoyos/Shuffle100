@@ -58,6 +58,13 @@ class RecitePoemScreen < PM::Screen
     layout.show_waiting_to_pause
     set_player_volume
     current_player.play
+    MPNowPlayingInfoCenter.defaultCenter.tap do |df|
+      dict = NSMutableDictionary.alloc.init
+      dict.setValue('あっちょんぶりけ', forKey: MPMediaItemPropertyTitle)
+      df.nowPlayingInfo = dict
+      puts "NoePlaying => #{df.nowPlayingInfo}(#{df.nowPlayingInfo.class})"
+      # df.setValue('あっちょんぶりけ', forKey: MPMediaItemPropertyTitle)
+    end
   end
 
   def init_view_with_new_layout

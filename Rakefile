@@ -28,7 +28,7 @@ Motion::Project::App.setup do |app|
 
   app.deployment_target = '9.0'
 
-  app.frameworks += ['AVFoundation', 'AudioToolbox']
+  app.frameworks += ['AVFoundation', 'AudioToolbox', 'MediaPlayer']
   app.frameworks += ['QuartzCore']
 
   app.prerendered_icon = true
@@ -48,11 +48,15 @@ Motion::Project::App.setup do |app|
         'CFBundleURLSchemes' => ['Shuffle100'] }
   ]
 
+  app.info_plist['UIBackgroundModes'] = [
+      'audio'
+  ]
+
   app.pods {
     pod 'BBBadgeBarButtonItem', git: 'https://github.com/TanguyAladenise/BBBadgeBarButtonItem.git'
   }
 
-  APP_VERSION = '4.1'
+  APP_VERSION = '4.19'
 
   app.development do
 =begin
