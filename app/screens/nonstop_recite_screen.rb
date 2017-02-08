@@ -43,6 +43,8 @@ class NonstopReciteScreen < BeginnerReciteScreen
       case event.subtype
         when 100; current_player.play
         when 101; current_player.pause
+        when 104; forward_skip
+        when 105; rewind_skip
         else
           puts "  今はまだこのRemoteControlイベント#{event.subtype}(#{event.subtype.class})は処理できない。。"
       end
