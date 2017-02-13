@@ -60,9 +60,9 @@ class RecitePoemScreen < PM::Screen
     current_player.play
     MPNowPlayingInfoCenter.defaultCenter.tap do |df|
       dict = NSMutableDictionary.alloc.init
-      dict.setValue('あっちょんぶりけ', forKey: MPMediaItemPropertyTitle)
+      dict.setValue(title_for_background_play, forKey: MPMediaItemPropertyTitle)
       df.nowPlayingInfo = dict
-      puts "NoePlaying => #{df.nowPlayingInfo}(#{df.nowPlayingInfo.class})"
+      # puts "NoePlaying => #{df.nowPlayingInfo}(#{df.nowPlayingInfo.class})"
       # df.setValue('あっちょんぶりけ', forKey: MPMediaItemPropertyTitle)
     end
   end
@@ -119,5 +119,11 @@ class RecitePoemScreen < PM::Screen
     "#{@supplier.current_index}首め:" +
         (@supplier.kami? ? '上の句' : '下の句') +
         " (全#{@supplier.size}首)"
+  end
+
+  #%ToDo: うまく動いたら、このメソッドはSupplierに移すべき。
+  def title_for_background_play
+    return '序歌' if supplier.current_index == 0
+    "#{supplier.current_index}/#{supplier.size} #{supplier.poem.poet}"
   end
 end
