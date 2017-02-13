@@ -42,6 +42,7 @@ Motion::Project::App.setup do |app|
   app.info_plist['AppStoreID'] = '857819404'
   app.info_plist['NSAppTransportSecurity'] = { 'NSAllowsArbitraryLoads' => true }
   app.info_plist['UIRequiresFullScreen'] = 'YES'
+  app.info_plist['ITSAppUsesNonExemptEncryption'] = false
 
   app.info_plist['CFBundleURLTypes'] = [
       { 'CFBundleURLName' => 'com.satoyos.Shuffle100',
