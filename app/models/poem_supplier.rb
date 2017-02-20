@@ -67,4 +67,9 @@ class PoemSupplier
   def step_back_to_kami
     @kami = true
   end
+
+  def title_for_background_play
+    return '序歌' if current_index == 0
+    "#{current_index}/#{size} #{poem.poet}"
+  end
 end

@@ -58,13 +58,7 @@ class RecitePoemScreen < PM::Screen
     layout.show_waiting_to_pause
     set_player_volume
     current_player.play
-    MPNowPlayingInfoCenter.defaultCenter.tap do |df|
-      dict = NSMutableDictionary.alloc.init
-      dict.setValue(title_for_background_play, forKey: MPMediaItemPropertyTitle)
-      df.nowPlayingInfo = dict
-      # puts "NoePlaying => #{df.nowPlayingInfo}(#{df.nowPlayingInfo.class})"
-      # df.setValue('あっちょんぶりけ', forKey: MPMediaItemPropertyTitle)
-    end
+    set_info_for_background_play
   end
 
   def init_view_with_new_layout
@@ -121,9 +115,13 @@ class RecitePoemScreen < PM::Screen
         " (全#{@supplier.size}首)"
   end
 
-  #%ToDo: うまく動いたら、このメソッドはSupplierに移すべき。
-  def title_for_background_play
-    return '序歌' if supplier.current_index == 0
-    "#{supplier.current_index}/#{supplier.size} #{supplier.poem.poet}"
+  def set_info_for_background_play
+    MPNowPlayingInfoCenter.defaultCenter.tap do |df|
+      dict = NSMutableDictionary.alloc.init
+      dict.setValue('百首読み上げ', forKey: MPMediaItemPropertyTitle)
+      dict.setValue(supplier.title_for_background_play, forKey: MPMediaItemPropertyArtist)
+      dict.setValue(current_player.duration, forKey: MPMediaItemPropertyPlaybackDuration)
+      df.nowPlayingInfo = dict
+    end
   end
 end
