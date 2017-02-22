@@ -14,16 +14,12 @@ class NonstopReciteScreen < BeginnerReciteScreen
   end
 
   def on_appear
-    # super.on_appear
-    # puts '+++ NonStopモードのon_appear'
     AVAudioSession.sharedInstance.setCategory(AVAudioSessionCategoryPlayAndRecord, error: nil)
     AVAudioSession.sharedInstance.setActive(true, error: nil)
     self.beginReceivingRemoteControlEvents
   end
 
   def on_disappear
-    # super.on_disappear
-    # puts '--- NonStopモードのon_disappear'
     self.endReceivingRemoteControlEvents
   end
 
