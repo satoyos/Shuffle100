@@ -86,6 +86,7 @@ class RecitePoemScreen < PM::Screen
         player.prepareToPlay
       end
       @reciting_settings = delegate.reciting_settings
+      delegate.set_delegate_screen(self)
     end
   end
 

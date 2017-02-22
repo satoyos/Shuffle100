@@ -5,8 +5,7 @@ module RecitePoemDelegate
 
   def play_button_pushed(view)
     if current_player.playing?
-      current_player.pause
-      layout.show_waiting_to_play
+      pause_reciting
     else
       recite_poem
     end
@@ -44,15 +43,28 @@ module RecitePoemDelegate
   def quit_game
     puts '- Quit Button Pushed!' if BW2.debug?
     if current_player.playing?
-      current_player.pause
-      layout.show_waiting_to_play
+      pause_reciting
     end
 
     confirm_user_to_quit
   end
 
+  def pause_reciting
+    current_player.pause
+    layout.show_waiting_to_play
+  end
+
   def back_to_top_screen
     close to_screen: :root
+  end
+
+  def did_enter_background
+    puts 'xxxx バックグラウンドになったよ xxxx' if BW2.debug?
+    pause_reciting if current_player.playing?
+  end
+
+  def did_become_active
+    puts 'ooo アプリがアクティブに戻ったよ。 ooo'
   end
 
   private

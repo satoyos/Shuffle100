@@ -44,6 +44,20 @@ class AppDelegate < PM::Delegate
     Singer.singers[game_settings.singer_index].path
   end
 
+  def set_delegate_screen(s)
+    @delegate = s
+  end
+
+  def on_enter_background
+    puts 'xxx アプリがバックグラウンドに入っちゃった！(AppDelegateで検出）' if BW2.debug?
+    @delegate.did_enter_background if @delegate
+  end
+
+  def on_activate
+    puts 'ooo アプリがフォアグラウンドなう！！(AppDelegateで検出）' if BW2.debug?
+    @delegate.did_become_active if @delegate
+  end
+
   private
 
   def set_appearance_defaults
