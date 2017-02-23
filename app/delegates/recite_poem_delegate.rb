@@ -60,11 +60,11 @@ module RecitePoemDelegate
 
   def did_enter_background
     puts 'xxxx バックグラウンドになったよ xxxx' if BW2.debug?
-    pause_reciting if current_player.playing?
+    pause_reciting if current_player and current_player.playing?
   end
 
   def did_become_active
-    puts 'ooo アプリがアクティブに戻ったよ。 ooo'
+    puts 'ooo アプリがアクティブに戻ったよ。 ooo' if BW2.debug?
   end
 
   private
