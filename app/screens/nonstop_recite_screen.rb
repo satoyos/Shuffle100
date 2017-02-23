@@ -23,6 +23,10 @@ class NonstopReciteScreen < BeginnerReciteScreen
     self.endReceivingRemoteControlEvents
   end
 
+  def did_enter_background
+    puts 'xxxx Nonstopだから、バックグラウンドになっても再生を止めないよ！ xxxx' if BW2.debug?
+  end
+
   def beginReceivingRemoteControlEvents
     UIApplication.sharedApplication.beginReceivingRemoteControlEvents
     self.becomeFirstResponder
