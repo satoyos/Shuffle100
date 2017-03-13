@@ -14,8 +14,10 @@ class NonstopReciteScreen < BeginnerReciteScreen
   end
 
   def on_appear
-    AVAudioSession.sharedInstance.setCategory(AVAudioSessionCategoryPlayAndRecord, error: nil)
-    AVAudioSession.sharedInstance.setActive(true, error: nil)
+    AVAudioSession.sharedInstance.tap do |session|
+      session.setCategory(AVAudioSessionCategoryPlayback, withOptions: AVAudioSessionCategoryOptionMixWithOthers, error: nil)
+      session.setActive(true, error: nil)
+    end
     self.beginReceivingRemoteControlEvents
   end
 
