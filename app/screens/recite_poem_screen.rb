@@ -13,6 +13,7 @@ class RecitePoemScreen < PM::Screen
   def on_load
     init_properties_with_delegate
     init_view_with_new_layout
+    set_info_for_background_play
     recite_poem
     set_font_changed_notification
   end
@@ -58,7 +59,6 @@ class RecitePoemScreen < PM::Screen
     layout.show_waiting_to_pause
     set_player_volume
     current_player.play
-    set_info_for_background_play
   end
 
   def init_view_with_new_layout
@@ -111,6 +111,7 @@ class RecitePoemScreen < PM::Screen
   end
 
   def create_current_title
+    set_info_for_background_play
     "#{@supplier.current_index}首め:" +
         (@supplier.kami? ? '上の句' : '下の句') +
         " (全#{@supplier.size}首)"

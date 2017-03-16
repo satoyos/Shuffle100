@@ -15,44 +15,46 @@ class NonstopReciteScreen < BeginnerReciteScreen
 
   def on_appear
     AVAudioSession.sharedInstance.tap do |session|
-      session.setCategory(AVAudioSessionCategoryPlayback, withOptions: AVAudioSessionCategoryOptionMixWithOthers, error: nil)
+      session.setCategory(AVAudioSessionCategoryPlayback, error: nil)
       session.setActive(true, error: nil)
     end
-    self.beginReceivingRemoteControlEvents
+    add_remote_command_event
   end
 
-  def on_disappear
-    self.endReceivingRemoteControlEvents
+  def add_remote_command_event
+    MPRemoteCommandCenter.sharedCommandCenter.tap do |center|
+      center.togglePlayPauseCommand.addTarget(self, action: 'remote_toggle_play_pause:')
+      center.playCommand.addTarget(self, action: 'remote_play:')
+      center.pauseCommand.addTarget(self, action: 'remote_pause:')
+      center.nextTrackCommand.addTarget(self, action: 'remote_next_track:')
+      center.previousTrackCommand.addTarget(self, action: 'remote_prev_track:')
+    end
+  end
+
+  def remote_toggle_play_pause(event)
+    current_player.playing ?
+        current_player.pause :
+        current_player.play
+  end
+
+  def remote_play(event)
+    current_player.play
+  end
+
+  def remote_pause(event)
+    current_player.pause
+  end
+
+  def remote_next_track(eveent)
+    forward_skip
+  end
+
+  def remote_prev_track(event)
+    rewind_skip
   end
 
   def did_enter_background
     puts 'xxxx Nonstopだから、バックグラウンドになっても再生を止めないよ！ xxxx' if BW2.debug?
-  end
-
-  def beginReceivingRemoteControlEvents
-    UIApplication.sharedApplication.beginReceivingRemoteControlEvents
-    self.becomeFirstResponder
-  end
-
-  def endReceivingRemoteControlEvents
-    UIApplication.sharedApplication.endReceivingRemoteControlEvents
-    self.resignFirstResponder
-  end
-
-  def remoteControlReceivedWithEvent(event)
-    if event.type == UIEventTypeRemoteControl
-      puts "/// Received Event: [#{event.subtype}]"
-      case event.subtype
-        when 100; current_player.play
-        when 101; current_player.pause
-        when 104; forward_skip
-        when 105; rewind_skip
-        else
-          puts "  今はまだこのRemoteControlイベント#{event.subtype}(#{event.subtype.class})は処理できない。。"
-      end
-    else
-      puts "*** 何か分かれへんイベントやで。。。(´・ω・｀)"
-    end
   end
 
 end
