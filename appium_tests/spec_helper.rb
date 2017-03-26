@@ -12,11 +12,12 @@ def desired_caps
   {
       caps: {
           platformName:  "iOS",
-          versionNumber: "9.2",
+          # versionNumber: "9.2",
           deviceName:    "iPhone 5s",
           # deviceName:    "iPad Pro",
           app: '../build/iPhoneSimulator-9.0-Development/Shuffle100.app',
-          fullReset: true,  # Appium1.5+(試したのは1.5.3)で、シミュレータの2回起動を抑止する。
+          # fullReset: true,  # Appium1.5+(試したのは1.5.3)で、シミュレータの2回起動を抑止する。
+          automationName: 'XCUITest'
       },
       appium_lib: {
           wait: 10
@@ -63,7 +64,7 @@ def open_game
 end
 
 def first_text_elem
-  find_elements(:xpath, '//UIAStaticText').first
+  find_elements(:xpath, '//XCUIElementTypeStaticText').first
 end
 
 def set_fake_mode_on
@@ -104,4 +105,16 @@ end
 def open_quit_dialogue(label)
   button(label).click
   can_see(DIALOGUE_MESSAGE_FOR_QUIT)
+end
+
+def click_element_with_text(text)
+  click_element_of('XCUIElementTypeStaticText', name: text)
+end
+
+def click_button(name)
+  click_element_of('XCUIElementTypeButton', name: name)
+end
+
+def click_back_button
+  click_button('戻る')
 end
