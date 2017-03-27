@@ -57,16 +57,13 @@ describe 'ヘルプメニューのテスト' do
 
     include_examples '元の画面に戻ることができる'
 
-=begin
-
     it '「このアプリを評価する」を選ぶと、ダイアログが起動する' do
-      click_element_of('UIATableCell', name: 'このアプリを評価する')
+      click_element_with_text('このアプリを評価する')
       can_see(DIALOGUE_MESSAGE_FOR_EVAL_APP)
       alert_dismiss
       can_not_see(DIALOGUE_MESSAGE_FOR_EVAL_APP)
-      back
     end
-=end
+
   end
 end
 
