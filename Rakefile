@@ -60,11 +60,6 @@ Motion::Project::App.setup do |app|
   APP_VERSION = '4.22'
 
   app.development do
-=begin
-    app.pods {
-      pod 'Reveal-iOS-SDK'
-    } if rake_mode == :simulator
-=end
     app.version = build_number
     app.short_version = APP_VERSION + 'β' + ".#{build_number}"
     app.codesign_certificate = 'iPhone Developer: Yoshifumi Sato'
