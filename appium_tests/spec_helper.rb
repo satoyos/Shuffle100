@@ -14,6 +14,7 @@ def desired_caps
           platformName:  "iOS",
           # versionNumber: "9.2",
           deviceName:    "iPhone 5s",
+          platformVersion: "10.3",
           # deviceName:    "iPad Pro",
           app: '../build/iPhoneSimulator-9.0-Development/Shuffle100.app',
           # fullReset: true,  # Appium1.5+(試したのは1.5.3)で、シミュレータの2回起動を抑止する。
