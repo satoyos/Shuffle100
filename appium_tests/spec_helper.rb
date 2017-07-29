@@ -60,7 +60,7 @@ def can_not_see(text)
 end
 
 def open_game
-    click_element_of('UIATableCell', name: '試合開始')
+    click_element_with_text('試合開始')
     can_see(JOKA)
 end
 
@@ -82,11 +82,12 @@ def set_singer_inaba_kun
 end
 
 def set_recite_mode_beginner
-  click_element_of('UIATableCell', name: '読み上げモード')
+  # click_element_of('UIATableCell', name: '読み上げモード')
+  click_element_with_text('読み上げモード')
   can_see('読み上げモードを選ぶ')
   wheel = find_element(class_name: 'UIAPickerWheel')
   wheel.send_keys '初心者（散らし取り）'
-  back
+  click_back_button
   can_see '初心者'
 end
 

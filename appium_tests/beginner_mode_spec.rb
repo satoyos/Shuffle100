@@ -8,7 +8,7 @@ describe '初心者モードのテスト' do
     can_see(TITLE)
   end
 
-  describe '「次はどうする？」画面での動作各員' do
+  describe '「次はどうする？」画面での動作確認' do
 
     it '初心者モードにする' do
       can_see('空札を加える')
@@ -18,15 +18,16 @@ describe '初心者モードのテスト' do
 
     it '試合を開始し、早送りボタンを押して、1首めへ' do
       open_game
-      button('forward').click
+      click_button('forward')
       expect(first_text_elem.value).to match_regex /\A1首め/
     end
 
     it 'さらに早送りボタンを押して、下の句へ。' do
-      button('forward').click
+      click_button('forward')
       expect(first_text_elem.value).to match_regex /下の句/
     end
 
+=begin
     it 'もう一度早送りボタンを押すと、「次はどうする？」画面になる' do
       button('forward').click
       expect(first_text_elem.value).to eq WHATS_NEXT_STR
@@ -43,9 +44,11 @@ describe '初心者モードのテスト' do
       can_see('torifuda_view')
       button('閉じる').click # 取り札画面を閉じて、また「次はどうする？」画面に戻る
     end
+=end
   end
 end
 
+=begin
 describe '他のモードで空札をonにした後でも、初心者モードで起動すると、空札設定はoffになる' do
   it '空札を加えるモードにする' do
     set_fake_mode_on
@@ -93,3 +96,4 @@ describe '他のモードで空札をonにした後でも、初心者モード�
   end
 
 end
+=end
