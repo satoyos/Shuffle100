@@ -69,8 +69,10 @@ def first_text_elem
 end
 
 def set_fake_mode_on
-  fake_mode_switch = elem_of_class('UIASwitch', name: '空札を加える')
-  fake_mode_switch.click if fake_mode_switch.value == 0
+  fake_mode_switch = elem_of_class('XCUIElementTypeSwitch', name: '空札を加える')
+  # fake_mode_switch.click if fake_mode_switch.value == 0
+  fake_mode_switch.click
+
 end
 
 def set_singer_inaba_kun
@@ -82,7 +84,6 @@ def set_singer_inaba_kun
 end
 
 def set_recite_mode_beginner
-  # click_element_of('UIATableCell', name: '読み上げモード')
   click_element_with_text('読み上げモード')
   can_see('読み上げモードを選ぶ')
   wheel = find_element(class_name: 'UIAPickerWheel')
@@ -101,11 +102,11 @@ def set_recite_mode_nostop
 end
 
 def click_forward_button
-  button('forward').click
+  click_button('forward')
 end
 
 def open_quit_dialogue(label)
-  button(label).click
+  click_button(label)
   can_see(DIALOGUE_MESSAGE_FOR_QUIT)
 end
 
