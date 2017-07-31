@@ -43,7 +43,6 @@ def elem_of_class(class_name, name: nil)
 end
 
 def click_element_of(class_name, name: nil)
-  # element = find_elements(:class_name, class_name).find{|c| c.name == name}
   elem_of_class(class_name, name: name).click
 end
 
@@ -70,7 +69,6 @@ end
 
 def set_fake_mode_on
   fake_mode_switch = elem_of_class('XCUIElementTypeSwitch', name: '空札を加える')
-  # fake_mode_switch.click if fake_mode_switch.value == 0
   fake_mode_switch.click
 
 end
@@ -79,7 +77,7 @@ def set_singer_inaba_kun
   click_element_of('UIATableCell', name: '読手') if elems_of_str('試しに聞いてみる').empty?
   wheel = find_element(class_name: 'UIAPickerWheel')
   wheel.send_keys 'いなばくん（人間）'
-  back
+  click_back_button
   can_see 'いなばくん（人間）'
 end
 
@@ -97,7 +95,7 @@ def set_recite_mode_nostop
   can_see('読み上げモードを選ぶ')
   wheel = find_element(class_name: 'UIAPickerWheel')
   wheel.send_keys 'ノンストップ（止まらない）'
-  back
+  click_back_button
   can_see 'ノンストップ'
 end
 
