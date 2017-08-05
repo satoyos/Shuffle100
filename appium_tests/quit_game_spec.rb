@@ -55,17 +55,17 @@ describe "試合終了テスト" do
 
     it '試合を開始し、早送りボタンを押して、1首めへ' do
       open_game
-      button('forward').click
+      click_forward_button
       expect(first_text_elem.value).to match_regex /\A1首め/
     end
 
     it 'さらに早送りボタンを押して、下の句へ。' do
-      button('forward').click
+      click_forward_button
       expect(first_text_elem.value).to match_regex /下の句/
     end
 
     it 'もう一度早送りボタンを押すと、「次はどうする？」画面になる' do
-      button('forward').click
+      click_forward_button
       expect(first_text_elem.value).to eq WHATS_NEXT_STR
     end
 
