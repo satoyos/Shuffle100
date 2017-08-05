@@ -3,7 +3,6 @@ require_relative 'spec_helper'
 
 
 describe "試合終了テスト" do
-  # DIALOGUE_MESSAGE_FOR_QUIT = '試合を終了しますか？'
 
   it "アプリのタイトルが正しく表示される" do
     can_see(TITLE)
@@ -47,8 +46,6 @@ describe "試合終了テスト" do
   describe '「次はどうする？」画面からのゲーム終了テスト' do
     it '初心者モードをonにする' do
       can_see('空札を加える')
-      # click_element_of('UIATableCell', name: '読み上げモード')
-      # can_see('読み上げモードを選ぶ')
       set_recite_mode_beginner
       can_not_see('空札を加える')
     end
@@ -80,12 +77,3 @@ describe "試合終了テスト" do
     end
   end
 end
-
-=begin
-private
-
-def open_quit_dialogue(label)
-    button(label).click
-    can_see(DIALOGUE_MESSAGE_FOR_QUIT)
-end
-=end
