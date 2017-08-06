@@ -102,6 +102,10 @@ def click_forward_button
   click_button('forward')
 end
 
+def click_rewind_button
+  click_button('rewind')
+end
+
 def open_quit_dialogue(label)
   click_button(label)
   can_see(DIALOGUE_MESSAGE_FOR_QUIT)

@@ -42,11 +42,5 @@ describe '巻き戻しボタンのテスト' do
       can_see TITLE
     end
   end
-
-  private
-
-  def click_rewind_button
-    button('rewind').click
-  end
 end
 
