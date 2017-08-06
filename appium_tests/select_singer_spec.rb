@@ -13,7 +13,7 @@ describe '読手を選ぶテスト' do
     end
 
     it 'ホーム画面で読手セルをタップすると、読手を設定する画面が開く' do
-      click_element_of('UIATableCell', name: '読手')
+      click_element_with_text( '読手')
       can_see('読手を選ぶ')
     end
 

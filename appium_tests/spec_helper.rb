@@ -74,7 +74,6 @@ def set_fake_mode_on
 end
 
 def set_singer_inaba_kun
-  click_element_of('UIATableCell', name: '読手') if elems_of_str('試しに聞いてみる').empty?
   wheel = find_element(class_name: 'UIAPickerWheel')
   wheel.send_keys 'いなばくん（人間）'
   click_back_button
