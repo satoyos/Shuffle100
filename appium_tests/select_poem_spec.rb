@@ -9,58 +9,51 @@ describe '歌を選ぶテスト' do
 
   describe '「1文字めで選ぶ」が正しく機能する' do
     it '歌選択画面を開く' do
-      click_element_of('UIATableCell', name: '取り札を用意する歌')
-      can_see('歌を選ぶ')
+      open_select_poem_screen
     end
     it '「全て取消」を選ぶと、全く歌が選ばれていない状態になる' do
-      button('全て取消').click
+      click_all_clear_button
+      click_back_button
       can_see '0首'
+      open_select_poem_screen
     end
     it '「1字目で選ぶ」ボタンを押すことで、その画面に遷移する' do
-      button('1字目で選ぶ').click
-      can_see '一字決まりの歌'
-      can_see '0首'
+      open_first_char_select_screen
     end
     it '「一字決まりの歌」のセルをタップすると、7首の歌が選ばれる' do
-      click_element_of('UIATableCell', name: 'just_one')
-      can_see '7首'
-    end
-    it '歌選択画面に戻っても、7首選ばれていることが反映されている' do
-      back
-      can_see '歌を選ぶ'
-      can_see '7首'
-    end
-    it 'トップ画面に戻っても、7首選ばれていることが反映されている' do
-      back
-      can_see 'トップ'
+      click_element_with_text('一字決まりの歌')
+      2.times{ click_back_button }
       can_see '7首'
     end
   end
 
   describe '1首も歌が選ばれていない状態で試合を開始すると、警告を出す' do
     it '歌選択画面を開き、全く歌が選ばれていない状態にする' do
-      click_element_of('UIATableCell', name: '取り札を用意する歌')
-      button('全て取消').click
-      back
+      open_select_poem_screen
+      click_all_clear_button
+      click_back_button
       can_see '0首'
     end
     it 'この状態で試合を開始すると、警告(AlertView)が表示される' do
-      click_element_of('UIATableCell', name: '試合開始')
+      open_game_without_check
       can_see '歌を選びましょう'
-      button('戻る').click
+      click_button('戻る')
     end
   end
+end
 
-  # Appium1.5では、scrollToコマンドが削除されたようなので、以下の練習テストは省く。
-=begin
-  describe 'スクロールの練習' do
-    it '歌選択画面を開く' do
-      click_element_of('UIATableCell', name: '取り札を用意する歌')
-      can_see('歌を選ぶ')
-    end
-    it '50首めまでスクロールする' do
-      execute_script "mobile: scrollTo", :element => find_element(:accessibility_id, "050").ref
-    end
-  end
-=end
+private
+
+def open_select_poem_screen
+  click_element_with_text('取り札を用意する歌')
+  can_see('歌を選ぶ')
+end
+
+def open_first_char_select_screen
+  click_button('1字目で選ぶ')
+  can_see '一字決まりの歌'
+end
+
+def click_all_clear_button
+  click_button('全て取消')
 end

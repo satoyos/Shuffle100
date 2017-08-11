@@ -59,8 +59,12 @@ def can_not_see(text)
 end
 
 def open_game
-    click_element_with_text('試合開始')
-    can_see(JOKA)
+  open_game_without_check
+  can_see(JOKA)
+end
+
+def open_game_without_check
+  click_element_with_text('試合開始')
 end
 
 def first_text_elem
