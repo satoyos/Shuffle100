@@ -50,7 +50,6 @@ describe '初心者モードで、百首を通して(問題を起こさず)読�
     open_game
     click_forward_button
     expect(first_text_elem.value).to match_regex /\A1首め/
-    # expect(1).to eq 1
   end
   it '残り、百首まで問題無く読み上げられる' do
     (2..100).each { |i|
@@ -68,30 +67,29 @@ describe '初心者モードで、百首を通して(問題を起こさず)読�
   end
 end
 
-=begin
 describe 'ノンストップ・モードで、百首を通して(問題を起こさず)読み上げられる' do
   it 'ノンストップモードにする' do
     can_see('空札を加える')
-    set_recite_mode_nostop
+    set_recite_mode_nonstop
   end
   it '試合を開始し、早送りボタンを押して、1首めへ' do
     open_game
     click_forward_button
-    expect(1).to eq 1
+    expect(first_text_elem.value).to match_regex /\A1首め/
   end
   it '残り、百首まで問題無く読み上げられる' do
     (2..100).each { |i|
       skip_skip
+      expect(first_text_elem.value).to match_regex Regexp.new("\\A#{i}首め")
       puts "  -#{i}首目を読み上げ中。"
+      puts '     [現在、ノンストップモード]' if i % 10 == 1
     }
-    expect(1).to eq 1
   end
   it '百首めが終わると、試合終了画面が表示される' do
     skip_skip
     can_see '試合終了'
   end
 end
-=end
 
 
 private

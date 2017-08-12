@@ -93,8 +93,8 @@ def set_recite_mode_beginner
   can_see '初心者'
 end
 
-def set_recite_mode_nostop
-  click_element_of('UIATableCell', name: '読み上げモード')
+def set_recite_mode_nonstop
+  click_element_with_text('読み上げモード')
   can_see('読み上げモードを選ぶ')
   wheel = find_element(class_name: 'UIAPickerWheel')
   wheel.send_keys 'ノンストップ（止まらない）'
