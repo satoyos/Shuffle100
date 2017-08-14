@@ -36,6 +36,7 @@ GEM
       childprocess (~> 0.5)
       rubyzip (~> 1.0)
       websocket (~> 1.0)
+    slack-notifier (2.3.1)
     tomlrb (1.2.2)
     websocket (1.2.3)
 
@@ -46,6 +47,7 @@ DEPENDENCIES
   appium_lib
   rspec
   selenium-webdriver
+  slack-notifier
 
 BUNDLED WITH
-   1.12.5
+   1.14.6
