@@ -1,3 +1,4 @@
 --color
 --format d
 --format SlackFormatter
+--require ./lib/slack_formatter.rb
