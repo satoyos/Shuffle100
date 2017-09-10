@@ -86,7 +86,4 @@ def quit_settings_and_see(str)
   can_see str
 end
 
-def click_table_cell_of_name(str)
-  click_element_of('XCUIElementTypeCell', name: str)
-end
 
