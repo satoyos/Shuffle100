@@ -1,0 +1,1 @@
+require_relative 'string_with_utf8_mac'

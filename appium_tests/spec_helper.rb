@@ -1,7 +1,7 @@
 # coding: utf-8
 require "rubygems"
 require "appium_lib"
-require_relative 'string_with_utf8_mac'
+require_relative 'application_drivers/application_drivers'
 
 TITLE = '百首読み上げ'
 JOKA  = '序歌'
@@ -14,7 +14,7 @@ def desired_caps
           platformName:  "iOS",
           # versionNumber: "9.2",
           deviceName:    "iPhone 5s",
-          platformVersion: "10.3",
+          platformVersion: "11.0",
           # deviceName:    "iPad Pro",
           app: '../build/iPhoneSimulator-9.0-Development/Shuffle100.app',
           # fullReset: true,  # Appium1.5+(試したのは1.5.3)で、シミュレータの2回起動を抑止する。
@@ -75,6 +75,10 @@ def set_fake_mode_on
   fake_mode_switch = elem_of_class('XCUIElementTypeSwitch', name: '空札を加える')
   fake_mode_switch.click
 
+end
+
+def navigation_bar_of_name(name)
+  elem_of_class('XCUIElementTypeNavigationBar', name: name)
 end
 
 def set_singer_inaba_kun
