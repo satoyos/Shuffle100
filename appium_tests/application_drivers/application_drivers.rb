@@ -1,6 +1,10 @@
 require_relative 'string_with_utf8_mac'
 
 
+def currnet_screen_is(name)
+  expect(navigation_bar_of_name(name)).not_to be nil
+end
+
 def elem_of_class(class_name, name: nil)
   find_elements(:class_name, class_name).find{|c| c.name == name}
 end
@@ -90,6 +94,13 @@ def click_button(name)
   click_element_of('XCUIElementTypeButton', name: name)
 end
 
+def get_first_button
+  find_elements(class_name: 'XCUIElementTypeButton').first
+end
+
 def click_back_button
-  click_button('戻る')
+  # click_button('戻る')
+  ### NavigationControllerのbackItemが取得できなくなったので、最初に取得できるボタンがbackItemだと仮定する。
+  ### もうちょっとマシな解決方法ああれば良いのだが…
+  get_first_button.click
 end
