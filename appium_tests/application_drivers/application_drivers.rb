@@ -5,6 +5,15 @@ def currnet_screen_is(name)
   expect(navigation_bar_of_name(name)).not_to be nil
 end
 
+def recite_screen_title_matches(regexp)
+  # 読み上げ画面のヘッダのラベルにacccessibilityLabelを設定すると、
+  # Appium Test上では、そのラベルのaccessibility_idだけでなく、labelやnameもすべてその値に書き換わり、
+  # 実際にどのような文字列が書かれているのかが取得できなくなる。
+  # なので、不本意ながら、「最初に取得できるテキストラベル」を「読み上げ画面のヘッダラベル」とみなす。
+  expect(first_text_elem.name).to match_regex regexp
+end
+
+
 def elem_of_class(class_name, name: nil)
   find_elements(:class_name, class_name).find{|c| c.name == name}
 end
