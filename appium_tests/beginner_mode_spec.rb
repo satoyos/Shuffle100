@@ -1,6 +1,7 @@
 # coding: utf-8
 require_relative 'spec_helper'
 
+=begin
 describe '初心者モードのテスト' do
 
   it 'アプリのタイトルが正しく表示される' do
@@ -21,54 +22,49 @@ describe '初心者モードのテスト' do
       recite_screen_title_matches(/\A1首め/)
     end
 
-=begin
     it 'さらに早送りボタンを押して、下の句へ。' do
       click_forward_button
-      expect(first_text_elem.value).to match_regex /下の句/
+      recite_screen_title_matches /下の句/
     end
 
     it 'もう一度早送りボタンを押すと、「次はどうする？」画面になる' do
       click_forward_button
-      expect(first_text_elem.value).to eq WHATS_NEXT_STR
+      currnet_screen_is WHATS_NEXT_STR
     end
 
     it '「下の句をもう一度読む」ボタンを押すと、下の句の読み上げを繰り返す' do
-      click_button('refrain_button')
-      expect(first_text_elem.value).to match_regex /\A1首め/
+      click_refrain_button
+      recite_screen_title_matches /\A1首め/
       click_forward_button # 早送りして、また「次はどうする？」画面に戻る
     end
 
     it '「取り札を見る」ボタンを押すと、取り札画面が表示される' do
-      click_button('torifuda_button')
+      click_torifuda_button
       can_see('torifuda_view')
       click_button('閉じる') # 取り札画面を閉じて、また「次はどうする？」画面に戻る
     end
-=end
   end
 end
+=end
 
-=begin
 describe '他のモードで空札をonにした後でも、初心者モードで起動すると、空札設定はoffになる' do
   it '空札を加えるモードにする' do
     set_fake_mode_on
   end
+
   it '歌選択画面を開く' do
-    click_element_with_text('取り札を用意する歌')
-    can_see('歌を選ぶ')
+    go_to_poem_selection
+    currnet_screen_is POEM_SELECTION_TITLE
   end
-  it '「全て取消」を選ぶ' do
-    click_button('全て取消')
-    # can_see('0首')
-  end
-  it '一首目のセルをタップする' do
-    click_element_of('XCUIElementTypeCell', name: '001')
-    # can_see '1首'
-  end
-  it 'トップ画面に戻っても、1首選ばれていることが反映されている' do
+
+  it '1首だけ選ぶと、トップ画面に戻っても、1首選ばれていることが反映されている' do
+    click_button_to_cancel_all
+    tap_first_poem
     click_back_button
-    can_see 'トップ'
+    currnet_screen_is TOP_TITLE
     can_see '1首'
   end
+=begin
   it '試合を開始し、早送りボタンを押して、1首めへ行くと、読み上げ予定枚数は2首になっている' do
     open_game
     click_forward_button
@@ -93,6 +89,6 @@ describe '他のモードで空札をonにした後でも、初心者モード�
   it '初心者モードなので、読み上げ予定枚数は1枚に減っている。' do
     expect(first_text_elem.value).to match_regex /全1首/
   end
+=end
 
 end
-=end

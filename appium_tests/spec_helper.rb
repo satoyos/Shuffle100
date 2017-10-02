@@ -7,6 +7,8 @@ TITLE = '百首読み上げ'
 JOKA  = '序歌'
 WHATS_NEXT_STR = '次はどうする？'
 DIALOGUE_MESSAGE_FOR_QUIT = '試合を終了しますか？'
+TOP_TITLE = 'トップ'
+POEM_SELECTION_TITLE = '歌を選ぶ'
 
 def desired_caps
   {

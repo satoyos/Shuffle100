@@ -1,6 +1,10 @@
 require_relative 'string_with_utf8_mac'
 
 
+def  first_text_is(str)
+  expect(first_text_content).to eq str
+end
+
 def currnet_screen_is(name)
   expect(navigation_bar_of_name(name)).not_to be nil
 end
@@ -10,21 +14,9 @@ def recite_screen_title_matches(regexp)
   # Appium Test上では、そのラベルのaccessibility_idだけでなく、labelやnameもすべてその値に書き換わり、
   # 実際にどのような文字列が書かれているのかが取得できなくなる。
   # なので、不本意ながら、「最初に取得できるテキストラベル」を「読み上げ画面のヘッダラベル」とみなす。
-  expect(first_text_elem.name).to match_regex regexp
+  expect(first_text_content).to match_regex regexp
 end
 
-
-def elem_of_class(class_name, name: nil)
-  find_elements(:class_name, class_name).find{|c| c.name == name}
-end
-
-def click_element_of(class_name, name: nil)
-  elem_of_class(class_name, name: name).click
-end
-
-def elems_of_str(text)
-  find_elements(:accessibility_id, text)
-end
 
 def can_see(text)
   expect(elems_of_str(text)).not_to be_empty
@@ -90,14 +82,45 @@ def click_rewind_button
   click_button('rewind')
 end
 
+def click_refrain_button
+  click_button('refrain_button')
+end
+
+def click_torifuda_button
+  click_button('torifuda_button')
+end
+
 def open_quit_dialogue(label)
   click_button(label)
   can_see(DIALOGUE_MESSAGE_FOR_QUIT)
 end
 
+def click_back_button
+  # click_button('戻る')
+  ### NavigationControllerのbackItemが取得できなくなったので、最初に取得できるボタンがbackItemだと仮定する。
+  ### もうちょっとマシな解決方法ああれば良いのだが…
+  get_first_button.click
+end
+
 def click_element_with_text(text)
   click_element_of('XCUIElementTypeStaticText', name: text)
 end
+
+def go_to_poem_selection
+  click_element_with_text('取り札を用意する歌')
+end
+
+def tap_first_poem
+  click_element_of('XCUIElementTypeCell', name: '001')
+end
+
+def click_button_to_cancel_all
+  click_button('全て取消')
+end
+
+
+
+private
 
 def click_button(name)
   click_element_of('XCUIElementTypeButton', name: name)
@@ -107,9 +130,19 @@ def get_first_button
   find_elements(class_name: 'XCUIElementTypeButton').first
 end
 
-def click_back_button
-  # click_button('戻る')
-  ### NavigationControllerのbackItemが取得できなくなったので、最初に取得できるボタンがbackItemだと仮定する。
-  ### もうちょっとマシな解決方法ああれば良いのだが…
-  get_first_button.click
+def first_text_content
+  first_text_elem.name
 end
+
+def elem_of_class(class_name, name: nil)
+  find_elements(:class_name, class_name).find{|c| c.name == name}
+end
+
+def click_element_of(class_name, name: nil)
+  elem_of_class(class_name, name: name).click
+end
+
+def elems_of_str(text)
+  find_elements(:accessibility_id, text)
+end
+
