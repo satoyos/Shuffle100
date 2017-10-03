@@ -68,7 +68,7 @@ describe '他のモードで空札をonにした後でも、初心者モード�
     recite_screen_title_matches /全2首/
   end
   it 'そこで試合を終了し、トップに戻る' do
-    open_quit_dialogue('quit_button')
+    open_quit_dialogue
     alert_dismiss
     currnet_screen_is TOP_TITLE
   end

@@ -90,8 +90,12 @@ def click_torifuda_button
   click_button('torifuda_button')
 end
 
-def open_quit_dialogue(label)
-  click_button(label)
+def click_quit_button
+  click_button('quit_button')
+end
+
+def open_quit_dialogue
+  click_quit_button
   can_see(DIALOGUE_MESSAGE_FOR_QUIT)
 end
 
