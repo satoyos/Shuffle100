@@ -1,7 +1,6 @@
 # coding: utf-8
 require_relative 'spec_helper'
 
-=begin
 describe '初心者モードのテスト' do
 
   it 'アプリのタイトルが正しく表示される' do
@@ -45,7 +44,6 @@ describe '初心者モードのテスト' do
     end
   end
 end
-=end
 
 describe '他のモードで空札をonにした後でも、初心者モードで起動すると、空札設定はoffになる' do
   it '空札を加えるモードにする' do
@@ -64,16 +62,15 @@ describe '他のモードで空札をonにした後でも、初心者モード�
     currnet_screen_is TOP_TITLE
     can_see '1首'
   end
-=begin
   it '試合を開始し、早送りボタンを押して、1首めへ行くと、読み上げ予定枚数は2首になっている' do
     open_game
     click_forward_button
-    expect(first_text_elem.value).to match_regex /全2首/
+    recite_screen_title_matches /全2首/
   end
   it 'そこで試合を終了し、トップに戻る' do
     open_quit_dialogue('quit_button')
     alert_dismiss
-    can_see(TITLE)
+    currnet_screen_is TOP_TITLE
   end
   it '初心者モードにすると、「空札を加える」を選択するセルが無くなる' do
     can_see('空札を加える')
@@ -84,11 +81,10 @@ describe '他のモードで空札をonにした後でも、初心者モード�
   it '試合を開始し、早送りボタンを押して、1首めへ' do
     open_game
     click_forward_button
-    expect(first_text_elem.value).to match_regex /\A1首め/
+    recite_screen_title_matches /\A1首め/
   end
   it '初心者モードなので、読み上げ予定枚数は1枚に減っている。' do
-    expect(first_text_elem.value).to match_regex /全1首/
+    recite_screen_title_matches /全1首/
   end
-=end
 
 end
