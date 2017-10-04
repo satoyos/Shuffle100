@@ -5,7 +5,7 @@ def  first_text_is(str)
   expect(first_text_content).to eq str
 end
 
-def currnet_screen_is(name)
+def current_screen_is(name)
   expect(navigation_bar_of_name(name)).not_to be nil
 end
 
@@ -104,6 +104,10 @@ def click_back_button
   ### NavigationControllerのbackItemが取得できなくなったので、最初に取得できるボタンがbackItemだと仮定する。
   ### もうちょっとマシな解決方法ああれば良いのだが…
   get_first_button.click
+end
+
+def click_settings_button
+  click_button('gear')
 end
 
 def click_element_with_text(text)

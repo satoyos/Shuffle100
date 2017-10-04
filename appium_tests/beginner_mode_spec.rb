@@ -28,7 +28,7 @@ describe '初心者モードのテスト' do
 
     it 'もう一度早送りボタンを押すと、「次はどうする？」画面になる' do
       click_forward_button
-      currnet_screen_is WHATS_NEXT_STR
+      current_screen_is WHATS_NEXT_STR
     end
 
     it '「下の句をもう一度読む」ボタンを押すと、下の句の読み上げを繰り返す' do
@@ -52,14 +52,14 @@ describe '他のモードで空札をonにした後でも、初心者モード�
 
   it '歌選択画面を開く' do
     go_to_poem_selection
-    currnet_screen_is POEM_SELECTION_TITLE
+    current_screen_is POEM_SELECTION_TITLE
   end
 
   it '1首だけ選ぶと、トップ画面に戻っても、1首選ばれていることが反映されている' do
     click_button_to_cancel_all
     tap_first_poem
     click_back_button
-    currnet_screen_is TOP_TITLE
+    current_screen_is TOP_TITLE
     can_see '1首'
   end
   it '試合を開始し、早送りボタンを押して、1首めへ行くと、読み上げ予定枚数は2首になっている' do
@@ -70,7 +70,7 @@ describe '他のモードで空札をonにした後でも、初心者モード�
   it 'そこで試合を終了し、トップに戻る' do
     open_quit_dialogue
     alert_dismiss
-    currnet_screen_is TOP_TITLE
+    current_screen_is TOP_TITLE
   end
   it '初心者モードにすると、「空札を加える」を選択するセルが無くなる' do
     can_see('空札を加える')
