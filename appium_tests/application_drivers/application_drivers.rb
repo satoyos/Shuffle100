@@ -1,5 +1,13 @@
 require_relative 'string_with_utf8_mac'
 
+# GUI Element Type
+
+TYPE_STATIC_TEXT = 'XCUIElementTypeStaticText'
+TYPE_BUTTON = 'XCUIElementTypeButton'
+TYPE_CELL = 'XCUIElementTypeCell'
+TYPE_SWITCH = 'XCUIElementTypeSwitch'
+# TYPE_PICKER_WHEEL = 'UIAPickerWheel'
+TYPE_PICKER_WHEEL = 'XCUIElementTypePickerWheel'
 
 def  first_text_is(str)
   expect(first_text_content).to eq str
@@ -35,12 +43,8 @@ def open_game_without_check
   click_element_with_text('試合開始')
 end
 
-def first_text_elem
-  find_elements(:xpath, '//XCUIElementTypeStaticText').first
-end
-
 def set_fake_mode_on
-  fake_mode_switch = elem_of_class('XCUIElementTypeSwitch', name: '空札を加える')
+  fake_mode_switch = elem_of_class(TYPE_SWITCH, name: '空札を加える')
   fake_mode_switch.click
 
 end
@@ -50,7 +54,7 @@ def navigation_bar_of_name(name)
 end
 
 def set_singer_inaba_kun
-  wheel = find_element(class_name: 'UIAPickerWheel')
+  wheel = find_element(class_name: TYPE_PICKER_WHEEL)
   wheel.send_keys 'いなばくん（人間）'
   click_back_button
   can_see 'いなばくん（人間）'
@@ -59,7 +63,7 @@ end
 def set_recite_mode_beginner
   click_element_with_text('読み上げモード')
   can_see('読み上げモードを選ぶ')
-  wheel = find_element(class_name: 'UIAPickerWheel')
+  wheel = find_element(class_name: TYPE_PICKER_WHEEL)
   wheel.send_keys '初心者（散らし取り）'
   click_back_button
   can_see '初心者'
@@ -68,10 +72,15 @@ end
 def set_recite_mode_nonstop
   click_element_with_text('読み上げモード')
   can_see('読み上げモードを選ぶ')
-  wheel = find_element(class_name: 'UIAPickerWheel')
+  wheel = find_element(class_name: TYPE_PICKER_WHEEL)
   wheel.send_keys 'ノンストップ（止まらない）'
   click_back_button
   can_see 'ノンストップ'
+end
+
+def quit_settings_and_see(str)
+  click_button(CLOSE_ON_GAME_SETTINGS)
+  can_see str
 end
 
 def click_forward_button
@@ -107,11 +116,11 @@ def click_back_button
 end
 
 def click_settings_button
-  click_button('gear')
+  settings_button.click
 end
 
 def click_element_with_text(text)
-  click_element_of('XCUIElementTypeStaticText', name: text)
+  click_element_of(TYPE_STATIC_TEXT, name: text)
 end
 
 def go_to_poem_selection
@@ -119,7 +128,7 @@ def go_to_poem_selection
 end
 
 def tap_first_poem
-  click_element_of('XCUIElementTypeCell', name: '001')
+  click_element_of(TYPE_CELL, name: '001')
 end
 
 def click_button_to_cancel_all
@@ -130,12 +139,16 @@ end
 
 private
 
+def first_text_elem
+  find_elements(:xpath, '//' + TYPE_STATIC_TEXT).first
+end
+
 def click_button(name)
-  click_element_of('XCUIElementTypeButton', name: name)
+  click_element_of(TYPE_BUTTON, name: name)
 end
 
 def get_first_button
-  find_elements(class_name: 'XCUIElementTypeButton').first
+  find_elements(class_name: TYPE_BUTTON).first
 end
 
 def first_text_content
@@ -154,3 +167,7 @@ def elems_of_str(text)
   find_elements(:accessibility_id, text)
 end
 
+def settings_button
+  elem_of_class(TYPE_BUTTON, name: 'gear') ||
+      elem_of_class(TYPE_BUTTON, name: 'gear_button')
+end
