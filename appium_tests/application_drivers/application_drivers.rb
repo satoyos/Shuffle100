@@ -100,7 +100,7 @@ def click_torifuda_button
 end
 
 def click_quit_button
-  click_button('quit_button')
+  quit_button.click
 end
 
 def open_quit_dialogue
@@ -170,4 +170,9 @@ end
 def settings_button
   elem_of_class(TYPE_BUTTON, name: 'gear') ||
       elem_of_class(TYPE_BUTTON, name: 'gear_button')
+end
+
+def quit_button
+  elem_of_class(TYPE_BUTTON, name: 'quit_button') ||
+      elem_of_class(TYPE_BUTTON, name: 'exit')
 end
