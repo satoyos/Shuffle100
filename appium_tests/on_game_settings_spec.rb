@@ -17,6 +17,7 @@ describe '試合途中で変更可能な設定のテスト(通常モード)' do
 
     it 'トップ画面で歯車ボタンを押すと、各種設定画面が現れる' do
       click_settings_button
+      sleep 1
       current_screen_is TITLE_FOR_ON_GAME_SETTINGS
     end
     it '通常モードの時には、「上の句と下の句の間隔」セルが表示されない' do

@@ -40,6 +40,7 @@ describe '初心者モードのテスト' do
     it '「取り札を見る」ボタンを押すと、取り札画面が表示される' do
       click_torifuda_button
       can_see('torifuda_view')
+      sleep 1
       click_button('閉じる') # 取り札画面を閉じて、また「次はどうする？」画面に戻る
     end
   end
