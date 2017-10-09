@@ -6,10 +6,12 @@ TYPE_STATIC_TEXT = 'XCUIElementTypeStaticText'
 TYPE_BUTTON = 'XCUIElementTypeButton'
 TYPE_CELL = 'XCUIElementTypeCell'
 TYPE_SWITCH = 'XCUIElementTypeSwitch'
-# TYPE_PICKER_WHEEL = 'UIAPickerWheel'
 TYPE_PICKER_WHEEL = 'XCUIElementTypePickerWheel'
 
 # TEXT_ON_SCREEN
+STR_ADD_FAKE_POEMS = '空札を加える'
+STR_CLOSE = '閉じる'
+STR_INABA_KUN = 'いなばくん（人間）'
 STR_POEM_SELECTION = '取り札を用意する歌'
 STR_START_GAME = '試合開始'
 
@@ -25,10 +27,13 @@ def can_not_see(text)
   expect(elems_of_str(text)).to be_empty
 end
 
+def close_whats_next_screen
+  click_button(STR_CLOSE)
+end
+
 def current_screen_is(name)
   expect(navigation_bar_of_name(name)).not_to be nil
 end
-
 
 def fill_search_window_with_text(str)
   find_element(:accessibility_id, ID_SEARCH_TEXT_FIELD).send_keys str
@@ -60,7 +65,7 @@ def recite_screen_title_matches(regexp)
 end
 
 def set_fake_mode_on
-  fake_mode_switch = elem_of_class(TYPE_SWITCH, name: '空札を加える')
+  fake_mode_switch = elem_of_class(TYPE_SWITCH, name: STR_ADD_FAKE_POEMS)
   fake_mode_switch.click
 end
 
@@ -70,9 +75,9 @@ end
 
 def set_singer_inaba_kun
   wheel = find_element(class_name: TYPE_PICKER_WHEEL)
-  wheel.send_keys 'いなばくん（人間）'
+  wheel.send_keys STR_INABA_KUN
   click_back_button
-  can_see 'いなばくん（人間）'
+  can_see STR_INABA_KUN
 end
 
 def set_recite_mode_beginner
@@ -136,10 +141,6 @@ end
 
 def click_element_with_text(text)
   click_element_of(TYPE_STATIC_TEXT, name: text)
-end
-
-def go_to_poem_selection
-  click_element_with_text(STR_POEM_SELECTION)
 end
 
 def tap_first_poem

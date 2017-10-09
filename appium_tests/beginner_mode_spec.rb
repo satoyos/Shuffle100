@@ -10,9 +10,9 @@ describe '初心者モードのテスト' do
   describe '「次はどうする？」画面での動作確認' do
 
     it '初心者モードにする' do
-      can_see('空札を加える')
+      can_see(STR_ADD_FAKE_POEMS)
       set_recite_mode_beginner
-      can_not_see('空札を加える')
+      can_not_see(STR_ADD_FAKE_POEMS)
     end
 
     it '試合を開始し、早送りボタンを押して、1首めへ' do
@@ -41,7 +41,7 @@ describe '初心者モードのテスト' do
       click_torifuda_button
       can_see('torifuda_view')
       sleep 1
-      click_button('閉じる') # 取り札画面を閉じて、また「次はどうする？」画面に戻る
+      close_whats_next_screen # 取り札画面を閉じて、また「次はどうする？」画面に戻る
     end
   end
 end
@@ -52,7 +52,7 @@ describe '他のモードで空札をonにした後でも、初心者モード�
   end
 
   it '歌選択画面を開く' do
-    go_to_poem_selection
+    goto_select_poem_screen
     current_screen_is POEM_SELECTION_TITLE
   end
 
@@ -74,9 +74,9 @@ describe '他のモードで空札をonにした後でも、初心者モード�
     current_screen_is TOP_TITLE
   end
   it '初心者モードにすると、「空札を加える」を選択するセルが無くなる' do
-    can_see('空札を加える')
+    can_see(STR_ADD_FAKE_POEMS)
     set_recite_mode_beginner
-    can_not_see('空札を加える')
+    can_not_see(STR_ADD_FAKE_POEMS)
   end
 
   it '試合を開始し、早送りボタンを押して、1首めへ' do
