@@ -4,17 +4,17 @@ require_relative 'spec_helper'
 describe '歌を検索するテスト' do
 
   it 'アプリのタイトルが正しく表示される' do
-    can_see(TITLE)
+    current_screen_is TOP_TITLE
   end
 
   describe '検索窓に文字を入力すると、歌を絞り込むことができる' do
     it '歌選択画面を開く' do
-      click_element_with_text('取り札を用意する歌')
-      can_see('歌を選ぶ')
+      goto_select_poem_screen
+      current_screen_is '歌を選ぶ'
     end
     it '検索窓に「秋」を入力すると、1番, 5番, 22番…という順に歌が選ばれていて、2番は選ばれない。' do
-      find_element(:accessibility_id, "search_text_field").send_keys "秋"
-      cell_names = find_elements(:class_name, 'XCUIElementTypeCell').map{|e| e.name}
+      fill_search_window_with_text '秋'
+      cell_names = get_filtered_cell_names
       expect(cell_names.first).to eq '001'
       expect(cell_names[1]).to eq '005'
       expect(cell_names[2]).to eq '022'

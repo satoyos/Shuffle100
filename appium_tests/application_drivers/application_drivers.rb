@@ -9,21 +9,12 @@ TYPE_SWITCH = 'XCUIElementTypeSwitch'
 # TYPE_PICKER_WHEEL = 'UIAPickerWheel'
 TYPE_PICKER_WHEEL = 'XCUIElementTypePickerWheel'
 
-def  first_text_is(str)
-  expect(first_text_content).to eq str
-end
+# TEXT_ON_SCREEN
+STR_POEM_SELECTION = '取り札を用意する歌'
+STR_START_GAME = '試合開始'
 
-def current_screen_is(name)
-  expect(navigation_bar_of_name(name)).not_to be nil
-end
-
-def recite_screen_title_matches(regexp)
-  # 読み上げ画面のヘッダのラベルにacccessibilityLabelを設定すると、
-  # Appium Test上では、そのラベルのaccessibility_idだけでなく、labelやnameもすべてその値に書き換わり、
-  # 実際にどのような文字列が書かれているのかが取得できなくなる。
-  # なので、不本意ながら、「最初に取得できるテキストラベル」を「読み上げ画面のヘッダラベル」とみなす。
-  expect(first_text_content).to match_regex regexp
-end
+# Accessibility ID of UI Elements
+ID_SEARCH_TEXT_FIELD = 'search_text_field'
 
 
 def can_see(text)
@@ -34,19 +25,43 @@ def can_not_see(text)
   expect(elems_of_str(text)).to be_empty
 end
 
+def current_screen_is(name)
+  expect(navigation_bar_of_name(name)).not_to be nil
+end
+
+
+def fill_search_window_with_text(str)
+  find_element(:accessibility_id, ID_SEARCH_TEXT_FIELD).send_keys str
+end
+
+def get_filtered_cell_names
+  find_elements(:class_name, TYPE_CELL).map {|e| e.name}
+end
+
+def goto_select_poem_screen
+  click_element_with_text STR_POEM_SELECTION
+end
+
 def open_game
   open_game_without_check
   can_see(JOKA)
 end
 
 def open_game_without_check
-  click_element_with_text('試合開始')
+  click_element_with_text(STR_START_GAME)
+end
+
+def recite_screen_title_matches(regexp)
+  # 読み上げ画面のヘッダのラベルにacccessibilityLabelを設定すると、
+  # Appium Test上では、そのラベルのaccessibility_idだけでなく、labelやnameもすべてその値に書き換わり、
+  # 実際にどのような文字列が書かれているのかが取得できなくなる。
+  # なので、不本意ながら、「最初に取得できるテキストラベル」を「読み上げ画面のヘッダラベル」とみなす。
+  expect(first_text_content).to match_regex regexp
 end
 
 def set_fake_mode_on
   fake_mode_switch = elem_of_class(TYPE_SWITCH, name: '空札を加える')
   fake_mode_switch.click
-
 end
 
 def navigation_bar_of_name(name)
@@ -124,7 +139,7 @@ def click_element_with_text(text)
 end
 
 def go_to_poem_selection
-  click_element_with_text('取り札を用意する歌')
+  click_element_with_text(STR_POEM_SELECTION)
 end
 
 def tap_first_poem
