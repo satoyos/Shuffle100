@@ -12,8 +12,11 @@ TYPE_PICKER_WHEEL = 'XCUIElementTypePickerWheel'
 STR_ADD_FAKE_POEMS = '空札を加える'
 STR_CLOSE = '閉じる'
 STR_INABA_KUN = 'いなばくん（人間）'
+STR_ONE_CHAR_KIMARI = '一字決まりの歌'
 STR_POEM_SELECTION = '取り札を用意する歌'
+STR_SELECT_POEM_SCREEN = '歌を選ぶ'
 STR_START_GAME = '試合開始'
+
 
 # Accessibility ID of UI Elements
 ID_SEARCH_TEXT_FIELD = 'search_text_field'
@@ -47,6 +50,11 @@ def goto_select_poem_screen
   click_element_with_text STR_POEM_SELECTION
 end
 
+def open_first_char_select_screen
+  click_button('1字目で選ぶ')
+  can_see STR_ONE_CHAR_KIMARI
+end
+
 def open_game
   open_game_without_check
   can_see(JOKA)
@@ -62,6 +70,10 @@ def recite_screen_title_matches(regexp)
   # 実際にどのような文字列が書かれているのかが取得できなくなる。
   # なので、不本意ながら、「最初に取得できるテキストラベル」を「読み上げ画面のヘッダラベル」とみなす。
   expect(first_text_content).to match_regex regexp
+end
+
+def select_one_char_kimari
+  click_element_with_text(STR_ONE_CHAR_KIMARI)
 end
 
 def set_fake_mode_on
