@@ -15,6 +15,7 @@ STR_INABA_KUN = 'いなばくん（人間）'
 STR_ONE_CHAR_KIMARI = '一字決まりの歌'
 STR_POEM_SELECTION = '取り札を用意する歌'
 STR_SELECT_POEM_SCREEN = '歌を選ぶ'
+STR_SINGER = '読手'
 STR_START_GAME = '試合開始'
 
 
@@ -48,6 +49,10 @@ end
 
 def goto_select_poem_screen
   click_element_with_text STR_POEM_SELECTION
+end
+
+def goto_select_singer_screen
+  click_element_with_text(STR_SINGER)
 end
 
 def open_first_char_select_screen
