@@ -1,6 +1,10 @@
 # coding: utf-8
 require_relative 'spec_helper'
 
+STR_MODE_BEGINNER = '初心者モード'
+STR_MODE_NORMAL  = '通常モード'
+STR_MODE_NONSTOP = 'ノンストップモード'
+
 describe '百首を通しで読み上げるテスト' do
 
   it 'アプリのタイトルが正しく表示される' do
@@ -17,8 +21,7 @@ describe '百首を通しで読み上げるテスト' do
       (2..100).each { |i|
         skip_start_skip
         recite_screen_title_matches Regexp.new("\\A#{i}首め")
-        puts "  -#{i}首目を読み上げ中。"
-        puts '     [現在、通常モード]' if i % 10 == 1
+        puts_current_fuda(i, mode_str: STR_MODE_NORMAL)
       }
     end
     it '百首めが終わると、試合終了画面が表示される' do
@@ -54,8 +57,7 @@ describe '初心者モードで、百首を通して(問題を起こさず)読�
     (2..100).each { |i|
       skip_skip_next
       recite_screen_title_matches Regexp.new("\\A#{i}首め")
-      puts "  -#{i}首目を読み上げ中。"
-      puts '     [現在、初心者モード]' if i % 10 == 1
+      puts_current_fuda(i, mode_str: STR_MODE_BEGINNER)
     }
   end
   it '百首めが終わると、試合終了画面が表示される' do
@@ -78,8 +80,7 @@ describe 'ノンストップ・モードで、百首を通して(問題を起こ
     (2..100).each { |i|
       skip_skip
       recite_screen_title_matches Regexp.new("\\A#{i}首め")
-      puts "  -#{i}首目を読み上げ中。"
-      puts '     [現在、ノンストップモード]' if i % 10 == 1
+      puts_current_fuda(i, mode_str: STR_MODE_NONSTOP)
     }
   end
   it '百首めが終わると、試合終了画面が表示される' do
@@ -91,8 +92,16 @@ end
 
 private
 
+def puts_current_fuda(i, mode_str: nil)
+  raise '読み上げモードを示す文字列をパラメータで指定してください。' unless mode_str
+  puts "  -#{i}首目を読み上げ中。"
+  puts "     [現在、#{mode_str}]" if i % 10 == 1
+end
+
+
 def skip_start_skip
   click_forward_button
+  sleep 1
   click_button('play') # 下の句から読み上げ再開
   click_forward_button
 end
