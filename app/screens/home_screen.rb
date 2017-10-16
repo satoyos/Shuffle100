@@ -6,7 +6,8 @@ class HomeScreen < PM::GroupedTableScreen
 
   SELECT_POEM_TITLE = '取り札を用意する歌'
   NAV_BAR_BUTTON_SIZE = CGSizeMake(14, 14)
-  BAR_BUTTON_SIZE = 28
+  # BAR_BUTTON_SIZE = 28
+  BAR_BUTTON_SIZE = 14
 
   def on_load
     set_nav_bar_button :right, {
