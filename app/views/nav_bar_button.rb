@@ -7,8 +7,9 @@ class NavBarButton < UIButton
 
   class << self
     def create_with_square_size(size)
+      button_size = button_size_by_ios_version(size)
       self.buttonWithType(UIButtonTypeRoundedRect).tap do |b|
-        b.frame = CGRectMake(0, 0, size, size)
+        b.frame = CGRectMake(0, 0, button_size, button_size)
         b.set_image_after_frame_is_set
       end
     end
@@ -22,6 +23,15 @@ class NavBarButton < UIButton
         BW2.retina_ratio = img.size.width / size
         puts " -- retina_ratio => #{BW2.retina_ratio}"
       }.imageWithRenderingMode(UIImageRenderingModeAlwaysTemplate)
+    end
+
+    def self.button_size_by_ios_version(size)
+      button_size = size
+      if BW2.ios_major_ver_num < 11
+        button_size *= 2
+        puts "iOSのバージョンが#{BW2.ios_version}なので、ボタン用の画像を倍サイズで作ります。" if BW2.debug?
+      end
+      button_size
     end
   end
 end

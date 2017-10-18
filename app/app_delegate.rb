@@ -88,4 +88,8 @@ class BW2
     @ios_version ||= UIDevice.currentDevice.systemVersion
   end
 
+  def self.ios_major_ver_num
+    @ios_major_ver_num ||= ios_version.split(/\./).first.to_i
+  end
+
 end
