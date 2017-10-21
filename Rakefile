@@ -26,7 +26,7 @@ end
 Motion::Project::App.setup do |app|
   app.name = 'Shuffle100'
 
-  app.deployment_target = '9.0'
+  app.deployment_target = '10.0'
 
   app.frameworks += ['AVFoundation', 'AudioToolbox', 'MediaPlayer']
   app.frameworks += ['QuartzCore']
