@@ -35,7 +35,8 @@ Motion::Project::App.setup do |app|
   app.prerendered_icon = true
   app.icons = Dir.glob('resources/Icon*.png').map{|icon| icon.split('/').last}
 =end
-  app.info_plist['CFBundleIconName'] = 'AppIcon'
+  # app.info_plist['CFBundleIconName'] = 'AppIcon'
+  define_icon_defaults!(app)
 
   app.fonts = ['fontawesome-webfont.ttf']
 
@@ -81,6 +82,22 @@ Motion::Project::App.setup do |app|
   app.detect_dependencies = true
 
   app.redgreen_style = :focused if rake_mode == :spec
+end
+
+def define_icon_defaults!(app)
+  app.info_plist['CFBundleIcons'] = {
+      'CFBundlePrimaryIcon' => {
+          'CFBundleIconName' => 'AppIcon',
+          'CFBundleIconFiles' => ['AppIcon60x60']
+      }
+  }
+
+  app.info_plist['CFBundleIcons~ipad'] = {
+      'CFBundlePrimaryIcon' => {
+          'CFBundleIconName' => 'AppIcon',
+          'CFBundleIconFiles' => ['AppIcon60x60', 'AppIcon76x76']
+      }
+  }
 end
 
 def build_number
