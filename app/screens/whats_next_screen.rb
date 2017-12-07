@@ -3,7 +3,8 @@ class WhatsNextScreen < PM::Screen
 
   title '次はどうする？'
 
-  BAR_BUTTON_SIZE = 28
+  # BAR_BUTTON_SIZE = 28
+  BAR_BUTTON_SIZE = 14
 
   attr_reader :layout
 
