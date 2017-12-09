@@ -14,11 +14,10 @@ def desired_caps
   {
       caps: {
           platformName:  "iOS",
-          # versionNumber: "9.2",
-          deviceName:    "iPhone 8",
-          platformVersion: "11.2",
-          # platformVersion: "10.3",
-          # deviceName:    "iPad Pro",
+          deviceName:    "iPhone 7",
+          # deviceName:    "iPad Pro (10.5-inch)",
+          # platformVersion: "11.2",
+          platformVersion: "10.3",
           app: '../build/iPhoneSimulator-10.0-Development/Shuffle100.app',
           # fullReset: true,  # Appium1.5+(試したのは1.5.3)で、シミュレータの2回起動を抑止する。
           automationName: 'XCUITest'
