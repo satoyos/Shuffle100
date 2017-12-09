@@ -3,12 +3,12 @@ module OneHundred
     module_function
 
     def select_sizes
-      case UIDevice.currentDevice.name
+      case UIDevice.currentDevice.model
         when /iPhone/; SizesIPhone.new
         when /iPod/;   SizesIPhone.new
         when /iPad/  ; SizesIPad.new
         else
-          puts "Unsupported Device [#{UIDevice.currentDevice.name}] is detected." if BW2.debug?
+          puts "Unsupported Device [#{UIDevice.currentDevice.model}] is detected." if BW2.debug?
           SizesIPhone.new
       end
     end
