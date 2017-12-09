@@ -61,7 +61,7 @@ Motion::Project::App.setup do |app|
     pod 'BBBadgeBarButtonItem', git: 'https://github.com/TanguyAladenise/BBBadgeBarButtonItem.git'
   }
 
-  APP_VERSION = '4.30'
+  APP_VERSION = '4.31'
 
   app.development do
     app.version = build_number
