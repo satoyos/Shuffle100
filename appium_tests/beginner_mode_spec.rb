@@ -28,6 +28,7 @@ describe '初心者モードのテスト' do
 
     it 'もう一度早送りボタンを押すと、「次はどうする？」画面になる' do
       click_forward_button
+      sleep 1
       current_screen_is WHATS_NEXT_STR
     end
 
