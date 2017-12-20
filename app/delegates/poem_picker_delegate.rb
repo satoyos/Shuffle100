@@ -42,6 +42,10 @@ module PoemPickerDelegate
     end
   end
 
+  def select_by_five_colors
+    puts "You select 五色から選ぶ！" if BW2.debug?
+  end
+
   def select_by_ngram
     if searching?
       alert_ngram_picker_disabled

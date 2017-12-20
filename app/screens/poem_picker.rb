@@ -72,6 +72,12 @@ class PoemPicker < PM::TableScreen
              }, {
                  system_item: :flexible_space
              }, {
+                 title: '五色',
+                 action: :select_by_five_colors
+             },{
+                 system_item: :flexible_space
+             },
+             {
                  title: '1字目で選ぶ',
                  action: :select_by_ngram
              }]
