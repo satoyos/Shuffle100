@@ -44,6 +44,7 @@ module PoemPickerDelegate
 
   def select_by_five_colors
     puts "You select 五色から選ぶ！" if BW2.debug?
+    open FiveColorsScreen.new
   end
 
   def select_by_ngram

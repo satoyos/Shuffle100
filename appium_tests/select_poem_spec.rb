@@ -46,5 +46,17 @@ describe '歌を選ぶテスト' do
       can_not_see STR_ONE_POEM_AT_LIEAST
     end
   end
+
+
+  describe '五色百人一首の色別の20首を選択できる' do
+    it '歌選択画面を開く' do
+      goto_select_poem_screen
+      current_screen_is STR_SELECT_POEM_SCREEN
+    end
+    it '「五色」ボタンを押すことで、五色による歌選択画面に遷移する' do
+      click_button('五色')
+      can_see "五色百人一首の色で選ぶ"
+    end
+  end
 end
 

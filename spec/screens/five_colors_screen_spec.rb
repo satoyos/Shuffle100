@@ -1,0 +1,20 @@
+describe 'FiveColrosScreen' do
+  tests FiveColorsScreen
+
+  def controller
+    @controller ||= FiveColorsScreen.new
+  end
+  alias :screen :controller
+
+  it 'is a kind of PM::Screen' do
+    screen.should.be.kind_of PM::Screen
+  end
+  it 'タイトルが正しく設定されている' do
+    screen.title.should == '五色百人一首の色で選ぶ'
+  end
+=begin
+  it 'Layoutが設定されている' do
+    screen.layout.should.not.be.nil
+  end
+=end
+end
