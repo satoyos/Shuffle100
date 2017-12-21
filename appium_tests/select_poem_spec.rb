@@ -9,6 +9,7 @@ describe '歌を選ぶテスト' do
     current_screen_is TOP_TITLE
   end
 
+=begin
   describe '「1文字めで選ぶ」が正しく機能する' do
     it '歌選択画面を開く' do
       goto_select_poem_screen
@@ -46,6 +47,7 @@ describe '歌を選ぶテスト' do
       can_not_see STR_ONE_POEM_AT_LIEAST
     end
   end
+=end
 
 
   describe '五色百人一首の色別の20首を選択できる' do
