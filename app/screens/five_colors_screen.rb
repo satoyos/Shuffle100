@@ -7,6 +7,8 @@ class FiveColorsScreen < PM::Screen
   attr_reader :layout
 
   def on_load
+    @layout = FiveColorsLayout.new
+    self.view = layout.view
 =begin
     @layout = WhatsNextLayout.new.tap{|l|
       l.sizes = app_delegate.sizes ? app_delegate.sizes :
