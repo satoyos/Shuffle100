@@ -7,23 +7,34 @@ class FiveColorsScreen < PM::Screen
   attr_reader :layout
 
   def on_load
-    @layout = FiveColorsLayout.new
-    self.view = layout.view
-=begin
-    @layout = WhatsNextLayout.new.tap{|l|
+    @layout = FiveColorsLayout.new.tap{|l|
       l.sizes = app_delegate.sizes ? app_delegate.sizes :
-          OH::DeviceSizeManager.select_sizes  # こっちはRSpecテスト用。
+                    OH::DeviceSizeManager.select_sizes  # こっちはRSpecテスト用。
     }
     self.view = layout.view
     set_button_actions
-=end
   end
 
   private
 
 
-=begin
   def set_button_actions
+    layout.get(:blue_group_button).on(:touch) {
+      puts '+ 「青グループ」ボタンが押された！' if BW2.debug?
+      alert = UIAlertController.alertControllerWithTitle('Title', message: 'This is the message area.', preferredStyle: UIAlertControllerStyleActionSheet )
+      select20 = UIAlertAction.actionWithTitle(
+          '選ぶ',
+          style: UIAlertActionStyleDefault,
+          handler: Proc.new{|obj| puts "[選ぶ]が選択された"})
+      cancel = UIAlertAction.actionWithTitle(
+          'キャンセル',
+          style: UIAlertActionStyleCancel,
+          handler: nil)
+      alert.addAction(select20)
+      alert.addAction(cancel)
+      self.presentViewController(alert, animated: true, completion: nil)
+    }
+=begin
     layout.get(:refrain_button).on(:touch){
       puts '+ 「もう1回下の句」ボタンが押された！' if BW2.debug?
       close(next: :refrain)
@@ -44,8 +55,10 @@ class FiveColorsScreen < PM::Screen
       puts '+ 終了ボタンが押された！' if BW2.debug?
       confirm_user_to_quit
     }
+=end
   end
 
+=begin
   def open_on_game_settings
     open OnGameSettingsScreen.new, modal: true, nav_bar: true
   end
