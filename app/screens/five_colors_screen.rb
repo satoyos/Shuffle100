@@ -1,10 +1,12 @@
 class FiveColorsScreen < PM::Screen
+  include SelectedStatusHandler
+
   title '五色百人一首の色で選ぶ'
 
   # BAR_BUTTON_SIZE = 28
   BAR_BUTTON_SIZE = 14
 
-  attr_reader :layout
+  attr_reader :layout, :badge_button, :status100
 
   def on_load
     @layout = FiveColorsLayout.new.tap{|l|
@@ -12,11 +14,23 @@ class FiveColorsScreen < PM::Screen
                     OH::DeviceSizeManager.select_sizes  # こっちはRSpecテスト用。
     }
     self.view = layout.view
+    self.navigationItem.prompt = AppDelegate::PROMPT
+    init_members
     set_button_actions
+    set_badge_button
+    badge_button.button_size_plus(2)
+  end
+
+  def will_appear
+    badge_button.badgeValue = "#{status100.selected_num}首"
   end
 
   private
 
+  def init_members
+    @status100 = loaded_selected_status
+    @badge_button = PoemsNumberSelectedItem.create_with_origin_x(-50)
+  end
 
   def set_button_actions
     layout.get(:blue_group_button).on(:touch) {
@@ -34,44 +48,12 @@ class FiveColorsScreen < PM::Screen
       alert.addAction(cancel)
       self.presentViewController(alert, animated: true, completion: nil)
     }
-=begin
-    layout.get(:refrain_button).on(:touch){
-      puts '+ 「もう1回下の句」ボタンが押された！' if BW2.debug?
-      close(next: :refrain)
-    }
-    layout.get(:next_poem_button).on(:touch){
-      puts '+ 「次の歌へ！」ボタンが押された！' if BW2.debug?
-      close(next: :next_poem)
-    }
-    layout.get(:torifuda_button).on(:touch){
-      puts '+ 「取り札を見る」ボタンが押された！' if BW2.debug?
-      show_torifuda
-    }
-    @gear_button.on(:touch){
-      puts '+ 「いろいろな設定」ボタンが押された！' if BW2.debug?
-      open_on_game_settings
-    }
-    @exit_button.on(:touch){
-      puts '+ 終了ボタンが押された！' if BW2.debug?
-      confirm_user_to_quit
-    }
-=end
   end
 
-=begin
-  def open_on_game_settings
-    open OnGameSettingsScreen.new, modal: true, nav_bar: true
+  def set_badge_button
+    set_nav_bar_button :right, {
+        button: badge_button
+    }
   end
 
-  def back_to_top_screen
-    close(next: :back_to_top)
-  end
-
-  def show_torifuda
-    open_modal FudaScreen.new(nav_bar: true).tap{|s|
-                 s.fuda_str = parent_screen.poem.in_hiragana.shimo
-                 s.nav_bar_title = parent_screen.poem.str_with_number_and_liner
-               }
-  end
-=end
 end
