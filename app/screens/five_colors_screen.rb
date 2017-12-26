@@ -1,7 +1,7 @@
 class FiveColorsScreen < PM::Screen
   include SelectedStatusHandler
 
-  title '五色百人一首の色で選ぶ'
+  title '五色百人一首'
 
   # BAR_BUTTON_SIZE = 28
   BAR_BUTTON_SIZE = 14
