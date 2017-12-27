@@ -5,15 +5,14 @@ class NGramPicker < PM::Screen
 
   title '1字目で選ぶ'
 
-  attr_reader :table_view, :badge_button
+  attr_reader :table_view
 
   def on_load
     view.backgroundColor = UIColor.whiteColor
-    init_members
+    self.navigationItem.prompt = AppDelegate::PROMPT
+    init_selected_status_and_badge
     init_table_view
     add table_view
-    set_badge_button
-    badge_button.button_size_plus(2)
   end
 
   def init_table_view
@@ -34,17 +33,6 @@ class NGramPicker < PM::Screen
   end
 
   private
-
-  def init_members
-    @status100 = loaded_selected_status
-    @badge_button = PoemsNumberSelectedItem.create_with_origin_x(-50)
-  end
-
-  def set_badge_button
-    set_nav_bar_button :right, {
-        button: badge_button
-    }
-  end
 
   def reload_table_data_and_prepare(content_offset=nil)
     table_view.reloadData

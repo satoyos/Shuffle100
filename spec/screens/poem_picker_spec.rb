@@ -2,7 +2,7 @@ describe 'PoemPicker' do
   describe '初期化' do
 
     def controller
-      @controller ||= PoemPicker.new.init_members
+      @controller ||= PoemPicker.new.init_selected_status_and_badge
     end
     alias :screen :controller
 

@@ -3,10 +3,9 @@ class FiveColorsScreen < PM::Screen
 
   title '五色百人一首'
 
-  # BAR_BUTTON_SIZE = 28
   BAR_BUTTON_SIZE = 14
 
-  attr_reader :layout, :badge_button, :status100
+  attr_reader :layout
 
   def on_load
     @layout = FiveColorsLayout.new.tap{|l|
@@ -15,22 +14,11 @@ class FiveColorsScreen < PM::Screen
     }
     self.view = layout.view
     self.navigationItem.prompt = AppDelegate::PROMPT
-    init_members
     set_button_actions
-    set_badge_button
-    badge_button.button_size_plus(2)
-  end
-
-  def will_appear
-    badge_button.badgeValue = "#{status100.selected_num}首"
+    init_selected_status_and_badge
   end
 
   private
-
-  def init_members
-    @status100 = loaded_selected_status
-    @badge_button = PoemsNumberSelectedItem.create_with_origin_x(-50)
-  end
 
   def set_button_actions
     layout.get(:blue_group_button).on(:touch) {
@@ -47,12 +35,6 @@ class FiveColorsScreen < PM::Screen
       alert.addAction(select20)
       alert.addAction(cancel)
       self.presentViewController(alert, animated: true, completion: nil)
-    }
-  end
-
-  def set_badge_button
-    set_nav_bar_button :right, {
-        button: badge_button
     }
   end
 
