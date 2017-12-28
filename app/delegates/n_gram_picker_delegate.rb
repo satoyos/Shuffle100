@@ -10,7 +10,7 @@ module NGramPickerDelegate
   end
 
   def tableView(tableView, willDisplayCell: cell, forRowAtIndexPath: indexPath)
-    self.navigationItem.prompt = AppDelegate::PROMPT
+    # self.navigationItem.prompt = AppDelegate::PROMPT
     badge_button.badgeValue = "#{@status100.selected_num}首"
   end
 

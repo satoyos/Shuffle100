@@ -4,4 +4,18 @@ module FiveColors
   ORANGE = [19, 21, 25, 27, 43, 44, 45, 49, 52, 53, 56, 63, 64, 67, 77, 88, 90, 95, 98, 99]
   BLUE   = [3, 5, 6, 12, 14, 24, 30, 31, 50, 57, 61, 62, 69, 70, 74, 75, 76, 82, 91, 100]
   GREEN  = [8, 9, 11, 15, 17, 20, 23, 26, 29, 35, 36, 38, 41, 42, 54, 59, 68, 71, 92, 93]
+
+  def numbers_of_color(color_sym)
+    case color_sym
+      when :blue;   BLUE
+      when :yellow; YELLOW
+      when :green;  GREEN
+      when :pink;   PINK
+      when :orange; ORANGE
+      else
+        purs("xxxx ERROR: [#{color_sym}]の色はサポートしていません。 xxxx")
+        []
+    end
+  end
+
 end
