@@ -56,6 +56,13 @@ class FiveColorsScreen < PM::Screen
     alert.addAction(select20)
     alert.addAction(add20)
     alert.addAction(cancel)
+
+    # iPad用の設定
+    if pc = alert.popoverPresentationController
+      pc.sourceView = button_of_color(color_sym)
+      pc.sourceRect = CGRectMake(0, 0, 1, 1)
+    end
+
     self.presentViewController(alert, animated: true, completion: nil)
   end
 
@@ -70,6 +77,10 @@ class FiveColorsScreen < PM::Screen
     status100.select_in_numbers(numbers_of_color(color_sym))
     save_selected_status(status100)
     update_badge_value
+  end
+
+  def button_of_color(color_sym)
+    layout.get("#{color_sym}_group_button".to_sym)
   end
 
 end
