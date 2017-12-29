@@ -29,35 +29,6 @@ class FiveColorsLayout < MotionKit::Layout
     accessibility_label 'blue_gruop_button'
   end
 
-=begin
-  def refrain_button_style
-    typical_button_styling
-    center y: '50%'
-    init_title_style_and_image('refrain.png')
-    title '下の句をもう一度読む'
-    set_insets
-    accessibility_label 'refrain_button'
-  end
-
-  def next_poem_button_style
-    typical_button_styling
-    center y: '70%'
-    init_title_style_and_image('go_next.png')
-    title '次の歌へ！      '
-    set_insets
-    accessibility_label 'next_poem_button'
-  end
-
-  def torifuda_button_style
-    typical_button_styling
-    center y: '30%'
-    init_title_style_and_image('torifuda.png')
-    title '取り札を見る     '
-    set_insets
-    accessibility_label 'torifuda_button'
-  end
-=end
-
   private
 
   def typical_button_styling
