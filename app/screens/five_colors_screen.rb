@@ -23,19 +23,22 @@ class FiveColorsScreen < PM::Screen
 
   def set_button_actions
     layout.get(:blue_group_button).on(:touch) {
-      blue_color_button_pushed
+      pushed_button_of_color(:blue)
     }
   end
 
-  def blue_color_button_pushed
-    puts '+ 「青グループ」ボタンが押された！' if BW2.debug?
-    alert = UIAlertController.alertControllerWithTitle('青色の20首をどうしますか？', message: 'aaa', preferredStyle: UIAlertControllerStyleActionSheet)
+  def pushed_button_of_color(color_sym)
+    puts "+ 「#{str_of_color(color_sym)}グループ」ボタンが押された！" if BW2.debug?
+    alert = UIAlertController.alertControllerWithTitle(
+        "#{str_of_color(color_sym)}色の20首をどうしますか？",
+        message: nil,
+        preferredStyle: UIAlertControllerStyleActionSheet)
     select20 = UIAlertAction.actionWithTitle(
         'この20首だけを選ぶ',
         style: UIAlertActionStyleDefault,
         handler: Proc.new {|obj|
           puts "[20首だけ選ぶ]が選択された"
-          select_just20(:blue)
+          select_just20(color_sym)
         }
     )
     add20 = UIAlertAction.actionWithTitle(
@@ -43,7 +46,7 @@ class FiveColorsScreen < PM::Screen
         style: UIAlertActionStyleDefault,
         handler: Proc.new {|obj|
           puts "[追加する]が選択された"
-          add_20_of_color(:blue)
+          add_20_of_color(color_sym)
         }
     )
     cancel = UIAlertAction.actionWithTitle(
@@ -69,18 +72,4 @@ class FiveColorsScreen < PM::Screen
     update_badge_value
   end
 
-=begin
-  def numbers_of_color(color_sym)
-    case color_sym
-      when :blue;   FiveColors::BLUE
-      when :yellow; FiveColors::YELLOW
-      when :green;  FiveColors::GREEN
-      when :pink;   FiveColors::PINK
-      when :orange; FiveColors::ORANGE
-      else
-        purs("xxxx ERROR: [#{color_sym}]の色はサポートしていません。 xxxx")
-        []
-    end
-  end
-=end
 end
