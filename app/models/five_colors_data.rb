@@ -1,4 +1,6 @@
 module FiveColors
+  FIVE_COLOR_SYMBOLS = [:blue, :yellow, :green, :pink, :orange]
+
   # 各色の札番号
   YELLOW_NUMBERS = [ 2,  7, 10, 18, 32, 33, 37, 39, 46, 47, 55, 60, 78, 79, 81, 85, 87, 89, 94, 96]
   PINK_NUMBERS   = [ 1,  4, 13, 16, 22, 28, 34, 40, 48, 51, 58, 65, 66, 72, 73, 80, 83, 84, 86, 97]

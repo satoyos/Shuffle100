@@ -1,35 +1,54 @@
 class FiveColorsLayout < MotionKit::Layout
   include NormalButtonStyles
+  include FiveColors
 
   attr_accessor :sizes
 
   def layout
     background_color :white.uicolor
-    add WhatsNextButton, :blue_group_button
-    add WhatsNextButton, :pink_group_button
-    # add WhatsNextButton, :next_poem_button
-    # add WhatsNextButton, :torifuda_button
+    FIVE_COLOR_SYMBOLS.each {|color_sym|
+      add WhatsNextButton, "#{color_sym}_group_button".to_sym
+    }
   end
 
   def blue_group_button_style
-    typical_button_styling
-    center y: '10%'
-    init_title_style_and_image('5colors/blue.png')
-    title '青'
-    set_insets
-    accessibility_label 'blue_gruop_button'
+    button_style_of_color(:blue)
   end
 
   def pink_group_button_style
-    typical_button_styling
-    center y: '30%'
-    init_title_style_and_image('5colors/pink.png')
-    title '桃 (ピンク)'
-    set_insets
-    accessibility_label 'blue_gruop_button'
+    button_style_of_color(:pink)
+  end
+
+  def yellow_group_button_style
+    button_style_of_color(:yellow)
+  end
+
+  def green_group_button_style
+    button_style_of_color(:green)
+  end
+
+  def orange_group_button_style
+    button_style_of_color(:orange)
   end
 
   private
+
+  CENTER_Y_POSITIONS = {
+      blue:   '10%',
+      pink:   '25%',
+      yellow: '40%',
+      orange: '55%',
+      green:  '70%'
+  }
+
+  def button_style_of_color(color_sym)
+    typical_button_styling
+    center y: CENTER_Y_POSITIONS[color_sym]
+    init_title_style_and_image("5colors/#{color_sym}.png")
+    title str_of_color(color_sym)
+    set_insets
+    accessibilityLabel "#{color_sym}_group_button"
+  end
 
   def typical_button_styling
     size ['100%', whats_next_button_height]
@@ -49,6 +68,7 @@ class FiveColorsLayout < MotionKit::Layout
 
   def whats_next_button_height
     sizes.whats_next_button_height
+    # sizes.five_colors_button_height
   end
 
   def image_offset_x
