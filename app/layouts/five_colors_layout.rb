@@ -57,6 +57,8 @@ class FiveColorsLayout < MotionKit::Layout
   end
 
   def set_insets
+    contentHorizontalAlignment UIControlContentHorizontalAlignmentLeft
+=begin
     image_edge_insets UIEdgeInsetsMake(
                           0, image_offset_x,
                           0, super_view_width - whats_next_button_height -
@@ -64,6 +66,7 @@ class FiveColorsLayout < MotionKit::Layout
     title_edge_insets UIEdgeInsetsMake(
                           0, -2 * whats_next_button_height * (BW2.retina_ratio-1),
                           0, 0)
+=end
   end
 
   def whats_next_button_height
