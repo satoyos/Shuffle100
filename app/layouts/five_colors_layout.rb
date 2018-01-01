@@ -77,7 +77,4 @@ class FiveColorsLayout < MotionKit::Layout
     whats_next_button_height
   end
 
-  def super_view_width
-    superview.frame.size.width
-  end
 end
