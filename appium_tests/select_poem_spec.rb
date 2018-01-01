@@ -57,6 +57,23 @@ describe '歌を選ぶテスト' do
       click_button('五色')
       can_see "五色百人一首"
     end
+    it '「青」ボタンを押すと、アクション選択ダイアログが表示される' do
+      click_button('blue_group_button')
+      can_see 'この20首だけを選ぶ'
+    end
+    it '「キャンセル」を押して、一旦戻る' do
+      click_button('キャンセル')
+      click_back_button
+      current_screen_is STR_SELECT_POEM_SCREEN
+    end
+    it 'また五色百人一首の画面に戻る' do
+      click_button('五色')
+      can_see "五色百人一首"
+    end
+    it '「ピンク」ボタンを押すと、アクション選択ダイアログが表示される' do
+      click_button('pink_group_button')
+      can_see 'この20首だけを選ぶ'
+    end
   end
 end
 

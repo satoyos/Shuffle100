@@ -22,9 +22,11 @@ class FiveColorsScreen < PM::Screen
   private
 
   def set_button_actions
-    layout.get(:blue_group_button).on(:touch) {
-      pushed_button_of_color(:blue)
-    }
+    FIVE_COLOR_SYMBOLS.each do |color_sym|
+      button_of_color(color_sym).on(:touch) {
+        pushed_button_of_color(color_sym)
+      }
+    end
   end
 
   def pushed_button_of_color(color_sym)
