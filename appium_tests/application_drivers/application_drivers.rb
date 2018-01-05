@@ -181,6 +181,8 @@ def click_button(name)
 end
 
 def get_first_button
+  puts "       (見つかったボタンの数: #{find_elements(class_name: TYPE_BUTTON).size})"
+  # ↑ なぜか、このデバッグ用の一行を追加すると、正しく動作するようになった。訳が分からない。
   find_elements(class_name: TYPE_BUTTON).first
 end
 
