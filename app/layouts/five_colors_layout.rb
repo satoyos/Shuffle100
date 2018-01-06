@@ -44,7 +44,7 @@ class FiveColorsLayout < MotionKit::Layout
   def button_style_of_color(color_sym)
     typical_button_styling
     center y: CENTER_Y_POSITIONS[color_sym]
-    init_title_style_and_image("5colors/#{color_sym}.png")
+    init_title_style_and_image("5colors/full/#{color_sym}.png")
     title str_of_color(color_sym)
     set_insets
     accessibilityLabel "#{color_sym}_group_button"
