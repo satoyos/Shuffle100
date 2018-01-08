@@ -28,10 +28,6 @@ class NGramPicker < PM::Screen
     reload_table_data_and_prepare
   end
 
-  def test_set_status100(bool_or_booleans)
-    @status100 = SelectedStatus100.new(bool_or_booleans)
-  end
-
   private
 
   def reload_table_data_and_prepare(content_offset=nil)

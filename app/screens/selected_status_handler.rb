@@ -28,6 +28,10 @@ module SelectedStatusHandler
     end
   end
 
+  def test_set_status100(bool_or_booleans)
+    @status100 = SelectedStatus100.new(bool_or_booleans)
+  end
+
   private
 
   def update_badge_value
