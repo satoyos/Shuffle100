@@ -12,32 +12,32 @@ module FiveColors
   BLUE_STR   = '青'
   YELLOW_STR = '黃'
   GREEN_STR  = '緑'
-PINK_STR   = '桃(ピンク)'
-ORANGE_STR = '橙(オレンジ)'
+  PINK_STR   = '桃(ピンク)'
+  ORANGE_STR = '橙(オレンジ)'
 
-def numbers_of_color(color_sym)
-  case color_sym
-    when :blue;   BLUE_NUMBERS
-    when :yellow; YELLOW_NUMBERS
-    when :green;  GREEN_NUMBERS
-    when :pink;   PINK_NUMBERS
-    when :orange; ORANGE_NUMBERS
-    else
-      puts ("xxxx ERROR: [#{color_sym}]の色はサポートしていません。 xxxx") if BW2.debug?
-      []
+  def numbers_of_color(color_sym)
+    case color_sym
+      when :blue;   BLUE_NUMBERS
+      when :yellow; YELLOW_NUMBERS
+      when :green;  GREEN_NUMBERS
+      when :pink;   PINK_NUMBERS
+      when :orange; ORANGE_NUMBERS
+      else
+        puts ("xxxx ERROR: [#{color_sym}]の色はサポートしていません。 xxxx") if BW2.debug?
+        []
+    end
   end
-end
 
-def str_of_color(color_sym)
-  case color_sym
-    when :blue;   BLUE_STR
-    when :yellow; YELLOW_STR
-    when :green;  GREEN_STR
-    when :pink;   PINK_STR
-    when :orange; ORANGE_STR
-    else
-      purs("xxxx ERROR: [#{color_sym}]の色はサポートしていません。 xxxx") if BW2.debug?
-      ''
+  def str_of_color(color_sym)
+    case color_sym
+      when :blue;   BLUE_STR
+      when :yellow; YELLOW_STR
+      when :green;  GREEN_STR
+      when :pink;   PINK_STR
+      when :orange; ORANGE_STR
+      else
+        purs("xxxx ERROR: [#{color_sym}]の色はサポートしていません。 xxxx") if BW2.debug?
+        ''
+    end
   end
-end
 end
