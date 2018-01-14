@@ -19,6 +19,10 @@ class FiveColorsScreen < PM::Screen
     init_selected_status_and_badge
   end
 
+  def will_appear
+    reflesh_button_images
+  end
+
   def selected_status_of_color(color_sym)
     raise "Invalid argument type #{color_sym}" unless color_sym.is_a? Symbol
     numbers = numbers_of_color(color_sym)
@@ -33,6 +37,14 @@ class FiveColorsScreen < PM::Screen
   end
 
   private
+
+  def reflesh_button_images
+    FIVE_COLOR_SYMBOLS.each do |color_sym|
+      st = selected_status_of_color(color_sym)
+      img_path = st == :none ? '5colors/gray.png' : "5colors/#{st}/#{color_sym}.png"
+      button_of_color(color_sym).init_title_style_and_image(img_path)
+    end
+  end
 
   def set_button_actions
     FIVE_COLOR_SYMBOLS.each do |color_sym|
@@ -85,12 +97,14 @@ class FiveColorsScreen < PM::Screen
     status100.cancel_all
     status100.select_in_numbers(numbers_of_color(color_sym))
     save_selected_status(status100)
+    reflesh_button_images
     update_badge_value
   end
 
   def add_20_of_color(color_sym)
     status100.select_in_numbers(numbers_of_color(color_sym))
     save_selected_status(status100)
+    reflesh_button_images
     update_badge_value
   end
 
