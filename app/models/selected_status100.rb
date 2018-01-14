@@ -89,6 +89,12 @@ class SelectedStatus100
     reverse_in_index(num-1)
   end
 
+  def debug_print
+    (0..9).each { |i|
+      puts "#{@status[(i*10)..(i*10+9)]}"
+    }
+  end
+
   :private
 
   def set_status(value, of_number: idx)
