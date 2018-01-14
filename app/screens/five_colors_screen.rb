@@ -19,6 +19,19 @@ class FiveColorsScreen < PM::Screen
     init_selected_status_and_badge
   end
 
+  def selected_status_of_color(color_sym)
+    raise "Invalid argument type #{color_sym}" unless color_sym.is_a? Symbol
+    numbers = numbers_of_color(color_sym)
+    raise "Couldn't get Numbers for Color [#{color_sym}]" if numbers.empty?
+    if numbers.inject(true){|result, num| result &&= status100.of_number(num)}
+      :full # 該当する歌が全て選択されているとき
+    elsif !numbers.inject(false) { |result, num| result ||= status100.of_number(num) }
+      :none # 該当する歌が一つも選択されてないとき
+    else
+      :partial # 中途半端に選択されているとき
+    end
+  end
+
   private
 
   def set_button_actions
