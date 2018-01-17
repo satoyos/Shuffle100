@@ -11,6 +11,7 @@ TYPE_PICKER_WHEEL = 'XCUIElementTypePickerWheel'
 # TEXT_ON_SCREEN
 STR_ADD_FAKE_POEMS = '空札を加える'
 STR_CLOSE = '閉じる'
+STR_FIVE_COLORS_SCREEN = '五色百人一首'
 STR_INABA_KUN = 'いなばくん（人間）'
 STR_ONE_CHAR_KIMARI = '一字決まりの歌'
 STR_POEM_SELECTION = '取り札を用意する歌'
@@ -168,6 +169,13 @@ def click_button_to_cancel_all
   click_button('全て取消')
 end
 
+def click_button_to_select_all
+  click_button('全て選択')
+end
+
+def goto_five_colors_screen
+  click_button('五色')
+end
 
 
 private
