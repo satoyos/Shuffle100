@@ -62,11 +62,11 @@ describe '歌を選ぶテスト' do
     it '「五色」ボタンを押すことで、五色による歌選択画面に遷移する' do
 
       goto_five_colors_screen
-      can_see "五色百人一首"
+      current_screen_is STR_FIVE_COLORS_SCREEN
     end
     it '「青」ボタンを押すと、アクション選択ダイアログが表示される' do
-      click_button('blue_group_button')
-      can_see 'この20首だけを選ぶ'
+      select_blue_color
+      can_see STR_SELECT_JUST_20
     end
     it '「キャンセル」を押して、一旦戻る' do
       click_button('キャンセル')
@@ -78,19 +78,19 @@ describe '歌を選ぶテスト' do
       current_screen_is STR_FIVE_COLORS_SCREEN
     end
     it '「ピンク」ボタンを押すと、アクション選択ダイアログが表示される' do
-      click_button('pink_group_button')
-      can_see 'この20首だけを選ぶ'
+      select_pink_color
+      can_see STR_SELECT_JUST_20
     end
     it '「この20首だけを選ぶ」を押すと、選択されている歌の数が20首になる' do
-      click_button('この20首だけを選ぶ')
+      click_button(STR_SELECT_JUST_20)
       2.times { click_back_button}
       can_see '20首'
     end
     it '「五色」画面で青ボタンを押し、「今選んでいる札に加える」を選ぶ' do
       goto_select_poem_screen
       goto_five_colors_screen
-      click_button('blue_group_button')
-      click_button('今選んでいる札に加える')
+      select_blue_color
+      click_button(STR_ADD_THESE_20)
 
     end
     it '40首が選ばれている状態になっている' do

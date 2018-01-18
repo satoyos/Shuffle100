@@ -10,11 +10,13 @@ TYPE_PICKER_WHEEL = 'XCUIElementTypePickerWheel'
 
 # TEXT_ON_SCREEN
 STR_ADD_FAKE_POEMS = '空札を加える'
+STR_ADD_THESE_20 = '今選んでいる札に加える'
 STR_CLOSE = '閉じる'
 STR_FIVE_COLORS_SCREEN = '五色百人一首'
 STR_INABA_KUN = 'いなばくん（人間）'
 STR_ONE_CHAR_KIMARI = '一字決まりの歌'
 STR_POEM_SELECTION = '取り札を用意する歌'
+STR_SELECT_JUST_20 = 'この20首だけを選ぶ'
 STR_SELECT_POEM_SCREEN = '歌を選ぶ'
 STR_SINGER = '読手'
 STR_START_GAME = '試合開始'
@@ -175,6 +177,14 @@ end
 
 def goto_five_colors_screen
   click_button('五色')
+end
+
+def select_blue_color
+  click_button('blue_group_button')
+end
+
+def select_pink_color
+  click_button('pink_group_button')
 end
 
 
