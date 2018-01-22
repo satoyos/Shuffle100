@@ -20,6 +20,11 @@ describe '歌を選ぶテスト' do
       can_see '0首'
       goto_select_poem_screen
     end
+    it '「まとめて選ぶ」を選ぶと、複数の洗濯方法が表示される' do
+      select_by_group
+      can_see STR_NGRAM_PICKER
+      can_see STR_SELECT_BY_FIVE_COLORS
+    end
     it '「1字目で選ぶ」ボタンを押すことで、その画面に遷移する' do
       open_first_char_select_screen
     end
@@ -60,7 +65,7 @@ describe '歌を選ぶテスト' do
       goto_select_poem_screen
     end
     it '「五色」ボタンを押すことで、五色による歌選択画面に遷移する' do
-
+      select_by_group
       goto_five_colors_screen
       current_screen_is STR_FIVE_COLORS_SCREEN
     end
@@ -74,6 +79,7 @@ describe '歌を選ぶテスト' do
       current_screen_is STR_SELECT_POEM_SCREEN
     end
     it 'また五色百人一首の画面に戻る' do
+      select_by_group
       goto_five_colors_screen
       current_screen_is STR_FIVE_COLORS_SCREEN
     end
@@ -88,10 +94,10 @@ describe '歌を選ぶテスト' do
     end
     it '「五色」画面で青ボタンを押し、「今選んでいる札に加える」を選ぶ' do
       goto_select_poem_screen
+      select_by_group
       goto_five_colors_screen
       select_blue_color
       click_button(STR_ADD_THESE_20)
-
     end
     it '40首が選ばれている状態になっている' do
       2.times { click_back_button}

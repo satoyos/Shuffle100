@@ -14,8 +14,11 @@ STR_ADD_THESE_20 = '今選んでいる札に加える'
 STR_CLOSE = '閉じる'
 STR_FIVE_COLORS_SCREEN = '五色百人一首'
 STR_INABA_KUN = 'いなばくん（人間）'
+STR_NGRAM_PICKER = '1字目で選ぶ'
 STR_ONE_CHAR_KIMARI = '一字決まりの歌'
 STR_POEM_SELECTION = '取り札を用意する歌'
+STR_SELECT_BY_FIVE_COLORS = '「五色百人一首」で選ぶ'
+STR_SELECT_BY_GROUP = 'まとめて選ぶ'
 STR_SELECT_JUST_20 = 'この20首だけを選ぶ'
 STR_SELECT_POEM_SCREEN = '歌を選ぶ'
 STR_SINGER = '読手'
@@ -60,7 +63,7 @@ end
 
 def open_first_char_select_screen
   sleep 0.5
-  click_button('1字目で選ぶ')
+  click_button(STR_NGRAM_PICKER)
   can_see STR_ONE_CHAR_KIMARI
 end
 
@@ -79,6 +82,10 @@ def recite_screen_title_matches(regexp)
   # 実際にどのような文字列が書かれているのかが取得できなくなる。
   # なので、不本意ながら、「最初に取得できるテキストラベル」を「読み上げ画面のヘッダラベル」とみなす。
   expect(first_text_content).to match_regex regexp
+end
+
+def select_by_group
+  click_button(STR_SELECT_BY_GROUP)
 end
 
 def select_one_char_kimari
@@ -180,7 +187,7 @@ end
 
 def goto_five_colors_screen
   sleep 0.5
-  click_button('五色')
+  click_button(STR_SELECT_BY_FIVE_COLORS)
 end
 
 def select_blue_color

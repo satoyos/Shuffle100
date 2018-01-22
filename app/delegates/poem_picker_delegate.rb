@@ -42,6 +42,45 @@ module PoemPickerDelegate
     end
   end
 
+  def select_by_group
+    puts '「まとめて選ぶ」が選択された！' if BW2.debug?
+    alert = UIAlertController.alertControllerWithTitle(
+        'どうやって選びますか？',
+        message: nil,
+        preferredStyle: UIAlertControllerStyleActionSheet)
+    by_ngram = UIAlertAction.actionWithTitle(
+        '1字目で選ぶ',
+        style: UIAlertActionStyleDefault,
+        handler: Proc.new {|obj|
+          puts "[1字目で選ぶ]が選択された" if BW2.debug?
+          select_by_ngram
+        }
+    )
+    by_five_colors = UIAlertAction.actionWithTitle(
+        '「五色百人一首」で選ぶ',
+        style: UIAlertActionStyleDefault,
+        handler: Proc.new {|obj|
+          puts "[五色百人一首で選ぶ]が選択された" if BW2.debug?
+          select_by_five_colors
+        }
+    )
+    cancel = UIAlertAction.actionWithTitle(
+        'キャンセル',
+        style: UIAlertActionStyleCancel,
+        handler: nil)
+    alert.addAction(by_ngram)
+    alert.addAction(by_five_colors)
+    alert.addAction(cancel)
+
+    # iPad用の設定
+    if pc = alert.popoverPresentationController
+      pc.sourceView = navigation_controller.toolbar
+      pc.sourceRect = CGRectMake(pc.sourceView.frame.size.width, 0, 1, 1)
+    end
+
+    self.presentViewController(alert, animated: true, completion: nil)
+  end
+
   def select_by_five_colors
     puts "You select 五色から選ぶ！" if BW2.debug?
     open FiveColorsScreen.new

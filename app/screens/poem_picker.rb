@@ -62,6 +62,9 @@ class PoemPicker < PM::TableScreen
              }, {
                  system_item: :flexible_space
              }, {
+                 title: 'まとめて選ぶ',
+                 action: :select_by_group
+=begin
                  title: '五色',
                  action: :select_by_five_colors
              },{
@@ -70,6 +73,7 @@ class PoemPicker < PM::TableScreen
              {
                  title: '1字目で選ぶ',
                  action: :select_by_ngram
+=end
              }]
     set_toolbar_items items
   end
