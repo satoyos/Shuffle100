@@ -64,7 +64,7 @@ class FiveColorsScreen < PM::Screen
         'この20首だけを選ぶ',
         style: UIAlertActionStyleDefault,
         handler: Proc.new {|obj|
-          puts "[20首だけ選ぶ]が選択された"
+          puts "[20首だけ選ぶ]が選択された" if BW2.debug?
           select_just20(color_sym)
         }
     )
@@ -72,7 +72,7 @@ class FiveColorsScreen < PM::Screen
         '今選んでいる札に加える',
         style: UIAlertActionStyleDefault,
         handler: Proc.new {|obj|
-          puts "[追加する]が選択された"
+          puts "[追加する]が選択された" if BW2.debug?
           add_20_of_color(color_sym)
         }
     )
