@@ -59,6 +59,7 @@ def goto_select_singer_screen
 end
 
 def open_first_char_select_screen
+  sleep 0.5
   click_button('1字目で選ぶ')
   can_see STR_ONE_CHAR_KIMARI
 end
@@ -168,14 +169,17 @@ def tap_first_poem
 end
 
 def click_button_to_cancel_all
+  sleep 0.5
   click_button('全て取消')
 end
 
 def click_button_to_select_all
+  sleep 0.5
   click_button('全て選択')
 end
 
 def goto_five_colors_screen
+  sleep 0.5
   click_button('五色')
 end
 
