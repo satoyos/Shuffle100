@@ -57,7 +57,7 @@ module PoemPickerDelegate
         }
     )
     by_five_colors = UIAlertAction.actionWithTitle(
-        '「五色百人一首」で選ぶ',
+        '「五色百人一首」の色で選ぶ',
         style: UIAlertActionStyleDefault,
         handler: Proc.new {|obj|
           puts "[五色百人一首で選ぶ]が選択された" if BW2.debug?
