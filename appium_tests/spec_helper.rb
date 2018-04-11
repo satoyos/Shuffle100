@@ -9,6 +9,7 @@ WHATS_NEXT_STR = '次はどうする？'
 DIALOGUE_MESSAGE_FOR_QUIT = '試合を終了しますか？'
 TOP_TITLE = 'トップ'
 POEM_SELECTION_TITLE = '歌を選ぶ'
+ROOT = "."
 
 def desired_caps
   {
@@ -33,6 +34,21 @@ RSpec.configure { |c|
     @driver = Appium::Driver.new(desired_caps, true).start_driver
     @driver.manage.timeouts.implicit_wait = 2
     Appium.promote_appium_methods Object
+
+  }
+
+  c.before(:each) do |example|
+    @recorder = Recorder.new(@driver)
+    @recorder.start("#{ROOT}/screenshots/#{example.description}.mov")
+  end
+
+  c.after(:each) { |example|
+    if @recorder
+      @recorder.stop
+
+      # テストが通った場合は録画を消す（=失敗したものは残る）
+      @recorder.remove_video unless example.exception
+    end
   }
 
   c.after(:all) {
