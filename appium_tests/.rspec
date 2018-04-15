@@ -2,5 +2,5 @@
 --format d
 --require ./lib/slack_formatter.rb
 --require ./lib/recorder.rb
-#--format SlackFormatter
+--format SlackFormatter
 
