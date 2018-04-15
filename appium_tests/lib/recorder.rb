@@ -6,7 +6,7 @@ class Recorder
 
   def initialize(driver)
     @udid = _get_udid(driver)
-    puts "UDID: #{@udid}"
+    # puts "UDID: #{@udid}"
   end
 
   def _get_udid(driver)
@@ -29,8 +29,8 @@ class Recorder
 
     file_path_converted = replace_chars_for_path(file_path)
     # バックグラウンドで録画を開始
-    # @pid = spawn("xcrun simctl io #{@udid} recordVideo #{file_path}", out: '/dev/null', err: '/dev/null')
-    @pid = spawn("xcrun simctl io #{@udid} recordVideo #{file_path_converted}")
+    @pid = spawn("xcrun simctl io #{@udid} recordVideo #{file_path_converted}", out: '/dev/null', err: '/dev/null')
+    # @pid = spawn("xcrun simctl io #{@udid} recordVideo #{file_path_converted}")
     @file_path = file_path_converted
     Process.detach(@pid)
   end
@@ -60,7 +60,7 @@ class Recorder
 
     if File.exist? @file_path
       File.delete(@file_path)
-      puts "--- 録画ファイルを消したよ！ #{@file_path}"
+      # puts "--- 録画ファイルを消したよ！ #{@file_path}"
     end
 
     @file_path = nil
