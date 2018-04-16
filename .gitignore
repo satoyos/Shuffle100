@@ -37,5 +37,5 @@ resources/fontawesome-webfont.ttf
 appium_tests/vendor/
 vendor/
 node_modules/
-appium_tests/screenshots/
+appium_tests/screenshots/*.mov
 
