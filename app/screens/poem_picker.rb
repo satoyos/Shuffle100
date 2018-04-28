@@ -85,4 +85,8 @@ class PoemPicker < PM::TableScreen
     }.show
   end
 
+  def create_button_and_badge_icon
+    @badge_button = PoemsNumberSelectedItem.create_with_origin_x(-50, '保存')
+  end
+
 end

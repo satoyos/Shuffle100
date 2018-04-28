@@ -41,6 +41,10 @@ module SelectedStatusHandler
 
   def init_members
     @status100 = loaded_selected_status
+    create_button_and_badge_icon
+  end
+
+  def create_button_and_badge_icon
     @badge_button = PoemsNumberSelectedItem.create_with_origin_x(-50)
   end
 

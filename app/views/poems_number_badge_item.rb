@@ -1,17 +1,20 @@
 class PoemsNumberSelectedItem < BBBadgeBarButtonItem
 
   class << self
-    def create_with_origin_x(org_x)
-      self.alloc.initWithCustomUIButton(create_base_button).tap do |bb|
+    def create_with_origin_x(org_x, title=nil)
+      self.alloc.initWithCustomUIButton(create_base_button(title)).tap do |bb|
         bb.badgeOriginX = org_x
         bb.badgeOriginY = 0.0  if BW2.ios_major_ver_num >= 11
         bb.shouldHideBadgeAtZero = false
       end
     end
 
-    def create_base_button
+    #ToDo: PagePicker上で、このボタンに対するアクションを設定できるはず！
+
+    def create_base_button(title)
+      set_title = title ? title : ''
       UIButton.alloc.init.tap do |b|
-        b.setTitle('保存', forState: UIControlStateNormal)
+        b.setTitle(set_title, forState: UIControlStateNormal)
         b.setTitleColor('blue'.uicolor, forState: UIControlStateNormal)
       end
     end
