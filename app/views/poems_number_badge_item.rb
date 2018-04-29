@@ -14,8 +14,12 @@ class PoemsNumberSelectedItem < BBBadgeBarButtonItem
     def create_base_button(title)
       set_title = title ? title : ''
       UIButton.alloc.init.tap do |b|
-        b.setTitle(set_title, forState: UIControlStateNormal)
-        b.setTitleColor('blue'.uicolor, forState: UIControlStateNormal)
+        b.setTitle(set_title, forState: :normal.uicontrolstate)
+        if title
+          b.setTitleColor([0, 122, 255].uicolor, forState: :normal.uicontrolstate)
+          b.setTitleColor(:light_gray.uicolor, forState: :highlighted.uicontrolstate)
+          b.setTitleColor(:light_gray.uicolor(0.5), forState: :disabled.uicontrolstate)
+        end
       end
     end
   end
