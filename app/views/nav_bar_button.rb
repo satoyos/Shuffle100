@@ -21,7 +21,7 @@ class NavBarButton < UIButton
                                 newSize: CGSizeMake(size, size)).tap {|img|
         puts "作成されたNavBar用Imageのサイズ => [#{img.size.width}, #{img.size.height}]" if BW2.debug?
         BW2.retina_ratio = img.size.width / size
-        puts " -- retina_ratio => #{BW2.retina_ratio}"
+        puts " -- retina_ratio => #{BW2.retina_ratio}" if BW2.debug?
       }.imageWithRenderingMode(UIImageRenderingModeAlwaysTemplate)
     end
 
