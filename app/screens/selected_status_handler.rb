@@ -10,7 +10,7 @@ module SelectedStatusHandler
   def init_selected_status_and_badge
     init_members
     set_badge_button
-    badge_button.button_size_plus(2)
+    badge_button.badge_size_plus(2)
     self
   end
 

@@ -9,8 +9,6 @@ class PoemsNumberSelectedItem < BBBadgeBarButtonItem
       end
     end
 
-    #ToDo: PagePicker上で、このボタンに対するアクションを設定できるはず！
-
     def create_base_button(title)
       set_title = title ? title : ''
       UIButton.alloc.init.tap do |b|
@@ -24,7 +22,7 @@ class PoemsNumberSelectedItem < BBBadgeBarButtonItem
     end
   end
 
-  def button_size_plus(plus_size)
+  def badge_size_plus(plus_size)
     org_font_size = badge_font.pointSize
     self.badgeFont = badge_font.fontWithSize(org_font_size + plus_size)
   end
