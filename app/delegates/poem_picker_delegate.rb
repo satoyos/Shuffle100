@@ -81,6 +81,46 @@ module PoemPickerDelegate
     self.presentViewController(alert, animated: true, completion: nil)
   end
 
+  def save_button_tapped(sender)
+    puts '「保存」ボタンが押された！' if BW2.debug?
+    alert = UIAlertController.alertControllerWithTitle(
+        '選択している札のセットをどう保存しますか？',
+        message: nil,
+        preferredStyle: UIAlertControllerStyleActionSheet)
+    new_set = UIAlertAction.actionWithTitle(
+        '新しい札セットとして保存する',
+        style: UIAlertActionStyleDefault,
+        handler: Proc.new {|obj|
+          puts "[新しい札セット]が選択された" if BW2.debug?
+          # select_by_ngram
+        }
+    )
+    overwrite = UIAlertAction.actionWithTitle(
+        '既存の札セットを上書きする',
+        style: UIAlertActionStyleDefault,
+        handler: Proc.new {|obj|
+          puts "[上書き]が選択された" if BW2.debug?
+          # select_by_five_colors
+        }
+    )
+    cancel = UIAlertAction.actionWithTitle(
+        'キャンセル',
+        style: UIAlertActionStyleCancel,
+        handler: nil)
+    alert.addAction(new_set)
+    alert.addAction(overwrite)
+    alert.addAction(cancel)
+
+    # iPad用の設定
+    if pc = alert.popoverPresentationController
+      pc.sourceView = sender
+      # pc.sourceRect = CGRectMake(pc.sourceView.frame.size.width, 0, 1, 1)
+      pc.sourceRect = sender.frame
+    end
+
+    self.presentViewController(alert, animated: true, completion: nil)
+  end
+
   def select_by_five_colors
     puts "You select 五色から選ぶ！" if BW2.debug?
     open FiveColorsScreen.new

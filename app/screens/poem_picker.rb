@@ -86,7 +86,13 @@ class PoemPicker < PM::TableScreen
   end
 
   def create_button_and_badge_icon
-    @badge_button = PoemsNumberSelectedItem.create_with_origin_x(-50, '保存')
+    @badge_button = PoemsNumberSelectedItem.create_with_origin_x(-50, '保存', self, 'save_button_tapped:')
   end
+
+=begin
+  def fixed_action(sender)
+    puts "保存ボタンが押されたよ(sender: #{sender})"
+  end
+=end
 
 end
