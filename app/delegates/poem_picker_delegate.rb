@@ -64,13 +64,9 @@ module PoemPickerDelegate
           select_by_five_colors
         }
     )
-    cancel = UIAlertAction.actionWithTitle(
-        'キャンセル',
-        style: UIAlertActionStyleCancel,
-        handler: nil)
     alert.addAction(by_ngram)
     alert.addAction(by_five_colors)
-    alert.addAction(cancel)
+    alert.addAction(alert_action_cancel)
 
     # iPad用の設定
     if pc = alert.popoverPresentationController
@@ -103,13 +99,9 @@ module PoemPickerDelegate
           # select_by_five_colors
         }
     )
-    cancel = UIAlertAction.actionWithTitle(
-        'キャンセル',
-        style: UIAlertActionStyleCancel,
-        handler: nil)
     alert.addAction(new_set)
     alert.addAction(overwrite)
-    alert.addAction(cancel)
+    alert.addAction(alert_action_cancel)
 
     # iPad用の設定
     if pc = alert.popoverPresentationController
@@ -132,5 +124,14 @@ module PoemPickerDelegate
       return
     end
     open NGramPicker.new
+  end
+
+  private
+
+  def alert_action_cancel
+    UIAlertAction.actionWithTitle(
+        'キャンセル',
+        style: UIAlertActionStyleCancel,
+        handler: nil)
   end
 end
