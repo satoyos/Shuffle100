@@ -2,6 +2,7 @@
 require_relative 'spec_helper'
 
 STR_ONE_POEM_AT_LIEAST = '歌を選びましょう'
+STR_SAVE_FUDA_SET = '保存'
 
 describe '札セットを保存するテスト' do
 
@@ -15,15 +16,13 @@ describe '札セットを保存するテスト' do
       current_screen_is STR_SELECT_POEM_SCREEN
     end
     it '歌選択画面に「保存」ボタンが表示されている' do
-      can_see('保存')
+      can_see(STR_SAVE_FUDA_SET)
+    end
+    it '「保存」をタップすると、どのように保存するかをユーザに確認するダイアログが現れる' do
+      click_save_button
+      can_see '選択している札のセットをどう保存しますか？'
     end
 =begin
-    it '「全て取消」を選ぶと、全く歌が選ばれていない状態になる' do
-      click_button_to_cancel_all
-      click_back_button
-      can_see '0首'
-      goto_select_poem_screen
-    end
     it '「まとめて選ぶ」を選ぶと、選択方法が表示される' do
       select_by_group
       can_see STR_NGRAM_PICKER
@@ -39,4 +38,8 @@ describe '札セットを保存するテスト' do
     end
 =end
   end
+end
+
+def click_save_button
+  click_button(STR_SAVE_FUDA_SET)
 end
