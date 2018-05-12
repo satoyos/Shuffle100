@@ -101,18 +101,21 @@ end
 
 def skip_start_skip
   click_forward_button
-  sleep 1
+  sleep_while_animation
   click_button('play') # 下の句から読み上げ再開
   click_forward_button
 end
 
 def skip_skip_next
   click_forward_button
+  sleep_while_animation
   click_forward_button
+  sleep_while_animation
   click_button('next_poem_button') # 次の歌に進む
 end
 
 def skip_skip
   click_forward_button
+  sleep_while_animation
   click_forward_button
 end

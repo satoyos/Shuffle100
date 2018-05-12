@@ -15,7 +15,8 @@ def desired_caps
   {
       caps: {
           platformName:  "iOS",
-          deviceName:    "iPhone 7",
+          deviceName:    "iPhone X",
+          # deviceName:    "iPhone 7",
           # deviceName:    "iPad Pro (10.5-inch)",
           platformVersion: "11.3",
           # platformVersion: "10.3",

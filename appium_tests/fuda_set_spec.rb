@@ -69,7 +69,3 @@ def click_cancel_button
   sleep_while_animation
   click_button(STR_CANCEL)
 end
-
-def sleep_while_animation
-  sleep 0.5
-end

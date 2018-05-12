@@ -127,6 +127,10 @@ def set_recite_mode_nonstop
   can_see 'ノンストップ'
 end
 
+def sleep_while_animation
+  sleep 0.5
+end
+
 def quit_settings_and_see(str)
   click_button(CLOSE_ON_GAME_SETTINGS)
   can_see str
