@@ -38,6 +38,7 @@ describe '歌を選ぶテスト' do
   describe '1首も歌が選ばれていない状態で試合を開始すると、警告を出す' do
     it '歌選択画面を開き、全く歌が選ばれていない状態にする' do
       goto_select_poem_screen
+      sleep_while_animation
       click_button_to_cancel_all
       click_back_button
       can_see '0首'
@@ -60,6 +61,7 @@ describe '歌を選ぶテスト' do
     end
     it '「全て選択」を押すと、100酒が選ばれた状態になる' do
       click_button_to_select_all
+      sleep_while_animation
       click_back_button
       can_see '100首'
       goto_select_poem_screen
@@ -75,6 +77,7 @@ describe '歌を選ぶテスト' do
     end
     it '「キャンセル」を押して、一旦戻る' do
       click_button('キャンセル')
+      sleep_while_animation
       click_back_button
       current_screen_is STR_SELECT_POEM_SCREEN
     end
@@ -89,6 +92,7 @@ describe '歌を選ぶテスト' do
     end
     it '「この20首だけを選ぶ」を押すと、選択されている歌の数が20首になる' do
       click_button(STR_SELECT_JUST_20)
+      sleep_while_animation
       2.times { click_back_button}
       can_see '20首'
     end

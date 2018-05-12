@@ -20,7 +20,9 @@ describe '巻き戻しボタンのテスト' do
     it '2首目の上の句まで進む' do
       open_game
       click_forward_button # 序歌を跳ばし、1首目へ
+      sleep_while_animation
       click_forward_button # 1首めの上の句をskip
+      sleep_while_animation
       click_forward_button # 1首めの下の句もskip
       recite_screen_title_matches /\A2首め/
     end
