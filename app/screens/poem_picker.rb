@@ -62,18 +62,14 @@ class PoemPicker < PM::TableScreen
              }, {
                  system_item: :flexible_space
              }, {
+=begin
+                 # Ver.5 以降
                  title: 'まとめて選ぶ',
                  action: :select_by_group
-=begin
-                 title: '五色',
-                 action: :select_by_five_colors
-             },{
-                 system_item: :flexible_space
-             },
-             {
+=end
+                 # Ver.4.xxまで
                  title: '1字目で選ぶ',
                  action: :select_by_ngram
-=end
              }]
     set_toolbar_items items
   end
@@ -85,13 +81,10 @@ class PoemPicker < PM::TableScreen
     }.show
   end
 
+=begin
+  # Ver.5以降で札セットをサポート
   def create_button_and_badge_icon
     @badge_button = PoemsNumberSelectedItem.create_with_origin_x(-50, '保存', self, 'save_button_tapped:')
-  end
-
-=begin
-  def fixed_action(sender)
-    puts "保存ボタンが押されたよ(sender: #{sender})"
   end
 =end
 

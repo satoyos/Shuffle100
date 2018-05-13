@@ -62,7 +62,7 @@ def goto_select_singer_screen
 end
 
 def open_first_char_select_screen
-  sleep 0.5
+  sleep_while_animation
   click_button(STR_NGRAM_PICKER)
   can_see STR_ONE_CHAR_KIMARI
 end

@@ -14,17 +14,26 @@ describe '歌を選ぶテスト' do
       goto_select_poem_screen
       current_screen_is STR_SELECT_POEM_SCREEN
     end
+    # Ver.5.0未満
+    it '「保存」ボタンは、このバージョンではまだ見えない' do
+      can_not_see '保存'
+    end
+
     it '「全て取消」を選ぶと、全く歌が選ばれていない状態になる' do
       click_button_to_cancel_all
       click_back_button
       can_see '0首'
       goto_select_poem_screen
     end
+=begin
+    # Ver.5以降
     it '「まとめて選ぶ」を選ぶと、複数の洗濯方法が表示される' do
       select_by_group
       can_see STR_NGRAM_PICKER
       can_see STR_SELECT_BY_FIVE_COLORS
     end
+=end
+
     it '「1字目で選ぶ」ボタンを押すことで、その画面に遷移する' do
       open_first_char_select_screen
     end
@@ -54,6 +63,7 @@ describe '歌を選ぶテスト' do
   end
 
 
+=begin
   describe '五色百人一首の色別の20首を選択できる' do
     it '歌選択画面を開く' do
       goto_select_poem_screen
@@ -110,5 +120,6 @@ describe '歌を選ぶテスト' do
       can_see '40首'
     end
   end
+=end
 end
 
