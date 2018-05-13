@@ -100,7 +100,9 @@ describe '歌を選ぶテスト' do
       goto_select_poem_screen
       select_by_group
       goto_five_colors_screen
+      sleep_while_animation
       select_blue_color
+      sleep_while_animation
       click_button(STR_ADD_THESE_20)
     end
     it '40首が選ばれている状態になっている' do
