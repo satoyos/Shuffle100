@@ -32,10 +32,6 @@ Motion::Project::App.setup do |app|
   app.frameworks += ['AVFoundation', 'AudioToolbox', 'MediaPlayer']
   app.frameworks += ['QuartzCore']
 
-=begin
-  app.prerendered_icon = true
-  app.icons = Dir.glob('resources/Icon*.png').map{|icon| icon.split('/').last}
-=end
   # app.info_plist['CFBundleIconName'] = 'AppIcon'
   define_icon_defaults!(app)
 
@@ -62,7 +58,7 @@ Motion::Project::App.setup do |app|
     pod 'BBBadgeBarButtonItem', git: 'https://github.com/TanguyAladenise/BBBadgeBarButtonItem.git'
   }
 
-  APP_VERSION = '5.0'
+  APP_VERSION = '4.50'
 
   app.development do
     app.version = build_number
