@@ -68,12 +68,8 @@ class AppDelegate < PM::Delegate
 end
 
 class BW2
-  def self.retina_ratio=(value)
-    @retina_ratio = value
-  end
-
   def self.retina_ratio
-    @retina_ratio || 1.0
+    UIScreen.mainScreen.scale
   end
 
   def self.debug=(value)

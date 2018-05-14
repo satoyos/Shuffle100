@@ -25,7 +25,6 @@ class WhatsNextButton < UIButton
           ResizeUIImage.resizeImage(img_file_name.uiimage,
                                     newSize: CGSizeMake(height, height)).tap{|img|
             puts "作成されたUIImageのサイズ => [#{img.size.width}, #{img.size.height}]" if BW2.debug?
-            BW2.retina_ratio = img.size.width / height
             puts " -- retina_ratio => #{BW2.retina_ratio}" if BW2.debug?
           }
     end
