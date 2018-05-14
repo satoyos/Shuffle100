@@ -17,12 +17,18 @@ class NavBarButton < UIButton
     private
 
     def header_button_from_image_file(file_path, size: size)
+      new_size = retina_ratio_from_uiscreen > 2.1 ? size*2/3 : size # ratioが3倍の時、サイズがおかしくなるので
       ResizeUIImage.resizeImage(UIImage.imageNamed(file_path),
-                                newSize: CGSizeMake(size, size)).tap {|img|
+                                newSize: CGSizeMake(new_size, new_size)).tap {|img|
         puts "作成されたNavBar用Imageのサイズ => [#{img.size.width}, #{img.size.height}]" if BW2.debug?
-        BW2.retina_ratio = img.size.width / size
+        BW2.retina_ratio = img.size.width / new_size
         puts " -- retina_ratio => #{BW2.retina_ratio}" if BW2.debug?
+        puts "    ちなみに、UIScreenから取得した倍率は #{retina_ratio_from_uiscreen} です。" if BW2.debug?
       }.imageWithRenderingMode(UIImageRenderingModeAlwaysTemplate)
+    end
+
+    def retina_ratio_from_uiscreen
+      UIScreen.mainScreen.scale
     end
 
     def self.button_size_by_ios_version(size)

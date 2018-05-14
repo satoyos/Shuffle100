@@ -25,6 +25,10 @@ class HomeScreen < PM::GroupedTableScreen
     navigation_controller.tap do |nc|
       nc.setNavigationBarHidden(false, animated: false)
       nc.navigationBar.translucent = false
+      if BW2.debug?
+        fr = navigation_controller.navigationBar.frame
+        puts "●ナビゲーションバーのframe => [orgX: #{fr.origin.x}, orgY: #{fr.origin.y}, width: #{fr.size.width}, height: #{fr.size.height}]"
+      end
     end if self.nav_bar?
     self.navigationItem.prompt = app_delegate.prompt
     update_table_data
