@@ -39,3 +39,4 @@ vendor/
 node_modules/
 appium_tests/screenshots/*.mov
 
+provisioning

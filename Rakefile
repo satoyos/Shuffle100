@@ -60,11 +60,23 @@ Motion::Project::App.setup do |app|
 
   APP_VERSION = '4.50'
 
+  MotionProvisioning.output_path = '../my_provisioning'
+
   app.development do
     app.version = build_number
     app.short_version = APP_VERSION + 'β' + ".#{build_number}"
+=begin
     app.codesign_certificate = 'iPhone Developer: Yoshifumi Sato'
     app.provisioning_profile = ENV['PROVISIONING_PROFILE_DEVELOPMENT']
+=end
+    app.codesign_certificate = MotionProvisioning.certificate(
+        type: :development,
+        platform: :ios)
+    app.provisioning_profile = MotionProvisioning.profile(
+        bundle_identifier: app.identifier,
+        app_name: app.name,
+        platform: :ios,
+        type: :development)
   end
 
   app.release do
