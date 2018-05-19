@@ -65,10 +65,6 @@ Motion::Project::App.setup do |app|
   app.development do
     app.version = build_number
     app.short_version = APP_VERSION + 'β' + ".#{build_number}"
-=begin
-    app.codesign_certificate = 'iPhone Developer: Yoshifumi Sato'
-    app.provisioning_profile = ENV['PROVISIONING_PROFILE_DEVELOPMENT']
-=end
     app.codesign_certificate = MotionProvisioning.certificate(
         type: :development,
         platform: :ios)
@@ -83,9 +79,17 @@ Motion::Project::App.setup do |app|
     app.info_plist['AppStoreRelease'] = true
     app.version = build_number
     app.short_version = APP_VERSION
-    app.codesign_certificate = 'iPhone Distribution: Yoshifumi Sato'
-    app.provisioning_profile = ENV['PROVISIONING_PROFILE_DISTRIBUTION']
     app.entitlements['beta-reports-active'] = true
+
+    app.codesign_certificate = MotionProvisioning.certificate(
+        type: :distribution,
+        platform: :ios)
+
+    app.provisioning_profile = MotionProvisioning.profile(
+        bundle_identifier: app.identifier,
+        app_name: app.name,
+        platform: :ios,
+        type: :distribution)
   end
 
   app.detect_dependencies = true
