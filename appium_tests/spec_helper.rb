@@ -35,7 +35,7 @@ RSpec.configure { |c|
     @driver = Appium::Driver.new(desired_caps, true).start_driver
     @driver.manage.timeouts.implicit_wait = 2
     Appium.promote_appium_methods Object
-
+    @device_name = desired_caps[:caps][:deviceName]
   }
 
   c.before(:each) do |example|
