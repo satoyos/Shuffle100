@@ -3,12 +3,17 @@ require "rubygems"
 require "appium_lib"
 require_relative 'application_drivers/application_drivers'
 
+# Screen Titles
 TITLE = '百首読み上げ'
 JOKA  = '序歌'
 WHATS_NEXT_STR = '次はどうする？'
+TITLE_FOR_ON_GAME_SETTINGS = 'いろいろな設定'
+POEM_SELECTION_TITLE = '歌を選ぶ'
+DURATION_BETWEEN_SONGS = '歌と歌の間隔'
+TITLE_FOR_DURATION_BETWEEN_SONGS = '歌の間隔の変更'
+
 DIALOGUE_MESSAGE_FOR_QUIT = '試合を終了しますか？'
 TOP_TITLE = 'トップ'
-POEM_SELECTION_TITLE = '歌を選ぶ'
 ROOT = "."
 
 def desired_caps

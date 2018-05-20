@@ -1,7 +1,7 @@
 # coding: utf-8
 require_relative 'spec_helper'
 
-TITLE_FOR_ON_GAME_SETTINGS = 'いろいろな設定'
+# TITLE_FOR_ON_GAME_SETTINGS = 'いろいろな設定'
 CLOSE_ON_GAME_SETTINGS = '設定終了'
 DURATION_BETWEEN_KAMI_SHIMO = '上の句と下の句の間隔'
 
@@ -12,8 +12,10 @@ describe '試合途中で変更可能な設定のテスト(通常モード)' do
   end
 
   describe '通常モードでの各種設定' do
+=begin
     DURATION_BETWEEN_SONGS = '歌と歌の間隔'
     TITLE_FOR_DURATION_BETWEEN_SONGS = '歌の間隔の変更'
+=end
 
     it 'トップ画面で歯車ボタンを押すと、各種設定画面が現れる' do
       click_settings_button
