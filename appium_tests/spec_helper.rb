@@ -41,6 +41,7 @@ RSpec.configure { |c|
     @driver.manage.timeouts.implicit_wait = 2
     Appium.promote_appium_methods Object
     @device_name = desired_caps[:caps][:deviceName]
+    clean_screenshots_folder
   }
 
   c.before(:each) do |example|
@@ -61,3 +62,10 @@ RSpec.configure { |c|
     @driver.quit
   }
 }
+
+def clean_screenshots_folder
+  FileUtils.chdir("screenshots")
+  FileUtils.rm Dir.glob("*.mov")
+  FileUtils.rm Dir.glob("*.png")
+  FileUtils.chdir("..")
+end
