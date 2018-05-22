@@ -20,9 +20,10 @@ def desired_caps
   {
       caps: {
           platformName:  "iOS",
-          deviceName:    "iPhone X",
-          # deviceName:    "iPhone 7",
-          # deviceName:    "iPad Pro (10.5-inch)",
+          deviceName:    "iPhone 7",
+          # deviceName:    "iPhone X",
+          # deviceName:    "iPhone 7 Plus",
+          # deviceName:    "iPad Pro (12.9-inch)",
           platformVersion: "11.3",
           # platformVersion: "10.3",
           app: '../build/iPhoneSimulator-10.0-Development/Shuffle100.app',
@@ -45,8 +46,10 @@ RSpec.configure { |c|
   }
 
   c.before(:each) do |example|
-    @recorder = Recorder.new(@driver)
-    @recorder.start("#{ROOT}/screenshots/#{example.description}.mov")
+    unless @device_name =~ /iPad/  # <= Initializing recorder causes Error, so stop recording on iPad
+      @recorder = Recorder.new(@driver)
+      @recorder.start("#{ROOT}/screenshots/#{example.description}.mov")
+    end
   end
 
   c.after(:each) { |example|
