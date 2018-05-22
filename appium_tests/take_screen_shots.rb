@@ -57,6 +57,7 @@ describe 'スクリーンショットの撮影' do
       can_see('torifuda_view')
     end
     it 'ここでスクリーンショットを撮る' do
+      sleep_while_animation
       take_screenshot_no(4)
     end
     it 'ホーム画面に戻る' do
@@ -81,6 +82,7 @@ describe 'スクリーンショットの撮影' do
       current_screen_is TITLE_FOR_DURATION_BETWEEN_SONGS
     end
     it 'ここでスクリーンショットを撮る' do
+      sleep_while_animation
       take_screenshot_no(5)
       make_test_success
     end
@@ -135,9 +137,9 @@ describe 'スクリーンショットの撮影' do
     it '8番目の歌を選ぶ' do
       select_poem_of_no(8)
     end
-    it '12番目の歌を選ぶ' do
+    it '11番目の歌を選ぶ' do
       if @device_name =~ /iPhone X/ or @device_name =~ /iPad/ or @device_name =~ /Plus/
-        select_poem_of_no(12)
+        select_poem_of_no(11)
       end
     end
     it 'ここでスクリーンショットを撮る' do
@@ -149,7 +151,6 @@ describe 'スクリーンショットの撮影' do
       current_screen_is TOP_TITLE
     end
   end
-
 
 end
 
@@ -176,8 +177,8 @@ def scroll_screen(down_height)
   Appium::TouchAction.new.swipe(
       start_x: startX,
       start_y: startY,
-      offset_x: 0,
-      offset_y: -offsetY,
+      end_x: 0,
+      end_y: -offsetY,
       duration: 400).perform
   make_test_success
 end
