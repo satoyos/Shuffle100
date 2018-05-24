@@ -4,7 +4,8 @@ class PoemsNumberSelectedItem < BBBadgeBarButtonItem
     def create_with_origin_x(org_x, title=nil, target=nil, action=nil)
       self.alloc.initWithCustomUIButton(create_base_button(title, target, action)).tap do |bb|
         bb.badgeOriginX = org_x
-        bb.badgeOriginY = 0.0  if BW2.ios_major_ver_num >= 11
+        # bb.badgeOriginY = 0.0  if BW2.ios_major_ver_num >= 11
+        bb.badgeOriginY = 0.0
         bb.shouldHideBadgeAtZero = false
       end
     end

@@ -26,10 +26,6 @@ class NavBarButton < UIButton
 
     def self.button_size_calc_by_env(size)
       button_size = size
-      if BW2.ios_major_ver_num < 11
-        button_size *= 2
-        puts "iOSのバージョンが#{BW2.ios_version}なので、ボタン用の画像を倍サイズで作ります。" if BW2.debug?
-      end
       if BW2.retina_ratio > 2.1
         button_size *= 2.0/3
         puts "3xのRetinaスクリーンなので、サイズを2/3にして作ります。" if BW2.debug?
