@@ -1,8 +1,9 @@
 class SettingsManager
   KEY_RECITING_SETTINGS = 'reciting_settings'
   KEY_GAME_SETTINGS     = 'game_settings'
+  KEY_FUDA_SETS         = 'fuda_sets'
 
-  attr_accessor :reciting_settings, :game_settings
+  attr_reader :reciting_settings, :game_settings
 
   def initialize
     self.load
@@ -11,9 +12,9 @@ class SettingsManager
   def load
     puts '* 設定データを読み込みます' if BW2.debug?
     rs_data = standard_defaults.objectForKey(KEY_RECITING_SETTINGS)
-    self.reciting_settings = unarchived_rs_data(rs_data) || RecitingSettings.new
+    @reciting_settings = unarchived_rs_data(rs_data) || RecitingSettings.new
     gs_data = game_settings_defaults.objectForKey(KEY_GAME_SETTINGS)
-    self.game_settings = unarchived_gs_data(gs_data) || GameSettings.new
+    @game_settings = unarchived_gs_data(gs_data) || GameSettings.new
   end
 
   def save
@@ -32,6 +33,10 @@ class SettingsManager
 
   def game_settings_defaults
     @game_settings_defaults ||= NSUserDefaults.alloc.initWithSuiteName(KEY_GAME_SETTINGS)
+  end
+
+  def fuda_sets_defaults
+    @fuda_sets_defaults ||= NSUserDefaults.alloc.initWithSuiteName(KEY_FUDA_SETS)
   end
 
   def rs_data_to_save
