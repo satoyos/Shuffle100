@@ -4,9 +4,10 @@ class GameSettings
   KEY_BEGINNER_FLG = 'beginner_flg'
   KEY_SINGER_INDEX = 'singer_index'
   KEY_RECITE_MODE_ID = 'recite_mode_id'
+  KEY_FUDA_SETS = 'fuda_sets'
 
   attr_accessor :statuses_for_deck, :fake_flg
-  attr_accessor :singer_index
+  attr_accessor :singer_index, :fuda_sets
   attr_reader :beginner_flg, :recite_mode_id
 
   def initialize
@@ -18,6 +19,7 @@ class GameSettings
     self.recite_mode_id = :normal
 =end
     set_recite_mode(:normal)
+    self.fuda_sets = []
   end
 
   # @param [NSCoder] decoder
@@ -31,6 +33,7 @@ class GameSettings
       @recite_mode_id = fix_recite_mode_id(decoder)
     end
     self.singer_index = decoder.decodeIntForKey(KEY_SINGER_INDEX) || 0
+    self.fuda_sets = decoder.decodeObjectForKey(KEY_FUDA_SETS) || []
     self
   end
 
@@ -41,6 +44,7 @@ class GameSettings
     encoder.encodeBool(self.beginner_flg, forKey: KEY_BEGINNER_FLG)
     encoder.encodeInt(self.singer_index, forKey: KEY_SINGER_INDEX)
     encoder.encodeObject(self.recite_mode_id, forKey: KEY_RECITE_MODE_ID)
+    encoder.encodeObject(self.fuda_sets, forKey: KEY_FUDA_SETS)
   end
 
   def initial_statuses
