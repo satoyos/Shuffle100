@@ -170,16 +170,15 @@ def select_poem_of_numbers(numbers)
   }
 end
 
-def scroll_screen(down_height)
+def scroll_screen(scroll_up_length)
+  puts "↑↑ #{scroll_up_length}だけ上にスクロールします"
   startX = 100
   startY = 250
-  offsetY = down_height
   Appium::TouchAction.new.swipe(
       start_x: startX,
       start_y: startY,
-      end_x: 0,
-      end_y: -offsetY,
-      duration: 400).perform
+      end_x: startX,
+      end_y: startY-scroll_up_length,
+      duration: 1000).perform
   make_test_success
 end
-
