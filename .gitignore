@@ -38,5 +38,6 @@ appium_tests/vendor/
 vendor/
 node_modules/
 appium_tests/screenshots/*.mov
+appium_tests/screenshots/*.png
 
 provisioning
