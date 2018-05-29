@@ -81,11 +81,9 @@ class PoemPicker < PM::TableScreen
     }.show
   end
 
-=begin
   # Ver.5以降で札セットをサポート
   def create_button_and_badge_icon
     @badge_button = PoemsNumberSelectedItem.create_with_origin_x(-50, '保存', self, 'save_button_tapped:')
   end
-=end
 
 end

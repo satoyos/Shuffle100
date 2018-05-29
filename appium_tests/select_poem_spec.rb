@@ -14,11 +14,6 @@ describe '歌を選ぶテスト' do
       goto_select_poem_screen
       current_screen_is STR_SELECT_POEM_SCREEN
     end
-    # Ver.5.0未満
-    it '「保存」ボタンは、このバージョンではまだ見えない' do
-      can_not_see '保存'
-    end
-
     it '「全て取消」を選ぶと、全く歌が選ばれていない状態になる' do
       click_button_to_cancel_all
       click_back_button
