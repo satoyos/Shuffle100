@@ -62,14 +62,9 @@ class PoemPicker < PM::TableScreen
              }, {
                  system_item: :flexible_space
              }, {
-=begin
                  # Ver.5 以降
                  title: 'まとめて選ぶ',
                  action: :select_by_group
-=end
-                 # Ver.4.xxまで
-                 title: '1字目で選ぶ',
-                 action: :select_by_ngram
              }]
     set_toolbar_items items
   end
