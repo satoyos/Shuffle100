@@ -38,21 +38,6 @@ describe '札セットを保存するテスト' do
     end
 =end
 
-=begin
-    it '「まとめて選ぶ」を選ぶと、選択方法が表示される' do
-      select_by_group
-      can_see STR_NGRAM_PICKER
-      # can_see STR_SELECT_BY_FIVE_COLORS
-    end
-    it '「1字目で選ぶ」ボタンを押すことで、その画面に遷移する' do
-      open_first_char_select_screen
-    end
-    it '「一字決まりの歌」のセルをタップすると、7首の歌が選ばれる' do
-      select_one_char_kimari
-      2.times{ click_back_button }
-      can_see '7首'
-    end
-=end
   end
 end
 
