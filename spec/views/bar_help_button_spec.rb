@@ -1,4 +1,4 @@
-describe 'HelpExitButton' do
+describe 'BarHelpButton' do
   describe '初期化' do
     before do
       @button = BarHelpButton.create_with_square_size(25)
