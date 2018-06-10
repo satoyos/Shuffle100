@@ -44,29 +44,27 @@ module PoemPickerDelegate
 
   def select_by_group
     puts '「まとめて選ぶ」が選択された！' if BW2.debug?
-    alert = UIAlertController.alertControllerWithTitle(
-        'どうやって選びますか？',
-        message: nil,
-        preferredStyle: UIAlertControllerStyleActionSheet)
-    by_ngram = UIAlertAction.actionWithTitle(
-        '1字目で選ぶ',
-        style: UIAlertActionStyleDefault,
-        handler: Proc.new {|obj|
-          puts "[1字目で選ぶ]が選択された" if BW2.debug?
-          select_by_ngram
-        }
-    )
-    by_five_colors = UIAlertAction.actionWithTitle(
-        '「五色百人一首」の色で選ぶ',
-        style: UIAlertActionStyleDefault,
-        handler: Proc.new {|obj|
-          puts "[五色百人一首で選ぶ]が選択された" if BW2.debug?
-          select_by_five_colors
-        }
-    )
-    alert.addAction(by_ngram)
-    alert.addAction(by_five_colors)
-    alert.addAction(alert_action_cancel)
+    alert = ActionAlertFactory.create_alert({
+            title: 'どうやって選びますか？',
+            message: nil,
+            actions: [
+                {
+                    title: '1字目で選ぶ',
+                    handler: Proc.new {|obj|
+                      puts "[1字目で選ぶ]が選択された" if BW2.debug?
+                      select_by_ngram
+                    }
+                },
+                {
+                    title: '「五色百人一首」の色で選ぶ',
+                    handler: Proc.new {|obj|
+                      puts "[五色百人一首で選ぶ]が選択された" if BW2.debug?
+                      select_by_five_colors
+                    }
+                }
+            ],
+            cancel_title: 'キャンセル'
+        })
 
     # iPad用の設定
     if pc = alert.popoverPresentationController
