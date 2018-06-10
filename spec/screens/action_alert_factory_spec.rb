@@ -4,10 +4,15 @@ describe 'ActionAlertFactory' do
       message: 'メッセージ',
       actions: [
           {
-
+              title: 'アクション1',
+              handler: Proc.new {}
+          },
+          {
+              title: 'アクション2',
+              handler: Proc.new {}
           }
       ],
-      cancel_str: 'キャンセル'
+      cancel_title: 'キャンセル'
   }
   before do
     @alert = ActionAlertFactory.create_alert(AAF_TEST_INIT_HASH)
@@ -21,5 +26,10 @@ describe 'ActionAlertFactory' do
   it '指定したタイトルとメッセージが設定されている' do
     @alert.title.should == 'タイトル'
     @alert.message.should == 'メッセージ'
+  end
+  it 'アクションが設定されている' do
+    @alert.actions.size.should == 3
+    @alert.actions.first.title.should == 'アクション1'
+    @alert.actions.last.title.should == 'キャンセル'
   end
 end
