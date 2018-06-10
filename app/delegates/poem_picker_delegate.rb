@@ -77,29 +77,25 @@ module PoemPickerDelegate
 
   def save_button_tapped(sender)
     puts '「保存」ボタンが押された！' if BW2.debug?
-    alert = UIAlertController.alertControllerWithTitle(
-        '選択している札のセットをどう保存しますか？',
-        message: nil,
-        preferredStyle: UIAlertControllerStyleActionSheet)
-    new_set = UIAlertAction.actionWithTitle(
-        '新しい札セットとして保存する',
-        style: UIAlertActionStyleDefault,
-        handler: Proc.new {|obj|
-          puts "[新しい札セット]が選択された" if BW2.debug?
-          # select_by_ngram
-        }
-    )
-    overwrite = UIAlertAction.actionWithTitle(
-        '既存の札セットを上書きする',
-        style: UIAlertActionStyleDefault,
-        handler: Proc.new {|obj|
-          puts "[上書き]が選択された" if BW2.debug?
-          # select_by_five_colors
-        }
-    )
-    alert.addAction(new_set)
-    alert.addAction(overwrite)
-    alert.addAction(alert_action_cancel)
+    alert = ActionAlertFactory.create_alert({
+            title: '選択している札のセットをどう保存しますか？',
+            message: nil,
+            actions: [
+                {
+                    title: '新しい札セットとして保存する',
+                    handler: Proc.new {|obj|
+                      puts "[新しい札セット]が選択された" if BW2.debug?
+                    }
+                },
+                {
+                    title: '既存の札セットを上書きする',
+                    handler: Proc.new {|obj|
+                      puts "[上書き]が選択された" if BW2.debug?
+                    }
+                }
+            ],
+            cancel_title: 'キャンセル'
+        })
 
     # iPad用の設定
     if pc = alert.popoverPresentationController
