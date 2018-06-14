@@ -61,7 +61,7 @@ RSpec.configure { |c|
   }
 
   c.after(:all) {
-    @driver.quit
+    @driver.quit if @driver
   }
 }
 
