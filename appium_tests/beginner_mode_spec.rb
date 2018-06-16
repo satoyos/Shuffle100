@@ -4,8 +4,7 @@ require_relative 'spec_helper'
 describe '初心者モードのテスト' do
 
   it 'アプリのタイトルが正しく表示される' do
-    wait = Selenium::WebDriver::Wait.new :timeout => 60
-    wait.until { elems_of_str('トップ').first.displayed? }
+    wait_for_initial_boot
     can_see(TITLE)
   end
 

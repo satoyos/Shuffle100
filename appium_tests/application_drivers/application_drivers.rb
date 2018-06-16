@@ -203,6 +203,12 @@ def select_pink_color
   click_button('pink_group_button')
 end
 
+def wait_for_initial_boot
+  wait = Selenium::WebDriver::Wait.new :timeout => 60
+  wait.until {elems_of_str(TITLE).first.displayed?}
+end
+
+
 
 private
 
