@@ -85,6 +85,7 @@ module PoemPickerDelegate
                     title: '新しい札セットとして保存する',
                     handler: Proc.new {|obj|
                       puts "[新しい札セット]が選択された" if BW2.debug?
+                      open NameNewSetScreen.new, modal: true, nav_bar: true
                     }
                 },
                 {

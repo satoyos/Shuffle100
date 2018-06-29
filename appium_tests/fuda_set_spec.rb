@@ -31,12 +31,12 @@ describe '札セットを保存するテスト' do
       sleep_while_animation
       can_not_see STR_CONFIRM_SAVE_METHOD
     end
-=begin
-    it '「新しい札セット」の方を選ぶと、新しいセットの名前を入力する多面が現れる' do
+    it 'そのダイアログで「新しい札セット」の方を選ぶと、新しいセットの名前を入力する多面が現れる' do
+      click_save_button
+      sleep_while_animation
       click_new_set_button
-      can_see '新しい札セットの名前を決めてください'
+      can_see '新しい札セットの名前'
     end
-=end
 
   end
 end
