@@ -7,5 +7,9 @@ describe 'NameNewSetScreen' do
       screen.should.not.be.nil
       screen.is_a?(PM::Screen).should.be.true
     end
+    it 'Viewが正しく設定されている' do
+      screen.view.backgroundColor.should == UIColor.whiteColor
+
+    end
   end
 end

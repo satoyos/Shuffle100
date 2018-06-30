@@ -3,4 +3,12 @@ class NameNewSetScreen < PM::Screen
 
   title STR_NAME_NEW_SET
 
+  attr_reader :layout
+
+  def on_load
+    # self.view.backgroundColor = :white.uicolor
+    @layout = NameNewSetLayout.new
+    self.view = layout.view
+  end
+
 end
