@@ -10,6 +10,11 @@ describe 'NameNewSetLayout' do
       @layout.should.not.be.nil
     end
 
+    it '名前を入力するフィールドが設置されている' do
+      @layout.get(:name_field).should.not.be.nil
+      @layout.get(:name_field).is_a?(UITextField).should.be.true
+    end
+
 =begin
     it '背景色は白' do
       @layout.view.backgroundColor.should == UIColor.whiteColor

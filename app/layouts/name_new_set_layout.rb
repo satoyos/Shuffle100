@@ -3,6 +3,7 @@ class NameNewSetLayout < MotionKit::Layout
     background_color :white.uicolor
 
 
+    add UITextField, :name_field
 
 =begin
     # header area
@@ -26,6 +27,14 @@ class NameNewSetLayout < MotionKit::Layout
 
     add UILabel, :notice_label
 =end
+  end
+
+  def name_field_style
+    size ['80%', '5%']
+    center ['50%', '30%']
+    text_alignment UITextAlignmentCenter
+    placeholder '名前を決めてください'
+    accessiblility_label 'name_field'
   end
 
 end
