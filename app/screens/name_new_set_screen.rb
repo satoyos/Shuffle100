@@ -6,9 +6,21 @@ class NameNewSetScreen < PM::Screen
   attr_reader :layout
 
   def on_load
-    # self.view.backgroundColor = :white.uicolor
     @layout = NameNewSetLayout.new
     self.view = layout.view
+    set_button_actions
+  end
+
+  private
+
+  def set_button_actions
+    layout.get(:cancel_button).addTarget(self,
+                                         action: 'cancel_button_pushed',
+                                         forControlEvents: UIControlEventTouchUpInside)
+  end
+
+  def cancel_button_pushed
+    close
   end
 
 end

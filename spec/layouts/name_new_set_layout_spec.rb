@@ -15,6 +15,10 @@ describe 'NameNewSetLayout' do
       @layout.get(:name_field).is_a?(UITextField).should.be.true
     end
 
+    it 'キャンセルボタンが設置されている' do
+      @layout.get(:cancel_button).should.not.be.nil
+      @layout.get(:cancel_button).is_a?(UIButton).should.be.true
+    end
 =begin
     it '背景色は白' do
       @layout.view.backgroundColor.should == UIColor.whiteColor
