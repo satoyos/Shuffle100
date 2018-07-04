@@ -37,7 +37,10 @@ describe '札セットを保存するテスト' do
       click_new_set_button
       can_see '新しい札セットの名前'
     end
-
+    it '新しい札セットの名前入力画面でキャンセルを押すと、札選択画面に戻る' do
+      click_cancel_button
+      current_screen_is STR_SELECT_POEM_SCREEN
+    end
   end
 end
 
