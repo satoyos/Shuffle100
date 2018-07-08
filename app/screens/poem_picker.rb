@@ -42,6 +42,17 @@ class PoemPicker < PM::TableScreen
     update_table_and_prompt
   end
 
+  def on_return(args={})
+    if args[:value] == :fix
+      puts '++ これから「札セット一覧」画面に遷移するぜ！'
+      #%ToDo: ここで、新しく作った札セットを永続化する
+      #
+      #
+
+      open FudaSetsScreen
+    end
+  end
+
   private
 
   def update_table_and_prompt

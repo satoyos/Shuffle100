@@ -50,9 +50,9 @@ describe '札セットを保存するテスト' do
     end
 =end
     it '名前を入力し、「決定」を押すと、札セット一覧画面に繊維する' do
-      fill_text_field_with '2字決まりセット'
+      fill_name_field_with '2字決まりセット'
       click_fix_button
-      can_see '作った札セット'
+      current_screen_is '作った札セット'
     end
   end
 end
@@ -76,6 +76,6 @@ def click_fix_button
   click_button('決定')
 end
 
-def fill_text_field_with(str)
+def fill_name_field_with(str)
   find_element(:accessibility_id, 'name_field').send_keys str
 end
