@@ -45,10 +45,9 @@ class PoemPicker < PM::TableScreen
   def on_return(args={})
     if args[:value] == :fix
       puts '++ これから「札セット一覧」画面に遷移するぜ！'
-      #%ToDo: ここで、新しく作った札セットを永続化する
-      #
-      #
-
+      puts "    札セットの名前は[#{args[:name]}]だ！" if args[:name]
+      app_delegate.game_settings.fuda_sets << FudaSet.new(args[:name], status100)
+      app_delegate.settings_manager.save
       open FudaSetsScreen
     end
   end

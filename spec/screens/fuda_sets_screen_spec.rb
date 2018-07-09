@@ -10,11 +10,11 @@ describe 'FudaSetsScreen' do
     screen.should.not.be.nil
   end
 
-=begin
   it 'is a GroupedTableScreen' do
-    screen.should.be.kind_of PM::GroupedTableScreen
+    screen.should.be.kind_of PM::TableScreen
   end
 
+=begin
   it 'should not rotate' do
     screen.should_autorotate.should.be.false
   end

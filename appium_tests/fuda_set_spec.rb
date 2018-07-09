@@ -6,6 +6,7 @@ STR_SAVE_FUDA_SET = '保存'
 STR_CONFIRM_SAVE_METHOD = '選択している札のセットをどう保存しますか？'
 STR_SAVE_AS_NEW_SET = '新しい札セットとして保存する'
 STR_CANCEL = 'キャンセル'
+STR_TEST_SET_NAME_2C = '2字決まりセット'
 
 
 describe '札セットを保存するテスト' do
@@ -22,6 +23,7 @@ describe '札セットを保存するテスト' do
     it '歌選択画面に「保存」ボタンが表示されている' do
       can_see(STR_SAVE_FUDA_SET)
     end
+=begin
     it '「保存」をタップすると、どのように保存するかをユーザに確認するダイアログが現れる' do
       click_save_button
       can_see STR_CONFIRM_SAVE_METHOD
@@ -31,6 +33,7 @@ describe '札セットを保存するテスト' do
       sleep_while_animation
       can_not_see STR_CONFIRM_SAVE_METHOD
     end
+=end
     it 'そのダイアログで「新しい札セット」の方を選ぶと、新しいセットの名前を入力する多面が現れる' do
       click_save_button
       sleep_while_animation
@@ -50,9 +53,12 @@ describe '札セットを保存するテスト' do
     end
 =end
     it '名前を入力し、「決定」を押すと、札セット一覧画面に繊維する' do
-      fill_name_field_with '2字決まりセット'
+      fill_name_field_with STR_TEST_SET_NAME_2C
       click_fix_button
       current_screen_is '作った札セット'
+    end
+    it '作ったばかりの札セットが表示されている' do
+      can_see STR_TEST_SET_NAME_2C
     end
   end
 end
