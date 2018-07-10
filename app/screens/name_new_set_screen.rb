@@ -6,12 +6,33 @@ class NameNewSetScreen < PM::Screen
   attr_reader :layout
 
   def on_load
-    @layout = NameNewSetLayout.new
-    self.view = layout.view
+    set_view_with_layout
     set_button_actions
+    set_text_field_delegate
+  end
+
+  def textFieldShouldReturn(text_field)
+    text_field.resignFirstResponder
+    true
+  end
+
+  def touchesBegan(touches, withEvent: event)
+    layout.get(:name_field).tap do |field|
+        field.resignFirstResponder if field.isFirstResponder
+    end
+
   end
 
   private
+
+  def set_view_with_layout
+    @layout = NameNewSetLayout.new
+    self.view = layout.view
+  end
+
+  def set_text_field_delegate
+    layout.get(:name_field).delegate = self
+  end
 
   def set_button_actions
     layout.get(:fix_button).addTarget(self,
@@ -24,10 +45,12 @@ class NameNewSetScreen < PM::Screen
   end
 
   def cancel_button_pushed
+    layout.get(:name_field).resignFirstResponder
     close value: :cancel
   end
 
   def fix_button_pushed
+    layout.get(:name_field).resignFirstResponder
     close value: :fix, name: fuda_set_name
   end
 
