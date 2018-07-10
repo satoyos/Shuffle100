@@ -26,8 +26,9 @@ def desired_caps
           # deviceName:    "iPad Pro (12.9-inch)",
           platformVersion: "11.4",
           app: '../build/iPhoneSimulator-11.0-Development/Shuffle100.app',
-          # fullReset: true,  # Appium1.5+(試したのは1.5.3)で、シミュレータの2回起動を抑止する。
-          automationName: 'XCUITest'
+          automationName: 'XCUITest',
+          simpleIsVisibleCheck: true,
+          iosInstallPause: 20000
       },
       appium_lib: {
           wait: 10
