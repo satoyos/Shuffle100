@@ -12,7 +12,7 @@ class NameNewSetScreen < PM::Screen
   end
 
   def textFieldShouldReturn(text_field)
-    text_field.resignFirstResponder
+    hyde_keyboard
     true
   end
 
@@ -45,13 +45,17 @@ class NameNewSetScreen < PM::Screen
   end
 
   def cancel_button_pushed
-    layout.get(:name_field).resignFirstResponder
+    hyde_keyboard
     close value: :cancel
   end
 
   def fix_button_pushed
-    layout.get(:name_field).resignFirstResponder
+    hyde_keyboard
     close value: :fix, name: fuda_set_name
+  end
+
+  def hyde_keyboard
+    layout.get(:name_field).resignFirstResponder
   end
 
   def fuda_set_name
