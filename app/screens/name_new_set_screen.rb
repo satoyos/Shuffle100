@@ -51,6 +51,10 @@ class NameNewSetScreen < PM::Screen
 
   def fix_button_pushed
     hyde_keyboard
+    if fuda_set_name.nil? || fuda_set_name.length < 1
+      alert_empty_name
+      return
+    end
     close value: :fix, name: fuda_set_name
   end
 
@@ -60,6 +64,13 @@ class NameNewSetScreen < PM::Screen
 
   def fuda_set_name
     layout.get(:name_field).text
+  end
+
+  def alert_empty_name
+    UIAlertView.alloc.init.tap{|alert_view|
+      alert_view.title ='新しい札セットの名前を決めましょう'
+      alert_view.addButtonWithTitle('戻る')
+    }.show
   end
 
 end
