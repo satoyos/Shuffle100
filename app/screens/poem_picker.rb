@@ -46,7 +46,8 @@ class PoemPicker < PM::TableScreen
     if args[:value] == :fix
       puts '++ これから「札セット一覧」画面に遷移するぜ！'
       puts "    札セットの名前は[#{args[:name]}]だ！" if args[:name]
-      app_delegate.game_settings.fuda_sets << FudaSet.new(args[:name], status100)
+      app_delegate.game_settings.fuda_sets <<
+          FudaSet.new(args[:name], status100.clone)
       app_delegate.settings_manager.save
       open FudaSetsScreen
     end
