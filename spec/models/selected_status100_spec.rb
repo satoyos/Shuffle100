@@ -202,4 +202,19 @@ describe 'SelectedState100' do
       @status100.of_number(11).should.be.true
     end
   end
+
+  describe '#clone' do
+    before do
+      @status100 = SelectedStatus100.new(nil).select_all
+      @clone = @status100.clone
+    end
+    it 'should not be same object of original' do
+      @status100.should.not == @clone
+    end
+    it 'cloneしたオブジェクトの内部データを変更しても、オリジナルには影響しない' do
+      @clone.cancel_all
+      @status100.selected_num.should == 100
+      @clone.selected_num.should == 0
+    end
+  end
 end

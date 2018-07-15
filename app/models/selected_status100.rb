@@ -95,6 +95,10 @@ class SelectedStatus100
     }
   end
 
+  def clone
+    self.class.new(status_array.clone)
+  end
+
   :private
 
   def set_status(value, of_number: idx)
