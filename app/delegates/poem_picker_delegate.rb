@@ -47,22 +47,7 @@ module PoemPickerDelegate
     alert = ActionAlertFactory.create_alert({
             title: 'どうやって選びますか？',
             message: nil,
-            actions: [
-                {
-                    title: '1字目で選ぶ',
-                    handler: Proc.new {|obj|
-                      puts "[1字目で選ぶ]が選択された" if BW2.debug?
-                      select_by_ngram
-                    }
-                },
-                {
-                    title: '「五色百人一首」の色で選ぶ',
-                    handler: Proc.new {|obj|
-                      puts "[五色百人一首で選ぶ]が選択された" if BW2.debug?
-                      select_by_five_colors
-                    }
-                }
-            ],
+            actions: actions_for_selection,
             cancel_title: 'キャンセル'
         })
 
@@ -122,6 +107,25 @@ module PoemPickerDelegate
   end
 
   private
+
+  def actions_for_selection
+    [
+        {
+            title: '1字目で選ぶ',
+            handler: Proc.new {|obj|
+              puts "[1字目で選ぶ]が選択された" if BW2.debug?
+              select_by_ngram
+            }
+        },
+        {
+            title: '「五色百人一首」の色で選ぶ',
+            handler: Proc.new {|obj|
+              puts "[五色百人一首で選ぶ]が選択された" if BW2.debug?
+              select_by_five_colors
+            }
+        }
+    ]
+  end
 
   def alert_action_cancel
     UIAlertAction.actionWithTitle(
