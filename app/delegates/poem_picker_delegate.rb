@@ -109,14 +109,9 @@ module PoemPickerDelegate
   private
 
   def actions_for_selection
-    [
-        {
-            title: '1字目で選ぶ',
-            handler: Proc.new {|obj|
-              puts "[1字目で選ぶ]が選択された" if BW2.debug?
-              select_by_ngram
-            }
-        },
+    actions = [
+        action_for_select_by_ngram,
+=begin
         {
             title: '「五色百人一首」の色で選ぶ',
             handler: Proc.new {|obj|
@@ -124,7 +119,32 @@ module PoemPickerDelegate
               select_by_five_colors
             }
         }
+=end
     ]
+    if app_delegate.game_settings.fuda_sets.size > 0
+      actions.insert(0, action_for_select_from_fuda_sets)
+    end
+    actions
+  end
+
+  def action_for_select_from_fuda_sets
+    {
+        title: '作った札セットから選ぶ',
+        handler: Proc.new {|obj|
+          puts "[札セットから選ぶ]が選択された" if BW2.debug?
+          # select_by_ngram
+        }
+    }
+  end
+
+  def action_for_select_by_ngram
+    {
+        title: '1字目で選ぶ',
+        handler: Proc.new {|obj|
+          puts "[1字目で選ぶ]が選択された" if BW2.debug?
+          select_by_ngram
+        }
+    }
   end
 
   def alert_action_cancel

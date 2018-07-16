@@ -21,10 +21,9 @@ describe '歌を選ぶテスト' do
       goto_select_poem_screen
     end
 
-    it '「まとめて選ぶ」を選ぶと、複数の洗濯方法が表示される' do
+    it '「まとめて選ぶ」を選ぶと、少なくとも「1字目で選ぶ」は表示される' do
       select_by_group
       can_see STR_NGRAM_PICKER
-      can_see STR_SELECT_BY_FIVE_COLORS
     end
 
     it '「1字目で選ぶ」ボタンを押すことで、その画面に遷移する' do
