@@ -6,9 +6,10 @@ STR_SAVE_FUDA_SET = '保存'
 STR_CONFIRM_SAVE_METHOD = '選択している札のセットをどう保存しますか？'
 STR_SAVE_AS_NEW_SET = '新しい札セットとして保存する'
 STR_CANCEL = 'キャンセル'
-STR_TEST_SET_NAME_2C = '2字決まりセット'
+STR_TEST_SET_NAME_2C = '2枚札のセット'
 STR_NAME_NOT_DEFINED = '新しい札セットの名前を決めましょう'
 STR_SAVE_COMPLETE = '保存完了'
+STR_SELECT_FROM_FUDA_SETS = '作った札セットから選ぶ'
 
 describe '札セットを保存するテスト' do
 
@@ -45,7 +46,18 @@ describe '札セットを保存するテスト' do
       current_screen_is STR_SELECT_POEM_SCREEN
     end
 =end
-    it 'もう一度、命名画面を表示' do
+    it '2枚札だけを選択した状態にする' do
+      click_button_to_cancel_all
+      select_by_group
+      open_first_char_select_screen
+      click_element_of(TYPE_CELL, name: 'u')
+      click_element_of(TYPE_CELL, name: 'tsu')
+      click_element_of(TYPE_CELL, name: 'shi')
+      click_element_of(TYPE_CELL, name: 'mo')
+      click_element_of(TYPE_CELL, name: 'yu')
+      click_back_button
+    end
+    it '命名画面を表示' do
       click_save_button
       sleep_while_animation
       click_new_set_button
@@ -59,6 +71,10 @@ describe '札セットを保存するテスト' do
     it 'ユーザの確認が終わると、ダイアログは消える' do
       alert_accept
       can_not_see STR_SAVE_COMPLETE
+    end
+    it '「まとめて選ぶ」を押すと、「作った札セットから選ぶ」アクションが表示されている' do
+      select_by_group
+      can_see STR_SELECT_FROM_FUDA_SETS
     end
 =begin
     it '名前を入力し、「決定」を押すと、札セット一覧画面に繊維する' do
