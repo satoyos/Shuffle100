@@ -78,7 +78,7 @@ module PoemPickerDelegate
   def save_button_tapped(sender)
     puts '「保存」ボタンが押された！' if BW2.debug?
     alert = ActionAlertFactory.create_alert({
-            title: '選択している札のセットをどう保存しますか？',
+            title: '選んでいる札をどのように保存しますか？',
             message: nil,
             actions: [
                 {
