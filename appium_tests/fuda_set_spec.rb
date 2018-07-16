@@ -9,7 +9,6 @@ STR_CANCEL = 'キャンセル'
 STR_TEST_SET_NAME_2C = '2枚札のセット'
 STR_NAME_NOT_DEFINED = '新しい札セットの名前を決めましょう'
 STR_SAVE_COMPLETE = '保存完了'
-STR_SELECT_FROM_FUDA_SETS = '作った札セットから選ぶ'
 
 describe '札セットを保存するテスト' do
 
@@ -75,6 +74,9 @@ describe '札セットを保存するテスト' do
     it '「まとめて選ぶ」を押すと、「作った札セットから選ぶ」アクションが表示されている' do
       select_by_group
       can_see STR_SELECT_FROM_FUDA_SETS
+    end
+    it  '「作った札セットから選ぶ」をタップすると、札セット一覧画面に遷移する' do
+      open_fuda_set_list_screen
     end
 =begin
     it '名前を入力し、「決定」を押すと、札セット一覧画面に繊維する' do

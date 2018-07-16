@@ -132,7 +132,7 @@ module PoemPickerDelegate
         title: '作った札セットから選ぶ',
         handler: Proc.new {|obj|
           puts "[札セットから選ぶ]が選択された" if BW2.debug?
-          # select_by_ngram
+          open FudaSetsScreen
         }
     }
   end

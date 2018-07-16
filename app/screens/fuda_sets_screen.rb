@@ -1,5 +1,5 @@
 class FudaSetsScreen < PM::TableScreen
-  title '作った札セット'
+  title '作った札セットから選ぶ'
 
   def on_load
     @fuda_sets = app_delegate.game_settings.fuda_sets

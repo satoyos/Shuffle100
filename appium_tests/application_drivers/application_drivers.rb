@@ -13,12 +13,14 @@ STR_ADD_FAKE_POEMS = '空札を加える'
 STR_ADD_THESE_20 = '今選んでいる札に加える'
 STR_CLOSE = '閉じる'
 STR_FIVE_COLORS_SCREEN = '五色百人一首'
+STR_FUDA_SET_LIST = '作った札セットから選ぶ'
 STR_INABA_KUN = 'いなばくん（人間）'
 STR_NGRAM_PICKER = '1字目で選ぶ'
 STR_ONE_CHAR_KIMARI = '一字決まりの歌'
 STR_POEM_SELECTION = '取り札を用意する歌'
 STR_SELECT_BY_FIVE_COLORS = '「五色百人一首」の色で選ぶ'
 STR_SELECT_BY_GROUP = 'まとめて選ぶ'
+STR_SELECT_FROM_FUDA_SETS = '作った札セットから選ぶ'
 STR_SELECT_JUST_20 = 'この20首だけを選ぶ'
 STR_SELECT_POEM_SCREEN = '歌を選ぶ'
 STR_SINGER = '読手'
@@ -64,7 +66,14 @@ end
 def open_first_char_select_screen
   sleep_while_animation
   click_button(STR_NGRAM_PICKER)
-  can_see STR_ONE_CHAR_KIMARI
+  sleep_while_animation
+  current_screen_is STR_NGRAM_PICKER
+end
+
+def open_fuda_set_list_screen
+  sleep_while_animation
+  click_button(STR_SELECT_FROM_FUDA_SETS)
+  current_screen_is STR_FUDA_SET_LIST
 end
 
 def open_game
