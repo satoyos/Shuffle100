@@ -36,6 +36,32 @@ describe '歌を選ぶテスト' do
     end
   end
 
+  describe '2枚札を複数選べる' do
+    it '歌選択画面を開く' do
+      goto_select_poem_screen
+      current_screen_is STR_SELECT_POEM_SCREEN
+    end
+    it '「全て取消」を選ぶ' do
+      click_button_to_cancel_all
+    end
+    it '「まとめて選ぶ」から「1字目で選ぶ」を選択する' do
+      select_by_group
+      open_first_char_select_screen
+    end
+
+    it '二枚札を選択する' do
+      click_element_of(TYPE_CELL, name: 'u')
+      click_element_of(TYPE_CELL, name: 'tsu')
+      click_element_of(TYPE_CELL, name: 'shi')
+      click_element_of(TYPE_CELL, name: 'mo')
+      click_element_of(TYPE_CELL, name: 'yu')
+    end
+    it 'ホーム画面に戻ると、10酒の植えたが選ばれている' do
+      2.times{ click_back_button }
+      can_see '10首'
+    end
+  end
+
   describe '1首も歌が選ばれていない状態で試合を開始すると、警告を出す' do
     it '歌選択画面を開き、全く歌が選ばれていない状態にする' do
       goto_select_poem_screen
