@@ -8,6 +8,7 @@ STR_SAVE_AS_NEW_SET = '新しい札セットとして保存する'
 STR_CANCEL = 'キャンセル'
 STR_TEST_SET_NAME_2C = '2字決まりセット'
 STR_NAME_NOT_DEFINED = '新しい札セットの名前を決めましょう'
+STR_SAVE_COMPLETE = '保存完了'
 
 describe '札セットを保存するテスト' do
 
@@ -23,6 +24,7 @@ describe '札セットを保存するテスト' do
     it '歌選択画面に「保存」ボタンが表示されている' do
       can_see(STR_SAVE_FUDA_SET)
     end
+=begin
     it '「保存」をタップすると、どのように保存するかをユーザに確認するダイアログが現れる' do
       click_save_button
       can_see STR_CONFIRM_SAVE_METHOD
@@ -42,12 +44,23 @@ describe '札セットを保存するテスト' do
       click_cancel_button
       current_screen_is STR_SELECT_POEM_SCREEN
     end
+=end
     it 'もう一度、命名画面を表示' do
       click_save_button
       sleep_while_animation
       click_new_set_button
       can_see '新しい札セットの名前'
     end
+    it '名前を入力し、「決定」を押すと、「保存完了」ダイアログが表示される' do
+      fill_name_field_with STR_TEST_SET_NAME_2C
+      click_fix_button
+      can_see STR_SAVE_COMPLETE
+    end
+    it 'ユーザの確認が終わると、ダイアログは消える' do
+      alert_accept
+      can_not_see STR_SAVE_COMPLETE
+    end
+=begin
     it '名前を入力し、「決定」を押すと、札セット一覧画面に繊維する' do
       fill_name_field_with STR_TEST_SET_NAME_2C
       click_fix_button
@@ -75,6 +88,7 @@ describe '札セットを保存するテスト' do
       alert_accept
       can_not_see STR_NAME_NOT_DEFINED
     end
+=end
   end
 end
 

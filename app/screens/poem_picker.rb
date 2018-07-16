@@ -43,14 +43,11 @@ class PoemPicker < PM::TableScreen
   end
 
   def on_return(args={})
-    if args[:value] == :fix
-      puts '++ これから「札セット一覧」画面に遷移するぜ！'
-      puts "    札セットの名前は[#{args[:name]}]だ！" if args[:name]
-      app_delegate.game_settings.fuda_sets <<
-          FudaSet.new(args[:name], status100.clone)
-      app_delegate.settings_manager.save
-      open FudaSetsScreen
-    end
+    return unless args[:value] == :fix
+    app_delegate.game_settings.fuda_sets <<
+        FudaSet.new(args[:name], status100.clone)
+    app_delegate.settings_manager.save
+    show_dialog_fuda_set_saved(args[:name])
   end
 
   private
@@ -84,6 +81,14 @@ class PoemPicker < PM::TableScreen
     UIAlertView.alloc.init.tap{|alert_view|
       alert_view.message = '歌を検索している時には、このボタンは使えません。'
       alert_view.addButtonWithTitle('戻る')
+    }.show
+  end
+
+  def show_dialog_fuda_set_saved(new_set_name)
+    UIAlertView.alloc.init.tap{|alert_view|
+      alert_view.title ='保存完了'
+      alert_view.message = "新しい札セット「#{new_set_name}」を保存しました。"
+      alert_view.addButtonWithTitle('OK')
     }.show
   end
 
