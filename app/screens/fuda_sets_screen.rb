@@ -2,6 +2,7 @@ class FudaSetsScreen < PM::TableScreen
   title '作った札セットから選ぶ'
 
   def on_load
+    self.navigationItem.prompt = AppDelegate::PROMPT
     @fuda_sets = app_delegate.game_settings.fuda_sets
   end
 
@@ -16,6 +17,10 @@ class FudaSetsScreen < PM::TableScreen
           }
         end
      }]
+  end
+
+  def tableView(tableView, didSelectRowAtIndexPath:indexPath)
+    close
   end
 
   def on_cell_deleted(cell, index_path)
