@@ -43,11 +43,16 @@ class PoemPicker < PM::TableScreen
   end
 
   def on_return(args={})
-    return unless args[:value] == :fix
-    app_delegate.game_settings.fuda_sets <<
-        FudaSet.new(args[:name], status100.clone)
-    app_delegate.settings_manager.save
-    show_dialog_fuda_set_saved(args[:name])
+    if args[:value] == :fix
+      app_delegate.game_settings.fuda_sets <<
+          FudaSet.new(args[:name], status100.clone)
+      app_delegate.settings_manager.save
+      show_dialog_fuda_set_saved(args[:name])
+    else
+      @status100 = loaded_selected_status
+      update_badge_value
+      update_table_and_prompt
+    end
   end
 
   private

@@ -94,6 +94,10 @@ describe '札セットを保存するテスト' do
       click_element_with_text STR_TEST_SET_NAME_2C
       current_screen_is STR_SELECT_POEM_SCREEN
     end
+    it '選択されている歌が、元の10首に戻っている' do
+      click_back_button
+      can_see '10首'
+    end
 =begin
     it '名前を入力し、「決定」を押すと、札セット一覧画面に繊維する' do
       fill_name_field_with STR_TEST_SET_NAME_2C

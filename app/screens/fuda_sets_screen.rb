@@ -1,4 +1,5 @@
 class FudaSetsScreen < PM::TableScreen
+
   title '作った札セットから選ぶ'
 
   def on_load
@@ -20,6 +21,8 @@ class FudaSetsScreen < PM::TableScreen
   end
 
   def tableView(tableView, didSelectRowAtIndexPath:indexPath)
+    set = @fuda_sets[indexPath.row]
+    app_delegate.current_status100 = set.status100.clone
     close
   end
 
