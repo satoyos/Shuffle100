@@ -77,6 +77,7 @@ module PoemPickerDelegate
                     title: '前に作った札セットに上書きする',
                     handler: Proc.new {|obj|
                       puts "[上書き]が選択された" if BW2.debug?
+                      open OverwriteSetScreen.new, modal: true, nav_bar: true
                     }
                 }
             ],
