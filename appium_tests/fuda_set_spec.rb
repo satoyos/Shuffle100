@@ -9,6 +9,7 @@ STR_CANCEL = 'キャンセル'
 STR_TEST_SET_NAME_2C = '2枚札のセット'
 STR_NAME_NOT_DEFINED = '新しい札セットの名前を決めましょう'
 STR_SAVE_COMPLETE = '保存完了'
+STR_OVERWRITE_SET = '前に作った札セットに上書きする'
 
 describe '札セットを保存するテスト' do
 
@@ -75,6 +76,7 @@ describe '札セットを保存するテスト' do
       click_back_button
       can_see '10首'
     end
+=begin
     it '歌選択画面でNo.1の詩を選び、11首選択した状態にする' do
       goto_select_poem_screen
       click_element_of(TYPE_CELL, name: '001')
@@ -98,35 +100,22 @@ describe '札セットを保存するテスト' do
       click_back_button
       can_see '10首'
     end
-=begin
-    it '名前を入力し、「決定」を押すと、札セット一覧画面に繊維する' do
-      fill_name_field_with STR_TEST_SET_NAME_2C
-      click_fix_button
-      current_screen_is '作った札セット'
-    end
-    it '作ったばかりの札セットが表示されている' do
-      can_see STR_TEST_SET_NAME_2C
-    end
-    it '札選択画面に戻る' do
-      click_back_button
-      current_screen_is STR_SELECT_POEM_SCREEN
-    end
-    it 'もう一度、命名画面を表示' do
-      click_save_button
-      sleep_while_animation
-      click_new_set_button
-      can_see '新しい札セットの名前'
-    end
-    it '名前入力画面で名前を入力せずに「決定」を押すと、警告が出る' do
-      fill_name_field_with ''
-      click_fix_button
-      can_see STR_NAME_NOT_DEFINED
-    end
-    it '警告を消す' do
-      alert_accept
-      can_not_see STR_NAME_NOT_DEFINED
-    end
 =end
+    describe '札セットの上書きテスト' do
+      it '札選択画面に移動し、1酒めを選んでみる' do
+        goto_select_poem_screen
+        click_element_of(TYPE_CELL, name: '001')
+        click_back_button
+        can_see '11首'
+        goto_select_poem_screen
+      end
+      it '「前に作った札セットに上書きする」を選ぶ' do
+        click_save_button
+        sleep_while_animation
+        click_overwrite_set_button
+        can_see '上書きする札セットを選ぶ'
+      end
+    end
   end
 end
 
@@ -137,6 +126,11 @@ end
 def click_new_set_button
   sleep_while_animation
   click_button(STR_SAVE_AS_NEW_SET)
+end
+
+def click_overwrite_set_button
+  sleep_while_animation
+  click_button(STR_OVERWRITE_SET)
 end
 
 def click_cancel_button
