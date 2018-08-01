@@ -71,7 +71,7 @@ describe '札セットを保存するテスト' do
       alert_accept
       can_not_see STR_SAVE_COMPLETE
     end
-    it 'メイン画面に戻ると、10首選ばれていることが客員できる' do
+    it 'メイン画面に戻ると、10首選ばれていることが確認できる' do
       click_back_button
       can_see '10首'
     end
