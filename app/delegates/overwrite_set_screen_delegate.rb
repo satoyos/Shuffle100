@@ -1,12 +1,6 @@
 module OverwriteSetScreenDelegate
-=begin
-
-  def pickerView(pickerView, titleForRow: row, forComponent: component)
-    singers[row].name
+  def cancel_button_pushed
+    puts 'キャンセルボタンが押された！' if BW2.debug?
+    close
   end
-
-  def pickerView(pickerView, widthForComponent: component)
-    view.frame.size.width
-  end
-=end
 end
