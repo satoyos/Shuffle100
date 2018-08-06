@@ -48,9 +48,6 @@ class SelectSingerScreen < PM::Screen
     @singers = Singer.singers
   end
 
-  # PICKER_VIEW_ACC_LABEL = 'picker_view'
-  # COMPONENT_ID = 0
-
   def set_try_button
     @try_button = UIButton.alloc.init.tap do |b|
       b.title = '試しに聞いてみる'
@@ -64,14 +61,6 @@ class SelectSingerScreen < PM::Screen
       view.addSubview(b)
     end
   end
-
-=begin
-  def set_button_title_color(b)
-    b.setTitleColor(:blue.uicolor, forState: :normal.uicontrolstate)
-    b.setTitleColor(:red.uicolor, forState: :highlighted.uicontrolstate)
-    b.setTitleColor(:light_gray.uicolor, forState: :disabled.uicontrolstate)
-  end
-=end
 
   def play_current_singer
     puts "++ #{current_singer.name}の声で読みます" if BW2.debug?
