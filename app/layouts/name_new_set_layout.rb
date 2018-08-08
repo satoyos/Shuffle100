@@ -31,6 +31,7 @@ class NameNewSetLayout < MotionKit::Layout
     size ['40%', '80%']
     center ['75%', '50%']
     title '決定'
+    accessibility_label 'fix_button'
   end
 
   def cancel_button_style
@@ -38,5 +39,6 @@ class NameNewSetLayout < MotionKit::Layout
     size ['40%', '80%']
     center ['25%', '50%']
     title 'キャンセル'
+    accessibility_label 'cancel_button'
   end
 end

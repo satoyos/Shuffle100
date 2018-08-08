@@ -173,7 +173,8 @@ end
 
 def click_fix_button
   sleep_while_animation
-  click_button('決定')
+  # click_button('決定')
+  click_button 'fix_button'
 end
 
 def fill_name_field_with(str)
