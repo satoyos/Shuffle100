@@ -33,24 +33,52 @@ class OverwriteSetScreen < PM::Screen
 
   private
 
-  def set_buttons
-    @cancel_button = UIButton.new.tap do |cb|
-      cb.frame = CGRectMake(0, picker_view.frame.origin.y + picker_view.frame.size.height,
-                       view.frame.size.width/2, 50)
-      cb.setTitle('キャンセル', forState: :normal.uicontrolstate)
-      set_button_title_color(cb)
-      cb.on(:touch){cancel_button_pushed}
-    end
-    view.addSubview(@cancel_button)
-
-  end
-
   def init_base_view
     view.backgroundColor = :white.uicolor
   end
 
   def fetch_fuda_sets
     @fuda_sets = app_delegate.game_settings.fuda_sets
+  end
+
+  def set_buttons
+    set_cancel_button
+    set_fix_button
+  end
+  
+  def set_fix_button
+    @fix_button = UIButton.new.tap do |fb|
+      fb.frame = CGRectMake(half_width_of_screen, buttons_org_y_margin,
+                            half_width_of_screen, buttons_height)
+      fb.setTitle('上書きする', forState: :normal.uicontrolstate)
+      set_button_title_color(fb)
+      fb.on(:touch) {fix_button_pushed}
+    end
+    view.addSubview(@fix_button)
+  end
+
+
+  def set_cancel_button
+    @cancel_button = UIButton.new.tap do |cb|
+      cb.frame = CGRectMake(0, buttons_org_y_margin,
+                            half_width_of_screen, buttons_height)
+      cb.setTitle('キャンセル', forState: :normal.uicontrolstate)
+      set_button_title_color(cb)
+      cb.on(:touch) {cancel_button_pushed}
+    end
+    view.addSubview(@cancel_button)
+  end
+
+  def half_width_of_screen
+    view.frame.size.width / 2
+  end
+
+  def buttons_height
+    50
+  end
+
+  def buttons_org_y_margin
+    picker_view.frame.origin.y + picker_view.frame.size.height
   end
 
 end
