@@ -52,7 +52,7 @@ class OverwriteSetScreen < PM::Screen
                             half_width_of_screen, buttons_height)
       fb.setTitle('上書きする', forState: :normal.uicontrolstate)
       set_button_title_color(fb)
-      fb.accessibilityLabel = "fix_buttton"
+      fb.accessibilityLabel = "fix_button"
       fb.on(:touch) {fix_button_pushed}
     end
     view.addSubview(@fix_button)
@@ -65,7 +65,7 @@ class OverwriteSetScreen < PM::Screen
                             half_width_of_screen, buttons_height)
       cb.setTitle('キャンセル', forState: :normal.uicontrolstate)
       set_button_title_color(cb)
-      cb.accessibilityLabel = "cancel_buttton"
+      cb.accessibilityLabel = "cancel_button"
       cb.on(:touch) {cancel_button_pushed}
     end
     view.addSubview(@cancel_button)
