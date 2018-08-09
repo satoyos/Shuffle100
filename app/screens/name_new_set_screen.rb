@@ -46,7 +46,7 @@ class NameNewSetScreen < PM::Screen
 
   def cancel_button_pushed
     hyde_keyboard
-    close value: :cancel
+    close mode: :cancel
   end
 
   def fix_button_pushed
@@ -55,7 +55,7 @@ class NameNewSetScreen < PM::Screen
       alert_empty_name
       return
     end
-    close value: :fix, name: fuda_set_name
+    close mode: :fix_new_name, name: fuda_set_name
   end
 
   def hyde_keyboard
