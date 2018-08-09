@@ -10,6 +10,7 @@ STR_TEST_SET_NAME_2C = '2枚札のセット'
 STR_TEST_SET_NAME_1C = '1字決まりセット'
 STR_NAME_NOT_DEFINED = '新しい札セットの名前を決めましょう'
 STR_SAVE_COMPLETE = '保存完了'
+STR_OVER_WRITE_COMPLETE = '上書き保存完了'
 STR_OVERWRITE_SET = '前に作った札セットに上書きする'
 
 describe '札セットを保存するテスト' do
@@ -146,7 +147,12 @@ describe '札セットを保存するテスト' do
           click_overwrite_set_button
           can_see '上書きする札セットを選ぶ'
         end
-
+        it '「１字決まりのセット」を選択する' do
+          select_one_char_set
+          click_fix_button
+          can_see STR_OVER_WRITE_COMPLETE
+          alert_accept
+        end
       end
     end
   end
@@ -179,4 +185,9 @@ end
 
 def fill_name_field_with(str)
   find_element(:accessibility_id, 'name_field').send_keys str
+end
+
+def select_one_char_set
+  wheel = find_element(class_name: TYPE_PICKER_WHEEL)
+  wheel.send_keys STR_TEST_SET_NAME_1C
 end
