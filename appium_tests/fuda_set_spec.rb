@@ -150,10 +150,10 @@ describe '札セットを保存するテスト' do
         it '「１字決まりのセット」を選択する' do
           select_one_char_set
           click_fix_button
-=begin
+        end
+        it '上書きが完了したことを示すダイアログが表示される' do
           can_see STR_OVER_WRITE_COMPLETE
           alert_accept
-=end
         end
       end
     end

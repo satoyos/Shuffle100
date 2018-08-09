@@ -48,6 +48,10 @@ class PoemPicker < PM::TableScreen
           FudaSet.new(args[:name], status100.clone)
       app_delegate.settings_manager.save
       show_dialog_fuda_set_saved(args[:name])
+    elsif args[:mode] == :fix_overwritten
+      puts "[#{args[:index]}]番の札セットを書き換えます" if BW2.debug?
+      ow_set = app_delegate.game_settings.fuda_sets[args[:index]]
+      show_dialog_fuda_set_overwritten(ow_set.name)
     else
       @status100 = loaded_selected_status
       update_badge_value
@@ -93,6 +97,14 @@ class PoemPicker < PM::TableScreen
     UIAlertView.alloc.init.tap{|alert_view|
       alert_view.title ='保存完了'
       alert_view.message = "新しい札セット「#{new_set_name}」を保存しました。"
+      alert_view.addButtonWithTitle('OK')
+    }.show
+  end
+
+  def show_dialog_fuda_set_overwritten(set_name)
+    UIAlertView.alloc.init.tap{|alert_view|
+      alert_view.title ='上書き保存完了'
+      alert_view.message = "札セット「#{set_name}」を上書きしました。"
       alert_view.addButtonWithTitle('OK')
     }.show
   end
