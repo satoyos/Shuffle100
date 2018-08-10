@@ -3,7 +3,7 @@ require_relative 'spec_helper'
 
 STR_ONE_POEM_AT_LIEAST = '歌を選びましょう'
 STR_SAVE_FUDA_SET = '保存'
-STR_CONFIRM_SAVE_METHOD = '選択している札のセットをどう保存しますか？'
+STR_CONFIRM_SAVE_METHOD = '選んでいる札をどのように保存しますか？'
 STR_SAVE_AS_NEW_SET = '新しい札セットとして保存する'
 STR_CANCEL = 'キャンセル'
 STR_TEST_SET_NAME_2C = '2枚札のセット'
@@ -27,27 +27,6 @@ describe '札セットを保存するテスト' do
     it '歌選択画面に「保存」ボタンが表示されている' do
       can_see(STR_SAVE_FUDA_SET)
     end
-=begin
-    it '「保存」をタップすると、どのように保存するかをユーザに確認するダイアログが現れる' do
-      click_save_button
-      can_see STR_CONFIRM_SAVE_METHOD
-    end
-    it '確認ダイアログでキャンセルボタンを押すと、ダイアログが消える' do
-      click_cancel_button
-      sleep_while_animation
-      can_not_see STR_CONFIRM_SAVE_METHOD
-    end
-    it '確認ダイアログで「新しい札セット」の方を選ぶと、新しいセットの名前を入力する多面が現れる' do
-      click_save_button
-      sleep_while_animation
-      click_new_set_button
-      can_see '新しい札セットの名前'
-    end
-    it '新しい札セットの名前入力画面でキャンセルを押すと、札選択画面に戻る' do
-      click_cancel_button
-      current_screen_is STR_SELECT_POEM_SCREEN
-    end
-=end
     it '2枚札だけを選択した状態にする' do
       click_button_to_cancel_all
       select_by_group
