@@ -155,6 +155,22 @@ describe '札セットを保存するテスト' do
           can_see STR_OVER_WRITE_COMPLETE
           alert_accept
         end
+        it 'いくつか追加で歌を選択してみる' do
+          click_element_of(TYPE_CELL, name: '002')
+          click_element_of(TYPE_CELL, name: '003')
+        end
+        it '上書き保存した「1字決まりのセット」を呼び出す' do
+          select_by_group
+          open_fuda_set_list_screen
+          sleep_while_animation
+          click_element_with_text STR_TEST_SET_NAME_1C
+          sleep_while_animation
+          current_screen_is STR_SELECT_POEM_SCREEN
+        end
+        it '最後に上書きした札セットが選ばれていることを確認できる' do
+          click_back_button
+          can_see '8首'
+        end
       end
     end
   end
