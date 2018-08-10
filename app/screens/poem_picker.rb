@@ -50,8 +50,10 @@ class PoemPicker < PM::TableScreen
       show_dialog_fuda_set_saved(args[:name])
     elsif args[:mode] == :fix_overwritten
       puts "[#{args[:index]}]番の札セットを書き換えます" if BW2.debug?
-      ow_set = app_delegate.game_settings.fuda_sets[args[:index]]
-      show_dialog_fuda_set_overwritten(ow_set.name)
+      org_set_name = app_delegate.game_settings.fuda_sets[args[:index]].name
+      app_delegate.game_settings.fuda_sets[args[:index]] = FudaSet.new(org_set_name, status100.clone)
+      app_delegate.settings_manager.save
+      show_dialog_fuda_set_overwritten(org_set_name)
     else
       @status100 = loaded_selected_status
       update_badge_value
