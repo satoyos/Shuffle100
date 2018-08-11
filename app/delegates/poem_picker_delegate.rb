@@ -65,22 +65,7 @@ module PoemPickerDelegate
     alert = ActionAlertFactory.create_alert({
             title: '選んでいる札をどのように保存しますか？',
             message: nil,
-            actions: [
-                {
-                    title: '新しい札セットとして保存する',
-                    handler: Proc.new {|obj|
-                      puts "[新しい札セット]が選択された" if BW2.debug?
-                      open NameNewSetScreen.new, modal: true, nav_bar: true
-                    }
-                },
-                {
-                    title: '前に作った札セットに上書きする',
-                    handler: Proc.new {|obj|
-                      puts "[上書き]が選択された" if BW2.debug?
-                      open OverwriteSetScreen.new, modal: true, nav_bar: true
-                    }
-                }
-            ],
+            actions: actions_for_save,
             cancel_title: 'キャンセル'
         })
 
@@ -109,6 +94,28 @@ module PoemPickerDelegate
 
   private
 
+  def actions_for_save
+    actions = [
+        {
+            title: '新しい札セットとして保存する',
+            handler: Proc.new {|obj|
+              puts "[新しい札セット]が選択された" if BW2.debug?
+              open NameNewSetScreen.new, modal: true, nav_bar: true
+            }
+        }
+    ]
+    if saved_fuda_set_exist?
+      actions << {
+          title: '前に作った札セットに上書きする',
+          handler: Proc.new {|obj|
+            puts "[上書き]が選択された" if BW2.debug?
+            open OverwriteSetScreen.new, modal: true, nav_bar: true
+          }
+      }
+    end
+    actions
+  end
+
   def actions_for_selection
     actions = [
         action_for_select_by_ngram,
@@ -122,10 +129,14 @@ module PoemPickerDelegate
         }
 =end
     ]
-    if app_delegate.game_settings.fuda_sets.size > 0
+    if saved_fuda_set_exist?
       actions.insert(0, action_for_select_from_fuda_sets)
     end
     actions
+  end
+
+  def saved_fuda_set_exist?
+    app_delegate.game_settings.fuda_sets.size > 0
   end
 
   def action_for_select_from_fuda_sets

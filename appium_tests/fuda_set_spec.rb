@@ -71,8 +71,13 @@ describe '札セットを保存するテスト' do
       click_element_of(TYPE_CELL, name: 'yu')
       click_back_button
     end
-    it '命名画面を表示' do
+    it 'ここで保存ボタンを押すと、新しい札セットとしては保存できるが、まだ上書きはできない(上書き対象が存在しない)' do
       click_save_button
+      can_see STR_SAVE_AS_NEW_SET
+      can_not_see STR_OVERWRITE_SET
+    end
+=begin
+    it '命名画面を表示' do
       sleep_while_animation
       click_new_set_button
       can_see '新しい札セットの名前'
@@ -161,9 +166,11 @@ describe '札セットを保存するテスト' do
         end
       end
     end
+=end
   end
 end
 
+=begin
 describe '札セットはスワイプで削除できる' do
   include_examples '「1字決まりセット」を作る'
   include_examples '歌を選ぶ画面を開く'
@@ -192,6 +199,7 @@ describe '札セットはスワイプで削除できる' do
     can_not_see STR_SELECT_FROM_FUDA_SETS
   end
 end
+=end
 
 def click_save_button
   click_button(STR_SAVE_FUDA_SET)
