@@ -61,6 +61,10 @@ class PoemPicker < PM::TableScreen
     end
   end
 
+  def should_autorotate
+    false
+  end
+
   private
 
   def update_table_and_prompt

@@ -14,6 +14,9 @@ describe 'NGramPicker' do
     it 'has a title' do
       controller.title.should.not.be.nil
     end
+    it 'should not rotate' do
+      screen.should_autorotate.should.be.false
+    end
   end
 
   describe 'セクション付きのテーブルを表示する' do

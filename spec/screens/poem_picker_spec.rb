@@ -26,6 +26,10 @@ describe 'PoemPicker' do
       screen.badge_button.should.not.be.nil
       screen.badge_button.badgeFont.is_a?(UIFont).should.be.true
     end
+
+    it 'should not rotate' do
+      screen.should_autorotate.should.be.false
+    end
   end
 
   describe '検索' do

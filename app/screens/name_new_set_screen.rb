@@ -20,7 +20,10 @@ class NameNewSetScreen < PM::Screen
     layout.get(:name_field).tap do |field|
         field.resignFirstResponder if field.isFirstResponder
     end
+  end
 
+  def should_autorotate
+    false
   end
 
   private

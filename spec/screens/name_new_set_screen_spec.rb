@@ -9,7 +9,9 @@ describe 'NameNewSetScreen' do
     end
     it 'Viewが正しく設定されている' do
       screen.view.backgroundColor.should == UIColor.whiteColor
-
+    end
+    it 'should not rotate' do
+      screen.should_autorotate.should.be.false
     end
   end
 end

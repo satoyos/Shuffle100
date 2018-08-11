@@ -18,6 +18,10 @@ class WhatsNextScreen < PM::Screen
     set_button_actions
   end
 
+  def should_autorotate
+    false
+  end
+
   private
 
   def set_navigation_bar_buttons

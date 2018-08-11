@@ -31,4 +31,8 @@ class FudaSetsScreen < PM::TableScreen
     app_delegate.settings_manager.save
   end
 
+  def should_autorotate
+    false
+  end
+
 end

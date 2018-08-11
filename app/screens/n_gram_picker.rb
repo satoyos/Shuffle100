@@ -28,6 +28,10 @@ class NGramPicker < PM::Screen
     reload_table_data_and_prepare
   end
 
+  def should_autorotate
+    false
+  end
+
   private
 
   def reload_table_data_and_prepare(content_offset=nil)
