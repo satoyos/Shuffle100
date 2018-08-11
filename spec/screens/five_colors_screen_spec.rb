@@ -18,6 +18,9 @@ describe 'FiveColrosScreen' do
   it 'Layoutが設定されている' do
     screen.layout.should.not.be.nil
   end
+  it 'should not rotate' do
+    screen.should_autorotate.should.be.false
+  end
 
   describe 'selected_status_of_color' do
     GREEN_SYMBOL = :green

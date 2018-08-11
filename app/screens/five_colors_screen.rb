@@ -36,6 +36,10 @@ class FiveColorsScreen < PM::Screen
     end
   end
 
+  def should_autorotate
+    false
+  end
+
   private
 
   def reflesh_button_images
