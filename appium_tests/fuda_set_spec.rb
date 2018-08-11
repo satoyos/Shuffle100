@@ -13,6 +13,13 @@ STR_SAVE_COMPLETE = '保存完了'
 STR_OVER_WRITE_COMPLETE = '上書き保存完了'
 STR_OVERWRITE_SET = '前に作った札セットに上書きする'
 
+shared_examples '歌を選ぶ画面を開く' do
+  it '歌選択画面を開く' do
+    goto_select_poem_screen
+    current_screen_is STR_SELECT_POEM_SCREEN
+  end
+end
+
 describe '札セットを保存するテスト' do
 
   it 'アプリのタイトルが正しく表示される' do
@@ -20,10 +27,7 @@ describe '札セットを保存するテスト' do
   end
 
   describe '歌を選ぶ画面で選択中の歌のセットを、名前をつけて保存できる' do
-    it '歌選択画面を開く' do
-      goto_select_poem_screen
-      current_screen_is STR_SELECT_POEM_SCREEN
-    end
+    include_examples '歌を選ぶ画面を開く'
     it '歌選択画面に「保存」ボタンが表示されている' do
       can_see(STR_SAVE_FUDA_SET)
     end
@@ -56,8 +60,8 @@ describe '札セットを保存するテスト' do
     it 'メイン画面に戻ると、10首選ばれていることが確認できる' do
       click_back_button
       can_see '10首'
-      goto_select_poem_screen
     end
+    include_examples '歌を選ぶ画面を開く'
     it '歌選択画面でNo.1の詩を選び、11首選択した状態にする' do
       click_element_of(TYPE_CELL, name: '001')
       click_back_button
@@ -79,10 +83,10 @@ describe '札セットを保存するテスト' do
     it '選択されている歌が、元の10首に戻っている' do
       click_back_button
       can_see '10首'
-      goto_select_poem_screen
     end
     describe '札セットの上書きテスト' do
       describe '「1字決まりの札セット」作る' do
+        include_examples '歌を選ぶ画面を開く'
         it '選択状態をオールクリア' do
           click_button_to_cancel_all
         end
@@ -109,8 +113,8 @@ describe '札セットを保存するテスト' do
         end
       end
       describe '札選択画面に移動し、1首めを選んでみる' do
+        include_examples '歌を選ぶ画面を開く'
         it '1種目を選ぶ' do
-          goto_select_poem_screen
           click_element_of(TYPE_CELL, name: '001')
         end
         it 'ホーム画面で、1枚増えていることを確認' do
@@ -119,8 +123,8 @@ describe '札セットを保存するテスト' do
         end
       end
       describe '既存の札セットを上書きする' do
+        include_examples '歌を選ぶ画面を開く'
         it '歌選択画面で「前に作った札セットに上書きする」を選ぶ' do
-          goto_select_poem_screen
           click_save_button
           sleep_while_animation
           click_overwrite_set_button
@@ -169,14 +173,8 @@ def click_overwrite_set_button
   click_button(STR_OVERWRITE_SET)
 end
 
-def click_cancel_button
-  sleep_while_animation
-  click_button(STR_CANCEL)
-end
-
 def click_fix_button
   sleep_while_animation
-  # click_button('決定')
   click_button 'fix_button'
 end
 
