@@ -76,7 +76,6 @@ describe '札セットを保存するテスト' do
       can_see STR_SAVE_AS_NEW_SET
       can_not_see STR_OVERWRITE_SET
     end
-=begin
     it '命名画面を表示' do
       sleep_while_animation
       click_new_set_button
@@ -166,11 +165,9 @@ describe '札セットを保存するテスト' do
         end
       end
     end
-=end
   end
 end
 
-=begin
 describe '札セットはスワイプで削除できる' do
   include_examples '「1字決まりセット」を作る'
   include_examples '歌を選ぶ画面を開く'
@@ -199,7 +196,6 @@ describe '札セットはスワイプで削除できる' do
     can_not_see STR_SELECT_FROM_FUDA_SETS
   end
 end
-=end
 
 def click_save_button
   click_button(STR_SAVE_FUDA_SET)
