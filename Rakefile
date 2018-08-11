@@ -50,6 +50,8 @@ Motion::Project::App.setup do |app|
         'CFBundleURLSchemes' => ['Shuffle100'] }
   ]
 
+  force_64bit_only!(app)
+
   app.info_plist['UIBackgroundModes'] = [
       'audio'
   ]
@@ -117,3 +119,10 @@ def build_number
   Time.now.strftime('%Y.%m.%d.%H.%M')
 end
 
+def force_64bit_only!(app)
+  # This is required as of iOS 11.0, 32 bit compilations will no
+  # longer be allowed for submission to the App Store.
+
+  app.archs['iPhoneOS'] = ['arm64']
+  app.info_plist['UIRequiredDeviceCapabilities'] = ['arm64']
+end
