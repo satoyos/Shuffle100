@@ -58,6 +58,13 @@ describe 'ヘルプメニューのテスト' do
 
     include_examples '元の画面に戻ることができる'
 
+    it '札セットについてのヘルプ画面を閲覧できる' do
+      click_element_with_text '「札セット」とその使い方'
+      current_screen_is '札セット: 今選んでいる歌を保存する'
+    end
+
+    include_examples '元の画面に戻ることができる'
+
     it '「このアプリを評価する」を選ぶと、ダイアログが起動する' do
       click_element_with_text('このアプリを評価する')
       can_see(DIALOGUE_MESSAGE_FOR_EVAL_APP)
