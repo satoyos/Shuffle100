@@ -60,7 +60,7 @@ Motion::Project::App.setup do |app|
     pod 'BBBadgeBarButtonItem', git: 'https://github.com/TanguyAladenise/BBBadgeBarButtonItem.git'
   }
 
-  APP_VERSION = '4.99'
+  APP_VERSION = '5.0'
 
   MotionProvisioning.output_path = '../my_provisioning'
 
