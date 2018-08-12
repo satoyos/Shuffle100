@@ -36,6 +36,10 @@ class HelpMenuScreen < PM::GroupedTableScreen
     open InfoScreen.new(url: 'html/about_inaba_kun.html', title: '「いなばくん」とは？')
   end
 
+  def open_fuda_set_help
+    open InfoScreen.new(url: 'html/fuda_set.html', title: '札セット: 今選んでいる歌を保存する')
+  end
+
   def review_page_url
     'itms-apps://itunes.apple.com/app/id' + 'AppStoreID'.info_plist
   end
