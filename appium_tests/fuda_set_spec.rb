@@ -197,6 +197,19 @@ describe '札セットはスワイプで削除できる' do
   end
 end
 
+describe '空の札セット(1首も選ばれていない状態)の保存はできない' do
+  include_examples '歌を選ぶ画面を開く'
+  it '1首も選ばれていない状態にする' do
+    click_button_to_cancel_all
+  end
+  it '「保存」を押すと、保存できない旨の表示が出る' do
+    click_save_button
+    can_see '歌を選びましょう'
+    alert_accept
+  end
+end
+
+
 def click_save_button
   click_button(STR_SAVE_FUDA_SET)
 end

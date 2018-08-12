@@ -62,6 +62,10 @@ module PoemPickerDelegate
 
   def save_button_tapped(sender)
     puts '「保存」ボタンが押された！' if BW2.debug?
+    if status100.selected_num == 0
+      show_empty_error_alert
+      return
+    end
     alert = ActionAlertFactory.create_alert({
             title: '選んでいる札をどのように保存しますか？',
             message: nil,
@@ -77,6 +81,14 @@ module PoemPickerDelegate
     end
 
     self.presentViewController(alert, animated: true, completion: nil)
+  end
+
+  def show_empty_error_alert
+    UIAlertView.alloc.init.tap{|alert_view|
+      alert_view.title ='歌を選びましょう'
+      alert_view.message = "空の札セットは作成できません"
+      alert_view.addButtonWithTitle('戻る')
+    }.show
   end
 
   def select_by_five_colors
