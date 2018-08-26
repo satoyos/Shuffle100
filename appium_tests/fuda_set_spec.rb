@@ -181,7 +181,6 @@ describe '札セットはスワイプで削除できる' do
   it '作ったばかりの札セットを確認できる' do
     can_see STR_TEST_SET_NAME_1C
     e = elems_of_str(STR_TEST_SET_NAME_1C).first
-    puts "該当エレメントの情報: [#{e.location.x}, #{e.location.y}], [#{e.size.width}, #{e.size.height}]"
     swipe_elem(e, 60)
     can_see STR_DELETE_FUDA_SET
   end
