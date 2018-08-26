@@ -19,32 +19,32 @@ module HelpMenuScreenDataSource
         {
             title: '設定できること',
             action: :open_options_help,
-            style: cell_with_disclosure_indicater
+            style: cell_with_disclosure_indicator
         },
         {
             title: '試合の流れ (通常モード)',
             action: :open_game_flow_help,
-            style: cell_with_disclosure_indicater
+            style: cell_with_disclosure_indicator
         },
         {
             title: '「札セット」とその使い方',
             action: :open_fuda_set_help,
-            style: cell_with_disclosure_indicater
+            style: cell_with_disclosure_indicator
         },
         {
             title: '「初心者モード」とは？',
             action: :open_what_is_beginner_mode,
-            style: cell_with_disclosure_indicater
+            style: cell_with_disclosure_indicator
         },
         {
             title: '試合の流れ (初心者モード)',
             action: :open_beginner_mode_flow_help,
-            style: cell_with_disclosure_indicater
+            style: cell_with_disclosure_indicator
         },
         {
             title: '「ノンストップ・モード」とは？',
             action: :open_what_is_nonstop_mode,
-            style: cell_with_disclosure_indicater
+            style: cell_with_disclosure_indicator
         },
 
     ]
@@ -55,12 +55,12 @@ module HelpMenuScreenDataSource
         {
             title: '「いなばくん」について',
             action: :open_about_inaba_kun,
-            style: cell_with_disclosure_indicater
+            style: cell_with_disclosure_indicator
         },
         {
             title: 'このアプリを評価する',
             action: :confirm_user_to_review,
-            style: cell_with_disclosure_indicater
+            style: cell_with_disclosure_indicator
         },
         {
             title: 'バージョン',
@@ -70,7 +70,7 @@ module HelpMenuScreenDataSource
     ]
   end
 
-  def cell_with_disclosure_indicater
+  def cell_with_disclosure_indicator
     {
         accessoryType: UITableViewCellAccessoryDisclosureIndicator,
     }
