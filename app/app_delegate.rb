@@ -26,6 +26,14 @@ class AppDelegate < PM::Delegate
     @prompt = PROMPT
   end
 
+  def prepare_game
+    new_deck = game_settings.fake_flg ?
+                   selected_poems_deck.add_fake_poems! :
+                   selected_poems_deck
+    set_opening_player
+    self.poem_supplier = PoemSupplier.new({deck: new_deck})
+  end
+
   def set_opening_player
     AudioPlayerFactory.prepare_audio_players({opening: current_singer_folder + '/序歌'})
     self.opening_player = AudioPlayerFactory.players[:opening]
@@ -64,5 +72,10 @@ class AppDelegate < PM::Delegate
     UINavigationBar.appearance.barTintColor = BAR_TINT_COLOR
     UIApplication.sharedApplication.statusBarOrientation = UIInterfaceOrientationPortrait
     @sizes = OH::DeviceSizeManager.select_sizes
+  end
+
+  # @return [Deck] 選択された歌から構成されるDeck。歌の順序はShuffleされている。
+  def selected_poems_deck
+    Deck.create_from_bool100(current_status100.status_array).shuffle!
   end
 end

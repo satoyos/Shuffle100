@@ -23,11 +23,7 @@ module HomeScreenDelegate
     puts '++ 試合開始！' if BW2.debug?
     prohibit_sleeping
     navigation_controller.setNavigationBarHidden(true, animated: true)
-    new_deck = app_delegate.game_settings.fake_flg ?
-        selected_poems_deck.add_fake_poems! :
-        selected_poems_deck
-    app_delegate.set_opening_player
-    app_delegate.poem_supplier = PoemSupplier.new({deck: new_deck})
+    app_delegate.prepare_game
     open_recite_screen_of(app_delegate.game_settings.recite_mode_id)
   end
 
@@ -48,11 +44,6 @@ module HomeScreenDelegate
   end
 
   private
-
-  # @return [Deck] 選択された歌から構成されるDeck。歌の順序はShuffleされている。
-  def selected_poems_deck
-    Deck.create_from_bool100(loaded_selected_status.status_array).shuffle!
-  end
 
   def update_table_view_data_animated
     self.promotion_table_data.data = self.table_data
