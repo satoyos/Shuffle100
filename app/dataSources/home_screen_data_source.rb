@@ -1,6 +1,7 @@
 module HomeScreenDataSource
   FAKE_SETTING_TITLE = '空札を加える'
   GAME_START_STR = '試合開始'
+  SELECT_POEM_TITLE = '取り札を用意する歌'
 
   def table_data
     [
@@ -30,7 +31,7 @@ module HomeScreenDataSource
 
   def select_poems_cell
     {
-        title: HomeScreen::SELECT_POEM_TITLE,
+        title: SELECT_POEM_TITLE,
         cell_style: UITableViewCellStyleValue1,
         subtitle: '%d首' % loaded_selected_status.selected_num,
         action: :select_poems,

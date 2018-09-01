@@ -54,7 +54,7 @@ module HomeScreenDelegate
   def alert_no_poem_selected
     UIAlertView.alloc.init.tap{|alert_view|
       alert_view.title ='歌を選びましょう'
-      alert_view.message = "「#{HomeScreen::SELECT_POEM_TITLE}」で、試合に使う歌を選んでください。"
+      alert_view.message = "「#{HomeScreenDataSource::SELECT_POEM_TITLE}」で、試合に使う歌を選んでください。"
       alert_view.addButtonWithTitle('戻る')
     }.show
   end
