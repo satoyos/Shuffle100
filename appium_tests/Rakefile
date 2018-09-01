@@ -7,3 +7,4 @@ RSpec::Core::RakeTask.new(:spec) do |t|
   # t.rspec_opts << ' more options'
 end
 task :default => :spec
+
