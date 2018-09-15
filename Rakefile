@@ -61,7 +61,7 @@ Motion::Project::App.setup do |app|
     pod 'Reveal-SDK', :configurations => ['Debug']
   }
 
-  APP_VERSION = '5.0'
+  APP_VERSION = '5.0.1'
 
   MotionProvisioning.output_path = '../my_provisioning'
 
