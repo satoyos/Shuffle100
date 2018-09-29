@@ -178,6 +178,7 @@ def click_back_button
 end
 
 def click_settings_button
+  sleep_while_animation
   settings_button.click
 end
 
@@ -190,17 +191,17 @@ def tap_first_poem
 end
 
 def click_button_to_cancel_all
-  sleep 0.5
+  sleep_while_animation
   click_button('全て取消')
 end
 
 def click_button_to_select_all
-  sleep 0.5
+  sleep_while_animation
   click_button('全て選択')
 end
 
 def goto_five_colors_screen
-  sleep 0.5
+  sleep_while_animation
   click_button(STR_SELECT_BY_FIVE_COLORS)
 end
 
