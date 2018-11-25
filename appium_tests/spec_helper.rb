@@ -24,7 +24,7 @@ def desired_caps
           deviceName:    "iPhone X",
           # deviceName:    "iPhone 7 Plus",
           # deviceName:    "iPad Pro (12.9-inch)",
-          platformVersion: "12.0",
+          platformVersion: "12.1",
           app: '../build/iPhoneSimulator-11.0-Development/Shuffle100.app',
           automationName: 'XCUITest',
           simpleIsVisibleCheck: true,
