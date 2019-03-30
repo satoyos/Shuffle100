@@ -94,7 +94,7 @@ def recite_screen_title_matches(regexp)
 end
 
 def select_by_group
-  sleep 0.5
+  sleep 2.0
   click_button(STR_SELECT_BY_GROUP)
 end
 

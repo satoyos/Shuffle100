@@ -24,7 +24,7 @@ def desired_caps
           deviceName:    "iPhone X",
           # deviceName:    "iPhone 7 Plus",
           # deviceName:    "iPad Pro (12.9-inch)",
-          platformVersion: "12.1",
+          platformVersion: "12.2",
           app: '../build/iPhoneSimulator-11.0-Development/Shuffle100.app',
           automationName: 'XCUITest',
           simpleIsVisibleCheck: true,
@@ -45,6 +45,7 @@ RSpec.configure { |c|
     clean_screenshots_folder
   }
 
+=begin
   c.before(:each) do |example|
     unless @device_name =~ /iPad/  # <= Initializing recorder causes Error, so stop recording on iPad
       @recorder = Recorder.new(@driver)
@@ -60,6 +61,7 @@ RSpec.configure { |c|
       @recorder.remove_video unless example.exception
     end
   }
+=end
 
   c.after(:all) {
     @driver.quit if @driver
