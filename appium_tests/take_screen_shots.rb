@@ -17,8 +17,9 @@ describe 'スクリーンショットの撮影' do
       recite_screen_title_matches /1首め/
     end
     it '少し待って、ポーズボタンを押し、スクリーンショットを撮る' do
-      sleep 3.0
+      sleep 2.0
       click_button'pause'
+      sleep_while_animation
       take_screenshot_no(1)
     end
     it 'ホーム画面に戻る' do
