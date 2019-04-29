@@ -181,7 +181,7 @@ describe '札セットはスワイプで削除できる' do
   it '作ったばかりの札セットを確認できる' do
     can_see STR_TEST_SET_NAME_1C
     e = elems_of_str(STR_TEST_SET_NAME_1C).first
-    swipe_elem(e, 60)
+    swipe_elem(e, 100)
     can_see STR_DELETE_FUDA_SET
   end
   it '削除ボタンを押すと、その札セットがリストから削除される' do
