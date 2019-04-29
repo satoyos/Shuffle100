@@ -27,7 +27,7 @@ end
 Motion::Project::App.setup do |app|
   app.name = 'Shuffle100'
 
-  app.deployment_target = '11.2'
+  app.deployment_target = '12.0'
 
   app.frameworks += ['AVFoundation', 'AudioToolbox', 'MediaPlayer']
   app.frameworks += ['QuartzCore']
@@ -62,7 +62,7 @@ Motion::Project::App.setup do |app|
     # DO NOT FORGET TO DELETE THIS before release and NUKE
   }
 
-  APP_VERSION = '5.0.1'
+  APP_VERSION = '5.1'
 
   MotionProvisioning.output_path = '../my_provisioning'
 

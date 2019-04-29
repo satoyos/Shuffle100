@@ -27,7 +27,7 @@ def desired_caps
           # deviceName:    "iPad Pro (12.9-inch)",
           # deviceName:    "iPad Pro (12.9-inch) (3rd generation)",
           platformVersion: "12.2",
-          app: '../build/iPhoneSimulator-11.2-Development/Shuffle100.app',
+          app: '../build/iPhoneSimulator-12.0-Development/Shuffle100.app',
           automationName: 'XCUITest',
           simpleIsVisibleCheck: true,
           iosInstallPause: 20000
