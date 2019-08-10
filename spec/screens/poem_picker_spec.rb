@@ -32,6 +32,7 @@ describe 'PoemPicker' do
     end
   end
 
+=begin
   describe '検索' do
     before do
       @screen =  PoemPicker.new
@@ -54,5 +55,6 @@ describe 'PoemPicker' do
       lambda{@screen.select_all_poems}.should.not.raise
     end
   end
+=end
 
 end

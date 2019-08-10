@@ -6,7 +6,7 @@ class PoemPicker < PM::TableScreen
   include PoemPickerSearchHelper
 
   title '歌を選ぶ'
-  searchable placeholder: '歌を検索'
+  # searchable placeholder: '歌を検索'
   longpressable
 
   def on_load
@@ -26,7 +26,7 @@ class PoemPicker < PM::TableScreen
   end
 
   def on_present
-    prepare_text_field
+    # prepare_text_field
   end
 
   def will_disappear
