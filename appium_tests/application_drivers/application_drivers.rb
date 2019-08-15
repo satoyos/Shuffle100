@@ -7,6 +7,7 @@ TYPE_BUTTON = 'XCUIElementTypeButton'
 TYPE_CELL = 'XCUIElementTypeCell'
 TYPE_SWITCH = 'XCUIElementTypeSwitch'
 TYPE_PICKER_WHEEL = 'XCUIElementTypePickerWheel'
+TYPE_SEARCH_FIELD = 'XCUIElementTypeSearchField'
 
 # TEXT_ON_SCREEN
 STR_ADD_FAKE_POEMS = '空札を加える'
@@ -48,7 +49,7 @@ def current_screen_is(name)
 end
 
 def fill_search_window_with_text(str)
-  find_element(:accessibility_id, ID_SEARCH_TEXT_FIELD).send_keys str
+  find_element(:class_name, TYPE_SEARCH_FIELD).send_keys str
 end
 
 def get_filtered_cell_names
