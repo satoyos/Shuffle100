@@ -103,7 +103,6 @@ module ProMotion
       self.promotion_table_data.data = data
       if args[:index_paths]
         args[:animation] ||= UITableViewRowAnimationNone
-
         table_view.beginUpdates
         table_view.reloadRowsAtIndexPaths(Array(args[:index_paths]), withRowAnimation: args[:animation])
         table_view.endUpdates
@@ -210,6 +209,9 @@ module ProMotion
     end
 
     def tableView(table_view, didSelectRowAtIndexPath: index_path)
+      ###
+      puts "++ Current table_view => #{table_view}" if BW2.debug?
+      ###
       data_cell = cell_at(index_path: index_path)
       table_view.deselectRowAtIndexPath(index_path, animated: true) unless data_cell[:keep_selection] == true
       trigger_action(data_cell[:action], data_cell[:arguments], index_path) if data_cell[:action]

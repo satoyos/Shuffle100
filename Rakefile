@@ -58,7 +58,7 @@ Motion::Project::App.setup do |app|
 
   app.pods {
     pod 'BBBadgeBarButtonItem', git: 'https://github.com/TanguyAladenise/BBBadgeBarButtonItem.git'
-    # pod 'Reveal-SDK', :configurations => ['Debug'] # Use this only if needed on debuggng
+    pod 'Reveal-SDK', :configurations => ['Debug'] # Use this only if needed on debuggng
     # DO NOT FORGET TO DELETE THIS before release and NUKE
   }
 

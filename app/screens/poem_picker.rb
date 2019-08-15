@@ -70,7 +70,6 @@ class PoemPicker < PM::TableScreen
 
   def update_table_and_prompt
     update_badge_value
-    tableView.reloadData
     update_table_data
   end
 
