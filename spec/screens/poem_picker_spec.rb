@@ -32,7 +32,6 @@ describe 'PoemPicker' do
     end
   end
 
-=begin
   describe '検索' do
     before do
       @screen =  PoemPicker.new
@@ -44,10 +43,12 @@ describe 'PoemPicker' do
     end
 
     it '検索窓に文字を入力すると検索が行われる' do
+=begin
       search_bar = @screen.tableView.tableHeaderView
       search_bar.should.be.kind_of UISearchBar
+=end
       @screen.searching?.should.not.be.true
-      search_bar.text = 'きみが'
+      @screen.search_controller.searchBar.text = 'きみが'
       @screen.searching?.should.be.true
       # ap @screen.promotion_table_data.filtered_data
       @screen.promotion_table_data.filtered_data.first[:cells].size.should == 2
@@ -55,6 +56,5 @@ describe 'PoemPicker' do
       lambda{@screen.select_all_poems}.should.not.raise
     end
   end
-=end
 
 end
