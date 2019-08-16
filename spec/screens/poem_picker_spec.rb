@@ -43,10 +43,6 @@ describe 'PoemPicker' do
     end
 
     it '検索窓に文字を入力すると検索が行われる' do
-=begin
-      search_bar = @screen.tableView.tableHeaderView
-      search_bar.should.be.kind_of UISearchBar
-=end
       @screen.searching?.should.not.be.true
       @screen.search_controller.searchBar.text = 'きみが'
       @screen.searching?.should.be.true
