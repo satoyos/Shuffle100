@@ -127,7 +127,7 @@ class PoemPicker < PM::TableScreen
       sc.searchResultsUpdater = self
       sc.hidesNavigationBarDuringPresentation = false
       sc.obscuresBackgroundDuringPresentation = false
-      sc.searchBar.placeholder = "歌を検索しましょう"
+      sc.searchBar.placeholder = "歌を検索"
     end
   end
 
