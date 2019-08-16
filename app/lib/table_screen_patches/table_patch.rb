@@ -209,9 +209,11 @@ module ProMotion
     end
 
     def tableView(table_view, didSelectRowAtIndexPath: index_path)
+=begin
       ###
       puts "++ Current table_view => #{table_view}" if BW2.debug?
       ###
+=end
       data_cell = cell_at(index_path: index_path)
       table_view.deselectRowAtIndexPath(index_path, animated: true) unless data_cell[:keep_selection] == true
       trigger_action(data_cell[:action], data_cell[:arguments], index_path) if data_cell[:action]

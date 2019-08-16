@@ -3,9 +3,6 @@ module PoemPickerDataSource
   SELECTED_BG_COLOR = '#eebbcb'.uicolor #撫子色
 
   def table_data
-    ###
-    puts "＊＊＊ table_dataを作り直す！！ヽ(`Д´)ﾉﾌﾟﾝﾌﾟﾝ`＊＊＊" if BW2.debug?
-    ###
     [{
          cell_style: UITableViewCellStyleValue1,
          cells: poems.map{|poem|
@@ -33,9 +30,6 @@ module PoemPickerDataSource
   # @param [Poem] poem
   # @return [UIColor]
   def bg_color_for_poem(poem)
-    if BW2.debug? and poem.number <= 10
-      puts " - Poem[#{poem.number}] => #{status100.of_number(poem.number)} "
-    end
     status100.of_number(poem.number) ?
         SELECTED_BG_COLOR :
         UIColor.whiteColor
