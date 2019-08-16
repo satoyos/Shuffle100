@@ -25,8 +25,7 @@ describe '歌を検索するテスト' do
       keyboard.find_element(:name, 'Search').click
     end
     it '検索結果の歌をすべて「取り消し」にする' do
-      toolbar = find_element(:class_name, 'XCUIElementTypeToolbar')
-      toolbar.find_element(:name, '全て取消').click
+      click_button_to_cancel_all
     end
     it '元の画面に戻ると、選ばれている歌の数が88酒になっている' do
       click_back_button

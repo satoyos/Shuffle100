@@ -193,17 +193,18 @@ end
 
 def click_button_to_cancel_all
   sleep_while_animation
-  click_button('全て取消')
+  toolbar.find_element(:name, '全て取消').click
 end
 
 def click_button_to_select_all
   sleep_while_animation
-  click_button('全て選択')
+  toolbar.find_element(:name, '全て選択').click
 end
 
 def goto_five_colors_screen
   sleep_while_animation
-  click_button(STR_SELECT_BY_FIVE_COLORS)
+  toolbar.find_element(:name, STR_SELECT_BY_FIVE_COLORS).click
+  # click_button(STR_SELECT_BY_FIVE_COLORS)
 end
 
 def select_blue_color
@@ -255,4 +256,8 @@ end
 def quit_button
   elem_of_class(TYPE_BUTTON, name: 'quit_button') ||
       elem_of_class(TYPE_BUTTON, name: 'exit')
+end
+
+def toolbar
+  find_element(:class_name, 'XCUIElementTypeToolbar')
 end
