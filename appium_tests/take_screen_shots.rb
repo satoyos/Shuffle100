@@ -100,7 +100,7 @@ describe 'スクリーンショットの撮影' do
       goto_select_poem_screen
       current_screen_is STR_SELECT_POEM_SCREEN
     end
-    it '検索窓に「秋」を入力する' do
+    it '検索窓に「春」を入力する' do
       fill_search_window_with_text '春'
       make_test_success
     end
