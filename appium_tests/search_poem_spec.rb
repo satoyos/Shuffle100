@@ -20,5 +20,9 @@ describe '歌を検索するテスト' do
       expect(cell_names[2]).to eq '022'
       expect(cell_names.include? '002').to be false
     end
+    it 'キーボードを隠す' do
+      keyboard = find_element(:class_name, 'XCUIElementTypeKeyboard')
+      keyboard.find_element(:name, 'Search').click
+    end
   end
 end
