@@ -1,6 +1,7 @@
 module PoemPickerSearchHelper
   def refresh_search_result_table
     # @table_search_display_controller.searchBar.text = @table_search_display_controller.searchBar.tex
+    updateSearchResultsForSearchController(@search_controller) if @search_controller
   end
 
   def filtered_poem_numbers

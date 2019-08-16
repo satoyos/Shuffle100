@@ -3,7 +3,7 @@ module PoemPickerDelegate
   def poem_tapped(poem)
     status100.reverse_in_number(poem.number)
     update_table_and_prompt
-    updateSearchResultsForSearchController(@search_controller) if @search_controller
+    refresh_search_result_table
   end
 
   def poem_long_pressed(poem)
