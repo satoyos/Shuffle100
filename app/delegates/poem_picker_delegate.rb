@@ -1,14 +1,9 @@
 module PoemPickerDelegate
 
   def poem_tapped(poem)
-    puts "△ 歌番号#{poem.number}番の選択状態を反転します。" if BW2.debug?
     status100.reverse_in_number(poem.number)
     update_table_and_prompt
-    puts "searching? => #{searching?}" if BW2.debug?
-    if searching?
-      puts 'reset search word in poem tapped!' if BW2.debug?
-      refresh_search_result_table
-    end
+    refresh_search_result_table
   end
 
   def poem_long_pressed(poem)

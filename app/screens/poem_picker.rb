@@ -13,6 +13,7 @@ class PoemPicker < PM::TableScreen
     self.navigationItem.prompt = AppDelegate::PROMPT
     init_selected_status_and_badge
     set_font_changed_notification
+    search_setup
     update_table_and_prompt
   end
 
@@ -26,7 +27,7 @@ class PoemPicker < PM::TableScreen
   end
 
   def on_present
-    prepare_text_field
+    # prepare_text_field
   end
 
   def will_disappear
@@ -118,6 +119,16 @@ class PoemPicker < PM::TableScreen
   # Ver.5以降で札セットをサポート
   def create_button_and_badge_icon
     @badge_button = PoemsNumberSelectedItem.create_with_origin_x(-50, '保存', self, 'save_button_tapped:')
+  end
+
+  # iOS13以降で検索の仕組みが変わったことに対応
+  def search_setup
+    @search_controller.tap do |sc|
+      sc.searchResultsUpdater = self
+      sc.hidesNavigationBarDuringPresentation = false
+      sc.obscuresBackgroundDuringPresentation = false
+      sc.searchBar.placeholder = "歌を検索"
+    end
   end
 
 end

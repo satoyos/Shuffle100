@@ -62,7 +62,7 @@ Motion::Project::App.setup do |app|
     # DO NOT FORGET TO DELETE THIS before release and NUKE
   }
 
-  APP_VERSION = '5.1'
+  APP_VERSION = '5.2'
 
   MotionProvisioning.output_path = '../my_provisioning'
 

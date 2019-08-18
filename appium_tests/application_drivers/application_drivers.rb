@@ -7,6 +7,7 @@ TYPE_BUTTON = 'XCUIElementTypeButton'
 TYPE_CELL = 'XCUIElementTypeCell'
 TYPE_SWITCH = 'XCUIElementTypeSwitch'
 TYPE_PICKER_WHEEL = 'XCUIElementTypePickerWheel'
+TYPE_SEARCH_FIELD = 'XCUIElementTypeSearchField'
 
 # TEXT_ON_SCREEN
 STR_ADD_FAKE_POEMS = '空札を加える'
@@ -48,7 +49,7 @@ def current_screen_is(name)
 end
 
 def fill_search_window_with_text(str)
-  find_element(:accessibility_id, ID_SEARCH_TEXT_FIELD).send_keys str
+  find_element(:class_name, TYPE_SEARCH_FIELD).send_keys str
 end
 
 def get_filtered_cell_names
@@ -192,17 +193,18 @@ end
 
 def click_button_to_cancel_all
   sleep_while_animation
-  click_button('全て取消')
+  toolbar.find_element(:name, '全て取消').click
 end
 
 def click_button_to_select_all
   sleep_while_animation
-  click_button('全て選択')
+  toolbar.find_element(:name, '全て選択').click
 end
 
 def goto_five_colors_screen
   sleep_while_animation
-  click_button(STR_SELECT_BY_FIVE_COLORS)
+  toolbar.find_element(:name, STR_SELECT_BY_FIVE_COLORS).click
+  # click_button(STR_SELECT_BY_FIVE_COLORS)
 end
 
 def select_blue_color
@@ -254,4 +256,8 @@ end
 def quit_button
   elem_of_class(TYPE_BUTTON, name: 'quit_button') ||
       elem_of_class(TYPE_BUTTON, name: 'exit')
+end
+
+def toolbar
+  find_element(:class_name, 'XCUIElementTypeToolbar')
 end
